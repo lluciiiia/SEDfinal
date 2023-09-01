@@ -12,20 +12,23 @@
 
 class User: public Account{
     private:
-    string userID;
     string IDtype;
     string passportType;
+    string idNum;
     string licenseNumber;
     string licenseExpiryDate;
     vector <UserRating> userRatings;
     double creditPoint;
     public:
-    User(string username, string password, string full_name, string phone_number, string userID,  string passportType, string licenseNumber,string licenseExpiryDate, UserRating rating,double creditPoint);
-    User(string username, string password, string full_name, string phone_number, string userID,  string passportType, string licenseNumber,string licenseExpiryDate,double creditPoint);
-    User(string username, string password, string full_name, string phone_number,string userID,  string passportType, string licenseNumber,string licenseExpiryDate, vector<UserRating> ratings,double creditPoint);
+    User ();
+    User(string username, string password, string full_name, string phone_number,  string passportType, string idNum,string licenseNumber,string licenseExpiryDate, UserRating rating,double creditPoint);
+    User(string username, string password, string full_name, string phone_number,   string passportType, string idNum,string licenseNumber,string licenseExpiryDate,double creditPoint);
+    User(string username, string password, string full_name, string phone_number,  string passportType,string idNum, string licenseNumber,string licenseExpiryDate, vector<UserRating> ratings,double creditPoint);
     string toStringAccount();
-
-    bool registerAccount(const string&username, const string&password,const double &credit, vector<User> &userList );
+    string getUserNAME(){
+        return Account::getUsername();
+    }
+    bool registerAccount(const string &username, const string &password, const double &credit, vector<User> &userList, string fullName, string phoneNumber,  string Type, string idNum,string licenseNum, string licenseExdate);
 };
 
 

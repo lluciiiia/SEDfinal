@@ -2,10 +2,10 @@
 #include "Account/User.h"
 #include "savingToFile.h"
 #include "Account/Account.h"
-
+#include<iostream>
 int main() {
-     User user1("User1", "Password1", "John Doe", "12345", "ID1", "Passport", "License123", "2023-12-31", 100.0);
-    User user2("User2", "Password2", "Jane Smith", "67890", "ID2", "Passport", "License456", "2023-11-30", 150.0);
+     User user1("User1", "Password1", "John Doe", "12345", "asd","ID1",  "License123", "2023-12-31", 100.0);
+    User user2("User2", "Password2", "Jane Smith", "67890", "asd","ID2",  "License456", "2023-11-30", 150.0);
 
     // Create a vector to store User objects
     std::vector<User> users;
@@ -15,9 +15,17 @@ int main() {
     // Create a SaveToFile object and save User objects to a file
     saveToFile fileSave;
     fileSave.SaveAccountToFile(users);
-
-
-    std::vector<User> newUser= fileSave.loadAccount();    
+    User user;
+std::vector<User> newUser= fileSave.loadAccount(); 
+    while (true){
+        int choice;
+        cout<< "Choose 1 to register";
+        cin>>choice;
+        if(choice == 1){
+            user.registerAccount("Phat","123", 20,newUser,"Huynh","fasd","123123", "pass","123123","sadfla");
+        }
+    }
+       
     for(auto user: newUser){
         cout<< user.toStringAccount()<< "\n";
     }
