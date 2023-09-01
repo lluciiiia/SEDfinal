@@ -12,7 +12,7 @@ protected:
     std::string userID;
 };
 
-class UserRating : protected Rating
+class UserRating : public Rating
 {
     std::string username;
 
@@ -27,7 +27,7 @@ public:
     // TODO: structure methods
 };
 
-class MotorbikeRating : protected Rating
+class MotorbikeRating : public Rating
 {
     std::string bikeID;
 
