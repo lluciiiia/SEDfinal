@@ -1,14 +1,19 @@
 {
     "files.associations": {
+
         "*.ejs": "javascript",
         "vector": "cpp",
         "array": "cpp",
         "atomic": "cpp",
+        "array": "cpp",
+        "bit": "cpp",
         "*.tcc": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
         "cstdarg": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
         "cstddef": "cpp",
         "cstdint": "cpp",
         "cstdio": "cpp",
@@ -16,6 +21,7 @@
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
+
         "unordered_map": "cpp",
         "exception": "cpp",
         "algorithm": "cpp",
@@ -23,6 +29,18 @@
         "memory_resource": "cpp",
         "optional": "cpp",
         "string": "cpp",
+
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "random": "cpp",
         "string_view": "cpp",
         "system_error": "cpp",
         "tuple": "cpp",
@@ -35,10 +53,16 @@
         "istream": "cpp",
         "limits": "cpp",
         "new": "cpp",
+
+        "numbers": "cpp",
         "ostream": "cpp",
-        "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "cstdarg": "cpp",
+        "ctime": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp"
     }
 }
