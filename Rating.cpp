@@ -1,3 +1,5 @@
+#ifndef RATING_H
+#define RATING_H
 
 // Rating
 class Rating {
@@ -7,7 +9,7 @@ class Rating {
 };
 
 // UserRating
-class UserRating : protected Rating{
+class UserRating : protected Rating {
     string username;
     public:
     UserRating(string username, float score, string comment) {
@@ -18,7 +20,7 @@ class UserRating : protected Rating{
 };
 
 // BikeRating
-class MotorbikeRating : protected Rating{
+class MotorbikeRating : protected Rating {
     string bikeID;
     public:
     MotorbikeRating(string bikeID, float score, string comment) {
