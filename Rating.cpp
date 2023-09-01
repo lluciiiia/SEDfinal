@@ -1,31 +1,45 @@
+#include <iostream>
+#include <string>
+#include <vector>
 #ifndef RATING_H
 #define RATING_H
 
-// Rating
-class Rating {
-    protected:
+class Rating
+{
+protected:
     float score;
-    string comment;
+    std::string comment;
+    std::string userID;
 };
 
-// UserRating
-class UserRating : protected Rating {
-    string username;
-    public:
-    UserRating(string username, float score, string comment) {
+class UserRating : protected Rating
+{
+    std::string username;
+
+public:
+    UserRating(std::string username, float score, std::string comment)
+    {
         this->username = username;
         this->score = score;
         this->comment = comment;
     }
+
+    // TODO: structure methods
 };
 
-// BikeRating
-class MotorbikeRating : protected Rating {
-    string bikeID;
-    public:
-    MotorbikeRating(string bikeID, float score, string comment) {
+class MotorbikeRating : protected Rating
+{
+    std::string bikeID;
+
+public:
+    MotorbikeRating(std::string bikeID, float score, std::string comment)
+    {
         this->bikeID = bikeID;
         this->score = score;
         this->comment = comment;
     }
+
+    // TODO: structure methods
 };
+
+#endif
