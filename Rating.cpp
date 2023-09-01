@@ -30,3 +30,5 @@ class MotorbikeRating : protected Rating {
         this->comment = comment;
     }
 };
+
+#endif
