@@ -1,5 +1,6 @@
 #ifndef RATING_H
 #define RATING_H
+using namespace std;
 
 // Rating
 class Rating {
