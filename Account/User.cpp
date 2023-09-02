@@ -14,7 +14,7 @@ User::User()
 User::User(string username,
            string password,
            string fullName,
-           string phone_number,
+           string phoneNumber,
            string passportType,
            string idNum,
            string licenseNumber,
