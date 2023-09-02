@@ -5,7 +5,7 @@
 #include <vector>
 #include "Account.h"
 #include "../Rating.h"
-#include "../Motobike.h"
+#include "../Motorbike.h"
 
 class User: public Account{
     private:
@@ -27,9 +27,6 @@ class User: public Account{
     }
     bool registerAccount(const string &username, const string &password, const double &credit, vector<User> &userList, string fullName, string phoneNumber,  string Type, string idNum,string licenseNum, string licenseExdate);
     
-
-
-
 
 };
 

@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-#include "Motobike.h"
+#include "Motorbike.h"
 #include "Account/User.h"
 #include "Borrow.h"
 #include "Request.h"
@@ -25,8 +25,8 @@ class saveToFile{
     public: 
     void SaveAccountToFile( vector<User>&users) ;
     vector<User> loadAccount();
-    void SaveMotobikeToFile(vector <Motobike> &moto);
-    vector<Motobike> loadMotor();
+    void SaveMotobikeToFile(vector <Motorbike> &moto);
+    vector<Motorbike> loadMotor();
     void SaveRequestToFIle(vector <Request> &request);
     vector <Request> loadRequest();
     void saveBorrowToFile(vector<Borrow> &borrow);
