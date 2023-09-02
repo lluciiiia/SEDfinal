@@ -1,14 +1,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "User.cpp" // I'm not sure if it's .cpp or .h
-
-#ifndef RATING_H
-#define RATING_H
+#include "Rating.h"
 
 class Rating
 {
-protected:
+private:
     float score;
     std::string comment;
     std::string userID;
@@ -46,9 +43,9 @@ public:
         this->comment = comment;
     }
 
-    // Missing the user class so it's giving an error
+    // TODO: Missing the user class so it's giving an error
     int getNumberOfRatings() {
-        return userRating->size;
+        // return userRating->size;
     }
 
 };
@@ -84,10 +81,4 @@ class MotorbikeRating : public Rating
         this->comment = comment;
     }
 };
-
-#endif
-
-};
-
-#endif
-
+ 
