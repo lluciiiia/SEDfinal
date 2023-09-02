@@ -1,5 +1,6 @@
 #include "User.h"
 #include <iostream>
+#include <string>
 
 User::User()
     : Account("", "", "", ""),
@@ -11,14 +12,14 @@ User::User()
 {
 }
 
-User::User(string username,
-           string password,
-           string full_name,
-           string phone_number,
-           string passportType,
-           string idNum,
-           string licenseNumber,
-           string licenseExpiryDate,
+User::User(std::string username,
+           std::string password,
+           std::string full_name,
+           std::string phone_number,
+           std::string passportType,
+           std::string idNum,
+           std::string licenseNumber,
+           std::string licenseExpiryDate,
            UserRating rating,
            double creditPoint) : Account(username,
                                          password,

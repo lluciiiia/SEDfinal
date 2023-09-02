@@ -16,6 +16,7 @@ enum class City
 class Motorbike
 {
 public:
+    Motorbike();
     Motorbike(
         std::string &model,
         std::string &motorbikeID,
@@ -56,4 +57,4 @@ private:
     std::vector<TimeSlot> availability;
 };
 
-#endif 
+#endif

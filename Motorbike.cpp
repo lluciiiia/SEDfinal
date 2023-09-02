@@ -6,6 +6,7 @@
 class Motorbike
 {
 public:
+    Motorbike();
     Motorbike(
         std::string &model,
         std::string &motorbikeID,
