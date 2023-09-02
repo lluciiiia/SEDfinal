@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-#include "Motobike.h"
+#include "Motorbike.h"
 #include "Account/User.h"
 #include "Borrow.h"
 #include "Request.h"
@@ -17,7 +17,7 @@ using namespace std;
 
 class saveToFile{
     const string accountFile= "Account.txt";
-    const string motobikeFile= "Motobike.txt";
+    const string motobikeFile= "Motorbike.txt";
     const string requestFile= "Request.txt";
     const string borrowFile= "Borrow.txt";
     const string ratingFile= "Ratting.txt";
@@ -25,8 +25,8 @@ class saveToFile{
     public: 
     void SaveAccountToFile( vector<User>&users) ;
     vector<User> loadAccount();
-    void SaveMotobikeToFile(vector <Motobike> &moto);
-    vector<Motobike> loadMotor();
+    void SaveMotobikeToFile(vector <Motorbike> &moto);
+    vector<Motorbike> loadMotor();
     void SaveRequestToFIle(vector <Request> &request);
     vector <Request> loadRequest();
     void saveBorrowToFile(vector<Borrow> &borrow);
