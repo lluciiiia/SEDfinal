@@ -19,8 +19,6 @@ public:
     void setScore(float score);
     std::string getComment();
     void setComment(std::string comment);
-    // I just changed the parameter for this
-    int getNumberOfRatings(const User& user);
 };
 
 class UserRating : public Rating
