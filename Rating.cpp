@@ -1,84 +1,37 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include "Rating.h"
+#include <Rating.h> // Not sure if this gives errors in your vscode
 
-class Rating
-{
-private:
-    float score;
-    std::string comment;
-    std::string userID;
-};
+Rating::Rating() : score(0.0), comment("") {}
 
-class UserRating : public Rating
-{
-    std::string username;
+Rating::Rating(float score, std::string comment) : score(score), comment(comment) {}
 
-public:
-    // Constructors
-    UserRating();
+float Rating::getScore() {
+    return score;
+}
 
-    UserRating(std::string username, float score, std::string comment)
-    {
-        this->username = username;
-        this->score = score;
-        this->comment = comment;
-    }
+void Rating::setScore(float score) {
+    this->score = score;
+}
 
-    // Getters/setters
-    int getScore() {
-        return this->score;
-    }
+std::string Rating::getComment() {
+    return comment;
+}
 
-    void setScore(int score) {
-        this->score = score;
-    }
+void Rating::setComment(std::string comment) {
+    this->comment = comment;
+}
 
-    std::string getComment() {
-        return this->comment;
-    }
+// Just changed this
+int Rating::getNumberOfRatings(const User& user) {
+    const std::vector<UserRating>& ratings = user.getUserRatings();
+    return ratings.size();
+}
 
-    void setComment(std::string comment) {
-        this->comment = comment;
-    }
+UserRating::UserRating() : Rating(), username("") {}
 
-    // TODO: Missing the user class so it's giving an error
-    int getNumberOfRatings() {
-        // return userRating->size;
-    }
+UserRating::UserRating(std::string username, float score, std::string comment)
+    : Rating(score, comment), username(username) {}
 
-};
+MotorbikeRating::MotorbikeRating() : Rating(), bikeID("") {}
 
-class MotorbikeRating : public Rating
-{
-    std::string bikeID;
-
-
-    // Constructors 
-    MotorbikeRating();
-
-    MotorbikeRating(std::string bikeID, float score, std::string comment)
-    {
-        this->bikeID = bikeID;
-        this->score = score;
-        this->comment = comment;
-    }
-
-    int getScore() {
-        return this->score;
-    }
-
-    void setScore (int score) {
-        this->score = score; 
-    }
-
-    std::string getComment() {
-        return this->comment;
-    }
-
-    void setComment(std::string comment) {
-        this->comment = comment;
-    }
-};
- 
+MotorbikeRating::MotorbikeRating(std::string bikeID, float score, std::string comment)
+    : Rating(score, comment), bikeID(bikeID) {}
