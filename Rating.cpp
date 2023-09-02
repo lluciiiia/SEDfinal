@@ -1,4 +1,5 @@
-#include <Rating.h> // Not sure if this gives errors in your vscode
+#include <Rating.h>
+
 
 Rating::Rating() : score(0.0), comment("") {}
 
@@ -18,12 +19,6 @@ std::string Rating::getComment() {
 
 void Rating::setComment(std::string comment) {
     this->comment = comment;
-}
-
-// Just changed this
-int Rating::getNumberOfRatings(const User& user) {
-    const std::vector<UserRating>& ratings = user.getUserRatings();
-    return ratings.size();
 }
 
 UserRating::UserRating() : Rating(), username("") {}
