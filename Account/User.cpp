@@ -64,8 +64,16 @@ bool User::registerAccount(const string &username, const string &password, const
             cout<< "Username "<< username << " already exists.";
             return false;
         }else{
-
-            userList.emplace_back(username,password,fullName,phoneNumber,passportType,idNum,licenseNum,licenseExdate);
+            Account:: setUsername(username);
+            Account::setPassword(password);
+            Account:: setFull_Name(fullName);
+            Account :: setPhone_number(phoneNumber);
+            this->passportType = Type;
+            this->idNum = idNum;
+            this->licenseNumber= licenseNum;
+            this-> licenseExpiryDate= licenseExdate;
+            this-> creditPoint= credit;
+            userList.push_back(*this);
             cout<<"Register successfully! ";
             
         }

@@ -41,14 +41,38 @@ vector<User> saveToFile::loadAccount()
     return users;
 }
 
+void saveToFile::SaveMotobikeToFile(vector<Motobike> &moto)
+{
+}
 
+vector<Motobike> saveToFile::loadMotor()
+{
+    return vector<Motobike>();
+}
 
+void saveToFile::SaveRequestToFIle(vector<Request> &request)
+{
+}
 
+vector<Request> saveToFile::loadRequest()
+{
+    return vector<Request>();
+}
 
+void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
+{
+}
 
+vector<Borrow> saveToFile::loadBorrow()
+{
+    return vector<Borrow>();
+}
 
+void saveToFile::saveRatingToFile(vector<Rating> &ratings)
+{
+}
 
-
-
-
-
+vector<Rating> saveToFile::loadRating()
+{
+    return vector<Rating>();
+}

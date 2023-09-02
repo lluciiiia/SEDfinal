@@ -21,8 +21,9 @@ std::vector<User> newUser= fileSave.loadAccount();
         int choice;
         cout<< "Choose 1 to register";
         cin>>choice;
-        if(choice == 1){
-            user.registerAccount("Phat","123", 20,newUser,"Huynh","fasd","123123", "pass","123123","sadfla");
+        if(choice == 1){ 
+            user.registerAccount("User1","123", 20,newUser,"Huynh","fasd","123123", "pass","123123","sadfla");
+            break;
         }
     }
        

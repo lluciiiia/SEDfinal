@@ -25,10 +25,12 @@ class Account{
 
     string getPhoneNumber();
 
+    void setUsername(string userName);
 
+    void setPassword(string pass);
+    void setFull_Name(string full_name);
 
-
-
+    void setPhone_number(string phone_Number);
 };
 
 

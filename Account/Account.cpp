@@ -23,4 +23,18 @@ Account::Account(std::string username, std::string password, std::string full_na
     }
 
 
+    
+    void Account:: setUsername(string userName){
+        this->username= userName;
+    }
 
+    void Account::setPassword(string pass){
+        this->password = pass;
+    }
+    void Account::setFull_Name(string full_name){
+        this->full_name =full_name;
+    }
+
+    void Account::setPhone_number(string phone_Number){
+        this-> phone_number = phone_Number;
+    }
