@@ -1,5 +1,6 @@
 #ifndef TIMESLOT_H
 #define TIMESLOT_H
+
 #include <string>
 
 using namespace std;
@@ -22,6 +23,5 @@ public:
         return endTime;
     }
 };
-
 
 #endif

@@ -1,10 +1,10 @@
 #ifndef REQUEST_H
 #define REQUEST_H
+
 #include "User.cpp"
 #include "Motorbike.cpp"
 #include "TimeSlot.cpp"
 #include "RequestStatus.cpp"
-
 
 class Request {
 private:
@@ -38,6 +38,5 @@ public:
         return timeSlot;
     }
 };
-
 
 #endif
