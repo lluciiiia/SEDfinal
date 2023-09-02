@@ -3,15 +3,19 @@
 #include <vector>
 #include "Rating.h"
 
+
 Rating::Rating()
+
 {
     
 }
 
 float Rating::getScore()
 {
+
     return this->score;
 }
+
 
 std::string Rating::getComment()
 {
@@ -54,3 +58,4 @@ std::string MotorbikeRating::getBikeId()
 {
     return bikeID;
 }
+

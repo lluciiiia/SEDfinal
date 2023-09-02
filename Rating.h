@@ -1,6 +1,7 @@
 #ifndef RATING_H
 #define RATING_H
 
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -61,15 +62,25 @@ class MotorbikeRating : public Rating
 
     void setComment(std::string comment) ;
     std:: string getBikeId();
+
+};
+
+class MotorbikeRating : public Rating
+{
+    std::string bikeID;
+
+public:
+    MotorbikeRating();
+
+    MotorbikeRating(std::string bikeID, float score, std::string comment);
+
+    float getScore() const;
+    void setScore(float score);
+
+    std::string getComment() const;
+    void setComment(const std::string &comment);
 };
 
 
-
-
-
-
-
-
-
-
 #endif
+

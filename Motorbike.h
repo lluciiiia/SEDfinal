@@ -1,10 +1,6 @@
 #ifndef MOTORBIKE_H
 #define MOTORBIKE_H
 
-
-
-
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,10 +8,16 @@
 #include "TimeSlot.cpp"
 #include "Motorbike.h"
 
+enum class City
+{
+    Saigon,
+    Hanoi
+
+
 class Motorbike
 {
 public:
-    // Constructor
+
     Motorbike(
         std::string &model,
         std::string &motorbikeID,
@@ -55,12 +57,5 @@ private:
     std::vector<Request> requests;
     std::vector<TimeSlot> availability;
 };
-
-enum class City
-{
-    Saigon,
-    Hanoi
-};
-
 
 #endif

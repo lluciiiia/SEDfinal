@@ -13,8 +13,6 @@
 #include "Rating.h"
 using namespace std;
 
-
-
 class saveToFile{
     const string accountFile= "Account.txt";
     const string motobikeFile= "Motorbike.txt";
