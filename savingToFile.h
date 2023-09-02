@@ -21,7 +21,7 @@ class saveToFile{
     const string ratingFile= "Ratting.txt";
 
     public: 
-    void SaveAccountToFile( vector<User>&users) ;
+    void SaveAccountToFile( vector<User>&users);
     vector<User> loadAccount();
     void SaveMotobikeToFile(vector <Motorbike> &moto);
     vector<Motorbike> loadMotor();

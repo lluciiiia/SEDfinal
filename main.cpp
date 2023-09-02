@@ -1,9 +1,11 @@
 #include "Account/User.h"
 #include "savingToFile.h"
 #include "Account/Account.h"
+#include "Rating.h"
+#include "Request.h"
+#include "TimeSlot.h"
 #include <iostream>
-
-
+#include "Borrow.h"
 
 
 

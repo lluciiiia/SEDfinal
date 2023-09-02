@@ -46,7 +46,7 @@ void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
 {
     ofstream myFile(motobikeFile);
     if(myFile.is_open()){
-        for(Motorbike &motor: moto ){
+        for(auto &motor: moto ){
             myFile<< motor.toStringMotorBike()<< "\n";
         }
         myFile.close();
@@ -55,55 +55,55 @@ void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
     }
 }
 
-vector<Motorbike> saveToFile::loadMotor()
-{
-    vector <Motorbike> motors;
-    fstream myFile(motobikeFile, ios:: in);
-    string line;
+// vector<Motorbike> saveToFile::loadMotor()
+// {
+//     vector <Motorbike> motors;
+//     fstream myFile(motobikeFile, ios:: in);
+//     string line;
 
 
-    while(getline(myFile, line)){
-        stringstream ss(line);
-        vector<string> tokens;
-        string token;
-        while(getline(ss,token,',')){
-            tokens.push_back(token);
-        }
+//     while(getline(myFile, line)){
+//         stringstream ss(line);
+//         vector<string> tokens;
+//         string token;
+//         while(getline(ss,token,',')){
+//             tokens.push_back(token);
+//         }
 
-        if(tokens.size()== 11){
-            // double yearMade= stod(tokens[5]);
-            // double consumingPoints= stod(tokens[7]);
-            // double retalAmount = stod(tokens[8]);
-            // double minRenterRating= stod (tokens[9]);
-            // double motorBikeRating= stod (tokens[10]);
-            // Motorbike motor(tokens[0],tokens[1],tokens[2],tokens[3],tokens[4],yearMade,tokens[6],consumingPoints,retalAmount,minRenterRating,motorBikeRating);
-        }
-    }
-}
+//         if(tokens.size()== 11){
+//             // double yearMade= stod(tokens[5]);
+//             // double consumingPoints= stod(tokens[7]);
+//             // double retalAmount = stod(tokens[8]);
+//             // double minRenterRating= stod (tokens[9]);
+//             // double motorBikeRating= stod (tokens[10]);
+//             // Motorbike motor(tokens[0],tokens[1],tokens[2],tokens[3],tokens[4],yearMade,tokens[6],consumingPoints,retalAmount,minRenterRating,motorBikeRating);
+//         }
+//     }
+// }
 
-void saveToFile::SaveRequestToFIle(vector<Request> &request)
-{
-}
+// void saveToFile::SaveRequestToFIle(vector<Request> &request)
+// {
+// }
 
-vector<Request> saveToFile::loadRequest()
-{
-    return vector<Request>();
-}
+// vector<Request> saveToFile::loadRequest()
+// {
+//     return vector<Request>();
+// }
 
-void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
-{
-}
+// void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
+// {
+// }
 
-vector<Borrow> saveToFile::loadBorrow()
-{
-    return vector<Borrow>();
-}
+// vector<Borrow> saveToFile::loadBorrow()
+// {
+//     return vector<Borrow>();
+// }
 
-void saveToFile::saveRatingToFile(vector<Rating> &ratings)
-{
-}
+// void saveToFile::saveRatingToFile(vector<Rating> &ratings)
+// {
+// }
 
-vector<Rating> saveToFile::loadRating()
-{
-    return vector<Rating>();
-}
+// vector<Rating> saveToFile::loadRating()
+// {
+//     return vector<Rating>();
+// }
