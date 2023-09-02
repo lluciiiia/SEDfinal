@@ -23,7 +23,7 @@ Account::Account(std::string username, std::string password, std::string fullNam
         return phoneNumber;
     }
 
-<<<<<<< Updated upstream
+
 
     
     void Account:: setUsername(string userName){
@@ -40,11 +40,7 @@ Account::Account(std::string username, std::string password, std::string fullNam
     void Account::setPhone_number(string phoneNumber){
         this-> phoneNumber = phoneNumber;
     }
-=======
-void Account::setPhoneNumber(string phoneNumber)
-{
-    this->phoneNumber = phoneNumber;
-}
 
 
->>>>>>> Stashed changes
+
+

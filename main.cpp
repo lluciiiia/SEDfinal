@@ -1,11 +1,11 @@
 #include "Account/User.h"
 #include "savingToFile.h"
 #include "Account/Account.h"
-#include "Rating.h"
-#include "Request.h"
-#include "TimeSlot.h"
+// #include "Rating.h"
+// #include "Request.h"
+// #include "TimeSlot.h"
 #include <iostream>
-#include "Borrow.h"
+// #include "Borrow.h"
 
 
 
@@ -35,6 +35,7 @@ int main()
     while (true){
         cout << "Enter your choice: ";
         cin>> choice;
+        cin.ignore();
         if(choice == 1){
             // display all bikes 
         }else if(choice == 2){

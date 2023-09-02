@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "Rating.h"
-
+#include "Motorbike.h"
 
 Rating::Rating()
 
@@ -10,18 +10,22 @@ Rating::Rating()
     
 }
 
-float Rating::getScore()
+float Rating::getScore () const
 {
 
     return this->score;
 }
 
 
-std::string Rating::getComment()
+std::string Rating::getComment() const
 {
     return this->comment;
 }
 
+
+
+
+// user rating
 UserRating::UserRating():Rating(0, "")
 {
     this->username="";
@@ -34,27 +38,35 @@ UserRating::UserRating(std::string username, float score, std::string comment):R
 
 
 
-float UserRating::getUserScore()
+float UserRating::getScore() const
 {
     return Rating::getScore();
 }
 
-std::string UserRating::getComment()
+std::string UserRating::getUsername() const
+{
+    return username;
+}
+
+std::string UserRating::getComment() const
 {
     return Rating::getComment();
 }
 
-float MotorbikeRating::getScore()
+
+
+// motobike rating
+float MotorbikeRating::getScore() const
 {
     return Rating::getScore();
 }
 
-std::string MotorbikeRating::getComment()
+std::string MotorbikeRating::getComment() const
 {
     return Rating::getComment();
 }
 
-std::string MotorbikeRating::getBikeId()
+std::string MotorbikeRating::getBikeId() const
 {
     return bikeID;
 }

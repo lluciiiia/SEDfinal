@@ -1,6 +1,5 @@
+#include "Request.h"
 
-<<<<<<< Updated upstream
-=======
 Request::Request(string username, string motorbikeId, RequestStatus status, TimeSlot timeSlot)
 {
     this->username = username;
@@ -18,4 +17,4 @@ string Request::getMotorbikeId()
 {
     return motobikeID;
 }
->>>>>>> Stashed changes
+

@@ -1,86 +1,62 @@
 #ifndef RATING_H
 #define RATING_H
 
-
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Account/User.h" // I'm not sure if it's .cpp or .h
 
-
+// Include User.h header with the correct path
+#include "Account/User.h"
 
 class Rating
 {
 private:
     float score;
     std::string comment;
-    public:
+
+public:
+    // Constructors
     Rating();
-    Rating(float score, string comment);
-    float getScore();
-    std:: string getComment();
+    Rating(float score, std::string comment);
+
+    // Getters
+    float getScore() const; // Added const qualifier
+    std::string getComment() const; // Added const qualifier
 };
 
 class UserRating : public Rating
 {
+private:
     std::string username;
 
 public:
     // Constructors
     UserRating();
-
     UserRating(std::string username, float score, std::string comment);
-
-    // Getters/setters
-    float getUserScore() ;
-
-    
-
-    std::string getComment();
-
-
-    // Missing the user class so it's giving an error
-    int getNumberOfRatings() ;
-
+    float getScore() const;
+    // Getter for username
+    std::string getUsername() const; // Added const qualifier
+    std:: string getComment() const;
+    // You don't need to redefine getScore and getComment since they are inherited
 };
 
+
+// motorbkike rating
 class MotorbikeRating : public Rating
 {
+private:
     std::string bikeID;
 
-
-    // Constructors 
-    MotorbikeRating();
-
-    MotorbikeRating(std::string bikeID, float score, std::string comment);
-
-    float getScore() ;
-
-    void setScore (int score);
-
-    std::string getComment();
-
-    void setComment(std::string comment) ;
-    std:: string getBikeId();
-
-};
-
-
-<<<<<<< Updated upstream
 public:
+    // Constructors
     MotorbikeRating();
-
     MotorbikeRating(std::string bikeID, float score, std::string comment);
-
+   
+    // Getter and setter for bikeID
+    std::string getBikeId() const; // Added const qualifier
     float getScore() const;
-    void setScore(float score);
-
-    std::string getComment() const;
-    void setComment(const std::string &comment);
+    std:: string getComment() const;
+    void setBikeId(std::string bikeID) const;
 };
-=======
->>>>>>> Stashed changes
-
 
 #endif
-

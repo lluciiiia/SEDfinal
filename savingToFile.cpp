@@ -42,18 +42,18 @@ vector<User> saveToFile::loadAccount()
     return users;
 }
 
-void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
-{
-    ofstream myFile(motobikeFile);
-    if(myFile.is_open()){
-        for(auto &motor: moto ){
-            myFile<< motor.toStringMotorBike()<< "\n";
-        }
-        myFile.close();
-    }else{
-        cout<< "Error opening motorbike file";
-    }
-}
+// void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
+// {
+//     ofstream myFile(motobikeFile);
+//     if(myFile.is_open()){
+//         for(auto &motor: moto ){
+//             myFile<< motor.toStringMotorBike()<< "\n";
+//         }
+//         myFile.close();
+//     }else{
+//         cout<< "Error opening motorbike file";
+//     }
+// }
 
 // vector<Motorbike> saveToFile::loadMotor()
 // {

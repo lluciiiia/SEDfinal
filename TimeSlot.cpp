@@ -3,25 +3,14 @@
 
 using namespace std;
 
-class TimeSlot {
-private:
-    string startTime;
-    string endTime;
+TimeSlot::TimeSlot()
+{   
+    this-> startTime = "";
+    this-> endTime ="";
+}
 
-public:
-    TimeSlot::TimeSlot()
-    {
-    }
-    TimeSlot(const string &startTime, const string &endTime)
-        : startTime(startTime), endTime(endTime)
-    {
-    }
-
-    string getStartTime() const {
-        return startTime;
-    }
-
-    string getEndTime() const {
-        return endTime;
-    }
-};
+TimeSlot::TimeSlot(const string &startTime, const string &endTime)
+{
+    this->startTime =startTime;
+    this-> endTime= endTime;
+}
