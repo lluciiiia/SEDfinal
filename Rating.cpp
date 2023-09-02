@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "User.cpp" // I'm not sure if it's .cpp or .h
+
 #ifndef RATING_H
 #define RATING_H
 
@@ -20,6 +21,7 @@ class UserRating : public Rating
 public:
     // Constructors
     UserRating();
+
     UserRating(std::string username, float score, std::string comment)
     {
         this->username = username;
@@ -48,15 +50,17 @@ public:
     int getNumberOfRatings() {
         return userRating->size;
     }
+
 };
 
 class MotorbikeRating : public Rating
 {
     std::string bikeID;
 
-public:
+
     // Constructors 
     MotorbikeRating();
+
     MotorbikeRating(std::string bikeID, float score, std::string comment)
     {
         this->bikeID = bikeID;
@@ -64,7 +68,6 @@ public:
         this->comment = comment;
     }
 
-    // Getters/setters
     int getScore() {
         return this->score;
     }
@@ -83,3 +86,8 @@ public:
 };
 
 #endif
+
+};
+
+#endif
+
