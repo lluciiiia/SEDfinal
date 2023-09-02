@@ -65,10 +65,8 @@ class MotorbikeRating : public Rating
 
 };
 
-class MotorbikeRating : public Rating
-{
-    std::string bikeID;
 
+<<<<<<< Updated upstream
 public:
     MotorbikeRating();
 
@@ -80,6 +78,8 @@ public:
     std::string getComment() const;
     void setComment(const std::string &comment);
 };
+=======
+>>>>>>> Stashed changes
 
 
 #endif

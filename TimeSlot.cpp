@@ -9,8 +9,12 @@ private:
     string endTime;
 
 public:
-    TimeSlot(const string& startTime, const string& endTime)
-        : startTime(startTime), endTime(endTime) {
+    TimeSlot::TimeSlot()
+    {
+    }
+    TimeSlot(const string &startTime, const string &endTime)
+        : startTime(startTime), endTime(endTime)
+    {
     }
 
     string getStartTime() const {
