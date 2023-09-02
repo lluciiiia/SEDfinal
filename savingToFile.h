@@ -13,11 +13,9 @@
 #include "Rating.h"
 using namespace std;
 
-
-
 class saveToFile{
     const string accountFile= "Account.txt";
-    const string motobikeFile= "Motobike.txt";
+    const string motobikeFile= "Motorbike.txt";
     const string requestFile= "Request.txt";
     const string borrowFile= "Borrow.txt";
     const string ratingFile= "Ratting.txt";

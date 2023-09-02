@@ -6,6 +6,7 @@
 #include <vector>
 #include "Request.h"
 #include "TimeSlot.h"
+#include "Motorbike.h"
 
 enum class City
 {
@@ -16,7 +17,7 @@ enum class City
 class Motorbike
 {
 public:
-    Motorbike();
+
     Motorbike(
         std::string &model,
         std::string &motorbikeID,

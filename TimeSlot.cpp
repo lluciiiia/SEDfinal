@@ -21,5 +21,3 @@ public:
         return endTime;
     }
 };
-
-#endif

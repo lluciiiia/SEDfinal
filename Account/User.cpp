@@ -1,6 +1,5 @@
 #include "User.h"
 #include <iostream>
-#include <string>
 
 User::User()
     : Account("", "", "", ""),
@@ -12,19 +11,19 @@ User::User()
 {
 }
 
-User::User(std::string username,
-           std::string password,
-           std::string full_name,
-           std::string phone_number,
-           std::string passportType,
-           std::string idNum,
-           std::string licenseNumber,
-           std::string licenseExpiryDate,
+User::User(string username,
+           string password,
+           string fullName,
+           string phone_number,
+           string passportType,
+           string idNum,
+           string licenseNumber,
+           string licenseExpiryDate,
            UserRating rating,
            double creditPoint) : Account(username,
                                          password,
-                                         full_name,
-                                         phone_number)
+                                         fullName,
+                                         phoneNumber)
 {
     this->passportType = passportType;
     this->idNum = idNum;
@@ -36,7 +35,7 @@ User::User(std::string username,
 
 User::User(string username,
            string password,
-           string full_name,
+           string fullName,
            string phone_number,
            string passportType,
            string idNum,
@@ -44,7 +43,7 @@ User::User(string username,
            string licenseExpiryDate,
            double creditPoint) : Account(username,
                                          password,
-                                         full_name,
+                                         fullName,
                                          phone_number)
 {
     this->passportType = passportType;
@@ -57,7 +56,7 @@ User::User(string username,
 
 User::User(string username,
            string password,
-           string full_name,
+           string fullName,
            string phone_number,
            string passportType,
            string idNum,
@@ -67,7 +66,7 @@ User::User(string username,
            double creditPoint)
     : Account(username,
               password,
-              full_name,
+              fullName,
               phone_number)
 {
     this->passportType = passportType;
@@ -81,7 +80,7 @@ string User::toStringAccount()
 {
     return Account::getUsername() + "," +
            Account::getPassword() + "," +
-           Account::getFull_Name() + "," +
+           Account::getFullName() + "," +
            Account::getPhoneNumber() + "," +
            this->passportType + "," +
            this->idNum + "," +
@@ -103,7 +102,7 @@ bool User::registerAccount(const string &username,
 {
     for (User &user : userList)
     {
-        if (user.getUserNAME() == username)
+        if (user.getUserName() == username)
         {
             cout << "Username " << username << " already exists.";
             return false;
@@ -112,8 +111,8 @@ bool User::registerAccount(const string &username,
         {
             Account::setUsername(username);
             Account::setPassword(password);
-            Account::setFull_Name(fullName);
-            Account ::setPhone_number(phoneNumber);
+            Account::setFullName(fullName);
+            Account ::setPhoneNumber(phoneNumber);
             this->passportType = Type;
             this->idNum = idNum;
             this->licenseNumber = licenseNum;
