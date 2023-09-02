@@ -15,7 +15,7 @@ private:
 
 public:
     Request(User requester, Motorbike motorbike, TimeSlot timeSlot)
-        : requester(requester), motorbike(motorbike), status(RequestStatus::Pending), timeSlot(timeSlot) {
+        : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot) {
     }
 
     User getRequester() const {
