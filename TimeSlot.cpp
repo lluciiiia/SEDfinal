@@ -1,6 +1,4 @@
-#ifndef TIMESLOT_H
-#define TIMESLOT_H
-
+#include "TimeSlot.h"
 #include <string>
 
 using namespace std;
