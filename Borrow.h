@@ -1,3 +1,5 @@
+#ifndef BORROW_H
+#define BORROW_H
 #include <string>
 #include "TimeSlot.h"
 
@@ -48,3 +50,5 @@ public:
         return price;
     }
 };
+
+#endif
