@@ -1,24 +1,40 @@
 {
     "files.associations": {
+
         "string": "cpp",
+        "*.ejs": "javascript",
+        "vector": "cpp",
         "array": "cpp",
         "atomic": "cpp",
+        "array": "cpp",
+
         "bit": "cpp",
         "*.tcc": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
+
+        "cstdarg": "cpp",
         "compare": "cpp",
         "concepts": "cpp",
-        "cstdarg": "cpp",
+
         "cstddef": "cpp",
         "cstdint": "cpp",
         "cstdio": "cpp",
         "cstdlib": "cpp",
+
         "ctime": "cpp",
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
+
+        "unordered_map": "cpp",
+        "exception": "cpp",
+        "algorithm": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "optional": "cpp",
+   
         "unordered_map": "cpp",
         "vector": "cpp",
         "exception": "cpp",
@@ -37,16 +53,22 @@
         "fstream": "cpp",
         "initializer_list": "cpp",
         "iomanip": "cpp",
+
         "iosfwd": "cpp",
         "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
         "new": "cpp",
+
         "numbers": "cpp",
         "ostream": "cpp",
-        "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "cstdarg": "cpp",
+        "ctime": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp"
     }
 }
