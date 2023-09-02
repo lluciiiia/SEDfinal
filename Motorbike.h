@@ -4,15 +4,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Request.cpp"
-#include "TimeSlot.cpp"
+#include "Request.h"
+#include "TimeSlot.h"
 #include "Motorbike.h"
 
 enum class City
 {
     Saigon,
     Hanoi
-
+};
 
 class Motorbike
 {

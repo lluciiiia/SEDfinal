@@ -13,7 +13,7 @@ Admin::Admin()
 Admin::Admin(string username,
              string password,
              string fullName,
-             string phone_number,
+             string phoneNumber,
              string adminID)
     : Account(username, password, fullName, phoneNumber), adminID(adminID)
 {

@@ -11,7 +11,7 @@ class Account{
         std:: string fullName;
         std:: string phoneNumber;
         public:
-        Account(std::string username, std::string password, std::string fullName, std:: string phoneNumber);
+        Account(std::string username, std::string password, std::string fullName, std::string phoneNumber);
     
     public: 
 
@@ -25,7 +25,7 @@ class Account{
     void setPassword(string pass);
     void setFullName(string fullName);
 
-    void setPhone_number(string phoneNumber);
+    void setPhoneNumber(string phoneNumber);
 };
 
 

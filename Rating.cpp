@@ -1,61 +1,37 @@
-#include <iostream>
-#include <string>
-#include <vector>
 #include "Rating.h"
 
 
-Rating::Rating()
+Rating::Rating() : score(0.0), comment("") {}
 
-{
-    
+Rating::Rating(float score, std::string comment) : score(score), comment(comment) {}
+
+float Rating::getScore() {
+    return score;
 }
 
-float Rating::getScore()
-{
-
-    return this->score;
+void Rating::setScore(float score) {
+    this->score = score;
 }
 
-
-std::string Rating::getComment()
-{
-    return this->comment;
+std::string Rating::getComment() {
+    return comment;
 }
 
-UserRating::UserRating():Rating(0, "")
-{
-    this->username="";
+void Rating::setComment(std::string comment) {
+    this->comment = comment;
 }
 
-UserRating::UserRating(std::string username, float score, std::string comment):Rating(score,comment)
-{
-    this->username = username;
+int Rating::getNumberOfRatings() {
+    // TODO: Implement this function to get the number of ratings
+    return 0; // Placeholder value, replace with actual implementation
 }
 
+UserRating::UserRating() : Rating(), username("") {}
 
+UserRating::UserRating(std::string username, float score, std::string comment)
+    : Rating(score, comment), username(username) {}
 
-float UserRating::getUserScore()
-{
-    return Rating::getScore();
-}
+MotorbikeRating::MotorbikeRating() : Rating(), bikeID("") {}
 
-std::string UserRating::getComment()
-{
-    return Rating::getComment();
-}
-
-float MotorbikeRating::getScore()
-{
-    return Rating::getScore();
-}
-
-std::string MotorbikeRating::getComment()
-{
-    return Rating::getComment();
-}
-
-std::string MotorbikeRating::getBikeId()
-{
-    return bikeID;
-}
-
+MotorbikeRating::MotorbikeRating(std::string bikeID, float score, std::string comment)
+    : Rating(score, comment), bikeID(bikeID) {}
