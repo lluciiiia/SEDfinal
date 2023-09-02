@@ -41,13 +41,13 @@ vector<User> saveToFile::loadAccount()
     return users;
 }
 
-void saveToFile::SaveMotobikeToFile(vector<Motobike> &moto)
+void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
 {
 }
 
-vector<Motobike> saveToFile::loadMotor()
+vector<Motorbike> saveToFile::loadMotor()
 {
-    return vector<Motobike>();
+    
 }
 
 void saveToFile::SaveRequestToFIle(vector<Request> &request)

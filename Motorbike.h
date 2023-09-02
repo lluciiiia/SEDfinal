@@ -4,19 +4,20 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Request.h"
-#include "TimeSlot.h"
+#include "Request.cpp"
+#include "TimeSlot.cpp"
+#include "Motorbike.h"
 
 enum class City
 {
     Saigon,
     Hanoi
-};
+
 
 class Motorbike
 {
 public:
-    Motorbike();
+
     Motorbike(
         std::string &model,
         std::string &motorbikeID,
