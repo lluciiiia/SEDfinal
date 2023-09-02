@@ -3,7 +3,7 @@
 using namespace std;
 
 
-Account::Account(std::string username, std::string password, std::string full_name, std:: string phone_number): username(username), password(password),full_name(full_name),phone_number(phone_number){}
+Account::Account(std::string username, std::string password, std::string fullName, std:: string phoneNumber): username(username), password(password),fullName(fullName),phoneNumber(phoneNumber){}
 
     string Account::getUsername(){
         return username;
@@ -14,12 +14,12 @@ Account::Account(std::string username, std::string password, std::string full_na
     }
 
 
-    string Account:: getFull_Name(){
-        return full_name;
+    string Account:: getFullName(){
+        return fullName;
     }
 
     string Account:: getPhoneNumber(){
-        return phone_number;
+        return phoneNumber;
     }
 
 
@@ -31,10 +31,10 @@ Account::Account(std::string username, std::string password, std::string full_na
     void Account::setPassword(string pass){
         this->password = pass;
     }
-    void Account::setFull_Name(string full_name){
-        this->full_name =full_name;
+    void Account::setFullName(string fullName){
+        this->fullName =fullName;
     }
 
-    void Account::setPhone_number(string phone_Number){
-        this-> phone_number = phone_Number;
+    void Account::setPhone_number(string phoneNumber){
+        this-> phoneNumber = phoneNumber;
     }
