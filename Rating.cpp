@@ -14,13 +14,6 @@ std::string Rating::getComment() const
     return this->comment;
 }
 
-
-// TODO: Do we need this?
-UserRating::UserRating():Rating(0, "")
-{
-    this->username="";
-}
-
 // user rating
 float UserRating::getScore() const
 {

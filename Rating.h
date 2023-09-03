@@ -29,9 +29,9 @@ private:
 public:
     UserRating();
     UserRating(std::string username, float score, std::string comment);
+    float getScore() const;
+    std::string getComment() const;
     std::string getUsername() const; 
-};
-
 };
 
 class MotorbikeRating : public Rating
@@ -44,6 +44,8 @@ public:
     MotorbikeRating();
     MotorbikeRating(std::string bikeID, float score, std::string comment);
     // Getter & Setter
+    float getScore() const;
+    std::string getComment() const;
     std::string getBikeId() const; 
     void setBikeId(std::string bikeID) const;
 };
