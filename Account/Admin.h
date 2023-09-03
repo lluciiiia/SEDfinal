@@ -22,7 +22,8 @@ public:
     void viewMotorbikeInfo();
     void viewAccounts();
 
-    // TODO: getters/setters
+    string getAdminID() const;
+    void setAdminID(string adminID);
 };
 
 #endif
