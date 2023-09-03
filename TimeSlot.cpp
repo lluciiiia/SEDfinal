@@ -13,4 +13,5 @@ TimeSlot::TimeSlot(const string &startTime, const string &endTime)
 {
     this->startTime =startTime;
     this-> endTime= endTime;
+
 }

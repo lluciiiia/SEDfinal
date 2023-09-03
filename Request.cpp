@@ -1,20 +1,31 @@
 #include "Request.h"
 
-Request::Request(string username, string motorbikeId, RequestStatus status, TimeSlot timeSlot)
+Request::Request(User requester, Motorbike motorbike, TimeSlot timeSlot)
+    : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot)
 {
-    this->username = username;
-    this->motobikeID = motorbikeId;
+}
+
+User Request::getRequester() const
+{
+    return requester;
+}
+
+Motorbike Request::getMotorbike() const
+{
+    return motorbike;
+}
+
+RequestStatus Request::getStatus() const
+{
+    return status;
+}
+
+TimeSlot Request::getTimeSlot() const
+{
+    return timeSlot;
+}
+
+void Request::setStatus(RequestStatus status)
+{
     this->status = status;
-    this->timeSlot = timeSlot;
 }
-
-string Request::getUsername()
-{
-    return username;
-}
-
-string Request::getMotorbikeId()
-{
-    return motobikeID;
-}
-

@@ -5,28 +5,38 @@
 #include "Motorbike.h"
 #include "TimeSlot.h"
 #include "RequestStatus.h"
-using namespace std;
-
-
 
 class Request {
 private:
-    
+    User requester;
+    Motorbike motorbike;
     RequestStatus status;
     TimeSlot timeSlot;
-    string username;
-    string motobikeID;
-    
-public:
-    Request (string username, string motorbikeId, RequestStatus status, TimeSlot timeSlot);
-    string getUsername();
-    string getMotorbikeId();
 
+public:
+    Request(User requester, Motorbike motorbike, TimeSlot timeSlot)
+        : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot) {
+    }
+
+    User getRequester() const {
+        return requester;
+    }
+
+    Motorbike getMotorbike() const {
+        return motorbike;
+    }
+
+    RequestStatus getStatus() const {
+        return status;
+    }
+
+    void setStatus(RequestStatus status) {
+        status = status;
+    }
+
+    TimeSlot getTimeSlot() const {
+        return timeSlot;
+    }
 };
 
-
-
-
 #endif
-
-

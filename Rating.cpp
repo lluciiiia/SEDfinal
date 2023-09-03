@@ -1,21 +1,13 @@
-#include <iostream>
-#include <string>
-#include <vector>
 #include "Rating.h"
 #include "Motorbike.h"
 
-Rating::Rating()
+Rating::Rating(){}
+Rating::Rating(float score, std::string comment) : score(score), comment(comment) {}
 
+float Rating::getScore() const
 {
-    
-}
-
-float Rating::getScore () const
-{
-
     return this->score;
 }
-
 
 std::string Rating::getComment() const
 {
@@ -23,29 +15,16 @@ std::string Rating::getComment() const
 }
 
 
-
-
-// user rating
+// TODO: Do we need this?
 UserRating::UserRating():Rating(0, "")
 {
     this->username="";
 }
 
-UserRating::UserRating(std::string username, float score, std::string comment):Rating(score,comment)
-{
-    this->username = username;
-}
-
-
-
+// user rating
 float UserRating::getScore() const
 {
     return Rating::getScore();
-}
-
-std::string UserRating::getUsername() const
-{
-    return username;
 }
 
 std::string UserRating::getComment() const
@@ -53,7 +32,10 @@ std::string UserRating::getComment() const
     return Rating::getComment();
 }
 
-
+std::string UserRating::getUsername() const
+{
+    return username;
+}
 
 // motobike rating
 float MotorbikeRating::getScore() const
