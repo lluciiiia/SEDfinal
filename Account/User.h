@@ -7,7 +7,7 @@
 #include "../Rating.h"
 #include "../Motorbike.h"
 
-
+// TODO: Add City attribute from City.h file
 class User : public Account
 {
 private:

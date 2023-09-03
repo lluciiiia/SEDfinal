@@ -3,6 +3,8 @@
 #include "Account.h"
 #include "../Rating.h"
 #include "../Motorbike.h"
+
+// TODO: Add City attribute 
 User::User()
     : Account("", "", "", ""),
       passportType(""),
@@ -25,7 +27,7 @@ User::User(string username,
            double creditPoint) : Account(username,
                                          password,
                                          fullName,
-                                         phone_number)
+                                         phoneNumber)
 {
     this->passportType = passportType;
     this->idNum = idNum;
@@ -38,7 +40,7 @@ User::User(string username,
 User::User(string username,
            string password,
            string fullName,
-           string phone_number,
+           string phoneNumber,
            string passportType,
            string idNum,
            string licenseNumber,
@@ -46,7 +48,7 @@ User::User(string username,
            double creditPoint) : Account(username,
                                          password,
                                          fullName,
-                                         phone_number)
+                                         phoneNumber)
 {
     this->passportType = passportType;
     this->idNum = idNum;
@@ -124,7 +126,7 @@ bool User::registerAccount(const string &username,
             Account::setUsername(username);
             Account::setPassword(password);
             Account::setFullName(fullName);
-            Account ::setPhone_number(phoneNumber);
+            Account ::setPhoneNumber(phoneNumber);
             this->passportType = Type;
             this->idNum = idNum;
             this->licenseNumber = licenseNum;
