@@ -1,6 +1,8 @@
 #include "User.h"
 #include <iostream>
-
+#include "Account.h"
+#include "../Rating.h"
+#include "../Motorbike.h"
 User::User()
     : Account("", "", "", ""),
       passportType(""),
@@ -23,7 +25,7 @@ User::User(string username,
            double creditPoint) : Account(username,
                                          password,
                                          fullName,
-                                         phoneNumber)
+                                         phone_number)
 {
     this->passportType = passportType;
     this->idNum = idNum;
@@ -89,6 +91,16 @@ string User::toStringAccount()
            to_string(this->creditPoint);
 }
 
+bool User::login(const string &username, const string &pass, vector<User> &userList)
+{
+    for(auto &user: userList){
+        if(user.getUserName() == username && user.getPassword() == pass){
+            return true;
+        }
+    }
+    return false;
+}
+
 bool User::registerAccount(const string &username,
                            const string &password,
                            const double &credit,
@@ -112,7 +124,7 @@ bool User::registerAccount(const string &username,
             Account::setUsername(username);
             Account::setPassword(password);
             Account::setFullName(fullName);
-            Account ::setPhoneNumber(phoneNumber);
+            Account ::setPhone_number(phoneNumber);
             this->passportType = Type;
             this->idNum = idNum;
             this->licenseNumber = licenseNum;
@@ -124,3 +136,20 @@ bool User::registerAccount(const string &username,
     }
     return true;
 }
+
+
+     
+// vector<Motorbike> User::addOwnedMotorbike(Motorbike bike)
+// {
+//     return vector<Motorbike>();
+// }
+
+// vector<Motorbike> User::rentBikes()
+// {
+//     return vector<Motorbike>();
+// }
+
+// vector<Request> User::receiveRequest()
+// {
+//     return vector<Request>();
+// }

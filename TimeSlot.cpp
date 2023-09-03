@@ -3,14 +3,15 @@
 
 using namespace std;
 
-TimeSlot::TimeSlot(const string& startTime, const string& endTime)
-    : startTime(startTime), endTime(endTime) {
+TimeSlot::TimeSlot()
+{   
+    this-> startTime = "";
+    this-> endTime ="";
 }
 
-string TimeSlot::getStartTime() const {
-    return startTime;
-}
+TimeSlot::TimeSlot(const string &startTime, const string &endTime)
+{
+    this->startTime =startTime;
+    this-> endTime= endTime;
 
-string TimeSlot::getEndTime() const {
-    return endTime;
 }

@@ -1,37 +1,55 @@
 #include "Rating.h"
+#include "Motorbike.h"
 
-
-Rating::Rating() : score(0.0), comment("") {}
-
+Rating::Rating(){}
 Rating::Rating(float score, std::string comment) : score(score), comment(comment) {}
 
-float Rating::getScore() {
-    return score;
+float Rating::getScore() const
+{
+    return this->score;
 }
 
-void Rating::setScore(float score) {
-    this->score = score;
+std::string Rating::getComment() const
+{
+    return this->comment;
 }
 
-std::string Rating::getComment() {
-    return comment;
+
+// TODO: Do we need this?
+UserRating::UserRating():Rating(0, "")
+{
+    this->username="";
 }
 
-void Rating::setComment(std::string comment) {
-    this->comment = comment;
+// user rating
+float UserRating::getScore() const
+{
+    return Rating::getScore();
 }
 
-int Rating::getNumberOfRatings() {
-    // TODO: Implement this function to get the number of ratings
-    return 0; // Placeholder value, replace with actual implementation
+std::string UserRating::getComment() const
+{
+    return Rating::getComment();
 }
 
-UserRating::UserRating() : Rating(), username("") {}
+std::string UserRating::getUsername() const
+{
+    return username;
+}
 
-UserRating::UserRating(std::string username, float score, std::string comment)
-    : Rating(score, comment), username(username) {}
+// motobike rating
+float MotorbikeRating::getScore() const
+{
+    return Rating::getScore();
+}
 
-MotorbikeRating::MotorbikeRating() : Rating(), bikeID("") {}
+std::string MotorbikeRating::getComment() const
+{
+    return Rating::getComment();
+}
 
-MotorbikeRating::MotorbikeRating(std::string bikeID, float score, std::string comment)
-    : Rating(score, comment), bikeID(bikeID) {}
+std::string MotorbikeRating::getBikeId() const
+{
+    return bikeID;
+}
+

@@ -35,6 +35,7 @@ public:
     void reserveTimeSlot(const TimeSlot &timeSlot);
     void addCreditPoints();
 
+    string toStringMotorBike();
 private:
     std::string model;
     std::string motorbikeID;

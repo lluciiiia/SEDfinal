@@ -23,3 +23,16 @@ void Motorbike::reserveTimeSlot(const TimeSlot &timeSlot)
 void Motorbike::addCreditPoints()
 {
 }
+string Motorbike:: toStringMotorBike(){
+        return model+","+
+                motorbikeID+","+
+                color+","+
+                engineSize+","+
+                transmissionMode+","+
+                to_string(yearMade)+","+
+                description+","+
+                to_string(consumingPoints)+","+
+                to_string(rentalAmount)+","+
+                to_string(minRenterRating)+","+
+                to_string(motorbikeRating)+",";
+    }

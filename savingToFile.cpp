@@ -2,6 +2,7 @@
 #include <fstream>
 #include "savingToFile.h"
 #include "Account/User.h"
+#include "Motorbike.h"
 using namespace std;
 
 void saveToFile::SaveAccountToFile(vector<User>& users)
@@ -41,38 +42,68 @@ vector<User> saveToFile::loadAccount()
     return users;
 }
 
-void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
-{
-}
+// void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
+// {
+//     ofstream myFile(motobikeFile);
+//     if(myFile.is_open()){
+//         for(auto &motor: moto ){
+//             myFile<< motor.toStringMotorBike()<< "\n";
+//         }
+//         myFile.close();
+//     }else{
+//         cout<< "Error opening motorbike file";
+//     }
+// }
 
-vector<Motorbike> saveToFile::loadMotor()
-{
-    
-}
+// vector<Motorbike> saveToFile::loadMotor()
+// {
+//     vector <Motorbike> motors;
+//     fstream myFile(motobikeFile, ios:: in);
+//     string line;
 
-void saveToFile::SaveRequestToFIle(vector<Request> &request)
-{
-}
 
-vector<Request> saveToFile::loadRequest()
-{
-    return vector<Request>();
-}
+//     while(getline(myFile, line)){
+//         stringstream ss(line);
+//         vector<string> tokens;
+//         string token;
+//         while(getline(ss,token,',')){
+//             tokens.push_back(token);
+//         }
 
-void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
-{
-}
+//         if(tokens.size()== 11){
+//             // double yearMade= stod(tokens[5]);
+//             // double consumingPoints= stod(tokens[7]);
+//             // double retalAmount = stod(tokens[8]);
+//             // double minRenterRating= stod (tokens[9]);
+//             // double motorBikeRating= stod (tokens[10]);
+//             // Motorbike motor(tokens[0],tokens[1],tokens[2],tokens[3],tokens[4],yearMade,tokens[6],consumingPoints,retalAmount,minRenterRating,motorBikeRating);
+//         }
+//     }
+// }
 
-vector<Borrow> saveToFile::loadBorrow()
-{
-    return vector<Borrow>();
-}
+// void saveToFile::SaveRequestToFIle(vector<Request> &request)
+// {
+// }
 
-void saveToFile::saveRatingToFile(vector<Rating> &ratings)
-{
-}
+// vector<Request> saveToFile::loadRequest()
+// {
+//     return vector<Request>();
+// }
 
-vector<Rating> saveToFile::loadRating()
-{
-    return vector<Rating>();
-}
+// void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
+// {
+// }
+
+// vector<Borrow> saveToFile::loadBorrow()
+// {
+//     return vector<Borrow>();
+// }
+
+// void saveToFile::saveRatingToFile(vector<Rating> &ratings)
+// {
+// }
+
+// vector<Rating> saveToFile::loadRating()
+// {
+//     return vector<Rating>();
+// }
