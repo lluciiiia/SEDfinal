@@ -17,7 +17,7 @@ Admin::Admin(string username,
              string adminID)
     : Account(username, password, fullName, phoneNumber), adminID(adminID)
 {
-    // Parameterized constructor implementation
+    this->adminID = adminID;
 }
 
 void Admin::viewMemberInfo()
@@ -31,3 +31,5 @@ void Admin::viewMotorbikeInfo()
 void Admin::viewAccounts()
 {
 }
+
+// TODO: getters & setters
