@@ -1,55 +1,51 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include "Request.cpp"
-#include "TimeSlot.cpp"
+#include "Motorbike.h"
 
-class Motorbike
-{
-public:
-    // Constructor
-    Motorbike(
-        std::string &model,
-        std::string &motorbikeID,
-        std::string &color,
-        std::string &engineSize,
-        City &city,
-        std::string &transmissionMode,
-        int yearMade,
-        std::string &description,
-        double consumingPoints,
-        double rentalAmount,
-        double minRenterRating,
-        double motorbikeRating);
+using namespace std;
 
-    // TODO: Getter methods for attributes
+Motorbike::Motorbike(string model, string motorbikeID, string color, string engineSize, City city, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating)
+    : model(model), motorbikeID(motorbikeID), color(color), engineSize(engineSize), city(city), transmissionMode(transmissionMode), yearMade(yearMade), description(description), consumingPoints(consumingPoints), rentalAmount(rentalAmount), minRenterRating(minRenterRating), motorbikeRating(motorbikeRating), ownerUsername(""), renterUsername(""), availability(true) {
+}
 
-    // Methods to manage requests and availability
-    void addRequest(const Request &request);
-    void viewRequest(const Request &request);
-    void checkAvailability(const TimeSlot &timeSlot);
-    void reserveTimeSlot(const TimeSlot &timeSlot);
-    void addCreditPoints();
+TimeSlot Motorbike::getTimeSlot() {
+}
 
-private:
-    std::string model;
-    std::string motorbikeID;
-    std::string color;
-    std::string engineSize;
-    City city;
-    std::string transmissionMode;
-    int yearMade;
-    std::string description;
-    double consumingPoints;
-    double rentalAmount;
-    double minRenterRating;
-    double motorbikeRating;
-    std::vector<Request> requests;
-    std::vector<TimeSlot> availability;
-};
+string Motorbike::getUsername() {
+    return ownerUsername;
+}
 
-enum class City
-{
-    Saigon,
-    Hanoi
-};
+string Motorbike::getMotorbikeId() {
+    return motorbikeID;
+}
+
+double Motorbike::getConsumingPoints() {
+    return consumingPoints;
+}
+
+void Motorbike::setUsername(string username) {
+    ownerUsername = username;
+}
+
+void Motorbike::setMotorbikeID(string motorbikeID) {
+    motorbikeID = motorbikeID;
+}
+
+void Motorbike::setConsumingPoints(double consumingPoints) {
+    consumingPoints = consumingPoints;
+}
+
+void Motorbike::addRequest(Request request) {
+    requests.push_back(request);
+}
+
+void Motorbike::viewRequests() {
+}
+
+bool Motorbike::checkAvailability() {
+    return availability;
+}
+
+void Motorbike::reserveTimeSlot(TimeSlot timeSlot) {
+}
+
+void Motorbike::addCreditPoints(double points) {
+}
