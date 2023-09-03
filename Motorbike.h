@@ -36,6 +36,7 @@ public:
     void addCreditPoints();
 
     string toStringMotorBike();
+
 private:
     std::string model;
     std::string motorbikeID;

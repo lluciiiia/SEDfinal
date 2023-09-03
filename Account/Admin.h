@@ -21,6 +21,8 @@ public:
     void viewMemberInfo();
     void viewMotorbikeInfo();
     void viewAccounts();
+
+    // TODO: getters/setters
 };
 
 #endif

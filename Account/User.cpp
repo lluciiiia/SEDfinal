@@ -7,6 +7,7 @@
 // TODO: Add City attribute 
 User::User()
     : Account("", "", "", ""),
+      IDtype(""),
       passportType(""),
       idNum(""),
       licenseNumber(""),
@@ -14,7 +15,7 @@ User::User()
       creditPoint(0.0)
 {
 }
-
+ // TODO: Add ITtype attribute
 User::User(string username,
            string password,
            string fullName,
