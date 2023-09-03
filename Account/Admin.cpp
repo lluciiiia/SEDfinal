@@ -15,7 +15,7 @@ Admin::Admin(string username,
              string fullName,
              string phoneNumber,
              string adminID)
-    : Account(username, password, fullName, phone_number), adminID(adminID)
+    : Account(username, password, fullName, phoneNumber), adminID(adminID)
 {
     // Parameterized constructor implementation
 }
