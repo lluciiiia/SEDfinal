@@ -1,16 +1,16 @@
 #include "Request.h"
 
-Request::Request(User requester, Motorbike motorbike, TimeSlot timeSlot)
+Request::Request(User* requester, Motorbike* motorbike, TimeSlot timeSlot)
     : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot)
 {
 }
 
-User Request::getRequester() const
+User* Request::getRequester() const
 {
     return requester;
 }
 
-Motorbike Request::getMotorbike() const
+Motorbike* Request::getMotorbike() const
 {
     return motorbike;
 }

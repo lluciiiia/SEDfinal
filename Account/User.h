@@ -6,8 +6,12 @@
 #include "Account.h"
 #include "../Rating.h"
 #include "../Motorbike.h"
+#include "../City.h"
 
-// TODO: Add City attribute from City.h file
+class Motorbike;
+class Request;
+class UserRating;
+
 class User : public Account
 {
 private:
@@ -18,13 +22,15 @@ private:
     string licenseExpiryDate;
     vector<UserRating> userRatings;
     double creditPoint;
-    // vector<Motorbike> listOwnedMotorbike;
-    // vector <Motorbike> listrentingBike;
-    // vector <Request> listOfRequest;
+    vector<Motorbike> listOwnedMotorbike;
+    vector <Motorbike> listrentingBike;
+    vector <Request> listOfRequest;
+    City city;
 public:
     User();
     User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, UserRating rating, double creditPoint);
     User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint);
+    User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint,City city);
     User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> ratings, double creditPoint);
     string toStringAccount();
     string getUserName();

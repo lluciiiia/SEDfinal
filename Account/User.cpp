@@ -59,6 +59,19 @@ User::User(string username,
     this->creditPoint = creditPoint;
 }
 
+User::User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city):Account(username,
+              password,
+              fullName,
+              phoneNumber)
+{
+    this->passportType = passportType;
+    this->idNum = idNum;
+    this->licenseNumber = licenseNumber;
+    this->licenseExpiryDate = licenseExpiryDate;
+    this->creditPoint = creditPoint;
+    this->city = city;
+}
+
 User::User(string username,
            string password,
            string fullName,
@@ -83,6 +96,18 @@ User::User(string username,
 
 string User::toStringAccount()
 {
+    string cityStr;
+    switch (city) {
+        case City::Saigon:
+            cityStr = "Saigon";
+            break;
+        case City::Hanoi:
+            cityStr = "Hanoi";
+            break;
+        // Handle other cases if needed
+        default:
+            cityStr = "Unknown";
+    }
     return Account::getUsername() + "," +
            Account::getPassword() + "," +
            Account::getFullName() + "," +
@@ -91,7 +116,8 @@ string User::toStringAccount()
            this->idNum + "," +
            this->licenseNumber + "," +
            this->licenseExpiryDate + "," +
-           to_string(this->creditPoint);
+           to_string(this->creditPoint)+","+
+           cityStr;
 }
 
 bool User::login(const string &username, const string &pass, vector<User> &userList)
