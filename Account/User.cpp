@@ -8,7 +8,6 @@
 class UserRating;
 class MotorbikeRating;
 
-// TODO: Add City attribute
 User::User()
     : Account("", "", "", ""),
       IDtype(""),
