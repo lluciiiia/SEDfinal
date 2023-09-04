@@ -14,23 +14,7 @@ class User;
 class Motorbike
 {
 private:
-<<<<<<< Updated upstream
-    Motorbike(
-        std::string &model,
-        std::string &motorbikeID,
-        std::string &color,
-        std::string &engineSize,
-        City &city,
-        std::string &transmissionMode,
-        int yearMade,
-        std::string &description,
-        double consumingPoints,
-        double rentalAmount,
-        double minRenterRating,
-        double motorbikeRating);
-=======
   
->>>>>>> Stashed changes
 
     // TODO: Getter methods for attributes
 public:
@@ -55,10 +39,6 @@ private:
     double rentalAmount;
     double minRenterRating;
     double motorbikeRating;
-<<<<<<< Updated upstream
-    std::vector<Request> requests;
-    std::vector<TimeSlot> availability;
-=======
     string ownerUsername;
     string renterUsername;
     bool availability;
@@ -92,11 +72,10 @@ public:
     bool checkAvailability(bool availability);
     void addCreditPoints(double points);
     // SavingToFile
-    string toStringMotorBike();
+    //string toStringMotorBike();
 
       Motorbike(
         std::string &model, std::string &motorbikeID, std::string &color, std::string &engineSize, City &city, std::string &transmissionMode, int yearMade, std::string &description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating, bool availability);
->>>>>>> Stashed changes
 };
 
 #endif

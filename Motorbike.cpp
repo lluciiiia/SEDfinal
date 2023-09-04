@@ -1,8 +1,5 @@
 #include "Motorbike.h"
 
-<<<<<<< Updated upstream
-Motorbike::Motorbike(std::string &model, std::string &motorbikeID, std::string &color, std::string &engineSize, City &city, std::string &transmissionMode, int yearMade, std::string &description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating)
-=======
 using namespace std;
 
 Motorbike::Motorbike(string model,
@@ -19,7 +16,6 @@ Motorbike::Motorbike(string model,
                      double motorbikeRating,
                      string owner,
                      string renter)
->>>>>>> Stashed changes
 {
         this->model= model;
         this-> motorbikeID= motorbikeID;
@@ -37,11 +33,6 @@ Motorbike::Motorbike(string model,
         this-> renterUsername= renter;
 }
 
-<<<<<<< Updated upstream
-void Motorbike::addRequest(const Request &request)
-{
-}
-=======
 // TimeSlot Motorbike::getTimeSlot()
 // {
 //         return
@@ -75,7 +66,6 @@ void Motorbike::setConsumingPoints(double consumingPoints)
 }
 
 
->>>>>>> Stashed changes
 
 void Motorbike::viewRequest(const Request &request)
 {
@@ -89,24 +79,6 @@ void Motorbike::reserveTimeSlot(const TimeSlot &timeSlot)
 {
 }
 
-<<<<<<< Updated upstream
-void Motorbike::addCreditPoints()
-{
-}
-string Motorbike:: toStringMotorBike(){
-        return model+","+
-                motorbikeID+","+
-                color+","+
-                engineSize+","+
-                transmissionMode+","+
-                to_string(yearMade)+","+
-                description+","+
-                to_string(consumingPoints)+","+
-                to_string(rentalAmount)+","+
-                to_string(minRenterRating)+","+
-                to_string(motorbikeRating)+",";
-    }
-=======
 Motorbike::Motorbike(std::string &model, std::string &motorbikeID, std::string &color, std::string &engineSize, City &city, std::string &transmissionMode, int yearMade, std::string &description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating, bool availability)
 {
         this->model= model;
@@ -123,4 +95,3 @@ Motorbike::Motorbike(std::string &model, std::string &motorbikeID, std::string &
         this->motorbikeRating= motorbikeRating;
         this-> availability= availability;
 }
->>>>>>> Stashed changes
