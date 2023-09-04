@@ -17,7 +17,6 @@ private:
     Motorbike* motorbike;  
     RequestStatus status;
     TimeSlot timeSlot;
-    string username;
     string motobikeID;
     
 public:

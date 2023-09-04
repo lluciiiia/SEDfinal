@@ -136,6 +136,7 @@ bool User::registerAccount(const string &username,
                            string licenseNum,
                            string licenseExdate)
 {
+    // TODO: There is an initial entry fee of $20 (pay to the system) when registering as a member, which earns the new member 20 credit points
     for (User &user : userList)
     {
         if (user.getUserName() == username)
@@ -173,7 +174,13 @@ void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 
 void User::viewRequests(){};
 void User::acceptRequest(vector<Request> &requests, Request request){
+    // 1. change the request status to Accepted
 
+    // 2. erase it from the request list
+
+    // 3. change the availability of the motorbike
+
+    // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 };
 void User::rateUser(){};
 void User::rateMotorbike(){};

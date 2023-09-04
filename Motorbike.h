@@ -18,6 +18,7 @@ private:
         std::string &color,
         std::string &engineSize,
         City &city,
+        User &owner,
         std::string &transmissionMode,
         int yearMade,
         std::string &description,
@@ -32,6 +33,7 @@ private:
     std::string color;
     std::string engineSize;
     City city;
+    User owner;
     std::string transmissionMode;
     int yearMade;
     std::string description;
@@ -45,14 +47,13 @@ private:
     bool availability;
 
 public:
-    Motorbike(string model, string motorbikeID, string color, string engineSize, City city, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
+    Motorbike(string model, string motorbikeID, string color, string engineSize, City city, User owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
     // Getters
-    // TimeSlot getTimeSlot();
-    string getUsername();
+    User getOwner();
     string getMotorbikeId();
     double getConsumingPoints();
     // Setters
-    void setUsername(string username);
+    void setOwner(User Owner);
     void setMotorbikeID(string motorbikeID);
     void setConsumingPoints(double consumingPoints);
     // Request / Availability / Credit Points
