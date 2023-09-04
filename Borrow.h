@@ -1,3 +1,6 @@
+#ifndef BORROW_H
+#define BORROW_H
+
 #include <string>
 #include "TimeSlot.h"
 
@@ -13,23 +16,6 @@ private:
 public:
     Borrow(TimeSlot timeSlot, string username, string motorbikeId, double price)
         : timeSlot(timeSlot), username(username), motorbikeId(motorbikeId), price(price) {}
-
-    //setters
-    void setTimeSlot(TimeSlot timeSlot) {
-        timeSlot = timeSlot;
-    }
-
-    void setUsername(string username) {
-        username = username;
-    }
-
-    void setMotorbikeId(string motorbikeId) {
-        motorbikeId = motorbikeId;
-    }
-
-    void setPrice(double price) {
-        price = price;
-    }
     
     //getters
     TimeSlot getTimeSlot() const {
@@ -47,4 +33,24 @@ public:
     double getPrice() const {
         return price;
     }
+
+    //setters
+    void setTimeSlot(TimeSlot timeSlot) {
+        timeSlot = timeSlot;
+    }
+
+    void setUsername(string username) {
+        username = username;
+    }
+
+    void setMotorbikeId(string motorbikeId) {
+        motorbikeId = motorbikeId;
+    }
+
+    void setPrice(double price) {
+        price = price;
+    }
 };
+
+#endif
+

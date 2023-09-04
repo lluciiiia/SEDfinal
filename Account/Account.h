@@ -1,4 +1,3 @@
-//account_h
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
@@ -9,33 +8,25 @@ class Account{
     private: 
         std:: string username;
         std:: string password;
-        std:: string full_name;
-        std:: string phone_number;
+        std:: string fullName;
+        std:: string phoneNumber;
         public:
-        Account(std::string username, std::string password, std::string full_name, std:: string phone_number);
+        Account(std::string username, std::string password, std::string fullName, std::string phoneNumber);
     
     public: 
 
     string getUsername();
-
     string getPassword();
-
-
-    string getFull_Name();
-
+    string getFullName();
     string getPhoneNumber();
 
     void setUsername(string userName);
 
     void setPassword(string pass);
-    void setFull_Name(string full_name);
+    void setFullName(string fullName);
 
-    void setPhone_number(string phone_Number);
+    void setPhoneNumber(string phoneNumber);
 };
-
-
-
-
 
 
 #endif

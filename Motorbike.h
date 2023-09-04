@@ -9,18 +9,43 @@
 #include "Motorbike.h"
 #include "City.h"
 
-using namespace std;
 
-class Motorbike {
+class Motorbike
+{
 private:
-    string model;
-    string motorbikeID;
-    string color;
-    string engineSize;
+    Motorbike(
+        std::string &model,
+        std::string &motorbikeID,
+        std::string &color,
+        std::string &engineSize,
+        City &city,
+        std::string &transmissionMode,
+        int yearMade,
+        std::string &description,
+        double consumingPoints,
+        double rentalAmount,
+        double minRenterRating,
+        double motorbikeRating, bool availability);
+
+    // TODO: Getter methods for attributes
+public:
+    // Methods to manage requests and availability
+    void addRequest(const Request &request);
+    void viewRequest(const Request &request);
+    void checkAvailability(bool &availability);
+    void addCreditPoints();
+
+    string toStringMotorBike();
+
+private:
+    std::string model;
+    std::string motorbikeID;
+    std::string color;
+    std::string engineSize;
     City city;
-    string transmissionMode;
+    std::string transmissionMode;
     int yearMade;
-    string description;
+    std::string description;
     double consumingPoints;
     double rentalAmount;
     double minRenterRating;
@@ -46,6 +71,5 @@ public:
     void reserveTimeSlot(TimeSlot timeSlot);
     void addCreditPoints(double points);
 };
-
 
 #endif

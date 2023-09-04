@@ -1,42 +1,31 @@
-#ifndef REQUEST_H
-#define REQUEST_H
+#include "Request.h"
 
-#include "User.cpp"
-#include "Motorbike.cpp"
-#include "TimeSlot.cpp"
-#include "RequestStatus.cpp"
+Request::Request(User requester, Motorbike motorbike, TimeSlot timeSlot)
+    : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot)
+{
+}
 
-class Request {
-private:
-    User requester;
-    Motorbike motorbike;
-    RequestStatus status;
-    TimeSlot timeSlot;
+User Request::getRequester() const
+{
+    return requester;
+}
 
-public:
-    Request(User requester, Motorbike motorbike, TimeSlot timeSlot)
-        : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot) {
-    }
+Motorbike Request::getMotorbike() const
+{
+    return motorbike;
+}
 
-    User getRequester() const {
-        return requester;
-    }
+RequestStatus Request::getStatus() const
+{
+    return status;
+}
 
-    Motorbike getMotorbike() const {
-        return motorbike;
-    }
+TimeSlot Request::getTimeSlot() const
+{
+    return timeSlot;
+}
 
-    RequestStatus getStatus() const {
-        return status;
-    }
-
-    void setStatus(RequestStatus status) {
-        status = status;
-    }
-
-    TimeSlot getTimeSlot() const {
-        return timeSlot;
-    }
-};
-
-#endif
+void Request::setStatus(RequestStatus status)
+{
+    this->status = status;
+}

@@ -1,93 +1,48 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include "User.cpp" // I'm not sure if it's .cpp or .h
+#include "Rating.h"
+#include "Motorbike.h"
 
-#ifndef RATING_H
-#define RATING_H
+Rating::Rating(){}
+Rating::Rating(float score, std::string comment) : score(score), comment(comment) {}
 
-class Rating
+float Rating::getScore() const
 {
-protected:
-    float score;
-    std::string comment;
-    std::string userID;
-};
+    return this->score;
+}
 
-class UserRating : public Rating
+std::string Rating::getComment() const
 {
-    std::string username;
+    return this->comment;
+}
 
-public:
-    // Constructors
-    UserRating();
-
-    UserRating(std::string username, float score, std::string comment)
-    {
-        this->username = username;
-        this->score = score;
-        this->comment = comment;
-    }
-
-    // Getters/setters
-    int getScore() {
-        return this->score;
-    }
-
-    void setScore(int score) {
-        this->score = score;
-    }
-
-    std::string getComment() {
-        return this->comment;
-    }
-
-    void setComment(std::string comment) {
-        this->comment = comment;
-    }
-
-    // Missing the user class so it's giving an error
-    int getNumberOfRatings() {
-        return userRating->size;
-    }
-
-};
-
-class MotorbikeRating : public Rating
+// user rating
+float UserRating::getScore() const
 {
-    std::string bikeID;
+    return Rating::getScore();
+}
 
+std::string UserRating::getComment() const
+{
+    return Rating::getComment();
+}
 
-    // Constructors 
-    MotorbikeRating();
+std::string UserRating::getUsername() const
+{
+    return username;
+}
 
-    MotorbikeRating(std::string bikeID, float score, std::string comment)
-    {
-        this->bikeID = bikeID;
-        this->score = score;
-        this->comment = comment;
-    }
+// motobike rating
+float MotorbikeRating::getScore() const
+{
+    return Rating::getScore();
+}
 
-    int getScore() {
-        return this->score;
-    }
+std::string MotorbikeRating::getComment() const
+{
+    return Rating::getComment();
+}
 
-    void setScore (int score) {
-        this->score = score; 
-    }
-
-    std::string getComment() {
-        return this->comment;
-    }
-
-    void setComment(std::string comment) {
-        this->comment = comment;
-    }
-};
-
-#endif
-
-};
-
-#endif
+std::string MotorbikeRating::getBikeId() const
+{
+    return bikeID;
+}
 

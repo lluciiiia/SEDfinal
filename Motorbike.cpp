@@ -44,8 +44,26 @@ bool Motorbike::checkAvailability() {
     return availability;
 }
 
-void Motorbike::reserveTimeSlot(TimeSlot timeSlot) {
-}
 
 void Motorbike::addCreditPoints(double points) {
 }
+
+void Motorbike::checkAvailability(bool &availability)
+{
+}
+
+
+string Motorbike:: toStringMotorBike(){
+        return model+","+
+                motorbikeID+","+
+                color+","+
+                engineSize+","+
+                transmissionMode+","+
+                to_string(yearMade)+","+
+                description+","+
+                to_string(consumingPoints)+","+
+                to_string(rentalAmount)+","+
+                to_string(minRenterRating)+","+
+                to_string(motorbikeRating)+",";
+    }
+
