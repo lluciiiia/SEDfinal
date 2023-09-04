@@ -55,7 +55,11 @@ int main()
                 break;
             }
             case 4:{
-                user.registerAccount(userList);
+                if(user.registerAccount(userList)){
+                    cout<< "Register successfully\n";
+                }else{
+                    cout<< "Fail\n";
+                }
                 break;
             }
             case 5:{

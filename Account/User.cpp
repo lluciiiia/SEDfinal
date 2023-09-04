@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <regex>
 #include "Account.h"
 #include "../Rating.h"
 #include "User.h"
@@ -132,58 +133,170 @@ bool User::login(const string &username,
 
 bool User::registerAccount(vector <User>& userList)
 {
-    
     string username, password, fullname, phoneNumber, idtype, idnum, licenseNum, licenseExdate;
-        double creditpoint;
+    double creditpoint;
     bool flag=true;
     cout<< "Starting to register. \n";
-    while(true){
+
+    while (true) {
         cout << "Enter your username: ";
-        getline(cin,username);
-        for(auto & user: userList){
-            if(username== user.getUserName()){
-                cout<< "Sorry! Username already exists! Please use another one! \n";
-            }else if(username.empty()){
-                cout<< "Username cannot be empty! ";
+        getline(cin, username);
+
+        if (username.empty()) {
+            cout << "Username cannot be empty! \n";
+        } else {
+            bool usernameExists = false;
+
+            for ( auto& user : userList) {
+                if (username == user.getUserName()) {
+                    usernameExists = true;
+                    break; 
+                }
+            }
+
+            if (usernameExists) {
+                cout << "Sorry! Username already exists! Please use another one! \n";
+            } else {
+                break;
+            }
+        }
+    }
+
+    while(true){
+        cout<< "Enter your password: ";
+        getline(cin, password);
+        if(password.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
+            break;
+        }
+    }
+
+    while(true){
+        cout<< "Enter your full name: \n";
+        getline(cin, fullname);
+        if(fullname.empty()){
+            cout<< "Full name cannot be empty! \n";
+        }else{
+            break;
+        }
+    }
+
+    while(true){
+        cout<< "Enter your phone number: \n";
+        getline(cin, phoneNumber);
+        if(phoneNumber.empty()){
+            cout<< "Phone Number cannot be empty! \n";
+        }else{
+            break;
+        }
+    }
+
+    int choice;
+    while(true){
+        cout<< "Enter your ID type: \n";
+        cout<< "Enter 1: Citizen ID \n";
+        cout<< "Enter 2: Passport\n";
+        cin>> choice;
+        cin.ignore();
+        string choiceString= to_string(choice);
+        if(choiceString.empty()){
+            cout<< "Its cannot be empty! \n";
+        }else{
+            if(choice == 1 ){
+                idtype = "Citizen ID";
+                break;
+            }else if( choice == 2){
+                idtype = "Passport";
+                break;
+            }else{
+                cout<< "Invalid input !\n";
+            }
+        }
+    }
+
+    if(choice == 1){
+        while(true){
+            cout<< "Enter citizen ID: ";
+            getline(cin, idnum);
+            if(idnum.empty()){
+                cout<< "Id num cannot be empty!! \n";
+            }else{
+                break;
+            }
+        }
+    }else if(choice == 2){
+        while(true){
+            cout<< "Enter passport: ";
+            getline(cin, idnum);
+            if(idnum.empty()){
+                cout<< "Id num cannot be empty!! \n";
             }else{
                 break;
             }
         }
     }
 
-    
+    while(true){
+        cout<< "Enter your expiry date: \n";
+        getline(cin, licenseExdate);
+        if(licenseExdate.empty()){
+            cout<< "License Expiry Date cannot be empty! \n";
+        }else{
+            break;
+        }
+    }
 
+    while(true){
+        cout<< "Enter your license number: \n";
+        getline(cin, licenseNum);
+        if(licenseNum.empty()){
+            cout<< "License Number cannot be empty! \n";
+        }else{
+            break;
+        }
+    }
 
+    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+    bool addSuccess=false;
+    while(true){
+        cout<< "In order to register, you need to add to your balance (At least 20$ for first register)\n";
+        cout<< "Please enter the money you want to add: ";
+        cin>> creditpoint;
+        cin.ignore();
+        string creditToString = to_string(creditpoint);
+        if(!regex_match(creditToString, regexp)){
+            cout<< "Invalid input! Please input the right amount of money!\n ";
+        }else{
+            if(creditpoint >= 20){
+                cout<<"Register successfully! You can now log in to the program\n";
+                addSuccess = true;
+                break;
+            }else{
+                char decision;
+                cout<< "You can only add at least 20$ to sign up for the first time! \n";
+                cout<< "Continue? (Y/N)";
+                cin>> decision;
+                cin.ignore();
+                if(decision == 'Y' || decision == 'y'){
+                    cout<< "Please do as the instruction\n";
+                }else if(decision == 'N' || decision == 'n'){
+                    cout<< "Thank you for your time! See you again! \n";
+                    break;
+                }
+            }
+        }
+    }
 
+    City city = City::Hanoi;
 
+    if(addSuccess){
+        User user23(username, password, fullname, phoneNumber, idtype, idnum, licenseNum, licenseExdate, creditpoint, city);
+        userList.push_back(user23);
+        return true;
+    }
 
-
-
-
-
-
-    //     if (user.getUserName() == username)
-    //     {
-    //         cout << "Username " << username << " already exists.";
-    //         return false;
-    //     }
-    //     else
-    //     {
-    //         Account::setUsername(username);
-    //         Account::setPassword(password);
-    //         Account::setFullName(fullName);
-    //         Account ::setPhoneNumber(phoneNumber);
-    //         this->IDtype = IDtype;
-    //         this->idNum = idNum;
-    //         this->licenseNumber = licenseNum;
-    //         this->licenseExpiryDate = licenseExdate;
-    //         this->creditPoint = credit;
-    //         userList.push_back(*this);
-    //         cout << "Register successfully! ";
-    //     }
-    // }
-    return true;
-
+    return false;
 }
 
 
