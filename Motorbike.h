@@ -9,11 +9,9 @@
 #include "Motorbike.h"
 #include "City.h"
 
-
 class Motorbike
 {
-public:
-
+private:
     Motorbike(
         std::string &model,
         std::string &motorbikeID,
@@ -29,7 +27,7 @@ public:
         double motorbikeRating);
 
     // TODO: Getter methods for attributes
-
+public:
     // Methods to manage requests and availability
     void addRequest(const Request &request);
     void viewRequest(const Request &request);

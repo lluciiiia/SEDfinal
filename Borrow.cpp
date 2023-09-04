@@ -1,32 +1,37 @@
-#include <string>
-#include "TimeSlot.cpp"
+#include "Borrow.h"
 
-using namespace std;
+Borrow::Borrow(TimeSlot timeSlot, string username, string motorbikeId, double price)
+    : timeSlot(timeSlot), username(username), motorbikeId(motorbikeId), price(price) {
+}
 
-class Borrow {
-private:
-    TimeSlot timeSlot;
-    string username;
-    int motorbikeId;
-    double price;
+TimeSlot Borrow::getTimeSlot() const {
+    return timeSlot;
+}
 
-public:
-    Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price)
-        : timeSlot(timeSlot), username(username), motorbikeId(motorbikeId), price(price) {}
+string Borrow::getUsername() const {
+    return username;
+}
 
-    TimeSlot getTimeSlot() const {
-        return timeSlot;
-    }
+string Borrow::getMotorbikeID() const {
+    return motorbikeId;
+}
 
-    string getUsername() const {
-        return username;
-    }
+double Borrow::getPrice() const {
+    return price;
+}
 
-    int getMotorbikeID() const {
-        return motorbikeId;
-    }
+void Borrow::setTimeSlot(TimeSlot timeSlot) {
+    timeSlot = timeSlot;
+}
 
-    double getPrice() const {
-        return price;
-    }
-};
+void Borrow::setUsername(string username) {
+    username = username;
+}
+
+void Borrow::setMotorbikeId(string motorbikeId) {
+    motorbikeId = motorbikeId;
+}
+
+void Borrow::setPrice(double price) {
+    price = price;
+}
