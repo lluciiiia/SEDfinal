@@ -1,2 +1,0 @@
-User1,Password1,John Doe,12345,asd,ID1,License123,2023-12-31,100.000000
-User2,Password2,Jane Smith,67890,asd,ID2,License456,2023-11-30,150.000000

@@ -1,6 +1,7 @@
 #include "Account/User.h"
 #include "savingToFile.h"
 #include "Account/Account.h"
+#include "City.h"
 // #include "Rating.h"
 // #include "Request.h"
 // #include "TimeSlot.h"
@@ -15,9 +16,18 @@
 
 int main()
 {   
+    
     User user;
     saveToFile fileSave;
     std::vector<User> userList = fileSave.loadAccount();
+     City city= City:: Saigon;
+
+    User user1("john_doe", "password123", "John Doe", "1234567890", "Passport", "ID12345", "License67890", "2023-12-31", 100.0, city);
+
+    User user2("alice_smith", "securePass123", "Alice Smith", "9876543210", "Driver's License", "DL6789", "License98765", "2023-11-30", 150.0,city);
+
+    userList.push_back(user1);
+    userList.push_back(user2);
     
     cout<< "EEET2482/COSC2082 ASSIGNMENT"<< "\n";
     cout<< "MOTORBIKE RENTAL APPLICATION."<< "\n\n";
@@ -38,6 +48,9 @@ int main()
         cin.ignore();
         if(choice == 1){
             // display all bikes 
+            for(auto &user : userList){
+                cout<< user.toStringAccount();
+            }
         }else if(choice == 2){
             string username;
             string pass;
@@ -46,7 +59,7 @@ int main()
             cout<< "Enter password: ";
             getline(cin, pass);
             if(user.login(username, pass, userList)){
-                cout<< "Hahalo";
+                cout<< "Login successfully!";
             }
         }else if(choice == 3){
             
@@ -62,10 +75,7 @@ int main()
 
 
 
-
-
-
-
+   
 
 
 

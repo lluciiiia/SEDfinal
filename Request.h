@@ -9,19 +9,42 @@ using namespace std;
 
 
 
+class Motorbike;
+class User;
+
 class Request {
 private:
-    
+    User* requester;   // Change to a pointer to User
+    Motorbike* motorbike;  // Change to a pointer to Motorbike
     RequestStatus status;
     TimeSlot timeSlot;
     string username;
     string motobikeID;
     
 public:
-    Request (string username, string motorbikeId, RequestStatus status, TimeSlot timeSlot);
-    string getUsername();
-    string getMotorbikeId();
+    Request(User* requester, Motorbike* motorbike, TimeSlot timeSlot)
+        : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot) {
+    }
 
+    User* getRequester() const {
+        return requester;
+    }
+
+    Motorbike* getMotorbike() const {
+        return motorbike;
+    }
+
+    RequestStatus getStatus() const {
+        return status;
+    }
+
+    void setStatus(RequestStatus status) {
+        this->status = status;  // Use 'this->status' to distinguish from the parameter
+    }
+
+    TimeSlot getTimeSlot() const {
+        return timeSlot;
+    }
 };
 
 
