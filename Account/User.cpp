@@ -4,23 +4,22 @@
 #include "../Rating.h"
 #include "../Motorbike.h"
 
-// TODO: Add City attribute 
+// TODO: Add City attribute
 User::User()
     : Account("", "", "", ""),
       IDtype(""),
-      passportType(""),
       idNum(""),
       licenseNumber(""),
       licenseExpiryDate(""),
       creditPoint(0.0)
 {
 }
- // TODO: Add ITtype attribute
+// TODO: Add ITtype attribute
 User::User(string username,
            string password,
            string fullName,
            string phoneNumber,
-           string passportType,
+           string IDtype,
            string idNum,
            string licenseNumber,
            string licenseExpiryDate,
@@ -30,7 +29,7 @@ User::User(string username,
                                          fullName,
                                          phoneNumber)
 {
-    this->passportType = passportType;
+    this->IDtype = IDtype;
     this->idNum = idNum;
     this->licenseNumber = licenseNumber;
     this->licenseExpiryDate = licenseExpiryDate;
@@ -42,7 +41,7 @@ User::User(string username,
            string password,
            string fullName,
            string phoneNumber,
-           string passportType,
+           string IDtype,
            string idNum,
            string licenseNumber,
            string licenseExpiryDate,
@@ -51,7 +50,7 @@ User::User(string username,
                                          fullName,
                                          phoneNumber)
 {
-    this->passportType = passportType;
+    this->IDtype = IDtype;
     this->idNum = idNum;
     this->licenseNumber = licenseNumber;
     this->licenseExpiryDate = licenseExpiryDate;
@@ -59,12 +58,12 @@ User::User(string username,
     this->creditPoint = creditPoint;
 }
 
-User::User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city):Account(username,
-              password,
-              fullName,
-              phoneNumber)
+User::User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city) : Account(username,
+                                                                                                                                                                                                        password,
+                                                                                                                                                                                                        fullName,
+                                                                                                                                                                                                        phoneNumber)
 {
-    this->passportType = passportType;
+    this->IDtype = IDtype;
     this->idNum = idNum;
     this->licenseNumber = licenseNumber;
     this->licenseExpiryDate = licenseExpiryDate;
@@ -76,7 +75,7 @@ User::User(string username,
            string password,
            string fullName,
            string phone_number,
-           string passportType,
+           string IDtype,
            string idNum,
            string licenseNumber,
            string licenseExpiryDate,
@@ -87,7 +86,7 @@ User::User(string username,
               fullName,
               phone_number)
 {
-    this->passportType = passportType;
+    this->IDtype = IDtype;
     this->idNum = idNum;
     this->licenseNumber = licenseNumber;
     this->licenseExpiryDate = licenseExpiryDate;
@@ -97,33 +96,36 @@ User::User(string username,
 string User::toStringAccount()
 {
     string cityStr;
-    switch (city) {
-        case City::Saigon:
-            cityStr = "Saigon";
-            break;
-        case City::Hanoi:
-            cityStr = "Hanoi";
-            break;
-        // Handle other cases if needed
-        default:
-            cityStr = "Unknown";
+    switch (city)
+    {
+    case City::Saigon:
+        cityStr = "Saigon";
+        break;
+    case City::Hanoi:
+        cityStr = "Hanoi";
+        break;
+    // Handle other cases if needed
+    default:
+        cityStr = "Unknown";
     }
     return Account::getUsername() + "," +
            Account::getPassword() + "," +
            Account::getFullName() + "," +
            Account::getPhoneNumber() + "," +
-           this->passportType + "," +
+           this->IDtype + "," +
            this->idNum + "," +
            this->licenseNumber + "," +
            this->licenseExpiryDate + "," +
-           to_string(this->creditPoint)+","+
+           to_string(this->creditPoint) + "," +
            cityStr;
 }
 
 bool User::login(const string &username, const string &pass, vector<User> &userList)
 {
-    for(auto &user: userList){
-        if(user.getUserName() == username && user.getPassword() == pass){
+    for (auto &user : userList)
+    {
+        if (user.getUserName() == username && user.getPassword() == pass)
+        {
             return true;
         }
     }
@@ -136,7 +138,7 @@ bool User::registerAccount(const string &username,
                            vector<User> &userList,
                            string fullName,
                            string phoneNumber,
-                           string Type,
+                           string Idtype,
                            string idNum,
                            string licenseNum,
                            string licenseExdate)
@@ -154,7 +156,7 @@ bool User::registerAccount(const string &username,
             Account::setPassword(password);
             Account::setFullName(fullName);
             Account ::setPhoneNumber(phoneNumber);
-            this->passportType = Type;
+            this->IDtype = IDtype;
             this->idNum = idNum;
             this->licenseNumber = licenseNum;
             this->licenseExpiryDate = licenseExdate;
@@ -166,8 +168,6 @@ bool User::registerAccount(const string &username,
     return true;
 }
 
-
-     
 // vector<Motorbike> User::addOwnedMotorbike(Motorbike bike)
 // {
 //     return vector<Motorbike>();

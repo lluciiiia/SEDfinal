@@ -25,12 +25,12 @@ TimeSlot Request::getTimeSlot() const
     return timeSlot;
 }
 
-void Request::setRequester(User requester)
+void Request::setRequester(User* requester)
 {
     this->requester = requester;
 }
 
-void Request::setMotorbike(Motorbike motorbike)
+void Request::setMotorbike(Motorbike* motorbike)
 {
     this->motorbike = motorbike;
 }
