@@ -173,6 +173,7 @@ void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 }
 
 void User::viewRequests(){};
+
 void User::acceptRequest(vector<Request> &requests, Request request){
     // 1. change the request status to Accepted
     request.setStatus(RequestStatus::ACCEPTED);
@@ -180,7 +181,7 @@ void User::acceptRequest(vector<Request> &requests, Request request){
     // 2. change the availability of the motorbike
     Motorbike* motorbikeToRequest = request.getMotorbike();
     motorbikeToRequest->setAvailability(false);
-    
+
     // 3. payment from the requester
     
     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
