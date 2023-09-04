@@ -5,14 +5,15 @@
 
 using namespace std;
 
-class TimeSlot {
+class TimeSlot
+{
 private:
     string startTime;
     string endTime;
 
 public:
     TimeSlot();
-    TimeSlot(const string& startTime, const string& endTime);
+    TimeSlot(const string &startTime, const string &endTime);
 
     string getStartTime() const;
     string getEndTime() const;

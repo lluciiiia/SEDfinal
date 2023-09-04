@@ -58,10 +58,19 @@ User::User(string username,
     this->creditPoint = creditPoint;
 }
 
-User::User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city) : Account(username,
-                                                                                                                                                                                                        password,
-                                                                                                                                                                                                        fullName,
-                                                                                                                                                                                                        phoneNumber)
+User::User(string username,
+           string password,
+           string fullName,
+           string phoneNumber,
+           string IDtype,
+           string idNum,
+           string licenseNumber,
+           string licenseExpiryDate,
+           double creditPoint,
+           City city) : Account(username,
+                                password,
+                                fullName,
+                                phoneNumber)
 {
     this->IDtype = IDtype;
     this->idNum = idNum;
@@ -120,7 +129,9 @@ string User::toStringAccount()
            cityStr;
 }
 
-bool User::login(const string &username, const string &pass, vector<User> &userList)
+bool User::login(const string &username,
+                 const string &pass,
+                 vector<User> &userList)
 {
     for (auto &user : userList)
     {
