@@ -4,10 +4,9 @@
 using namespace std;
 
 Admin::Admin()
-: Account("", "", "", "")
+    : Account("", "", "", "")
 // TODO: default
 {
-    
 }
 
 Admin::Admin(string username,
@@ -32,4 +31,10 @@ void Admin::viewAccounts()
 {
 }
 
-// TODO: getters & setters
+string Admin::getAdminID() const
+{
+}
+
+void setAdminID(string adminID)
+{
+}
