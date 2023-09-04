@@ -24,6 +24,7 @@ class Account{
     void setPassword(string pass);
     void setFullName(string fullName);
     void setPhoneNumber(string phoneNumber);
+
 };
 
 

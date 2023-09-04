@@ -175,14 +175,15 @@ void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 void User::viewRequests(){};
 void User::acceptRequest(vector<Request> &requests, Request request){
     // 1. change the request status to Accepted
+    request.setStatus(RequestStatus::ACCEPTED);
 
-    // 2. change the reqeust status of the request to ACCEPTED
-
-    // 3. change the availability of the motorbike
-
-    // 4. payment from the requester
+    // 2. change the availability of the motorbike
+    Motorbike* motorbikeToRequest = request.getMotorbike();
+    motorbikeToRequest->setAvailability(false);
     
-    // 5. increase the credits ($1 = 1 credit point) for both requester and the owner
+    // 3. payment from the requester
+    
+    // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
 };
 void User::rateUser(){};
