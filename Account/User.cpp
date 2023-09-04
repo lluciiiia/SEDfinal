@@ -3,6 +3,10 @@
 #include "Account.h"
 #include "../Rating.h"
 #include "../Motorbike.h"
+#include <vector>
+
+class UserRating;
+class MotorbikeRating;
 
 // TODO: Add City attribute
 User::User()
@@ -14,7 +18,7 @@ User::User()
       creditPoint(0.0)
 {
 }
-// TODO: Add ITtype attribute
+// Including userRatings
 User::User(string username,
            string password,
            string fullName,
@@ -23,28 +27,7 @@ User::User(string username,
            string idNum,
            string licenseNumber,
            string licenseExpiryDate,
-           UserRating rating,
-           double creditPoint) : Account(username,
-                                         password,
-                                         fullName,
-                                         phoneNumber)
-{
-    this->IDtype = IDtype;
-    this->idNum = idNum;
-    this->licenseNumber = licenseNumber;
-    this->licenseExpiryDate = licenseExpiryDate;
-    userRatings.push_back(rating);
-    this->creditPoint = creditPoint;
-}
-
-User::User(string username,
-           string password,
-           string fullName,
-           string phoneNumber,
-           string IDtype,
-           string idNum,
-           string licenseNumber,
-           string licenseExpiryDate,
+           std::vector<UserRating> userRatings,
            double creditPoint) : Account(username,
                                          password,
                                          fullName,
@@ -56,8 +39,29 @@ User::User(string username,
     this->licenseExpiryDate = licenseExpiryDate;
     this->userRatings = userRatings;
     this->creditPoint = creditPoint;
+};
+
+User::User(string username,
+           string password,
+           string fullName,
+           string phoneNumber,
+           string IDtype,
+           string idNum,
+           string licenseNumber,
+           string licenseExpiryDate,
+           double creditPoint) : Account(username,
+                                         password,
+                                         fullName,
+                                         phoneNumber)
+{
+    this->IDtype = IDtype;
+    this->idNum = idNum;
+    this->licenseNumber = licenseNumber;
+    this->licenseExpiryDate = licenseExpiryDate;
+    this->creditPoint = creditPoint;
 }
 
+// Including City
 User::User(string username,
            string password,
            string fullName,
@@ -78,28 +82,6 @@ User::User(string username,
     this->licenseExpiryDate = licenseExpiryDate;
     this->creditPoint = creditPoint;
     this->city = city;
-}
-
-User::User(string username,
-           string password,
-           string fullName,
-           string phone_number,
-           string IDtype,
-           string idNum,
-           string licenseNumber,
-           string licenseExpiryDate,
-           vector<UserRating> ratings,
-           double creditPoint)
-    : Account(username,
-              password,
-              fullName,
-              phone_number)
-{
-    this->IDtype = IDtype;
-    this->idNum = idNum;
-    this->licenseNumber = licenseNumber;
-    this->licenseExpiryDate = licenseExpiryDate;
-    this->creditPoint = creditPoint;
 }
 
 string User::toStringAccount()
@@ -178,6 +160,17 @@ bool User::registerAccount(const string &username,
     }
     return true;
 }
+
+// listMotorbike()
+// unlistMotorbike()
+void User::searchAvailableMotorbikes(){};
+void User::requestToRent(){};
+void User::viewRequests(){};
+void User::acceptRequest(vector<Request>& requests, Request request){
+    requests.push_back(request);
+};
+void User::rateUser(){};
+void User::rateMotorbike(){};
 
 // vector<Motorbike> User::addOwnedMotorbike(Motorbike bike)
 // {
