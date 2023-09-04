@@ -4,14 +4,17 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Request.h"
 #include "TimeSlot.h"
 #include "Motorbike.h"
 #include "City.h"
+#include "Account/User.h"
+#include "Request.h"
 
+class User;
 class Motorbike
 {
 private:
+<<<<<<< Updated upstream
     Motorbike(
         std::string &model,
         std::string &motorbikeID,
@@ -25,6 +28,9 @@ private:
         double rentalAmount,
         double minRenterRating,
         double motorbikeRating);
+=======
+  
+>>>>>>> Stashed changes
 
     // TODO: Getter methods for attributes
 public:
@@ -49,8 +55,48 @@ private:
     double rentalAmount;
     double minRenterRating;
     double motorbikeRating;
+<<<<<<< Updated upstream
     std::vector<Request> requests;
     std::vector<TimeSlot> availability;
+=======
+    string ownerUsername;
+    string renterUsername;
+    bool availability;
+
+public:
+    Motorbike(  string model,
+                     string motorbikeID,
+                     string color,
+                     string engineSize,
+                     City city,
+                     string transmissionMode,
+                     int yearMade,
+                     string description,
+                     double consumingPoints,
+                     double rentalAmount,
+                     double minRenterRating,
+                     double motorbikeRating,
+                     string owner,
+                     string renter);
+    // Getters
+    User getOwner();
+    string getMotorbikeId();
+    double getConsumingPoints();
+    // Setters
+    void setOwner(User Owner);
+    void setMotorbikeID(string motorbikeID);
+    void setConsumingPoints(double consumingPoints);
+    void setAvailability(bool availability);
+    // Request / Availability / Credit Points
+    void viewRequests();
+    bool checkAvailability(bool availability);
+    void addCreditPoints(double points);
+    // SavingToFile
+    string toStringMotorBike();
+
+      Motorbike(
+        std::string &model, std::string &motorbikeID, std::string &color, std::string &engineSize, City &city, std::string &transmissionMode, int yearMade, std::string &description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating, bool availability);
+>>>>>>> Stashed changes
 };
 
 #endif
