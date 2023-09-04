@@ -5,6 +5,7 @@
 #include "User.h"
 #include "../Motorbike.h"
 #include "../Request.h"
+#include "../RequestStatus.h"
 
 class UserRating;
 class MotorbikeRating;
@@ -61,7 +62,6 @@ User::User(string username,
     this->creditPoint = creditPoint;
 }
 
-// Including City
 User::User(string username,
            string password,
            string fullName,
@@ -176,11 +176,14 @@ void User::viewRequests(){};
 void User::acceptRequest(vector<Request> &requests, Request request){
     // 1. change the request status to Accepted
 
-    // 2. erase it from the request list
+    // 2. change the reqeust status of the request to ACCEPTED
 
     // 3. change the availability of the motorbike
 
-    // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+    // 4. payment from the requester
+    
+    // 5. increase the credits ($1 = 1 credit point) for both requester and the owner
+
 };
 void User::rateUser(){};
 void User::rateMotorbike(){};
