@@ -4,10 +4,9 @@
 using namespace std;
 
 Admin::Admin()
-: Account("", "", "", "")
+    : Account("", "", "", "")
 // TODO: default
 {
-    
 }
 
 Admin::Admin(string username,
@@ -15,9 +14,9 @@ Admin::Admin(string username,
              string fullName,
              string phoneNumber,
              string adminID)
-    : Account(username, password, fullName, phone_number), adminID(adminID)
+    : Account(username, password, fullName, phoneNumber), adminID(adminID)
 {
-    // Parameterized constructor implementation
+    this->adminID = adminID;
 }
 
 void Admin::viewMemberInfo()
@@ -30,4 +29,13 @@ void Admin::viewMotorbikeInfo()
 
 void Admin::viewAccounts()
 {
+}
+
+string Admin::getAdminID() const
+{
+}
+
+void Admin::setAdminID(string adminID)
+{
+    this->adminID = adminID;
 }

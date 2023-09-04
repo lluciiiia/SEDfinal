@@ -17,8 +17,11 @@ public:
     Rating();
     Rating(float score, std::string comment);
     // Getters
-    float getScore() const; 
+    float getScore() const;
     std::string getComment() const;
+    // Setters
+    void setScore(float score);
+    void setComment(string comment);
 };
 
 class UserRating : public Rating
@@ -29,9 +32,9 @@ private:
 public:
     UserRating();
     UserRating(std::string username, float score, std::string comment);
-    std::string getUsername() const; 
-};
-
+    float getScore() const;
+    std::string getComment() const;
+    std::string getUsername() const;
 };
 
 class MotorbikeRating : public Rating
@@ -44,7 +47,9 @@ public:
     MotorbikeRating();
     MotorbikeRating(std::string bikeID, float score, std::string comment);
     // Getter & Setter
-    std::string getBikeId() const; 
+    float getScore() const;
+    std::string getComment() const;
+    std::string getBikeId() const;
     void setBikeId(std::string bikeID) const;
 };
 

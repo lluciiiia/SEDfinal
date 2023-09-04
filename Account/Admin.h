@@ -21,6 +21,9 @@ public:
     void viewMemberInfo();
     void viewMotorbikeInfo();
     void viewAccounts();
+
+    string getAdminID() const;
+    void setAdminID(string adminID);
 };
 
 #endif

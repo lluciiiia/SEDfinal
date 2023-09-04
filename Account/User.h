@@ -2,15 +2,16 @@
 #define USER_H
 
 #include <string>
-#include <vector> // Add this line
+#include <vector> 
 #include "Account.h"
 #include "../Rating.h"
 #include "../Motorbike.h"
 #include "../City.h"
-// TODO: Add City attribute from City.h file
+
 class Motorbike;
 class Request;
 class UserRating;
+
 class User : public Account
 {
 private:
@@ -28,16 +29,11 @@ private:
 public:
     User();
     User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, UserRating rating, double creditPoint);
-    
-    
     User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint);
-     User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint,City city);
+    User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint,City city);
     User(string username, string password, string fullName, string phoneNumber, string passportType, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> ratings, double creditPoint);
     string toStringAccount();
-    string getUserName()
-    {
-        return Account::getUsername();
-    }
+    string getUserName();
     bool login(const string &username, const string&pass, vector <User> &userList);
     bool registerAccount(const string &username, const string &password, const double &credit, vector<User> &userList, string fullName, string phoneNumber,  string Type, string idNum,string licenseNum, string licenseExdate);
     // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
