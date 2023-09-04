@@ -1,24 +1,27 @@
 #include "Rating.h"
 #include "Motorbike.h"
 
-Rating::Rating(){}
+Rating::Rating() {}
 Rating::Rating(float score, std::string comment) : score(score), comment(comment) {}
 
 float Rating::getScore() const
 {
-    return this->score;
+    return score;
 }
 
 std::string Rating::getComment() const
 {
-    return this->comment;
+    return comment;
 }
 
-
-// TODO: Do we need this?
-UserRating::UserRating():Rating(0, "")
+void Rating::setScore(float score)
 {
-    this->username="";
+    this->score = score;
+}
+
+void Rating::setComment(string comment)
+{
+    this->comment = comment;
 }
 
 // user rating
@@ -52,4 +55,3 @@ std::string MotorbikeRating::getBikeId() const
 {
     return bikeID;
 }
-

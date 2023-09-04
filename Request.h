@@ -7,44 +7,34 @@
 #include "RequestStatus.h"
 using namespace std;
 
-
-
 class Motorbike;
 class User;
 
-class Request {
+class Request
+{
 private:
-    User* requester;   // Change to a pointer to User
-    Motorbike* motorbike;  // Change to a pointer to Motorbike
+    User* requester;  
+    Motorbike* motorbike;  
     RequestStatus status;
     TimeSlot timeSlot;
     string username;
     string motobikeID;
     
 public:
+
     Request(User* requester, Motorbike* motorbike, TimeSlot timeSlot)
         : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot) {
     }
 
-    User* getRequester() const {
-        return requester;
-    }
+    User getRequester() const;
+    Motorbike getMotorbike() const;
+    RequestStatus getStatus() const;
+    TimeSlot getTimeSlot() const;
 
-    Motorbike* getMotorbike() const {
-        return motorbike;
-    }
-
-    RequestStatus getStatus() const {
-        return status;
-    }
-
-    void setStatus(RequestStatus status) {
-        this->status = status;  // Use 'this->status' to distinguish from the parameter
-    }
-
-    TimeSlot getTimeSlot() const {
-        return timeSlot;
-    }
+    void setRequester(User requester);
+    void setMotorbike(Motorbike motorbike);
+    void setStatus(RequestStatus status);
+    void setTimeSlot(TimeSlot timeSlot);
 };
 
 
