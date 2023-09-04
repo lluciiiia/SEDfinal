@@ -21,10 +21,8 @@ class Account{
     string getPhoneNumber();
 
     void setUsername(string userName);
-
     void setPassword(string pass);
     void setFullName(string fullName);
-
     void setPhoneNumber(string phoneNumber);
 };
 

@@ -6,7 +6,8 @@
 #include "TimeSlot.h"
 #include "RequestStatus.h"
 
-class Request {
+class Request
+{
 private:
     User requester;
     Motorbike motorbike;
@@ -15,28 +16,19 @@ private:
 
 public:
     Request(User requester, Motorbike motorbike, TimeSlot timeSlot)
-        : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot) {
+        : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot)
+    {
     }
 
-    User getRequester() const {
-        return requester;
-    }
+    User getRequester() const;
+    Motorbike getMotorbike() const;
+    RequestStatus getStatus() const;
+    TimeSlot getTimeSlot() const;
 
-    Motorbike getMotorbike() const {
-        return motorbike;
-    }
-
-    RequestStatus getStatus() const {
-        return status;
-    }
-
-    void setStatus(RequestStatus status) {
-        status = status;
-    }
-
-    TimeSlot getTimeSlot() const {
-        return timeSlot;
-    }
+    void setRequester(User requester);
+    void setMotorbike(Motorbike motorbike);
+    void setStatus(RequestStatus status);
+    void setTimeSlot(TimeSlot timeSlot);
 };
 
 #endif

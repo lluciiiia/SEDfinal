@@ -35,6 +35,7 @@ string Admin::getAdminID() const
 {
 }
 
-void setAdminID(string adminID)
+void Admin::setAdminID(string adminID)
 {
+    this->adminID = adminID;
 }
