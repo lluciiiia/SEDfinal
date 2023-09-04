@@ -24,15 +24,14 @@ private:
         double consumingPoints,
         double rentalAmount,
         double minRenterRating,
-        double motorbikeRating);
+        double motorbikeRating, bool availability);
 
     // TODO: Getter methods for attributes
 public:
     // Methods to manage requests and availability
     void addRequest(const Request &request);
     void viewRequest(const Request &request);
-    void checkAvailability(const TimeSlot &timeSlot);
-    void reserveTimeSlot(const TimeSlot &timeSlot);
+    void checkAvailability(bool &availability);
     void addCreditPoints();
 
     string toStringMotorBike();
@@ -51,7 +50,7 @@ private:
     double minRenterRating;
     double motorbikeRating;
     std::vector<Request> requests;
-    std::vector<TimeSlot> availability;
+    bool availability;
 };
 
 #endif
