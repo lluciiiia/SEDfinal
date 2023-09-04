@@ -1,9 +1,11 @@
-#include "User.h"
 #include <iostream>
+#include <vector>
 #include "Account.h"
 #include "../Rating.h"
+#include "User.h"
 #include "../Motorbike.h"
-#include <vector>
+#include "../Request.h"
+#include "../RequestStatus.h"
 
 class UserRating;
 class MotorbikeRating;
@@ -60,7 +62,6 @@ User::User(string username,
     this->creditPoint = creditPoint;
 }
 
-// Including City
 User::User(string username,
            string password,
            string fullName,
@@ -135,6 +136,7 @@ bool User::registerAccount(const string &username,
                            string licenseNum,
                            string licenseExdate)
 {
+    // TODO: There is an initial entry fee of $20 (pay to the system) when registering as a member, which earns the new member 20 credit points
     for (User &user : userList)
     {
         if (user.getUserName() == username)
@@ -163,10 +165,25 @@ bool User::registerAccount(const string &username,
 // listMotorbike()
 // unlistMotorbike()
 void User::searchAvailableMotorbikes(){};
-void User::requestToRent(){};
+
+void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+{
+    Request request(this, &motorbike, timeSlot);
+    motorbike.addRequest(request);
+}
+
 void User::viewRequests(){};
-void User::acceptRequest(vector<Request>& requests, Request request){
-    requests.push_back(request);
+void User::acceptRequest(vector<Request> &requests, Request request){
+    // 1. change the request status to Accepted
+
+    // 2. change the reqeust status of the request to ACCEPTED
+
+    // 3. change the availability of the motorbike
+
+    // 4. payment from the requester
+    
+    // 5. increase the credits ($1 = 1 credit point) for both requester and the owner
+
 };
 void User::rateUser(){};
 void User::rateMotorbike(){};

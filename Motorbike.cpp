@@ -1,9 +1,33 @@
 #include "Motorbike.h"
+#include "Account/User.h"
 
 using namespace std;
 
-Motorbike::Motorbike(string model, string motorbikeID, string color, string engineSize, City city, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating)
-    : model(model), motorbikeID(motorbikeID), color(color), engineSize(engineSize), city(city), transmissionMode(transmissionMode), yearMade(yearMade), description(description), consumingPoints(consumingPoints), rentalAmount(rentalAmount), minRenterRating(minRenterRating), motorbikeRating(motorbikeRating), ownerUsername(""), renterUsername(""), availability(true)
+Motorbike::Motorbike(string model,
+                     string motorbikeID,
+                     string color,
+                     string engineSize,
+                     City city,
+                     User owner,
+                     string transmissionMode,
+                     int yearMade,
+                     string description,
+                     double consumingPoints,
+                     double rentalAmount,
+                     double minRenterRating,
+                     double motorbikeRating)
+    : model(model),
+      motorbikeID(motorbikeID),
+      color(color),
+      engineSize(engineSize),
+      city(city),
+      owner(owner),
+      transmissionMode(transmissionMode),
+      yearMade(yearMade),
+      description(description),
+      consumingPoints(consumingPoints),
+      rentalAmount(rentalAmount),
+      minRenterRating(minRenterRating), motorbikeRating(motorbikeRating), ownerUsername(""), renterUsername(""), availability(true)
 {
 }
 
@@ -12,9 +36,9 @@ Motorbike::Motorbike(string model, string motorbikeID, string color, string engi
 //         return
 // }
 
-string Motorbike::getUsername()
+User Motorbike::getOwner()
 {
-        return ownerUsername;
+        return owner;
 }
 
 string Motorbike::getMotorbikeId()
@@ -27,22 +51,22 @@ double Motorbike::getConsumingPoints()
         return consumingPoints;
 }
 
-void Motorbike::setUsername(string username)
+void Motorbike::setOwner(User owner)
 {
-    this->ownerUsername = username;
+        this->owner = owner;
 }
 
 void Motorbike::setMotorbikeID(string motorbikeID)
 {
-    this->motorbikeID = motorbikeID;
+        this->motorbikeID = motorbikeID;
 }
 
 void Motorbike::setConsumingPoints(double consumingPoints)
 {
-    this->consumingPoints = consumingPoints;
+        this->consumingPoints = consumingPoints;
 }
 
-void Motorbike::addRequest(std::vector<Request> requests, Request request)
+void Motorbike::addRequest(const Request &request)
 {
         requests.push_back(request);
 }
