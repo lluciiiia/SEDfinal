@@ -56,6 +56,7 @@ public:
     void setOwner(User Owner);
     void setMotorbikeID(string motorbikeID);
     void setConsumingPoints(double consumingPoints);
+    void setAvailability(bool availability);
     // Request / Availability / Credit Points
     void addRequest(const Request &request);
     void viewRequests();

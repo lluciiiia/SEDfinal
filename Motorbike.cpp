@@ -51,6 +51,11 @@ double Motorbike::getConsumingPoints()
         return consumingPoints;
 }
 
+void Motorbike::setAvailability(bool availability)
+{
+        this->availability = availability;
+}
+
 void Motorbike::setOwner(User owner)
 {
         this->owner = owner;
