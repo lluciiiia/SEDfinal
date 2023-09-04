@@ -27,26 +27,6 @@ private:
         double motorbikeRating, bool availability,
         std::vector<Request> requests);
 
-public:
-    Motorbike(string model, string motorbikeID, string color, string engineSize, City city, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
-    // Getters
-    // TimeSlot getTimeSlot();
-    string getUsername();
-    string getMotorbikeId();
-    double getConsumingPoints();
-    // Setters
-    void setUsername(string username);
-    void setMotorbikeID(string motorbikeID);
-    void setConsumingPoints(double consumingPoints);
-    // Request / Availability / Credit Points
-    void addRequest(std::vector<Request> requests, Request request);
-    void viewRequests();
-    bool checkAvailability(bool availability);
-    void addCreditPoints(double points);
-    // SavingToFile
-    string toStringMotorBike();
-
-private:
     std::string model;
     std::string motorbikeID;
     std::string color;
@@ -63,6 +43,25 @@ private:
     string renterUsername;
     vector<Request> requests;
     bool availability;
+
+public:
+    Motorbike(string model, string motorbikeID, string color, string engineSize, City city, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
+    // Getters
+    // TimeSlot getTimeSlot();
+    string getUsername();
+    string getMotorbikeId();
+    double getConsumingPoints();
+    // Setters
+    void setUsername(string username);
+    void setMotorbikeID(string motorbikeID);
+    void setConsumingPoints(double consumingPoints);
+    // Request / Availability / Credit Points
+    void addRequest(const Request &request);
+    void viewRequests();
+    bool checkAvailability(bool availability);
+    void addCreditPoints(double points);
+    // SavingToFile
+    string toStringMotorBike();
 };
 
 #endif

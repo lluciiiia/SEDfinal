@@ -39,9 +39,9 @@ public:
     // listMotorbike()
     // unlistMotorbike()
     void searchAvailableMotorbikes();
-    void requestToRent();
+    void requestToRent(Motorbike &motorbike, TimeSlot timeSlot);
     void viewRequests();
-    void acceptRequest(vector<Request>& requests, Request request);
+    void acceptRequest(vector<Request> &requests, Request request);
     void rateUser();
     void rateMotorbike();
 

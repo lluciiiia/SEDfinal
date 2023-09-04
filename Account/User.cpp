@@ -1,9 +1,10 @@
-#include "User.h"
 #include <iostream>
+#include <vector>
 #include "Account.h"
 #include "../Rating.h"
+#include "User.h"
 #include "../Motorbike.h"
-#include <vector>
+#include "../Request.h"
 
 class UserRating;
 class MotorbikeRating;
@@ -163,10 +164,16 @@ bool User::registerAccount(const string &username,
 // listMotorbike()
 // unlistMotorbike()
 void User::searchAvailableMotorbikes(){};
-void User::requestToRent(){};
+
+void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+{
+    Request request(this, &motorbike, timeSlot);
+    motorbike.addRequest(request);
+}
+
 void User::viewRequests(){};
-void User::acceptRequest(vector<Request>& requests, Request request){
-    requests.push_back(request);
+void User::acceptRequest(vector<Request> &requests, Request request){
+
 };
 void User::rateUser(){};
 void User::rateMotorbike(){};

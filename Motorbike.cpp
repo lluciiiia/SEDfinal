@@ -29,20 +29,20 @@ double Motorbike::getConsumingPoints()
 
 void Motorbike::setUsername(string username)
 {
-    this->ownerUsername = username;
+        this->ownerUsername = username;
 }
 
 void Motorbike::setMotorbikeID(string motorbikeID)
 {
-    this->motorbikeID = motorbikeID;
+        this->motorbikeID = motorbikeID;
 }
 
 void Motorbike::setConsumingPoints(double consumingPoints)
 {
-    this->consumingPoints = consumingPoints;
+        this->consumingPoints = consumingPoints;
 }
 
-void Motorbike::addRequest(std::vector<Request> requests, Request request)
+void Motorbike::addRequest(const Request &request)
 {
         requests.push_back(request);
 }
