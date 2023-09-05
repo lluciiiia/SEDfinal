@@ -14,27 +14,30 @@ Motorbike::Motorbike(string model,
                      string description,
                      double consumingPoints,
                      double rentalAmount,
-                     double minRenterRating,
-                     double motorbikeRating)
-    : model(model),
-      motorbikeID(motorbikeID),
-      color(color),
-      engineSize(engineSize),
-      city(city),
-      owner(owner),
-      transmissionMode(transmissionMode),
-      yearMade(yearMade),
-      description(description),
-      consumingPoints(consumingPoints),
-      rentalAmount(rentalAmount),
-      minRenterRating(minRenterRating), motorbikeRating(motorbikeRating), ownerUsername(""), renterUsername(""), availability(true)
+                     double minRenterRating,)
+
 {
+        this->model= model;
+        this-> motorbikeID= motorbikeID;
+        this-> color= color;
+        this-> engineSize=engineSize;
+        this-> city= city;
+        this-> transmissionMode = transmissionMode;
+        this->yearMade = yearMade;
+        this-> description= description;
+        this-> consumingPoints= consumingPoints;
+        this-> rentalAmount= rentalAmount;
+        this-> minRenterRating=minRenterRating;
+        this-> motorbikeRating= motorbikeRating;
+        this-> ownerUsername= owner;
+        this-> renterUsername= renter;
 }
 
 // TimeSlot Motorbike::getTimeSlot()
 // {
 //         return
 // }
+
 
 User Motorbike::getOwner()
 {
@@ -61,6 +64,7 @@ void Motorbike::setOwner(User owner)
         this->owner = owner;
 }
 
+
 void Motorbike::setMotorbikeID(string motorbikeID)
 {
         this->motorbikeID = motorbikeID;
@@ -76,30 +80,31 @@ void Motorbike::addRequest(const Request &request)
         requests.push_back(request);
 }
 
-void Motorbike::viewRequests()
+void Motorbike::viewRequest(const Request &request)
 {
 }
 
-bool Motorbike::checkAvailability(bool availability)
-{
-        return availability;
-}
-
-void Motorbike::addCreditPoints(double points)
+void Motorbike::checkAvailability(const TimeSlot &timeSlot)
 {
 }
 
-string Motorbike::toStringMotorBike()
+void Motorbike::reserveTimeSlot(const TimeSlot &timeSlot)
 {
-        return model + "," +
-               motorbikeID + "," +
-               color + "," +
-               engineSize + "," +
-               transmissionMode + "," +
-               to_string(yearMade) + "," +
-               description + "," +
-               to_string(consumingPoints) + "," +
-               to_string(rentalAmount) + "," +
-               to_string(minRenterRating) + "," +
-               to_string(motorbikeRating) + ",";
+}
+
+Motorbike::Motorbike(std::string &model, std::string &motorbikeID, std::string &color, std::string &engineSize, City &city, std::string &transmissionMode, int yearMade, std::string &description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating, bool availability)
+{
+        this->model= model;
+        this-> motorbikeID = motorbikeID;
+        this-> color =color;
+        this-> engineSize = engineSize;
+        this->city= city;
+        this->transmissionMode = transmissionMode;
+        this-> yearMade= yearMade;
+        this->description= description;
+        this->consumingPoints= consumingPoints;
+        this-> rentalAmount= rentalAmount;
+        this-> minRenterRating= minRenterRating;
+        this->motorbikeRating= motorbikeRating;
+        this-> availability= availability;
 }

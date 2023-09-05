@@ -20,31 +20,37 @@ void saveToFile::SaveAccountToFile(vector<User>& users)
 
 vector<User> saveToFile::loadAccount()
 {
-    vector <User> users;
+    vector<User> users;
     fstream myFile(accountFile, ios::in);
     string line;
-    
-    while(getline(myFile,line)){
+
+    while (getline(myFile, line))
+    {
         stringstream ss(line);
         vector<string> tokens;
         string token;
-        while(getline(ss, token,',')){
+        while (getline(ss, token, ','))
+        {
             tokens.push_back(token);
         }
 
-        if(tokens.size() == 9){
-            double creaditPoint = stod(tokens[8]);
+        if (tokens.size() == 10) 
+        {
+            double creditPoint = stod(tokens[8]); 
             City myCity;
-            if(tokens[9]== "Saigon"){
-               myCity= City::Saigon;
-            }else if(tokens[9]== "Hanoi"){
-                 myCity= City::Hanoi;
+            if (tokens[9] == "Saigon")
+            {
+                myCity = City::Saigon;
             }
-            User user(tokens[0],tokens[1],tokens[2],tokens[3], tokens[4],tokens[5], tokens[6],tokens[7], creaditPoint, myCity);
+            else if (tokens[9] == "Hanoi")
+            {
+                myCity = City::Hanoi;
+            }
+            User user(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7], creditPoint, myCity);
             users.push_back(user);
         }
     }
-        myFile.close();
+    myFile.close();
     return users;
 }
 
