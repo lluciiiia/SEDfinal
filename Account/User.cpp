@@ -328,9 +328,6 @@ void User::acceptRequest(vector<Request> &requests, Request request){
     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
 };
-void User::rateUser(){};
-void User::rateMotorbike(){};
-
 
 // listMotorbike()
 // unlistMotorbike()
@@ -361,7 +358,7 @@ motorbikeToRequest->setAvailability(false);
 
 void User::rateUser(User &ratedUser, float score, const std::string comment) {
 
-    UserRating rating(ratedUser.username, score, comment);
+    UserRating rating(ratedUser.getUserName(), score, comment);
 
     ratedUser.userRatings.push_back(rating);
 
@@ -372,16 +369,16 @@ void User::rateUser(User &ratedUser, float score, const std::string comment) {
     
     float averageRating = totalRating / ratedUser.userRatings.size();
 
-    // I will add a function to get average rating in rating class
+    // TODO: Add a function to get average rating in rating class
 
 };
 
 void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment) {
 
-    // Might need to change the motorbikeRating in motorbike class to a vector containing MotorbikeRating objects?
-    MotorbikeRating rating(ratedMotorbike.getBikeId(), score, comment);
-
-    ratedMotorbike.addRating(rating);
+    // TODO: change the motorbikeRating in motorbike class to a vector containing MotorbikeRating objects?
+    MotorbikeRating rating(ratedMotorbike.getMotorbikeId(), score, comment);
+    // TODO: cancel the comment after adding addRating function
+    // ratedMotorbike.addRating(rating);
 
     
 };
