@@ -1,55 +1,95 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include "Request.cpp"
-#include "TimeSlot.cpp"
+#include "Motorbike.h"
+#include "Account/User.h"
 
-class Motorbike
+using namespace std;
+
+Motorbike::Motorbike(string model,
+                     string motorbikeID,
+                     string color,
+                     string engineSize,
+                     City city,
+                     User owner,
+                     string transmissionMode,
+                     int yearMade,
+                     string description,
+                     double consumingPoints,
+                     double rentalAmount,
+                     double minRenterRating,
+                     double motorbikeRating,
+                     bool availability)
+
 {
-public:
-    // Constructor
-    Motorbike(
-        std::string &model,
-        std::string &motorbikeID,
-        std::string &color,
-        std::string &engineSize,
-        City &city,
-        std::string &transmissionMode,
-        int yearMade,
-        std::string &description,
-        double consumingPoints,
-        double rentalAmount,
-        double minRenterRating,
-        double motorbikeRating);
+        this->model = model;
+        this->motorbikeID = motorbikeID;
+        this->color = color;
+        this->engineSize = engineSize;
+        this->city = city;
+        this->transmissionMode = transmissionMode;
+        this->yearMade = yearMade;
+        this->description = description;
+        this->consumingPoints = consumingPoints;
+        this->rentalAmount = rentalAmount;
+        this->minRenterRating = minRenterRating;
+        this->motorbikeRating = motorbikeRating;
+        this->availability = availability;
+        // this-> ownerUsername= owner;
+        // this-> renterUsername= renter;
+}
 
-    // TODO: Getter methods for attributes
+// TimeSlot Motorbike::getTimeSlot()
+// {
+//         return
+// }
 
-    // Methods to manage requests and availability
-    void addRequest(const Request &request);
-    void viewRequest(const Request &request);
-    void checkAvailability(const TimeSlot &timeSlot);
-    void reserveTimeSlot(const TimeSlot &timeSlot);
-    void addCreditPoints();
-
-private:
-    std::string model;
-    std::string motorbikeID;
-    std::string color;
-    std::string engineSize;
-    City city;
-    std::string transmissionMode;
-    int yearMade;
-    std::string description;
-    double consumingPoints;
-    double rentalAmount;
-    double minRenterRating;
-    double motorbikeRating;
-    std::vector<Request> requests;
-    std::vector<TimeSlot> availability;
-};
-
-enum class City
+User Motorbike::getOwner()
 {
-    Saigon,
-    Hanoi
-};
+        return owner;
+}
+
+string Motorbike::getMotorbikeId()
+{
+        return motorbikeID;
+}
+
+double Motorbike::getConsumingPoints()
+{
+        return consumingPoints;
+}
+
+bool Motorbike::getAvailability()
+{
+        return availability;
+}
+
+void Motorbike::setAvailability(bool availability)
+{
+        this->availability = availability;
+}
+
+void Motorbike::setOwner(User owner)
+{
+        this->owner = owner;
+}
+
+void Motorbike::setMotorbikeID(string motorbikeID)
+{
+        this->motorbikeID = motorbikeID;
+}
+
+void Motorbike::setConsumingPoints(double consumingPoints)
+{
+        this->consumingPoints = consumingPoints;
+}
+
+void Motorbike::addRequest(const Request &request)
+{
+        requests.push_back(request);
+}
+
+void Motorbike::viewRequest(const Request &request)
+{
+}
+
+void Motorbike::reserveTimeSlot(const TimeSlot &timeSlot)
+{
+}

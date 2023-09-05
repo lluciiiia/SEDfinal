@@ -1,8 +1,26 @@
-#ifndef TIMESLOT_H
-#define TIMESLOT_H
+#include "TimeSlot.h"
+#include <string>
 
-class TimeSlot {
+using namespace std;
 
-};
+TimeSlot::TimeSlot()
+{
+    this->startTime = "";
+    this->endTime = "";
+}
 
-#endif
+TimeSlot::TimeSlot(const string &startTime, const string &endTime)
+{
+    this->startTime = startTime;
+    this->endTime = endTime;
+}
+
+string TimeSlot::getStartTime() const
+{
+    return startTime;
+}
+
+string TimeSlot::getEndTime() const
+{
+    return endTime;
+}
