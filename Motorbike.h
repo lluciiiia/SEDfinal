@@ -9,8 +9,8 @@
 #include "City.h"
 #include "Account/User.h"
 #include "Request.h"
+#include "Rating.h"
 
-class User;
 class Motorbike
 {
 private:
@@ -26,8 +26,8 @@ private:
         std::string description,
         double consumingPoints,
         double rentalAmount,
-        double minRenterRating,
-        double motorbikeRating,
+        // double minRenterRating,
+        vector<MotorbikeRating> motorbikeRatings,
         bool availability,
         std::vector<Request> requests);
 
@@ -42,8 +42,9 @@ private:
     std::string description;
     double consumingPoints;
     double rentalAmount;
-    double minRenterRating;
-    double motorbikeRating;
+    // double minRenterRating;
+    vector<MotorbikeRating> motorbikeRatings;
+    vector<Request> motorbikeRequests;
     string ownerUsername;
     string renterUsername;
     vector<Request> requests;
@@ -61,8 +62,9 @@ public:
               string description,
               double consumingPoints,
               double rentalAmount,
-              double minRenterRating,
-              double motorbikeRating,
+              // double minRenterRating,
+              vector<MotorbikeRating> motorbikeRatings,
+              vector<Request> motorbikeRequests,
               bool availability);
     // Getters
     User getOwner();
@@ -77,6 +79,8 @@ public:
     // Methods to manage requests and availability / Credit points
     void addRequest(const Request &request);
     void viewRequest(const Request &request);
+
+    void addRating(const MotorbikeRating &rating);
 
     void reserveTimeSlot(const TimeSlot &timeSlot);
     void addCreditPoints(double &points);

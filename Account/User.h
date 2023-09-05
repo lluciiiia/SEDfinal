@@ -43,8 +43,8 @@ public:
     void requestToRent(Motorbike &motorbike, TimeSlot timeSlot);
     void viewRequests();
     void acceptRequest(vector<Request> &requests, Request request);
-    void rateUser();
-    void rateMotorbike();
+    void rateUser(User &ratedUser, float score, const std::string comment);
+    void rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment);
 
     // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
     // vector <Motorbike> rentBikes();
