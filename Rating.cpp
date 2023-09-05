@@ -1,15 +1,23 @@
 #include "Rating.h"
 #include "Motorbike.h"
 
-Rating::Rating() {}
+Rating::Rating() : score(0.0), comment("") {}
 Rating::Rating(float score, std::string comment) : score(score), comment(comment) {}
 
-float Rating::getScore() const
+UserRating::UserRating() : Rating(), username("") {}
+UserRating::UserRating(std::string username, float score, std::string comment)
+    : Rating(score, comment), username(username) {}
+
+MotorbikeRating::MotorbikeRating() : Rating(), bikeID("") {}
+MotorbikeRating::MotorbikeRating(std::string bikeID, float score, std::string comment)
+    : Rating(score, comment), bikeID(bikeID) {}
+
+float Rating::getScore()
 {
     return score;
 }
 
-std::string Rating::getComment() const
+std::string Rating::getComment() 
 {
     return comment;
 }
@@ -25,33 +33,32 @@ void Rating::setComment(string comment)
 }
 
 // user rating
-float UserRating::getScore() const
-{
-    return Rating::getScore();
-}
+// float UserRating::getScore() 
+// {
+//     return Rating::getScore();
+// }
 
-std::string UserRating::getComment() const
-{
-    return Rating::getComment();
-}
+// std::string UserRating::getComment()
+// {
+//     return Rating::getComment();
+// }
 
-std::string UserRating::getUsername() const
-{
-    return username;
-}
+// std::string UserRating::getUsername()
+// {
+//     return username;
+// }
 
 // motobike rating
-float MotorbikeRating::getScore() const
-{
-    return Rating::getScore();
-}
+// float MotorbikeRating::getScore() {
+//     return Rating::getScore();
+// }
 
-std::string MotorbikeRating::getComment() const
-{
-    return Rating::getComment();
-}
+// std::string MotorbikeRating::getComment()
+// {
+//     return Rating::getComment();
+// }
 
-std::string MotorbikeRating::getBikeId() const
-{
-    return bikeID;
-}
+// std::string MotorbikeRating::getBikeId() 
+// {
+//     return bikeID;
+// }

@@ -357,8 +357,35 @@ motorbikeToRequest->setAvailability(false);
 // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
 };
-void User::rateUser(){};
-void User::rateMotorbike(){};
+
+
+void User::rateUser(User &ratedUser, float score, const std::string comment) {
+
+    UserRating rating(ratedUser.username, score, comment);
+
+    ratedUser.userRatings.push_back(rating);
+
+    float totalRating = 0;
+    for (const UserRating &rating : ratedUser.userRatings) {
+        totalRating += rating.getScore();
+    }
+    
+    float averageRating = totalRating / ratedUser.userRatings.size();
+
+    // I will add a function to get average rating in rating class
+
+};
+
+void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment) {
+
+    // Might need to change the motorbikeRating in motorbike class to a vector containing MotorbikeRating objects?
+    MotorbikeRating rating(ratedMotorbike.getBikeId(), score, comment);
+
+    ratedMotorbike.addRating(rating);
+
+    
+};
+
 
 // vector<Motorbike> User::addOwnedMotorbike(Motorbike bike)
 // {
@@ -374,3 +401,4 @@ void User::rateMotorbike(){};
 // {
 //     return vector<Request>();
 // }
+
