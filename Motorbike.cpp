@@ -1,4 +1,5 @@
 #include "Motorbike.h"
+#include "Account/User.h"
 
 using namespace std;
 
@@ -7,15 +8,14 @@ Motorbike::Motorbike(string model,
                      string color,
                      string engineSize,
                      City city,
+                     User owner,
                      string transmissionMode,
                      int yearMade,
                      string description,
                      double consumingPoints,
                      double rentalAmount,
-                     double minRenterRating,
-                     double motorbikeRating,
-                     string owner,
-                     string renter)
+                     double minRenterRating,)
+
 {
         this->model= model;
         this-> motorbikeID= motorbikeID;
@@ -39,6 +39,11 @@ Motorbike::Motorbike(string model,
 // }
 
 
+User Motorbike::getOwner()
+{
+        return owner;
+}
+
 string Motorbike::getMotorbikeId()
 {
         return motorbikeID;
@@ -54,6 +59,11 @@ void Motorbike::setAvailability(bool availability)
         this->availability = availability;
 }
 
+void Motorbike::setOwner(User owner)
+{
+        this->owner = owner;
+}
+
 
 void Motorbike::setMotorbikeID(string motorbikeID)
 {
@@ -65,7 +75,10 @@ void Motorbike::setConsumingPoints(double consumingPoints)
         this->consumingPoints = consumingPoints;
 }
 
-
+void Motorbike::addRequest(const Request &request)
+{
+        requests.push_back(request);
+}
 
 void Motorbike::viewRequest(const Request &request)
 {

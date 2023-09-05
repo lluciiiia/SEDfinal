@@ -14,68 +14,41 @@ class User;
 class Motorbike
 {
 private:
-  
-
-    // TODO: Getter methods for attributes
-public:
-    // Methods to manage requests and availability
-    void addRequest(const Request &request);
-    void viewRequest(const Request &request);
-    void checkAvailability(const TimeSlot &timeSlot);
-    void reserveTimeSlot(const TimeSlot &timeSlot);
-    void addCreditPoints();
-
-    string toStringMotorBike();
-private:
-    std::string model;
-    std::string motorbikeID;
-    std::string color;
-    std::string engineSize;
-    City city;
-    std::string transmissionMode;
-    int yearMade;
-    std::string description;
-    double consumingPoints;
-    double rentalAmount;
-    double minRenterRating;
-    double motorbikeRating;
-    string ownerUsername;
-    string renterUsername;
-    bool availability;
+    Motorbike(
+        std::string model,
+        std::string motorbikeID,
+        std::string color,
+        std::string engineSize,
+        City city,
+        User owner,
+        std::string transmissionMode,
+        int yearMade,
+        std::string description,
+        double consumingPoints,
+        double rentalAmount,
+        double minRenterRating,
+        double motorbikeRating, 
+        bool availability,
+        std::vector<Request> requests);
 
 public:
-    Motorbike(  string model,
-                     string motorbikeID,
-                     string color,
-                     string engineSize,
-                     City city,
-                     string transmissionMode,
-                     int yearMade,
-                     string description,
-                     double consumingPoints,
-                     double rentalAmount,
-                     double minRenterRating,
-                     double motorbikeRating,
-                     string owner,
-                     string renter);
+    Motorbike(string model, string motorbikeID, string color, string engineSize, City city, User owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
     // Getters
     User getOwner();
     string getMotorbikeId();
     double getConsumingPoints();
+    bool getAvailability();
     // Setters
     void setOwner(User Owner);
     void setMotorbikeID(string motorbikeID);
     void setConsumingPoints(double consumingPoints);
     void setAvailability(bool availability);
-    // Request / Availability / Credit Points
-    void viewRequests();
-    bool checkAvailability(bool availability);
-    void addCreditPoints(double points);
-    // SavingToFile
-    //string toStringMotorBike();
-
-      Motorbike(
-        std::string &model, std::string &motorbikeID, std::string &color, std::string &engineSize, City &city, std::string &transmissionMode, int yearMade, std::string &description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating, bool availability);
+  // Methods to manage requests and availability / Credit points
+    void addRequest(const Request &request);
+    void viewRequest(const Request &request);
+    
+    void reserveTimeSlot(const TimeSlot &timeSlot);
+    void addCreditPoints(double &points);   
 };
 
 #endif

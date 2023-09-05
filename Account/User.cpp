@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <regex>
+
 #include "Account.h"
 #include "../Rating.h"
 #include "User.h"
@@ -112,6 +113,7 @@ string User::toStringAccount()
            cityStr;
 }
 
+
 string User::getUserName()
 {
     return Account:: getUsername();
@@ -121,6 +123,7 @@ bool User::login(const string &username,
                  const string &pass,
                  vector<User> &userList)
 {
+
     for (auto &user : userList)
     {
         if (user.getUserName() == username && user.getPassword() == pass)
@@ -189,6 +192,7 @@ bool User::registerAccount(vector <User>& userList)
             cout<< "Phone Number cannot be empty! \n";
         }else{
             break;
+
         }
     }
 
@@ -299,6 +303,34 @@ bool User::registerAccount(vector <User>& userList)
     return false;
 }
 
+// listMotorbike()
+// unlistMotorbike()
+void User::searchAvailableMotorbikes(){};
+
+void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+{
+    Request request(this, &motorbike, timeSlot);
+    motorbike.addRequest(request);
+}
+
+void User::viewRequests(){};
+
+void User::acceptRequest(vector<Request> &requests, Request request){
+    // 1. change the request status to Accepted
+    request.setStatus(RequestStatus::ACCEPTED);
+
+    // 2. change the availability of the motorbike
+    Motorbike* motorbikeToRequest = request.getMotorbike();
+    motorbikeToRequest->setAvailability(false);
+
+    // 3. payment from the requester
+    
+    // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+
+};
+void User::rateUser(){};
+void User::rateMotorbike(){};
+
 
 // listMotorbike()
 // unlistMotorbike()
@@ -312,19 +344,19 @@ void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 
 void User::viewRequests(){};
 
-// void User::acceptRequest(vector<Request> &requests, Request request){
-//     // 1. change the request status to Accepted
-//     request.setStatus(RequestStatus::ACCEPTED);
+void User::acceptRequest(vector<Request> &requests, Request request){
+    // 1. change the request status to Accepted
+   request.setStatus(RequestStatus::ACCEPTED);
 
-//     // 2. change the availability of the motorbike
-//     Motorbike* motorbikeToRequest = request.getMotorbike();
-//     motorbikeToRequest->setAvailability(false);
+  // 2. change the availability of the motorbike
+  Motorbike* motorbikeToRequest = request.getMotorbike();
+motorbikeToRequest->setAvailability(false);
 
-//     // 3. payment from the requester
+// 3. payment from the requester
     
-//     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+// 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
-// };
+};
 void User::rateUser(){};
 void User::rateMotorbike(){};
 

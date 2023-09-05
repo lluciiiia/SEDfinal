@@ -18,38 +18,16 @@ public:
         : timeSlot(timeSlot), username(username), motorbikeId(motorbikeId), price(price) {}
     
     //getters
-    TimeSlot getTimeSlot() const {
-        return timeSlot;
-    }
-
-    string getUsername() const {
-        return username;
-    }
-
-    string getMotorbikeID() const {
-        return motorbikeId;
-    }
-
-    double getPrice() const {
-        return price;
-    }
+    TimeSlot getTimeSlot() const;
+    string getUsername() const;
+    string getMotorbikeID() const;
+    double getPrice() const;
 
     //setters
-    void setTimeSlot(TimeSlot timeSlot) {
-        timeSlot = timeSlot;
-    }
-
-    void setUsername(string username) {
-        username = username;
-    }
-
-    void setMotorbikeId(string motorbikeId) {
-        motorbikeId = motorbikeId;
-    }
-
-    void setPrice(double price) {
-        price = price;
-    }
+    void setTimeSlot(TimeSlot timeSlot);
+    void setUsername(string username);
+    void setMotorbikeId(string motorbikeId);
+    void setPrice(double price);
 };
 
 #endif

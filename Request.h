@@ -17,7 +17,6 @@ private:
     Motorbike* motorbike;  
     RequestStatus status;
     TimeSlot timeSlot;
-    string username;
     string motobikeID;
     
 public:
@@ -26,13 +25,13 @@ public:
         : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot) {
     }
 
-    User getRequester() const;
-    Motorbike getMotorbike() const;
+    User* getRequester() const;
+    Motorbike* getMotorbike() const;
     RequestStatus getStatus() const;
     TimeSlot getTimeSlot() const;
 
-    void setRequester(User requester);
-    void setMotorbike(Motorbike motorbike);
+    void setRequester(User* requester);
+    void setMotorbike(Motorbike* motorbike);
     void setStatus(RequestStatus status);
     void setTimeSlot(TimeSlot timeSlot);
 };
