@@ -461,6 +461,15 @@ void User::rateUser(User &ratedUser, float score, const std::string comment) {
 
     ratedUser.userRatings.push_back(rating);
 
+    float totalRating = 0;
+    for (const UserRating &rating : ratedUser.userRatings) {
+        totalRating += rating.getScore();
+    }
+    
+    float averageRating = totalRating / ratedUser.userRatings.size();
+
+    // I will add a function to get average rating in rating class
+
 };
 
 void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment) {
@@ -469,6 +478,7 @@ void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string com
     MotorbikeRating rating(ratedMotorbike.getBikeId(), score, comment);
 
     ratedMotorbike.addRating(rating);
+
     
 };
 
