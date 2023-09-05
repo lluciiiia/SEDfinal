@@ -11,11 +11,10 @@
 
 int main()
 {   
-    
     User user;
     saveToFile fileSave;
     std::vector<User> userList = fileSave.loadAccount();
-     City city= City:: Saigon;
+    City city= City:: Saigon;
 
     User user1("john_doe", "password123", "John Doe", "1234567890", "Passport", "ID12345", "License67890", "2023-12-31", 100.0, city);
 
