@@ -33,6 +33,7 @@ void Admin::viewAccounts()
 
 string Admin::getAdminID() const
 {
+    return adminID;
 }
 
 void Admin::setAdminID(string adminID)
