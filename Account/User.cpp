@@ -35,6 +35,8 @@ User::User(string username,
                                          password,
                                          fullName,
                                          phoneNumber)
+  
+  
 {
     this->IDtype = IDtype;
     this->idNum = idNum;
@@ -113,10 +115,9 @@ string User::toStringAccount()
            cityStr;
 }
 
-
 string User::getUserName()
 {
-    return Account:: getUsername();
+    return Account::getUsername();
 }
 
 bool User::login(const string &username,
@@ -153,7 +154,7 @@ bool User::login(const string &username,
 //             for ( auto& user : userList) {
 //                 if (username == user.getUserName()) {
 //                     usernameExists = true;
-//                     break; 
+//                     break;
 //                 }
 //             }
 
@@ -303,13 +304,15 @@ bool User::login(const string &username,
 //     return false;
 // }
 
+
 // listMotorbike()
 // unlistMotorbike()
 void User::searchAvailableMotorbikes(){};
 
 void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 {
-    Request request(this, &motorbike, timeSlot);
+  // TODO: if the credits are enough to rent it
+    Request request(this, &motorbike, timeSlot, RequestStatus::PENDING);
     motorbike.addRequest(request);
 }
 
@@ -327,65 +330,34 @@ void User::acceptRequest(vector<Request> &requests, Request request){
     
     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
+    // 5. create a borrow object w the info
 };
-void User::rateUser(){};
-void User::rateMotorbike(){};
 
-
-// listMotorbike()
-// unlistMotorbike()
-void User::searchAvailableMotorbikes(){};
-
-void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+// TODO: make the algorithm between rateUser and rateMotorbike the same
+void User::rateUser(User &ratedUser, float score, const std::string comment)
 {
-    Request request(this, &motorbike, timeSlot);
-    //motorbike.addRequest(request);
-}
 
-void User::viewRequests(){};
-
-void User::acceptRequest(vector<Request> &requests, Request request){
-    // 1. change the request status to Accepted
-   request.setStatus(RequestStatus::ACCEPTED);
-
-  // 2. change the availability of the motorbike
-  Motorbike* motorbikeToRequest = request.getMotorbike();
-motorbikeToRequest->setAvailability(false);
-
-// 3. payment from the requester
-    
-// 4. increase the credits ($1 = 1 credit point) for both requester and the owner
-
-};
-
-
-void User::rateUser(User &ratedUser, float score, const std::string comment) {
-
-    UserRating rating(ratedUser.username, score, comment);
+    UserRating rating(ratedUser.getUserName(), score, comment);
 
     ratedUser.userRatings.push_back(rating);
 
     float totalRating = 0;
-    for (const UserRating &rating : ratedUser.userRatings) {
+    for (const UserRating &rating : ratedUser.userRatings)
+    {
         totalRating += rating.getScore();
     }
-    
+
     float averageRating = totalRating / ratedUser.userRatings.size();
 
-    // I will add a function to get average rating in rating class
-
+    // TODO: Add a function to get average rating in rating class
 };
 
-void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment) {
+void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment)
+{
+    MotorbikeRating rating(ratedMotorbike.getMotorbikeId(), score, comment);
 
-    // Might need to change the motorbikeRating in motorbike class to a vector containing MotorbikeRating objects?
-    MotorbikeRating rating(ratedMotorbike.getBikeId(), score, comment);
-
-    ratedMotorbike.addRating(rating);
-
-    
+    //ratedMotorbike.addRating(rating);
 };
-
 
 // vector<Motorbike> User::addOwnedMotorbike(Motorbike bike)
 // {
@@ -401,6 +373,3 @@ void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string com
 // {
 //     return vector<Request>();
 // }
-
-friend class Admin;
-
