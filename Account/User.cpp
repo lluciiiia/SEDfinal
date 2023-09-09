@@ -402,3 +402,5 @@ void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string com
 //     return vector<Request>();
 // }
 
+friend class Admin;
+
