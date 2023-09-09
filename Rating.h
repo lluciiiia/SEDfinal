@@ -32,6 +32,7 @@ private:
 public:
     UserRating();
     UserRating(std::string username, float score, std::string comment);
+
     float getScore() const;
     std::string getComment() const;
     std::string getUsername() const;
@@ -46,10 +47,11 @@ public:
     // Constructors
     MotorbikeRating();
     MotorbikeRating(std::string bikeID, float score, std::string comment);
-    // Getter & Setter
+    // Getter
     float getScore() const;
     std::string getComment() const;
     std::string getBikeId() const;
+    // Setter
     void setBikeId(std::string bikeID) const;
 };
 

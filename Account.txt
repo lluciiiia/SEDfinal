@@ -1,0 +1,3 @@
+john_doe,password123,John Doe,1234567890,Passport,ID12345,License67890,2023-12-31,100.000000,Saigon
+alice_smith,securePass123,Alice Smith,9876543210,Driver's License,DL6789,License98765,2023-11-30,150.000000,Saigon
+phatnamki123,phat123,huynh tan hpat,1238,Citizen ID,askldjf123,als;kd123,12/2202,20.000000,Hanoi
