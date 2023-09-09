@@ -93,3 +93,5 @@ void Motorbike::viewRequest(const Request &request)
 void Motorbike::reserveTimeSlot(const TimeSlot &timeSlot)
 {
 }
+
+friend class Admin;
