@@ -335,6 +335,8 @@ void User::acceptRequest(vector<Request> &requests, Request request){
     // 3. change the request status to Accepted
     request.setStatus(RequestStatus::ACCEPTED);
 
+    // 4. create a borrow object
+
 };
 
 // TODO: make the algorithm between rateUser and rateMotorbike the same
@@ -359,7 +361,7 @@ void User::rateUser(User &ratedUser, float score, const std::string comment)
 void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment)
 {
     MotorbikeRating rating(ratedMotorbike.getMotorbikeId(), score, comment);
-    ratedMotorbike.addRating(rating);
+    //ratedMotorbike.addRating(rating);
 };
 
 // vector<Motorbike> User::addOwnedMotorbike(Motorbike bike)
