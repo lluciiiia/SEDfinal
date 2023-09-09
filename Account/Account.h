@@ -25,8 +25,6 @@ class Account{
     void setFullName(string fullName);
     void setPhoneNumber(string phoneNumber);
 
-    //Friend class
-    friend class Admin;
 
 };
 
