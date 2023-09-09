@@ -7,10 +7,11 @@
 #include "../Rating.h"
 #include "../Motorbike.h"
 #include "../City.h"
+#include "../TimeSlot.h"
 
-// class Motorbike;
-// class Request;
-// class UserRating;
+class Motorbike;
+class Request;
+class UserRating;
 
 class User : public Account
 {
@@ -20,7 +21,6 @@ private:
     string licenseNumber;
     string licenseExpiryDate;
     vector<UserRating> userRatings;
-    vector<MotorbikeRating> motorbikeRatings;
     vector<Motorbike> OwnedMotorbikes;
     vector<Motorbike> RentingBikes;
     double creditPoint;
@@ -31,6 +31,7 @@ public:
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> userRatings, double creditPoint);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
+    
     string toStringAccount();
     string getUserName();
     
@@ -43,8 +44,8 @@ public:
     void requestToRent(Motorbike &motorbike, TimeSlot timeSlot);
     void viewRequests();
     void acceptRequest(vector<Request> &requests, Request request);
-    void rateUser();
-    void rateMotorbike();
+    void rateUser(User &ratedUser, float score, const std::string comment);
+    void rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment);
 
     // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
     // vector <Motorbike> rentBikes();
