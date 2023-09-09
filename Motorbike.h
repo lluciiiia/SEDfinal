@@ -80,6 +80,8 @@ public:
 
     void reserveTimeSlot(const TimeSlot &timeSlot);
     void addCreditPoints(double &points);
+
+    friend class Admin;
 };
 
 #endif
