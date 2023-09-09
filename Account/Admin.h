@@ -18,9 +18,9 @@ public:
           string phoneNumber,
           string adminID);
 
-    void viewMemberInfo();
-    void viewMotorbikeInfo();
-    void viewAccounts();
+    void viewMemberInfo(vector<User> &userList);
+    void viewMotorbikeInfo(vector<Motorbike> &motorbikeList);
+    void viewAccounts(vector<Account> &accountList);
 
     string getAdminID() const;
     void setAdminID(string adminID);
