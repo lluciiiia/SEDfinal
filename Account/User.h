@@ -34,6 +34,7 @@ public:
     
     string toStringAccount();
     string getUserName();
+    
     bool login(const string &username, const string &pass, vector<User> &userList);
     bool registerAccount(const string &username, const string &password, const double &credit, vector<User> &userList, string fullName, string phoneNumber, string Type, string idNum, string licenseNum, string licenseExdate);
 
@@ -43,15 +44,12 @@ public:
     void requestToRent(Motorbike &motorbike, TimeSlot timeSlot);
     void viewRequests();
     void acceptRequest(vector<Request> &requests, Request request);
-    void rateUser();
-    void rateMotorbike();
+    void rateUser(User &ratedUser, float score, const std::string comment);
+    void rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment);
 
     // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
     // vector <Motorbike> rentBikes();
     // vector <Request> receiveRequest();
-
-    // Friend classes to access private attributes
-    friend class Admin;
 };
 
 #endif
