@@ -49,6 +49,9 @@ public:
     // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
     // vector <Motorbike> rentBikes();
     // vector <Request> receiveRequest();
+
+    // Friend classes to access private attributes
+    friend class Admin;
 };
 
 #endif
