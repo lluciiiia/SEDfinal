@@ -35,6 +35,8 @@ User::User(string username,
                                          password,
                                          fullName,
                                          phoneNumber)
+  
+  
 {
     this->IDtype = IDtype;
     this->idNum = idNum;
@@ -309,23 +311,23 @@ void User::searchAvailableMotorbikes(){};
 
 void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 {
-    Request request(this, &motorbike, timeSlot);
-    // motorbike.addRequest(request);
+  // TODO: if the credits are enough to rent it
+    Request request(this, &motorbike, timeSlot, RequestStatus::PENDING);
+    motorbike.addRequest(request);
 }
 
 void User::viewRequests(){};
 
-void User::acceptRequest(vector<Request> &requests, Request request)
-{
+void User::acceptRequest(vector<Request> &requests, Request request){
     // 1. change the request status to Accepted
     request.setStatus(RequestStatus::ACCEPTED);
 
     // 2. change the availability of the motorbike
-    Motorbike *motorbikeToRequest = request.getMotorbike();
+    Motorbike* motorbikeToRequest = request.getMotorbike();
     motorbikeToRequest->setAvailability(false);
 
     // 3. payment from the requester
-
+    
     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
     // 5. create a borrow object w the info
@@ -371,3 +373,4 @@ void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string com
 // {
 //     return vector<Request>();
 // }
+

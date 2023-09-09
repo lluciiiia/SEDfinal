@@ -1,7 +1,12 @@
 #include "Request.h"
 
-Request::Request(User *requester, Motorbike *motorbike, TimeSlot timeSlot)
-    : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot)
+Request::Request(User *requester,
+                 Motorbike *motorbike,
+                 TimeSlot timeSlot, RequestStatus status)
+    : requester(requester),
+      motorbike(motorbike),
+      status(RequestStatus::PENDING),
+      timeSlot(timeSlot)
 {
 }
 
@@ -44,3 +49,11 @@ void Request::setTimeSlot(TimeSlot timeslot)
 {
     this->timeSlot = timeSlot;
 }
+
+void Request::showInfo()
+{
+    cout << "Requester: " << requester->getUserName() << "\n";
+    cout << "Motorbike: " << motorbike->getMotorbikeId() << "\n";
+    cout << "Request Status: " << __STRINGIFY(status) << "\n";
+    timeSlot.showInfo();
+};
