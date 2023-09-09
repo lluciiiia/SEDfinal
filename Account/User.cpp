@@ -168,7 +168,7 @@ void User::searchAvailableMotorbikes(){};
 
 void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 {
-    Request request(this, &motorbike, timeSlot);
+    Request request(this, &motorbike, timeSlot, RequestStatus::PENDING);
     motorbike.addRequest(request);
 }
 

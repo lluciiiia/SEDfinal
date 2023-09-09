@@ -33,6 +33,7 @@ public:
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
     string toStringAccount();
     string getUserName();
+    
     bool login(const string &username, const string &pass, vector<User> &userList);
     bool registerAccount(const string &username, const string &password, const double &credit, vector<User> &userList, string fullName, string phoneNumber, string Type, string idNum, string licenseNum, string licenseExdate);
 
