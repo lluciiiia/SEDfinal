@@ -101,4 +101,5 @@ void Motorbike::reserveTimeSlot(const TimeSlot &timeSlot)
 {
 }
 
-void Motorbike::addCreditPoints(double &points){};
+friend class Admin;
+

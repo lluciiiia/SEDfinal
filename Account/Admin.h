@@ -18,9 +18,9 @@ public:
           string phoneNumber,
           string adminID);
 
-    void viewMemberInfo();
-    void viewMotorbikeInfo();
-    void viewAccounts();
+    void viewMemberInfo(User user);
+    void viewMotorbikeInfo(Motorbike motorbike);
+    void viewAccounts(Account account);
 
     string getAdminID() const;
     void setAdminID(string adminID);
