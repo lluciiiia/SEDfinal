@@ -21,6 +21,7 @@ public:
 
     Request(string requester, string motorbike, TimeSlot timeSlot, RequestStatus status);
 
+
     string getRequester() const;
     string getMotorbike() const;
     RequestStatus getStatus() const;
@@ -30,6 +31,7 @@ public:
     void setMotorbike(string motorbike);
     void setStatus(RequestStatus status);
     void setTimeSlot(TimeSlot timeSlot);
+
     void showInfo();
 };
 

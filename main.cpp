@@ -18,12 +18,13 @@ void user_dashboard(User &user, vector<Motorbike> &bikes);
 
 int main()
 {   
-    
     User user;
     saveToFile fileSave;
+
     vector<User> userList = fileSave.loadAccount();
     vector <Motorbike> motorbikeList;
      City city= City:: Saigon;
+
 
     // User user1("john_doe", "password123", "John Doe", "1234567890", "Passport", "ID12345", "License67890", "2023-12-31", 100.0, city);
 
@@ -69,12 +70,12 @@ int main()
                 break;
             }
             case 4:{
-                if(user.registerAccount(userList)){
-                    cout<< "Register successfully\n";
-                }else{
-                    cout<< "Fail\n";
-                }
-                break;
+                // if(user.registerAccount(userList)){
+                //     cout<< "Register successfully\n";
+                // }else{
+                //     cout<< "Fail\n";
+                // }
+                // break;
             }
             case 5:{
                 exitProgram= true;
@@ -83,19 +84,6 @@ int main()
             }
         }
     }
-
-
-
-
-
-
-
-
-   
-
-
-
-
 
 
 

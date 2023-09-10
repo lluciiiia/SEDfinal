@@ -1,7 +1,6 @@
 #include "Request.h"
 
 
-
 Request::Request(string requester, string motorbike, TimeSlot timeSlot, RequestStatus status)
 {
     this->requester= requester;
