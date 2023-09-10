@@ -12,12 +12,12 @@ MotorbikeRating::MotorbikeRating() : Rating(), bikeID("") {}
 MotorbikeRating::MotorbikeRating(std::string bikeID, float score, std::string comment)
     : Rating(score, comment), bikeID(bikeID) {}
 
-float Rating::getScore()
+float Rating::getScore() const
 {
     return score;
 }
 
-std::string Rating::getComment() 
+std::string Rating::getComment() const
 {
     return comment;
 }
@@ -33,32 +33,33 @@ void Rating::setComment(string comment)
 }
 
 // user rating
-// float UserRating::getScore() 
-// {
-//     return Rating::getScore();
-// }
+float UserRating::getScore() const
+{
+    return Rating::getScore();
+}
 
-// std::string UserRating::getComment()
-// {
-//     return Rating::getComment();
-// }
+std::string UserRating::getComment() const
+{
+    return Rating::getComment();
+}
 
-// std::string UserRating::getUsername()
-// {
-//     return username;
-// }
+std::string UserRating::getUsername() const
+{
+    return username;
+}
 
 // motobike rating
-// float MotorbikeRating::getScore() {
-//     return Rating::getScore();
-// }
+float MotorbikeRating::getScore() const
+{
+    return Rating::getScore();
+}
 
-// std::string MotorbikeRating::getComment()
-// {
-//     return Rating::getComment();
-// }
+std::string MotorbikeRating::getComment() const
+{
+    return Rating::getComment();
+}
 
-// std::string MotorbikeRating::getBikeId() 
-// {
-//     return bikeID;
-// }
+std::string MotorbikeRating::getBikeId() const
+{
+    return bikeID;
+}

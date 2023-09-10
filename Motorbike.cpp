@@ -14,8 +14,9 @@ Motorbike::Motorbike(string model,
                      string description,
                      double consumingPoints,
                      double rentalAmount,
-                     double minRenterRating,
-                     double motorbikeRating,
+                     // double minRenterRating,
+                     vector<MotorbikeRating> motorbikeRatings,
+                     vector<Request> motorbikeRequests,
                      bool availability)
 
 {
@@ -29,8 +30,9 @@ Motorbike::Motorbike(string model,
         this->description = description;
         this->consumingPoints = consumingPoints;
         this->rentalAmount = rentalAmount;
-        this->minRenterRating = minRenterRating;
-        this->motorbikeRating = motorbikeRating;
+        // this->minRenterRating = minRenterRating;
+        this->motorbikeRatings = motorbikeRatings;
+        this->motorbikeRequests = motorbikeRequests;
         this->availability = availability;
         // this-> ownerUsername= owner;
         // this-> renterUsername= renter;
@@ -83,11 +85,16 @@ void Motorbike::setConsumingPoints(double consumingPoints)
 
 void Motorbike::addRequest(const Request &request)
 {
-        requests.push_back(request);
+        motorbikeRequests.push_back(request);
 }
 
 void Motorbike::viewRequest(const Request &request)
 {
+}
+
+void Motorbike::addRating(const MotorbikeRating &rating)
+{
+        motorbikeRatings.push_back(rating);
 }
 
 void Motorbike::reserveTimeSlot(const TimeSlot &timeSlot)
@@ -95,3 +102,4 @@ void Motorbike::reserveTimeSlot(const TimeSlot &timeSlot)
 }
 
 friend class Admin;
+

@@ -1,5 +1,6 @@
 #include "TimeSlot.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -24,3 +25,8 @@ string TimeSlot::getEndTime() const
 {
     return endTime;
 }
+
+void TimeSlot::showInfo()
+{
+    cout << "Start time: " << startTime << "\nEnd time: " << endTime << "\n";
+};

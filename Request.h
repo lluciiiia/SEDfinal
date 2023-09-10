@@ -21,7 +21,7 @@ private:
     
 public:
 
-    Request(User* requester, Motorbike* motorbike, TimeSlot timeSlot)
+    Request(User* requester, Motorbike* motorbike, TimeSlot timeSlot, RequestStatus status)
         : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot) {
     }
 
@@ -34,6 +34,8 @@ public:
     void setMotorbike(Motorbike* motorbike);
     void setStatus(RequestStatus status);
     void setTimeSlot(TimeSlot timeSlot);
+
+    void showInfo();
 };
 
 
