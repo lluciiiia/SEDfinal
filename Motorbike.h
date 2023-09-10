@@ -53,7 +53,9 @@ public:
     void viewRequests();
     bool checkAvailability(bool availability);
     void reserveTimeSlot(const TimeSlot &timeSlot);
-    void addCreditPoints(double &points);   
+    void addCreditPoints(double &points);  
+
+    friend class Admin; 
 
 };
 

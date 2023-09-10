@@ -62,6 +62,7 @@ public:
     // vector <Motorbike> rentBikes();
     // vector <Request> receiveRequest();
 
+    friend class Admin;
 };
 
 #endif

@@ -44,7 +44,7 @@ void Admin::viewMotorbikeInfo(Motorbike motorbike)
     cout << "Color: " << motorbike.color << endl;
     cout << "Engine size: " << motorbike.engineSize << endl;
     cout << "City: " << __STRINGIFY(motorbike.city) << endl;
-    cout << "Owner name: " << motorbike.owner.getUserName() << endl;
+    cout << "Owner name: " << motorbike.owner << endl;
     cout << "Transmission mode: " << motorbike.transmissionMode << endl;
     cout << "Year made: " << motorbike.yearMade << endl;
     cout << "Description: " << motorbike.description << endl;
