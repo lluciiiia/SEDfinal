@@ -1,18 +1,23 @@
 #include "Request.h"
 
-Request::Request(User *requester, Motorbike *motorbike, TimeSlot timeSlot)
-    : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot)
+
+
+Request::Request(string requester, string motorbike, TimeSlot timeSlot, RequestStatus status)
 {
+    this->requester= requester;
+    this->motobikeID= motorbike;
+    this->timeSlot= timeSlot;
+    this->status= status;
 }
 
-User *Request::getRequester() const
+string Request::getRequester() const
 {
     return requester;
 }
 
-Motorbike *Request::getMotorbike() const
+string Request::getMotorbike() const
 {
-    return motorbike;
+    return motobikeID;
 }
 
 RequestStatus Request::getStatus() const
@@ -25,15 +30,18 @@ TimeSlot Request::getTimeSlot() const
     return timeSlot;
 }
 
-void Request::setRequester(User *requester)
+void Request::setRequester(string requester)
 {
-    this->requester = requester;
+    this->requester= requester;
 }
 
-void Request::setMotorbike(Motorbike *motorbike)
+void Request::setMotorbike(string motorbike)
 {
-    this->motorbike = motorbike;
+    this->motobikeID= motorbike;
 }
+
+
+
 
 void Request::setStatus(RequestStatus status)
 {
@@ -44,3 +52,11 @@ void Request::setTimeSlot(TimeSlot timeslot)
 {
     this->timeSlot = timeSlot;
 }
+
+void Request::showInfo()
+{
+    cout << "Requester: " << requester<< "\n";
+    cout << "Motorbike: " << motobikeID << "\n";
+    cout << "Request Status: " << __STRINGIFY(status) << "\n";
+    //timeSlot.showInfo();
+};

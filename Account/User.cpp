@@ -8,7 +8,7 @@
 #include "../Motorbike.h"
 #include "../Request.h"
 #include "../RequestStatus.h"
-
+#include <cstdlib>
 class UserRating;
 class MotorbikeRating;
 
@@ -118,24 +118,90 @@ string User::getUserName()
 {
     return Account:: getUsername();
 }
-
-bool User::login(const string &username,
-                 const string &pass,
-                 vector<User> &userList)
+string User::getIdType()
 {
-
-    for (auto &user : userList)
-    {
-        if (user.getUserName() == username && user.getPassword() == pass)
-        {
-            return true;
-        }
-    }
-    return false;
+    return this->IDtype;
 }
 
-bool User::registerAccount(vector <User>& userList)
+string User::getIdNum()
 {
+    return this->idNum;
+}
+
+string User::getLicenseNum()
+{
+    return this->licenseNumber;
+}
+
+string User::getExDate()
+{
+    return this->licenseExpiryDate;
+}
+
+double User::getCreditPoint()
+{
+    return this->creditPoint;
+}
+
+City User::getCity()
+{
+    return this->city;
+}
+
+bool login(User &cus, vector<User> &userList)
+{
+    string username;
+    string pass;
+    bool usernameFlag= false;
+    bool passFlag= false;
+    while (!usernameFlag) {
+        cout << "Enter your username: ";
+        getline(cin, username);
+
+        if (username.empty()) {
+            cout << "Username cannot be empty! \n";
+        } else {
+            for (auto &user : userList)
+            {
+                if (user.getUserName() == username )
+                {
+                    usernameFlag= true;
+                    break;
+                }
+            }
+        }
+    }
+    cout<< "Enter your password: ";
+    getline(cin,pass);
+        for (auto &user : userList)
+            {
+                if ( user.getPassword() == pass)
+                    {
+                        cus= User(username,pass,user.getFullName(),
+                        user.getPhoneNumber(),
+                        user.getIdType(),
+                        user.getIdNum(),
+                        user.getLicenseNum(),
+                        user.getExDate(),
+                        user.getCreditPoint(),
+                        user.getCity());
+                        passFlag= true;
+                        break;
+                    }
+            }
+    system("cls");
+    if(usernameFlag== true && passFlag== true){
+        return true;
+    } 
+    
+    return false;
+   
+}
+
+
+ bool User::registerAccount(vector <User>& userList)
+{
+    system("cls");
     string username, password, fullname, phoneNumber, idtype, idnum, licenseNum, licenseExdate;
     double creditpoint;
     bool flag=true;
@@ -307,58 +373,57 @@ bool User::registerAccount(vector <User>& userList)
 // unlistMotorbike()
 void User::searchAvailableMotorbikes(){};
 
-void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
-{
-    Request request(this, &motorbike, timeSlot);
-    motorbike.addRequest(request);
-}
+// void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+// {
+//     Request request(this, &motorbike, timeSlot);
+//     motorbike.addRequest(request);
+// }
 
 void User::viewRequests(){};
 
-void User::acceptRequest(vector<Request> &requests, Request request){
-    // 1. change the request status to Accepted
-    request.setStatus(RequestStatus::ACCEPTED);
+// void User::acceptRequest(vector<Request> &requests, Request request){
+//     // 1. change the request status to Accepted
+//     request.setStatus(RequestStatus::ACCEPTED);
 
-    // 2. change the availability of the motorbike
-    Motorbike* motorbikeToRequest = request.getMotorbike();
-    motorbikeToRequest->setAvailability(false);
+//     // 2. change the availability of the motorbike
+//     // Motorbike* motorbikeToRequest = request.getMotorbike();
+//     // motorbikeToRequest->setAvailability(false);
 
-    // 3. payment from the requester
+//     // 3. payment from the requester
     
-    // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+//     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
-};
+// };
 void User::rateUser(){};
-void User::rateMotorbike(){};
+void User::rateMotorbike(){}
 
 
 // listMotorbike()
 // unlistMotorbike()
-void User::searchAvailableMotorbikes(){};
 
-void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
-{
-    Request request(this, &motorbike, timeSlot);
-    //motorbike.addRequest(request);
-}
 
-void User::viewRequests(){};
+// void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+// {
+//     // Request request(this, &motorbike, timeSlot);
+//     //motorbike.addRequest(request);
+// }
 
-void User::acceptRequest(vector<Request> &requests, Request request){
-    // 1. change the request status to Accepted
-   request.setStatus(RequestStatus::ACCEPTED);
+// void User::viewRequests(){};
 
-  // 2. change the availability of the motorbike
-  Motorbike* motorbikeToRequest = request.getMotorbike();
-motorbikeToRequest->setAvailability(false);
+// void User::acceptRequest(vector<Request> &requests, Request request){
+//     // 1. change the request status to Accepted
+//    request.setStatus(RequestStatus::ACCEPTED);
 
-// 3. payment from the requester
+//   // 2. change the availability of the motorbike
+// //   Motorbike* motorbikeToRequest = request.getMotorbike();
+// // motorbikeToRequest->setAvailability(false);
+
+// // 3. payment from the requester
     
-// 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+// // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
-};
-void User::rateUser(){};
-void User::rateMotorbike(){};
+// };
+
 
 // vector<Motorbike> User::addOwnedMotorbike(Motorbike bike)
 // {
@@ -374,3 +439,5 @@ void User::rateMotorbike(){};
 // {
 //     return vector<Request>();
 // }
+
+

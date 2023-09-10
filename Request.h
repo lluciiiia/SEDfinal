@@ -8,32 +8,29 @@
 using namespace std;
 
 class Motorbike;
-class User;
-
 class Request
 {
 private:
-    User* requester;  
-    Motorbike* motorbike;  
+    string requester;  
+    string motorbike;  
     RequestStatus status;
     TimeSlot timeSlot;
     string motobikeID;
     
 public:
 
-    Request(User* requester, Motorbike* motorbike, TimeSlot timeSlot)
-        : requester(requester), motorbike(motorbike), status(RequestStatus::PENDING), timeSlot(timeSlot) {
-    }
+    Request(string requester, string motorbike, TimeSlot timeSlot, RequestStatus status);
 
-    User* getRequester() const;
-    Motorbike* getMotorbike() const;
+    string getRequester() const;
+    string getMotorbike() const;
     RequestStatus getStatus() const;
     TimeSlot getTimeSlot() const;
 
-    void setRequester(User* requester);
-    void setMotorbike(Motorbike* motorbike);
+    void setRequester(string requester);
+    void setMotorbike(string motorbike);
     void setStatus(RequestStatus status);
     void setTimeSlot(TimeSlot timeSlot);
+    void showInfo();
 };
 
 

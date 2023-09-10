@@ -17,6 +17,7 @@ public:
 
     string getStartTime() const;
     string getEndTime() const;
+    
 };
 
 #endif

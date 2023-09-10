@@ -9,44 +9,44 @@
 #include "City.h"
 #include "Account/User.h"
 #include "Request.h"
-
 class User;
 class Motorbike
 {
 private:
-    Motorbike(
-        std::string model,
-        std::string motorbikeID,
-        std::string color,
-        std::string engineSize,
-        City city,
-        User owner,
-        std::string transmissionMode,
-        int yearMade,
-        std::string description,
-        double consumingPoints,
-        double rentalAmount,
-        double minRenterRating,
-        double motorbikeRating, 
-        bool availability,
-        std::vector<Request> requests);
+    
+        std::string model;
+        std::string motorbikeID;
+        std::string color;
+        std::string engineSize;
+        City city;
+        string owner;
+        std::string transmissionMode;
+        int yearMade;
+        std::string description;
+        double consumingPoints;
+        double rentalAmount;
+        double minRenterRating;
+        double motorbikeRating;
+        bool availability;
+        std::vector<Request> requests;
 
 public:
-    Motorbike(string model, string motorbikeID, string color, string engineSize, City city, User owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
+    Motorbike(string model, string motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
     // Getters
-    User getOwner();
+    string getOwner();
     string getMotorbikeId();
     double getConsumingPoints();
     bool getAvailability();
     // Setters
-    void setOwner(User Owner);
+    void setOwner(string Owner);
     void setMotorbikeID(string motorbikeID);
     void setConsumingPoints(double consumingPoints);
     void setAvailability(bool availability);
   // Methods to manage requests and availability / Credit points
     void addRequest(const Request &request);
     void viewRequest(const Request &request);
-    
+    void viewRequests();
+    bool checkAvailability(bool availability);
     void reserveTimeSlot(const TimeSlot &timeSlot);
     void addCreditPoints(double &points);   
 };

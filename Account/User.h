@@ -34,9 +34,15 @@ public:
     
     string toStringAccount();
     string getUserName();
-    bool login(const string &username, const string &pass, vector<User> &userList);
-    bool registerAccount(const string &username, const string &password, const double &credit, vector<User> &userList, string fullName, string phoneNumber, string Type, string idNum, string licenseNum, string licenseExdate);
+    string getIdType();
+    string getIdNum();
+    string getLicenseNum();
+    string getExDate();
+    double getCreditPoint();
+    City getCity();
+    friend bool login(User &cus, vector<User> &userList);
 
+     bool registerAccount(vector <User>& userList);
     // listMotorbike()
     // unlistMotorbike()
     void searchAvailableMotorbikes();
@@ -45,7 +51,7 @@ public:
     void acceptRequest(vector<Request> &requests, Request request);
     void rateUser();
     void rateMotorbike();
-
+    bool login(User &cus);
     // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
     // vector <Motorbike> rentBikes();
     // vector <Request> receiveRequest();
