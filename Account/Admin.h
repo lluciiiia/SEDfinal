@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include "Account.h"
+#include "../Motorbike.h"
+#include "./User.h"
 
 class Admin : public Account
 {
@@ -24,6 +26,9 @@ public:
 
     string getAdminID() const;
     void setAdminID(string adminID);
+
+    friend class User;
+    friend class Motorbike;
 };
 
 #endif
