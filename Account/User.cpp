@@ -199,6 +199,130 @@ bool login(User &cus, vector<User> &userList)
 }
 
 
+
+void User::addBike(vector<Motorbike> &bikes)
+{
+    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+    string model, color, enginSize, transmissionmode;
+    string description="";
+    int yearMade;
+    cout<< "Please enter all of needed informations: \n";
+    while(true){
+        cout<< "Enter your model: ";
+        getline(cin, model);
+        if(model.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
+            break;
+        }
+    }
+    //color
+    while(true){
+        cout<< "Enter your color: ";
+        getline(cin, color);
+        if(color.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
+            break;
+        }
+    }
+
+    while(true){
+        cout<< "Enter your engine size: ";
+        getline(cin, enginSize);
+        if(enginSize.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
+            break;
+        }
+    }
+
+    while (true){
+        cout<< "Enter year made: ";
+        cin>>yearMade;
+        cin.ignore();
+        string num= to_string(yearMade);
+        if(!regex_match(num,regexp)){
+            cout<< "Invalid input for year made! Please enter agian. ";
+        }else{
+            break;
+        }
+    }
+    while(true){
+        cout<< "Enter your transmission mode: ";
+        getline(cin, transmissionmode);
+        if(transmissionmode.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
+            break;
+        }
+    }
+
+    cout<< "Add some description for the bike: ";
+    getline(cin,description);
+    std::string cityStr;
+    City selectedCity;
+
+    while (true) {
+        std::cout << "Enter your city (Saigon or Hanoi): ";
+        std::cin >> cityStr;
+
+        selectedCity = stringToCity(cityStr);
+
+        if (selectedCity != static_cast<City>(-1)) {
+            break; 
+        }
+
+        std::cout << "Invalid city. Please enter Saigon or Hanoi.\n";
+    }
+
+
+    int motorbikeID= bikes.size()+1;
+    int consumingPoints;
+    while (true){
+        cout<< "Enter the price for the bike: ";
+        cin>>consumingPoints;
+        cin.ignore();
+        string num= to_string(consumingPoints);
+        if(!regex_match(num,regexp)){
+            cout<< "Invalid input for year made! Please enter agian. ";
+        }else{
+            break;
+        }
+    }
+    Motorbike motor(model,motorbikeID,
+                    color,enginSize,
+                    selectedCity,
+                    Account::getUsername(),
+                    transmissionmode,
+                    yearMade,
+                    description,consumingPoints,0);
+    bikes.push_back(motor);
+    OwnedMotorbikes.push_back(motor);
+}
+
+
+void User::addMotorInnitial(Motorbike motor)
+{
+    OwnedMotorbikes.push_back(motor);
+}
+// string to city
+
+City User::stringToCity(const std::string &cityStr)
+{
+    if (cityStr == "Saigon") {
+        return City::Saigon;
+    } else if (cityStr == "Hanoi") {
+        return City::Hanoi;
+    }
+    return static_cast<City>(-1); // Invalid city, return -1
+}
+
+
+
+
+
+// register 
  bool User::registerAccount(vector <User>& userList)
 {
     system("cls");
@@ -326,6 +450,21 @@ bool login(User &cus, vector<User> &userList)
             break;
         }
     }
+    std::string cityStr;
+    City selectedCity;
+
+    while (true) {
+        std::cout << "Enter your city (Saigon or Hanoi): ";
+        std::cin >> cityStr;
+
+        selectedCity = stringToCity(cityStr);
+
+        if (selectedCity != static_cast<City>(-1)) {
+            break; 
+        }
+
+        std::cout << "Invalid city. Please enter Saigon or Hanoi.\n";
+    }
 
     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     bool addSuccess=false;
@@ -358,10 +497,10 @@ bool login(User &cus, vector<User> &userList)
         }
     }
 
-    City city = City::Hanoi;
+    
 
     if(addSuccess){
-        User user23(username, password, fullname, phoneNumber, idtype, idnum, licenseNum, licenseExdate, creditpoint, city);
+        User user23(username, password, fullname, phoneNumber, idtype, idnum, licenseNum, licenseExdate, creditpoint, selectedCity);
         userList.push_back(user23);
         return true;
     }
@@ -369,6 +508,12 @@ bool login(User &cus, vector<User> &userList)
     return false;
 }
 
+// end register 
+
+
+
+void User::rateUser(){};
+void User::rateMotorbike(){}
 // listMotorbike()
 // unlistMotorbike()
 void User::searchAvailableMotorbikes(){};
@@ -394,8 +539,6 @@ void User::viewRequests(){};
 //     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
 // };
-void User::rateUser(){};
-void User::rateMotorbike(){}
 
 
 // listMotorbike()

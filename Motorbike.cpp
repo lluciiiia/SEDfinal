@@ -10,7 +10,7 @@ using namespace std;
 //         return
 // }
 
-Motorbike::Motorbike(string model, string motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating)
+Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating)
 {
         this->model= model;
         this->motorbikeID= motorbikeID;
@@ -27,12 +27,27 @@ Motorbike::Motorbike(string model, string motorbikeID, string color, string engi
         this->motorbikeRating=motorbikeRating;
 }
 
+Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount)
+{
+        this->model = model;
+        this->motorbikeID=motorbikeID;
+        this->color=color;
+        this->engineSize= engineSize;
+        this->city= city;
+        this->owner= owner;
+        this-> transmissionMode = transmissionMode;
+        this->yearMade = yearMade;
+        this->description=description;
+        this->consumingPoints= consumingPoints;
+        this->rentalAmount;
+}
+
 string Motorbike::getOwner()
 {
         return owner;
 }
 
-string Motorbike::getMotorbikeId()
+int Motorbike::getMotorbikeId()
 {
         return motorbikeID;
 }
@@ -52,7 +67,7 @@ void Motorbike::setOwner(string owner)
         this->owner = owner;
 }
 
-void Motorbike::setMotorbikeID(string motorbikeID)
+void Motorbike::setMotorbikeID(int motorbikeID)
 {
         this->motorbikeID = motorbikeID;
 }

@@ -51,6 +51,9 @@ public:
     void acceptRequest(vector<Request> &requests, Request request);
     void rateUser();
     void rateMotorbike();
+    void addBike(vector<Motorbike> &bikes);
+    void addMotorInnitial(Motorbike motor);
+    City stringToCity(const std::string& cityStr);
     bool login(User &cus);
     // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
     // vector <Motorbike> rentBikes();

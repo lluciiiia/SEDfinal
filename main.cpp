@@ -119,8 +119,8 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
 
         // Display the user dashboard menu
         cout << "|==========================|\n";
-        cout << "|      User Dashboard      |\n";
-        cout << "|==========================|\n";
+        cout << "|      User Dashboard      |  Hello, "<< user.getUsername()<< "\n";
+        cout << "|==========================|  Credit point: " << user.getCreditPoint()<< "\n";
         cout << "| 1. Add your motorbike    |\n";
         cout << "| 2. View Orders           |\n";
         cout << "| 3. Make a Reservation    |\n";
@@ -134,7 +134,10 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
         switch (choice) {
             case 1:
                 // Implement code to view user profile here
-                cout<< user.getFullName();
+                user.addBike(bikes);
+                for(auto bik: bikes){
+                    cout<< bik.getConsumingPoints()<< " consumung ples";
+                }
                 break;
             case 2:
                 // Implement code to view user orders here
