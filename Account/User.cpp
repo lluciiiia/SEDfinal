@@ -334,30 +334,18 @@ void User::acceptRequest(vector<Request> &requests, Request request){
     // 5. create a borrow object w the info
 };
 
-// TODO: make the algorithm between rateUser and rateMotorbike the same
+//Rate a user
 void User::rateUser(User &ratedUser, float score, const std::string comment)
 {
-
     UserRating rating(ratedUser.getUserName(), score, comment);
-
     ratedUser.userRatings.push_back(rating);
-
-    float totalRating = 0;
-    for (const UserRating &rating : ratedUser.userRatings)
-    {
-        totalRating += rating.getScore();
-    }
-
-    float averageRating = totalRating / ratedUser.userRatings.size();
-
-    // TODO: Add a function to get average rating in rating class
 };
 
+//Rate a motorbike
 void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment)
 {
     MotorbikeRating rating(ratedMotorbike.getMotorbikeId(), score, comment);
-
-    //ratedMotorbike.addRating(rating);
+    ratedMotorbike.motorbikeRatings.push_back(rating);
 };
 
 // vector<Motorbike> User::addOwnedMotorbike(Motorbike bike)
