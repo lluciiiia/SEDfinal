@@ -14,28 +14,21 @@ Motorbike::Motorbike(string model,
                      string description,
                      double consumingPoints,
                      double rentalAmount,
-                     // double minRenterRating,
-                     vector<MotorbikeRating> motorbikeRatings,
-                     vector<Request> motorbikeRequests,
-                     bool availability)
-
+                     double minRenterRating,
+                     double motorbikeRating)
+    : model(model),
+      motorbikeID(motorbikeID),
+      color(color),
+      engineSize(engineSize),
+      city(city),
+      owner(owner),
+      transmissionMode(transmissionMode),
+      yearMade(yearMade),
+      description(description),
+      consumingPoints(consumingPoints),
+      rentalAmount(rentalAmount),
+      minRenterRating(minRenterRating), motorbikeRating(motorbikeRating), ownerUsername(""), renterUsername(""), availability(true)
 {
-        this->model = model;
-        this->motorbikeID = motorbikeID;
-        this->color = color;
-        this->engineSize = engineSize;
-        this->city = city;
-        this->transmissionMode = transmissionMode;
-        this->yearMade = yearMade;
-        this->description = description;
-        this->consumingPoints = consumingPoints;
-        this->rentalAmount = rentalAmount;
-        // this->minRenterRating = minRenterRating;
-        this->motorbikeRatings = motorbikeRatings;
-        this->motorbikeRequests = motorbikeRequests;
-        this->availability = availability;
-        // this-> ownerUsername= owner;
-        // this-> renterUsername= renter;
 }
 
 // TimeSlot Motorbike::getTimeSlot()
@@ -56,11 +49,6 @@ string Motorbike::getMotorbikeId()
 double Motorbike::getConsumingPoints()
 {
         return consumingPoints;
-}
-
-bool Motorbike::getAvailability()
-{
-        return availability;
 }
 
 void Motorbike::setAvailability(bool availability)
@@ -85,20 +73,39 @@ void Motorbike::setConsumingPoints(double consumingPoints)
 
 void Motorbike::addRequest(const Request &request)
 {
-        motorbikeRequests.push_back(request);
+        requests.push_back(request);
 }
 
-void Motorbike::viewRequest(const Request &request)
+void Motorbike::viewRequests()
+{       int i = 1;
+        cout << "View requests of the motorbike " << motorbikeID << "\n";
+        for (Request request : requests) {
+                cout << "Request " << i << ":\n";
+                request.showInfo();
+        }
+}       
+
+bool Motorbike::checkAvailability(bool availability)
 {
+        return availability;
 }
 
-void Motorbike::addRating(const MotorbikeRating &rating)
+// void Motorbike::addCreditPoints(double points)
+// {
+
+// }
+
+string Motorbike::toStringMotorBike()
 {
-        motorbikeRatings.push_back(rating);
+        return model + "," +
+               motorbikeID + "," +
+               color + "," +
+               engineSize + "," +
+               transmissionMode + "," +
+               to_string(yearMade) + "," +
+               description + "," +
+               to_string(consumingPoints) + "," +
+               to_string(rentalAmount) + "," +
+               to_string(minRenterRating) + "," +
+               to_string(motorbikeRating) + ",";
 }
-
-void Motorbike::reserveTimeSlot(const TimeSlot &timeSlot)
-{
-}
-
-void Motorbike::addCreditPoints(double &points){};

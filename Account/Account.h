@@ -25,8 +25,8 @@ class Account{
     void setFullName(string fullName);
     void setPhoneNumber(string phoneNumber);
 
-};
 
+};
 
 #endif
 

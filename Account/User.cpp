@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 #include <regex>
@@ -337,6 +338,7 @@ void User::acceptRequest(vector<Request> &requests, Request request){
 
     // 4. create a borrow object
 
+    // 5. create a borrow object w the info
 };
 
 // TODO: make the algorithm between rateUser and rateMotorbike the same
@@ -378,4 +380,5 @@ void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string com
 // {
 //     return vector<Request>();
 // }
+
 
