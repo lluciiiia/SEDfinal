@@ -40,6 +40,7 @@ public:
     string getExDate();
     double getCreditPoint();
     City getCity();
+    vector<Motorbike> getOwneMotorbike();
     friend bool login(User &cus, vector<User> &userList);
 
 
@@ -53,7 +54,7 @@ public:
 
     void rateUser(User &ratedUser, float score, const std::string comment);
     void rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment);
-    void addBike(vector<Motorbike> &bikes);
+    bool addBike(vector<Motorbike> &bikes);
     void addMotorInnitial(Motorbike motor);
     City stringToCity(const std::string& cityStr);
     bool login(User &cus);

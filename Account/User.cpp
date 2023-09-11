@@ -148,6 +148,11 @@ City User::getCity()
     return this->city;
 }
 
+vector<Motorbike> User::getOwneMotorbike()
+{
+    return this->OwnedMotorbikes;
+}
+
 bool login(User &cus, vector<User> &userList)
 {
     string username;
@@ -202,8 +207,12 @@ bool login(User &cus, vector<User> &userList)
     return false;
 }
 
-void User::addBike(vector<Motorbike> &bikes)
+bool User::addBike(vector<Motorbike> &bikes)
 {
+    if(this->OwnedMotorbikes.size() == 0){
+        cout << "You can only own one bike at a time." << endl;
+        return false;
+    }
     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     string model, color, enginSize, transmissionmode;
     string description = "";
@@ -326,6 +335,7 @@ void User::addBike(vector<Motorbike> &bikes)
                     description, consumingPoints, 0);
     bikes.push_back(motor);
     OwnedMotorbikes.push_back(motor);
+    return true;
 }
 
 void User::addMotorInnitial(Motorbike motor)
