@@ -21,8 +21,9 @@ int main()
     
     User user;
     saveToFile fileSave;
-    vector<User> userList = fileSave.loadAccount();
-    vector <Motorbike> motorbikeList;
+    vector <Motorbike> motorbikeList=fileSave.loadMotor();
+    vector<User> userList = fileSave.loadAccount(motorbikeList);
+    
      City city= City:: Saigon;
 
     // User user1("john_doe", "password123", "John Doe", "1234567890", "Passport", "ID12345", "License67890", "2023-12-31", 100.0, city);
@@ -101,6 +102,7 @@ int main()
 
 
     fileSave.SaveAccountToFile(userList);
+    fileSave.SaveMotobikeToFile(motorbikeList);
     return 0;
 }
 
@@ -113,6 +115,12 @@ int main()
 void user_dashboard(User &user, vector<Motorbike> &bikes){
     int choice;
     bool dashboardRun= false;
+    string model;
+    for(auto &bike : bikes){
+        if(bike.getOwner() == user.getUsername()){
+            model=bike.getModel(); 
+        }
+    }
     while (!dashboardRun) {
     
         system("cls");
@@ -121,7 +129,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
         cout << "|==========================|\n";
         cout << "|      User Dashboard      |  Hello, "<< user.getUsername()<< "\n";
         cout << "|==========================|  Credit point: " << user.getCreditPoint()<< "\n";
-        cout << "| 1. Add your motorbike    |\n";
+        cout << "| 1. Add your motorbike    |  Your owned bike: " << model <<"\n";
         cout << "| 2. View Orders           |\n";
         cout << "| 3. Make a Reservation    |\n";
         cout << "| 4. Logout                |\n";

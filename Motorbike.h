@@ -41,6 +41,7 @@ public:
     int getMotorbikeId();
     double getConsumingPoints();
     bool getAvailability();
+    string getModel();
     // Setters
     void setOwner(string Owner);
     void setMotorbikeID(int motorbikeID);
@@ -53,6 +54,9 @@ public:
     bool checkAvailability(bool availability);
     void reserveTimeSlot(const TimeSlot &timeSlot);
     void addCreditPoints(double &points);   
+
+    //to string
+    string toStringMotorBike();
 };
 
 #endif

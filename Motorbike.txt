@@ -1,0 +1,1 @@
+Bike1,1,blue,12,Saigon,phat1,Electric,2012,its good,12.000000,0.000000
