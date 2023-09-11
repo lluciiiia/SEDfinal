@@ -18,13 +18,13 @@ void user_dashboard(User &user, vector<Motorbike> &bikes);
 
 int main()
 {   
-    
     User user;
     saveToFile fileSave;
     vector <Motorbike> motorbikeList=fileSave.loadMotor();
     vector<User> userList = fileSave.loadAccount(motorbikeList);
     
      City city= City:: Saigon;
+
 
     // User user1("john_doe", "password123", "John Doe", "1234567890", "Passport", "ID12345", "License67890", "2023-12-31", 100.0, city);
 
@@ -70,12 +70,12 @@ int main()
                 break;
             }
             case 4:{
-                if(user.registerAccount(userList)){
-                    cout<< "Register successfully\n";
-                }else{
-                    cout<< "Fail\n";
-                }
-                break;
+                // if(user.registerAccount(userList)){
+                //     cout<< "Register successfully\n";
+                // }else{
+                //     cout<< "Fail\n";
+                // }
+                // break;
             }
             case 5:{
                 exitProgram= true;
@@ -84,19 +84,6 @@ int main()
             }
         }
     }
-
-
-
-
-
-
-
-
-   
-
-
-
-
 
 
 
@@ -141,18 +128,18 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
 
         switch (choice) {
             case 1:
-                // Implement code to view user profile here
+                
                 user.addBike(bikes);
                 for(auto bik: bikes){
                     cout<< bik.getConsumingPoints()<< " consumung ples";
                 }
                 break;
             case 2:
-                // Implement code to view user orders here
+                
                
                 break;
             case 3:
-                // Implement code to make a reservation here
+                
             
                 break;
             case 4:

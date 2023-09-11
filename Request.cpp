@@ -1,11 +1,10 @@
 #include "Request.h"
 
 
-
-Request::Request(string requester, string motorbike, TimeSlot timeSlot, RequestStatus status)
+Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status)
 {
     this->requester= requester;
-    this->motobikeID= motorbike;
+    this->motobikeID= motorbikeID;
     this->timeSlot= timeSlot;
     this->status= status;
 }
@@ -15,7 +14,7 @@ string Request::getRequester() const
     return requester;
 }
 
-string Request::getMotorbike() const
+int Request::getMotorbikeID() const
 {
     return motobikeID;
 }
@@ -35,9 +34,9 @@ void Request::setRequester(string requester)
     this->requester= requester;
 }
 
-void Request::setMotorbike(string motorbike)
+void Request::setMotorbikeID(int motorbikeID)
 {
-    this->motobikeID= motorbike;
+    this->motobikeID= motorbikeID;
 }
 
 

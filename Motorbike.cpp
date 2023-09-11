@@ -4,7 +4,6 @@
 using namespace std;
 
 
-
 // TimeSlot Motorbike::getTimeSlot()
 // {
 //         return
@@ -43,6 +42,7 @@ Motorbike::Motorbike(string model, int motorbikeID, string color, string engineS
 }
 
 string Motorbike::getOwner()
+
 {
         return owner;
 }
@@ -72,7 +72,9 @@ void Motorbike::setOwner(string owner)
         this->owner = owner;
 }
 
+
 void Motorbike::setMotorbikeID(int motorbikeID)
+
 {
         this->motorbikeID = motorbikeID;
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Request.h"
 #include "TimeSlot.h"
 #include "Motorbike.h"
 #include "City.h"
@@ -33,6 +34,7 @@ private:
         bool availability;
         std::vector<Request> requests;
         std:: vector<Rating> ratings;
+
 public:
     Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
     Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount);
@@ -47,7 +49,7 @@ public:
     void setMotorbikeID(int motorbikeID);
     void setConsumingPoints(double consumingPoints);
     void setAvailability(bool availability);
-  // Methods to manage requests and availability / Credit points
+    // Request / Availability / Credit Points
     void addRequest(const Request &request);
     void viewRequest(const Request &request);
     void viewRequests();
