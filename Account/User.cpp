@@ -209,7 +209,7 @@ bool login(User &cus, vector<User> &userList)
 
 bool User::addBike(vector<Motorbike> &bikes)
 {
-    if(this->OwnedMotorbikes.size() == 0){
+    if(this->OwnedMotorbikes.size() == 1){
         cout << "You can only own one bike at a time." << endl;
         return false;
     }
