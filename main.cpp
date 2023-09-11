@@ -8,6 +8,7 @@
 // #include "TimeSlot.h"
 #include <iostream>
 #include<cstdlib>
+#include <iomanip>
 // #include "Borrow.h"
 
 using namespace std;
@@ -15,7 +16,7 @@ using namespace std;
 
 
 void user_dashboard(User &user, vector<Motorbike> &bikes);
-
+void viewBikeDash(User &user,vector<Motorbike> &bikes);
 int main()
 {   
     User user;
@@ -117,8 +118,8 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
         cout << "|      User Dashboard      |  Hello, "<< user.getUsername()<< "\n";
         cout << "|==========================|  Credit point: " << user.getCreditPoint()<< "\n";
         cout << "| 1. Add your motorbike    |  Your owned bike: " << model <<"\n";
-        cout << "| 2. View Orders           |\n";
-        cout << "| 3. Make a Reservation    |\n";
+        cout << "| 2. View Bikes to rent    |\n";
+        cout << "| 3. View request          |\n";
         cout << "| 4. Logout                |\n";
         cout << "|==========================|\n";
         cout << "Enter your choice (1-4): ";
@@ -133,7 +134,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
                 
                 break;
             case 2:
-                
+                viewBikeDash(user,bikes);
                
                 break;
             case 3:
@@ -154,4 +155,37 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
         cin.ignore();
     }
 
+}
+
+
+
+void viewBikeDash(User &user,vector<Motorbike> &bikes){
+    system("cls");
+    int choice;
+    bool dashboardRun= false;
+    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
+    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+    for ( Motorbike& bike : bikes) {
+        cout << left << setw(12) << bike.getMotorbikeId()
+             << setw(20) << bike.getModel()
+             << setw(10) << bike.getColor()
+             << setw(10) << bike.getEngine()
+             << setw(15) << bike.getOwner()
+             << setw(12) << bike.getYear()
+             << setw(20) << bike.getDes()
+             << setw(8) << bike.getRating()
+             << endl;
+    }
+    while (!dashboardRun) {
+        
+        
+
+
+
+
+
+        cout<< "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
+    }
 }

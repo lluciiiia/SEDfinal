@@ -47,6 +47,27 @@ string Motorbike::getOwner()
         return owner;
 }
 
+int Motorbike::getYear()
+{
+        return this->yearMade;
+}
+
+string Motorbike::getDes()
+{
+        return this->description;
+}
+
+double Motorbike::getRating()
+{
+        double average=0;
+        double total=0;
+        for(auto rating: ratings){
+               total+= rating.getScore();
+        }
+        average= total/ratings.size();
+        return average;
+}
+
 int Motorbike::getMotorbikeId()
 {
         return motorbikeID;
@@ -57,9 +78,24 @@ double Motorbike::getConsumingPoints()
         return consumingPoints;
 }
 
+bool Motorbike::getAvailability()
+{
+        return availability;
+}
+
 string Motorbike::getModel()
 {
         return model;
+}
+
+string Motorbike::getColor()
+{
+        return this->color;
+}
+
+string Motorbike::getEngine()
+{
+        return engineSize;
 }
 
 void Motorbike::setAvailability(bool availability)
