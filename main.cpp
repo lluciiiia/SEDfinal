@@ -70,12 +70,12 @@ int main()
                 break;
             }
             case 4:{
-                // if(user.registerAccount(userList)){
-                //     cout<< "Register successfully\n";
-                // }else{
-                //     cout<< "Fail\n";
-                // }
-                // break;
+                if(user.registerAccount(userList)){
+                    cout<< "Register successfully\n";
+                }else{
+                    cout<< "Fail\n";
+                }
+                break;
             }
             case 5:{
                 exitProgram= true;
@@ -102,16 +102,16 @@ int main()
 void user_dashboard(User &user, vector<Motorbike> &bikes){
     int choice;
     bool dashboardRun= false;
-    string model;
-    for(auto &bike : bikes){
+    
+    while (!dashboardRun) {
+    
+        system("cls");
+        string model;
+         for(auto &bike : bikes){
         if(bike.getOwner() == user.getUsername()){
             model=bike.getModel(); 
         }
     }
-    while (!dashboardRun) {
-    
-        system("cls");
-
         // Display the user dashboard menu
         cout << "|==========================|\n";
         cout << "|      User Dashboard      |  Hello, "<< user.getUsername()<< "\n";
@@ -130,9 +130,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
             case 1:
                 
                 user.addBike(bikes);
-                for(auto bik: bikes){
-                    cout<< bik.getConsumingPoints()<< " consumung ples";
-                }
+                
                 break;
             case 2:
                 
