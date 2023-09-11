@@ -12,21 +12,22 @@ class Request
 {
 private:
     string requester;  
-    string motorbike;  
+    int motorbike;  
     RequestStatus status;
     TimeSlot timeSlot;
-    string motobikeID;
+    int motobikeID;
     
 public:
 
-    Request(string requester, string motorbike, TimeSlot timeSlot, RequestStatus status);
+    Request(string requester, int motorbike, TimeSlot timeSlot, RequestStatus status);
 
 
     string getRequester() const;
     string getMotorbike() const;
+    void setMotorbikeID(int motorbikeID);
     RequestStatus getStatus() const;
     TimeSlot getTimeSlot() const;
-
+    int getMotorbikeID() const;
     void setRequester(string requester);
     void setMotorbike(string motorbike);
     void setStatus(RequestStatus status);

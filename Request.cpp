@@ -16,7 +16,7 @@ string Request::getRequester() const
 
 int Request::getMotorbikeID() const
 {
-    return motorbikeID;
+    return motobikeID;
 }
 
 RequestStatus Request::getStatus() const

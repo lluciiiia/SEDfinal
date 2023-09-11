@@ -1,5 +1,4 @@
 #include "Rating.h"
-#include "Motorbike.h"
 
 Rating::Rating() : score(0.0), comment("") {}
 Rating::Rating(float score, std::string comment) : score(score), comment(comment) {}
@@ -27,20 +26,9 @@ void Rating::setScore(float score)
     this->score = score;
 }
 
-void Rating::setComment(string comment)
+void Rating::setComment(std::string comment)
 {
     this->comment = comment;
-}
-
-// user rating
-float UserRating::getScore() const
-{
-    return Rating::getScore();
-}
-
-std::string UserRating::getComment() const
-{
-    return Rating::getComment();
 }
 
 std::string UserRating::getUsername() const
@@ -48,18 +36,12 @@ std::string UserRating::getUsername() const
     return username;
 }
 
-// motobike rating
-float MotorbikeRating::getScore() const
-{
-    return Rating::getScore();
-}
-
-std::string MotorbikeRating::getComment() const
-{
-    return Rating::getComment();
-}
-
 std::string MotorbikeRating::getBikeId() const
 {
     return bikeID;
+}
+
+void MotorbikeRating::setBikeId(std::string bikeID)
+{
+    this->bikeID= bikeID;
 }

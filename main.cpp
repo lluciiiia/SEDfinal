@@ -121,18 +121,18 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
 
         switch (choice) {
             case 1:
-                // Implement code to view user profile here
+                
                 user.addBike(bikes);
                 for(auto bik: bikes){
                     cout<< bik.getConsumingPoints()<< " consumung ples";
                 }
                 break;
             case 2:
-                // Implement code to view user orders here
+                
                
                 break;
             case 3:
-                // Implement code to make a reservation here
+                
             
                 break;
             case 4:
