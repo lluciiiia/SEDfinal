@@ -15,8 +15,9 @@ using namespace std;
 
 
 
-void user_dashboard(User &user, vector<Motorbike> &bikes);
+void user_dashboard(User &user, vector<Motorbike> &bikes,vector<User> &userList);
 void viewBikeDash(User &user,vector<Motorbike> &bikes);
+void displayUserInfo( User &user,vector<User> &userList);
 int main()
 {   
     User user;
@@ -60,7 +61,7 @@ int main()
                 cout<< "Logging in \n";
                 cout<< "Your are logging in.\n";
                 if(login(user,userList)){
-                    user_dashboard(user,motorbikeList );
+                    user_dashboard(user,motorbikeList, userList );
                     system("cls");
                 }else{
                     cout<< "Login fail! Wrong username or password! \n";
@@ -100,7 +101,7 @@ int main()
 
 
 
-void user_dashboard(User &user, vector<Motorbike> &bikes){
+void user_dashboard(User &user, vector<Motorbike> &bikes,vector<User> &userList){
     int choice;
     bool dashboardRun= false;
     
@@ -117,10 +118,11 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
         cout << "|==========================|\n";
         cout << "|      User Dashboard      |  Hello, "<< user.getUsername()<< "\n";
         cout << "|==========================|  Credit point: " << user.getCreditPoint()<< "\n";
-        cout << "| 1. Add your motorbike    |  Your owned bike: " << model <<"\n";
-        cout << "| 2. View Bikes to rent    |\n";
-        cout << "| 3. View request          |\n";
-        cout << "| 4. Logout                |\n";
+        cout << "| 1. View Your Bio         |  Your owned bike: " << model <<"\n";
+        cout << "| 2. Add your motorbike    |\n";
+        cout << "| 3. View Bikes to rent    |\n";
+        cout << "| 4. View request          |\n";
+        cout << "| 5. Logout                |\n";
         cout << "|==========================|\n";
         cout << "Enter your choice (1-4): ";
 
@@ -129,19 +131,22 @@ void user_dashboard(User &user, vector<Motorbike> &bikes){
 
         switch (choice) {
             case 1:
-                
-                user.addBike(bikes);
+                displayUserInfo(user,userList);
+               
                 
                 break;
             case 2:
-                viewBikeDash(user,bikes);
+                 user.addBike(bikes);
                
                 break;
             case 3:
-                
+                viewBikeDash(user,bikes);
             
                 break;
             case 4:
+                
+                break;
+            case 5:
                 dashboardRun= true;
                 cout << "Logging out...\n";
                 break;
@@ -188,4 +193,52 @@ void viewBikeDash(User &user,vector<Motorbike> &bikes){
         cin >> choice;
         cin.ignore();
     }
+}
+
+void displayUserInfo( User &user,vector<User> &userList) {
+    bool flag= false;
+    int choice;
+    while(!flag){
+        cout << "Username: " << user.getUsername() << endl;
+        cout << "Full Name: " << user.getFullName() << endl;
+        cout << "Phone Number: " << user.getPhoneNumber() << endl;
+        cout << "ID Type: " << user.getIdType() << endl;
+        cout << "ID Number: " << user.getIdNum() << endl;
+         cout << "License Number: " << user.getLicenseNum() << endl;
+        cout << "License Expiry Date: " << user.getExDate() << endl;
+        cout << "City: " << (user.getCity() == City::Saigon ? "Saigon" : "Hanoi") << endl;
+        cout << "----------------------------------" << endl;
+        cout<<"1.Change your password. \n";
+        cout<<"2.Return. \n";
+        cin>> choice;
+        cin.ignore();
+
+        switch(choice){
+            case 1:{
+                string pass;
+                cout<< "Enter your old password: ";
+                getline(cin,pass);
+                if(pass== user.getPassword()){
+                    string passw;
+                    cout<< "Enter your new password: ";
+                    getline(cin,passw);
+                    user.setPassword(passw);
+                    cout<< "Change password sucessfully. ";
+                    for(auto &u: userList){
+                        if(user.getUsername() == u.getUsername()){
+                            u.setPassword(passw);
+                        }   
+                    }
+                }else{
+                    cout<< "Wrong password. \n";
+                }
+                break;
+            }
+                
+            case 2: 
+            flag= true;
+            break;
+        }
+    }
+    
 }
