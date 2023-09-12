@@ -16,6 +16,7 @@ using namespace std;
 void guest_dashboard(vector<Motorbike> &bikes);
 void user_dashboard(User &user, vector<Motorbike> &bikes);
 void viewBikeDash(User &user, vector<Motorbike> &bikes);
+void displayUserInfo(User &user, vector<User> &userList);
 int main()
 {
     User user;
@@ -78,7 +79,7 @@ int main()
             cout << "Your are logging in.\n";
             if (login(user, userList))
             {
-                user_dashboard(user, motorbikeList);
+                user_dashboard(user, motorbikeList, userList);
                 system("cls");
             }
             else
@@ -142,11 +143,11 @@ void guest_dashboard(vector<Motorbike> &bikes)
         {
         case 1:
 
-            viewBikeDash(user, bikes);
+            // viewBikeDash(user, bikes);
 
             break;
         case 2:
-            viewBikeDash(user, bikes);
+            // viewBikeDash(user, bikes);
 
             break;
         case 3:
@@ -164,7 +165,7 @@ void guest_dashboard(vector<Motorbike> &bikes)
     }
 }
 
-void user_dashboard(User &user, vector<Motorbike> &bikes)
+void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList)
 {
     int choice;
     bool dashboardRun = false;
@@ -198,18 +199,21 @@ void user_dashboard(User &user, vector<Motorbike> &bikes)
         switch (choice)
         {
         case 1:
-
-            user.addBike(bikes);
+            displayUserInfo(user, userList);
 
             break;
         case 2:
-            viewBikeDash(user, bikes);
+            user.addBike(bikes);
 
             break;
         case 3:
+            viewBikeDash(user, bikes);
 
             break;
         case 4:
+
+            break;
+        case 5:
             dashboardRun = true;
             cout << "Logging out...\n";
             break;
@@ -249,5 +253,61 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes)
         cout << "Enter your choice: ";
         cin >> choice;
         cin.ignore();
+    }
+}
+
+void displayUserInfo(User &user, vector<User> &userList)
+{
+    bool flag = false;
+    int choice;
+    while (!flag)
+    {
+        cout << "Username: " << user.getUsername() << endl;
+        cout << "Full Name: " << user.getFullName() << endl;
+        cout << "Phone Number: " << user.getPhoneNumber() << endl;
+        cout << "ID Type: " << user.getIdType() << endl;
+        cout << "ID Number: " << user.getIdNum() << endl;
+        cout << "License Number: " << user.getLicenseNum() << endl;
+        cout << "License Expiry Date: " << user.getExDate() << endl;
+        cout << "City: " << (user.getCity() == City::Saigon ? "Saigon" : "Hanoi") << endl;
+        cout << "----------------------------------" << endl;
+        cout << "1.Change your password. \n";
+        cout << "2.Return. \n";
+        cin >> choice;
+        cin.ignore();
+
+        switch (choice)
+        {
+        case 1:
+        {
+            string pass;
+            cout << "Enter your old password: ";
+            getline(cin, pass);
+            if (pass == user.getPassword())
+            {
+                string passw;
+                cout << "Enter your new password: ";
+                getline(cin, passw);
+                user.setPassword(passw);
+                cout << "Change password sucessfully. ";
+                for (auto &u : userList)
+                {
+                    if (user.getUsername() == u.getUsername())
+                    {
+                        u.setPassword(passw);
+                    }
+                }
+            }
+            else
+            {
+                cout << "Wrong password. \n";
+            }
+            break;
+        }
+
+        case 2:
+            flag = true;
+            break;
+        }
     }
 }
