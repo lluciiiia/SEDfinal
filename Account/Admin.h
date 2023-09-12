@@ -19,7 +19,6 @@ public:
           string fullName,
           string phoneNumber,
           string adminID);
-
     
     bool adminLogin(); 
     void viewMemberInfo(User user);
