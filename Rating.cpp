@@ -7,8 +7,8 @@ UserRating::UserRating() : Rating(), username("") {}
 UserRating::UserRating(std::string username, float score, std::string comment)
     : Rating(score, comment), username(username) {}
 
-MotorbikeRating::MotorbikeRating() : Rating(), bikeID("") {}
-MotorbikeRating::MotorbikeRating(std::string bikeID, float score, std::string comment)
+MotorbikeRating::MotorbikeRating() : Rating(), bikeID() {}
+MotorbikeRating::MotorbikeRating(int bikeID, float score, std::string comment)
     : Rating(score, comment), bikeID(bikeID) {}
 
 float Rating::getScore() const
@@ -36,12 +36,12 @@ std::string UserRating::getUsername() const
     return username;
 }
 
-std::string MotorbikeRating::getBikeId() const
+int MotorbikeRating::getBikeId() const
 {
     return bikeID;
 }
 
-void MotorbikeRating::setBikeId(std::string bikeID)
+void MotorbikeRating::setBikeId(int bikeID)
 {
     this->bikeID= bikeID;
 }

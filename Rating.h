@@ -39,16 +39,16 @@ public:
 class MotorbikeRating : public Rating
 {
 private:
-    std::string bikeID;
+    int bikeID;
 
 public:
     // Constructors
     MotorbikeRating();
-    MotorbikeRating(std::string bikeID, float score, std::string comment);
+    MotorbikeRating(int bikeID, float score, std::string comment);
     // Getter
-    std::string getBikeId() const;
+    int getBikeId() const;
     // Setter
-    void setBikeId(std::string bikeID);
+    void setBikeId(int bikeID);
 };
 
 #endif

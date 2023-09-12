@@ -78,3 +78,47 @@ void Admin::setAdminID(string adminID)
 {
     this->adminID = adminID;
 }
+
+bool login(Admin &admin, vector<Admin> &adminList) {
+	string username; 
+	string pass;
+	bool usernameFlag = false;
+	bool passFlag = false;
+while (!usernameFlag) {
+	cout << "Enter admin username: ";
+	getline(cin, username);
+
+	if (username.empty()) 
+	{
+		cout << "Username cannot be empty!\n";
+	}
+	else 
+	{
+		for (auto &admin : adminList)
+		{
+			if (admin.getUsername() == username) 
+			{
+			usernameFlag = true;
+			break;
+			}
+		}
+	}
+}
+	cout << "Enter admin password: ";
+	getline(cin, pass);
+	for (auto &admin : adminList) {
+		if (admin.getPassword() == pass)
+		{
+			admin = Admin( username, pass, admin.getFullName(), admin.getPhoneNumber(), admin.getAdminID() );
+		passFlag = true;
+		break;
+		}
+	}
+	system("cls");
+	if (usernameFlag == true && passFlag == true)
+	{
+		return true;
+	}
+
+	return false;
+}

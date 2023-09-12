@@ -148,11 +148,6 @@ City User::getCity()
     return this->city;
 }
 
-vector<Motorbike> User::getOwneMotorbike()
-{
-    return this->OwnedMotorbikes;
-}
-
 bool login(User &cus, vector<User> &userList)
 {
     string username;
@@ -207,12 +202,8 @@ bool login(User &cus, vector<User> &userList)
     return false;
 }
 
-bool User::addBike(vector<Motorbike> &bikes)
+void User::addBike(vector<Motorbike> &bikes)
 {
-    if(this->OwnedMotorbikes.size() == 1){
-        cout << "You can only own one bike at a time." << endl;
-        return false;
-    }
     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     string model, color, enginSize, transmissionmode;
     string description = "";
@@ -335,7 +326,6 @@ bool User::addBike(vector<Motorbike> &bikes)
                     description, consumingPoints, 0);
     bikes.push_back(motor);
     OwnedMotorbikes.push_back(motor);
-    return true;
 }
 
 void User::addMotorInnitial(Motorbike motor)
@@ -604,31 +594,24 @@ bool User::registerAccount(vector<User> &userList)
 
 // end register
 
-// TODO: make the algorithm between rateUser and rateMotorbike the same
+/* Haven't tested
+//Rate a user
 void User::rateUser(User &ratedUser, float score, const std::string comment)
 {
-
-   // UserRating rating(ratedUser.getUserName(), score, comment);
-
-    //ratedUser.userRatings.push_back(rating);
-
-    //float totalRating = 0;
-    //for (const UserRating &rating : ratedUser.userRatings)
-    //{
-        //totalRating += rating.getScore();
-    //}
-
-    //float averageRating = totalRating / ratedUser.userRatings.size();
-
-    // TODO: Add a function to get average rating in rating class
+    UserRating rating(ratedUser.getUserName(), score, comment);
+    ratedUser.userRatings.push_back(rating);
+    cout << "Rate user sucessful?\n";
 };
 
-// void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment)
-// {
-//     MotorbikeRating rating(ratedMotorbike.motorbikeID, score, comment);
 
-//     // ratedMotorbike.addRating(rating);
-// };
+//Rate a motorbike
+void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment)
+{
+    MotorbikeRating rating(ratedMotorbike.getMotorbikeId(), score, comment);
+    ratedMotorbike.ratings.push_back(rating);
+};
+*/
+
 // listMotorbike()
 // unlistMotorbike()
 void User::searchAvailableMotorbikes(){};
