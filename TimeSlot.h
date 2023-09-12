@@ -19,6 +19,7 @@ public:
     string getEndTime() const;
 
     void showInfo();
+
 };
 
 #endif

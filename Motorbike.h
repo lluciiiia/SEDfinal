@@ -39,9 +39,17 @@ public:
     Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
     Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount);
     // Getters
-    string getOwner();
+
     int getMotorbikeId();
     double getConsumingPoints();
+    bool getAvailability();
+    string getModel();
+    string getColor();
+    string getEngine();
+    string getOwner();
+    int getYear();
+    string getDes();
+    double getRating();
     // Setters
     void setOwner(string Owner);
     void setMotorbikeID(int motorbikeID);
@@ -53,11 +61,10 @@ public:
     void viewRequests();
     bool checkAvailability(bool availability);
     void reserveTimeSlot(const TimeSlot &timeSlot);
-    void addCreditPoints(double &points);  
+    void addCreditPoints(double &points);   
 
-    friend class Admin; 
-    friend class User;
-
+    //to string
+    string toStringMotorBike();
 };
 
 #endif

@@ -38,13 +38,34 @@ Motorbike::Motorbike(string model, int motorbikeID, string color, string engineS
         this->yearMade = yearMade;
         this->description=description;
         this->consumingPoints= consumingPoints;
-        this->rentalAmount;
+        this->rentalAmount=rentalAmount;
 }
 
 string Motorbike::getOwner()
 
 {
         return owner;
+}
+
+int Motorbike::getYear()
+{
+        return this->yearMade;
+}
+
+string Motorbike::getDes()
+{
+        return this->description;
+}
+
+double Motorbike::getRating()
+{
+        double average=0;
+        double total=0;
+        for(auto rating: ratings){
+               total+= rating.getScore();
+        }
+        average= total/ratings.size();
+        return average;
 }
 
 int Motorbike::getMotorbikeId()
@@ -55,6 +76,26 @@ int Motorbike::getMotorbikeId()
 double Motorbike::getConsumingPoints()
 {
         return consumingPoints;
+}
+
+bool Motorbike::getAvailability()
+{
+        return availability;
+}
+
+string Motorbike::getModel()
+{
+        return model;
+}
+
+string Motorbike::getColor()
+{
+        return this->color;
+}
+
+string Motorbike::getEngine()
+{
+        return engineSize;
 }
 
 void Motorbike::setAvailability(bool availability)
@@ -103,18 +144,30 @@ bool Motorbike::checkAvailability(bool availability)
 
 // }
 
-// string Motorbike::toStringMotorBike()
-// {
-//         return model + "," +
-//                motorbikeID + "," +
-//                color + "," +
-//                engineSize + "," +
-//                transmissionMode + "," +
-//                to_string(yearMade) + "," +
-//                description + "," +
-//                to_string(consumingPoints) + "," +
-//                to_string(rentalAmount) + "," +
-//                to_string(minRenterRating) + "," +
-//                to_string(motorbikeRating) + ",";
-// }
-
+string Motorbike::toStringMotorBike()
+{
+string cityStr;
+        switch (city)
+        {
+        case City::Saigon:
+                cityStr = "Saigon";
+                break;
+        case City::Hanoi:
+                cityStr = "Hanoi";
+                break;
+    // Handle other cases if needed
+        default:
+                cityStr = "Unknown";
+    }
+        return this->model+","+
+                to_string(motorbikeID)+","+
+                this->color+","+
+                this->engineSize+","+
+                cityStr+","+
+                this->owner+","+
+                this->transmissionMode+","+
+                to_string(yearMade)+","+
+                this->description+","+
+                to_string(this->consumingPoints)+","+
+                to_string(this->rentalAmount);
+}

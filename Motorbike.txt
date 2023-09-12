@@ -1,0 +1,2 @@
+Bike1,1,blue,12,Saigon,phat1,Electric,2012,its good,12.000000,0.000000
+Ferarri,2,Purple,v12,Hanoi,phat,Gas,2021,A bike called ferrari,3.000000,0.000000

@@ -594,6 +594,7 @@ bool User::registerAccount(vector<User> &userList)
 
 // end register
 
+/* Haven't tested
 //Rate a user
 void User::rateUser(User &ratedUser, float score, const std::string comment)
 {
@@ -609,6 +610,7 @@ void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string com
     MotorbikeRating rating(ratedMotorbike.getMotorbikeId(), score, comment);
     ratedMotorbike.ratings.push_back(rating);
 };
+*/
 
 // listMotorbike()
 // unlistMotorbike()
