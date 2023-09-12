@@ -26,7 +26,7 @@ Motorbike::Motorbike(string model, int motorbikeID, string color, string engineS
         this->motorbikeRating=motorbikeRating;
 }
 
-Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount)
+Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating)
 {
         this->model = model;
         this->motorbikeID=motorbikeID;
@@ -39,6 +39,7 @@ Motorbike::Motorbike(string model, int motorbikeID, string color, string engineS
         this->description=description;
         this->consumingPoints= consumingPoints;
         this->rentalAmount=rentalAmount;
+        this->minRenterRating= minRenterRating;
 }
 
 string Motorbike::getOwner()
@@ -169,5 +170,6 @@ string cityStr;
                 to_string(yearMade)+","+
                 this->description+","+
                 to_string(this->consumingPoints)+","+
-                to_string(this->rentalAmount);
+                to_string(this->rentalAmount)+","+
+                to_string(this->minRenterRating);
 }
