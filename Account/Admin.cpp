@@ -38,20 +38,23 @@ void Admin::viewMemberInfo(User user)
 void Admin::viewMotorbikeInfo(Motorbike motorbike)
 {
     // model, motorbikeID, color, engineSize, city, owner, transmissionMode, yearMade , description, consumingPoints, rentalAmount, motorbikeRating, requests, availability
-    cout << "\nMotorbike information:\n";
-    cout << "Model: " << motorbike.model << endl;
-    cout << "Motorbike ID: " << motorbike.motorbikeID << endl;
-    cout << "Color: " << motorbike.color << endl;
-    cout << "Engine size: " << motorbike.engineSize << endl;
-    cout << "City: " << __STRINGIFY(motorbike.city) << endl;
-    cout << "Owner name: " << motorbike.owner.getUserName() << endl;
-    cout << "Transmission mode: " << motorbike.transmissionMode << endl;
-    cout << "Year made: " << motorbike.yearMade << endl;
-    cout << "Description: " << motorbike.description << endl;
-    cout << "Consuming points: " << motorbike.consumingPoints << endl;
-    cout << "Rental amount: " << motorbike.rentalAmount << endl;
-    cout << "Rating: " << motorbike.motorbikeRating << endl;
-    cout << "Availability: " << motorbike.availability << endl;
+    
+    // those attributes are private cannot access directly like that
+    
+    // cout << "\nMotorbike information:\n";
+    // cout << "Model: " << motorbike.getMode() << endl;
+    // cout << "Motorbike ID: " << motorbike.getMotorbikeId() << endl;
+    // cout << "Color: " << motorbike. << endl;
+    // cout << "Engine size: " << motorbike.engineSize << endl;
+    // cout << "City: " << __STRINGIFY(motorbike.city) << endl;
+    // cout << "Owner name: " << motorbike.owner << endl;
+    // cout << "Transmission mode: " << motorbike.transmissionMode << endl;
+    // cout << "Year made: " << motorbike.yearMade << endl;
+    // cout << "Description: " << motorbike.description << endl;
+    // cout << "Consuming points: " << motorbike.consumingPoints << endl;
+    // cout << "Rental amount: " << motorbike.rentalAmount << endl;
+    // cout << "Rating: " << motorbike.motorbikeRating << endl;
+    // cout << "Availability: " << motorbike.getAvailability()<< endl;
 }
 
 // View a specific account (Might change parameter -> vector)
@@ -74,4 +77,48 @@ string Admin::getAdminID() const
 void Admin::setAdminID(string adminID)
 {
     this->adminID = adminID;
+}
+
+bool login(Admin &admin, vector<Admin> &adminList) {
+	string username; 
+	string pass;
+	bool usernameFlag = false;
+	bool passFlag = false;
+while (!usernameFlag) {
+	cout << "Enter admin username: ";
+	getline(cin, username);
+
+	if (username.empty()) 
+	{
+		cout << "Username cannot be empty!\n";
+	}
+	else 
+	{
+		for (auto &admin : adminList)
+		{
+			if (admin.getUsername() == username) 
+			{
+			usernameFlag = true;
+			break;
+			}
+		}
+	}
+}
+	cout << "Enter admin password: ";
+	getline(cin, pass);
+	for (auto &admin : adminList) {
+		if (admin.getPassword() == pass)
+		{
+			admin = Admin( username, pass, admin.getFullName(), admin.getPhoneNumber(), admin.getAdminID() );
+		passFlag = true;
+		break;
+		}
+	}
+	system("cls");
+	if (usernameFlag == true && passFlag == true)
+	{
+		return true;
+	}
+
+	return false;
 }

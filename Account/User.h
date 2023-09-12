@@ -34,23 +34,38 @@ public:
     
     string toStringAccount();
     string getUserName();
-    
-    bool login(const string &username, const string &pass, vector<User> &userList);
-    bool registerAccount(const string &username, const string &password, const double &credit, vector<User> &userList, string fullName, string phoneNumber, string Type, string idNum, string licenseNum, string licenseExdate);
+    string getIdType();
+    string getIdNum();
+    string getLicenseNum();
+    string getExDate();
+    double getCreditPoint();
+    City getCity();
+    vector<Motorbike> getOwneMotorbike();
+    friend bool login(User &cus, vector<User> &userList);
 
+
+     bool registerAccount(vector <User>& userList);
     // listMotorbike()
     // unlistMotorbike()
     void searchAvailableMotorbikes();
     void requestToRent(Motorbike &motorbike, TimeSlot timeSlot);
     void viewRequests();
     void acceptRequest(vector<Request> &requests, Request request);
+
     void rateUser(User &ratedUser, float score, const std::string comment);
     void rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment);
-
+    bool addBike(vector<Motorbike> &bikes);
+    void addMotorInnitial(Motorbike motor);
+    City stringToCity(const std::string& cityStr);
+    bool login(User &cus);
+    bool login(const string &username,
+                 const string &pass,
+                 vector<User> &userList);
     // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
     // vector <Motorbike> rentBikes();
     // vector <Request> receiveRequest();
 
+    friend class Admin;
 };
 
 #endif

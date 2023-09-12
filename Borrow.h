@@ -14,8 +14,7 @@ private:
     double price;
 
 public:
-    Borrow(TimeSlot timeSlot, string username, string motorbikeId, double price)
-        : timeSlot(timeSlot), username(username), motorbikeId(motorbikeId), price(price) {}
+    Borrow(TimeSlot timeSlot, string username, string motorbikeId, double price);
     
     //getters
     TimeSlot getTimeSlot() const;

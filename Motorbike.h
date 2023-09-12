@@ -8,64 +8,63 @@
 #include "TimeSlot.h"
 #include "Motorbike.h"
 #include "City.h"
-
+#include "Account/User.h"
+#include "Request.h"
+#include "Rating.h"
+class User;
+class Rating;
+class Request;
 class Motorbike
 {
 private:
-    Motorbike(
-        std::string &model,
-        std::string &motorbikeID,
-        std::string &color,
-        std::string &engineSize,
-        City &city,
-        User &owner,
-        std::string &transmissionMode,
-        int yearMade,
-        std::string &description,
-        double consumingPoints,
-        double rentalAmount,
-        double minRenterRating,
-        double motorbikeRating, bool availability,
-        std::vector<Request> requests);
-
-    std::string model;
-    std::string motorbikeID;
-    std::string color;
-    std::string engineSize;
-    City city;
-    User owner;
-    std::string transmissionMode;
-    int yearMade;
-    std::string description;
-    double consumingPoints;
-    double rentalAmount;
-    double minRenterRating;
-    double motorbikeRating;
-    string ownerUsername;
-    string renterUsername;
-    vector<Request> requests;
-    bool availability;
+    
+        std::string model;
+        int motorbikeID;
+        std::string color;
+        std::string engineSize;
+        City city;
+        string owner;
+        std::string transmissionMode;
+        int yearMade;
+        std::string description;
+        double consumingPoints;
+        double rentalAmount;
+        double minRenterRating;
+        double motorbikeRating;
+        bool availability;
+        std::vector<Request> requests;
+        std:: vector<Rating> ratings;
 
 public:
-    Motorbike(string model, string motorbikeID, string color, string engineSize, City city, User owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
+    Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
+    Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating);
     // Getters
-    User getOwner();
-    string getMotorbikeId();
+
+    int getMotorbikeId();
     double getConsumingPoints();
+    bool getAvailability();
+    string getModel();
+    string getColor();
+    string getEngine();
+    string getOwner();
+    int getYear();
+    string getDes();
+    double getRating();
     // Setters
-    void setOwner(User Owner);
-    void setMotorbikeID(string motorbikeID);
+    void setOwner(string Owner);
+    void setMotorbikeID(int motorbikeID);
     void setConsumingPoints(double consumingPoints);
     void setAvailability(bool availability);
     // Request / Availability / Credit Points
     void addRequest(const Request &request);
+    void viewRequest(const Request &request);
     void viewRequests();
     bool checkAvailability(bool availability);
-    // void addCreditPoints(double points);
-    // SavingToFile
-    string toStringMotorBike();
+    void reserveTimeSlot(const TimeSlot &timeSlot);
+    void addCreditPoints(double &points);   
 
-    friend class Admin;
+    //to string
+    string toStringMotorBike();
 };
 
 #endif
