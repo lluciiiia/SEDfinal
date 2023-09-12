@@ -21,7 +21,7 @@ public:
           string adminID);
 
     //Need to implment adminList, maybe have a file containing pre-provided admin info and load from that file
-    bool login(Admin &admin, vector<Admin> adminList); 
+    bool login(); 
     void viewMemberInfo(User user);
     void viewMotorbikeInfo(Motorbike motorbike);
     void viewAccounts(Account account);
