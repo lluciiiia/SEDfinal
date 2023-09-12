@@ -297,18 +297,6 @@ bool User::addBike(vector<Motorbike> &bikes)
         cin.ignore();
         string num= to_string(consumingPoints);
         if(!regex_match(num,regexp)){
-            cout<< "Invalid input for the points! Please enter agian. ";
-        }else{
-            break;
-        }
-    }
-    int minRating;
-    while (true){
-        cout<< "Enter min rating you want for the renter: ";
-        cin>>minRating;
-        cin.ignore();
-        string num= to_string(minRating);
-        if(!regex_match(num,regexp)){
             cout<< "Invalid input for year made! Please enter agian. ";
         }else{
             break;

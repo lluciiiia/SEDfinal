@@ -14,9 +14,11 @@
 using namespace std;
 
 void guest_dashboard(vector<Motorbike> &bikes);
-void user_dashboard(User &user, vector<Motorbike> &bikes);
+void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList);
+void viewGuestBikeDash(vector<Motorbike> &bikes);
 void viewBikeDash(User &user, vector<Motorbike> &bikes);
 void displayUserInfo(User &user, vector<User> &userList);
+
 int main()
 {
     User user;
@@ -44,7 +46,7 @@ int main()
          << "\n";
     cout << "s3929218, Student Name: Huynh Tan Phat"
          << "\n";
-    cout << "s3929218, Student Name: Huynh Tan Phat"
+    cout << "s3939114, Student Name: Seokyung Kim"
          << "\n";
     cout << "s3929218, Student Name: Huynh Tan Phat"
          << "\n";
@@ -58,7 +60,7 @@ int main()
         int choice;
         cout << "MOTORBIKE RENTAL APPLICATION."
              << "\n\n";
-        cout << "Use the app as 1.Guest  2. Member  3.Admin  4.Register  5.Exit the program\n\n";
+        cout << "Use the app as 1. Guest  2. Member  3.Admin  4.Register  5. Exit the program\n\n";
         cin >> choice;
         cin.ignore();
         switch (choice)
@@ -142,13 +144,10 @@ void guest_dashboard(vector<Motorbike> &bikes)
         switch (choice)
         {
         case 1:
-
-            // viewBikeDash(user, bikes);
-
+            viewGuestBikeDash(bikes); // TODO: Ha noi
             break;
         case 2:
-            // viewBikeDash(user, bikes);
-
+            viewGuestBikeDash(bikes); // TODO: Ho Chi Minh
             break;
         case 3:
 
@@ -226,6 +225,28 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         cout << "Press Enter to continue...";
         cin.ignore();
     }
+}
+
+void viewGuestBikeDash(vector<Motorbike> &bikes)
+{
+    system("cls");
+    int choice;
+    bool dashboardRun = false;
+    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
+    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+    for (Motorbike &bike : bikes)
+    {
+        cout << left << setw(12) << bike.getMotorbikeId()
+             << setw(20) << bike.getModel()
+             << setw(10) << bike.getColor()
+             << setw(10) << bike.getEngine()
+             << setw(15) << bike.getOwner()
+             << setw(12) << bike.getYear()
+             << setw(20) << bike.getDes()
+             << setw(8) << bike.getRating()
+             << endl;
+    }
+    
 }
 
 void viewBikeDash(User &user, vector<Motorbike> &bikes)
