@@ -15,6 +15,7 @@ using namespace std;
 
 void guest_dashboard(vector<Motorbike> &bikes);
 void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList);
+void admin_dashboard();
 void viewGuestBikeDash(vector<Motorbike> &bikes);
 void viewBikeDash(User &user, vector<Motorbike> &bikes);
 void displayUserInfo(User &user, vector<User> &userList);
@@ -92,6 +93,12 @@ int main()
         }
         case 3:
         {
+            // TODO: check if the login is admin account
+            cout << "Logging in as a Admin \n";
+            cout << "Your are on a Admin Mode.\n";
+
+            admin_dashboard();
+            system("cls");
             break;
         }
         case 4:
@@ -226,6 +233,62 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         cin.ignore();
     }
 }
+
+void admin_dashboard() {
+    int choice;
+    bool dashboardRun = false;
+
+    while (!dashboardRun)
+    {
+
+        system("cls");
+   
+        // Display the admin dashboard menu
+        cout << "|==========================|\n";
+        cout << "|      Adin Dashboard      |  Hello, " << "\n"; // TODO: Admin info
+        cout << "|==========================|\n";
+        cout << "| 1. ablablablabalbalbl    |\n";
+        cout << "| 2. ablablablabalbalbl    |\n";
+        cout << "| 3. ablablablabalbalbl    |\n";
+        cout << "| 4. Logout                |\n";
+        cout << "|==========================|\n";
+        cout << "Enter your choice (1-4): ";
+
+        cin >> choice;
+        cin.ignore(); // Consume the newline character
+
+        switch (choice)
+        {
+        case 1:
+            //displayUserInfo(user, userList);
+
+            break;
+        case 2:
+            //user.addBike(bikes);
+
+            break;
+        case 3:
+            //viewBikeDash(user, bikes);
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+            dashboardRun = true;
+            cout << "Logging out...\n";
+            break;
+        default:
+            cout << "Invalid choice. Please enter a valid option (1-4).\n";
+            break;
+        }
+
+        // Pause to allow the user to read the message
+        cout << "Press Enter to continue...";
+        cin.ignore();
+    }
+
+};
 
 void viewGuestBikeDash(vector<Motorbike> &bikes)
 {
