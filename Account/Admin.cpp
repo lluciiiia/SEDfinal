@@ -79,7 +79,10 @@ void Admin::setAdminID(string adminID)
     this->adminID = adminID;
 }
 
-bool login(Admin &admin, vector<Admin> &adminList) {
+bool adminLogin() {
+	//Temporary admin user and pass
+	string providedAdminUsername = "admin"; 
+	string providedAdminPass = "admin";
 	string username; 
 	string pass;
 	bool usernameFlag = false;
@@ -92,28 +95,32 @@ while (!usernameFlag) {
 	{
 		cout << "Username cannot be empty!\n";
 	}
-	else 
-	{
-		for (auto &admin : adminList)
+	else
 		{
-			if (admin.getUsername() == username) 
-			{
-			usernameFlag = true;
-			break;
-			}
-		}
-	}
-}
-	cout << "Enter admin password: ";
-	getline(cin, pass);
-	for (auto &admin : adminList) {
-		if (admin.getPassword() == pass)
+		if (username.compare(providedUsername) == 0) 
 		{
-			admin = Admin( username, pass, admin.getFullName(), admin.getPhoneNumber(), admin.getAdminID() );
-		passFlag = true;
+		usernameFlag = true;
 		break;
 		}
 	}
+
+while (!passwordFlag) {
+	cout << "Enter admin password: ";
+	getline(cin, pass);
+		if (pass.compare(providedPass) == 0)
+		{
+		//Not sure about this so i comment it out for now
+		//admin = Admin( username, pass, admin.getFullName(), admin.getPhoneNumber(), admin.getAdminID() ); 
+		//load admin dashboard (will see how)
+		passFlag = true;
+		break;
+		} 
+		else 
+		{
+			cout << "Incorrect password!\n";
+		}
+	}
+}
 	system("cls");
 	if (usernameFlag == true && passFlag == true)
 	{
