@@ -154,58 +154,7 @@ vector<Motorbike> User::getOwnedMotorbike()
     return this->OwnedMotorbikes;
 }
 
-bool login(User &cus, vector<User> &userList)
-{
-    string username;
-    string pass;
-    bool usernameFlag = false;
-    bool passFlag = false;
-    while (!usernameFlag) 
-    {
-        cout << "Enter your username: ";
-        getline(cin, username);
 
-        if (username.empty())
-        {
-            cout << "Username cannot be empty! \n";
-        } else 
-        {
-            for (auto &user : userList)
-            {
-                if (user.getUserName() == username )
-                {
-                    usernameFlag= true;
-                    break;
-                }
-            }
-        }
-    }
-    cout<< "Enter your password: ";
-    getline(cin,pass);
-        for (auto &user : userList)
-            {
-                if ( user.getPassword() == pass)
-                    {
-                        cus= User(username,pass,user.getFullName(),
-                        user.getPhoneNumber(),
-                        user.getIdType(),
-                        user.getIdNum(),
-                        user.getLicenseNum(),
-                        user.getExDate(),
-                        user.getCreditPoint(),
-                        user.getCity());
-                        passFlag= true;
-                        break;
-                    }
-            }
-    system("cls");
-    if(usernameFlag== true && passFlag== true){
-        return true;
-    } 
-    
-    return false;
-   
-}
 
 
 
@@ -605,4 +554,55 @@ void User::viewRequests(){
 //     return vector<Request>();
 // }
 
+bool login(User &cus, vector<User> &userList)
+{
+    string username;
+    string pass;
+    bool usernameFlag = false;
+    bool passFlag = false;
+    while (!usernameFlag) 
+    {
+        cout << "Enter your username: ";
+        getline(cin, username);
 
+        if (username.empty())
+        {
+            cout << "Username cannot be empty! \n";
+        } else 
+        {
+            for (auto &user : userList)
+            {
+                if (user.getUserName() == username )
+                {
+                    usernameFlag= true;
+                    break;
+                }
+            }
+        }
+    }
+    
+    cout<< "Enter your password: ";
+    getline(cin,pass);
+        for (auto &user : userList)
+            {
+                if ( user.getPassword() == pass)
+                    {
+                        cus= User(username,pass,user.getFullName(),
+                        user.getPhoneNumber(),
+                        user.getIdType(),
+                        user.getIdNum(),
+                        user.getLicenseNum(),
+                        user.getExDate(),
+                        user.getCreditPoint(),
+                        user.getCity());
+                        passFlag= true;
+                        break;
+                    }
+            }
+    system("cls");
+    if(usernameFlag== true && passFlag== true){
+        return true;
+    } 
+    
+    return false;
+}

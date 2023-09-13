@@ -233,6 +233,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             
             break;
         case 5:
+            user = User();
             dashboardRun = true;
             cout << "Logging out...\n";
             break;
@@ -370,47 +371,48 @@ void displayUserInfo(User &user, vector<User> &userList)
         cout << "License Expiry Date: " << user.getExDate() << endl;
         cout << "City: " << (user.getCity() == City::Saigon ? "Saigon" : "Hanoi") << endl;
         cout << "----------------------------------" << endl;
-        cout << "1.Change your password. \n";
-        cout << "2.Return. \n";
-        cout<< "Enter your choice: ";
-    while (!flag)
-    {
         
-        cin >> choice;
-        cin.ignore();
+        
+    while (true) {
+    cout << "Choose an option:\n";
+    cout << "1. Change Password\n";
+    cout << "2. Exit\n";
+    cout<< "Enter your choice: ";
+    cin >> choice;
+    cin.ignore();
 
-        switch (choice)
-        {
-        case 1:
-        {
-            string pass;
+    switch (choice) {
+        case 1: {
+            string oldPass;
             cout << "Enter your old password: ";
-            getline(cin, pass);
-            if (pass == user.getPassword())
-            {
-                string passw;
+            getline(cin, oldPass);
+
+            if (oldPass == user.getPassword()) {
+                string newPass;
                 cout << "Enter your new password: ";
-                getline(cin, passw);
-                user.setPassword(passw);
-                cout << "Change password sucessfully. ";
-                for (auto &u : userList)
-                {
-                    if (user.getUsername() == u.getUsername())
-                    {
-                        u.setPassword(passw);
+                getline(cin, newPass);
+
+                cout<< "Password correct! \n";
+
+                user.setPassword(newPass);
+                cout << "Password changed successfully.\n";
+
+                
+                for (auto &u : userList) {
+                    if (user.getUsername() == u.getUsername()) {
+                        u.setPassword(newPass);
+                        break; 
                     }
                 }
-            }
-            else
-            {
-                cout << "Wrong password. \n";
+            } else {
+                cout << "Incorrect old password. Password not changed.\n";
             }
             break;
         }
 
         case 2:
-            flag = true;
-            break;
-        }
+            return; // Exit the function or loop
     }
+}
+
 }
