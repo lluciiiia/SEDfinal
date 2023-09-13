@@ -57,16 +57,41 @@ void Admin::viewMotorbikeInfo(vector<Motorbike> &bikes)
     }
 }
 
-// View a specific account (Might change parameter -> vector)
-void Admin::viewAccounts(Account account)
+void Admin::viewAccounts(vector<User> &users)
 {
-    // username, password, fullName, phoneNumber
-    cout << "\nAccount information:\n";
-    cout << "Username: " << account.getUsername() << endl;
-    cout << "Password: " << account.getPassword() << endl;
-    cout << "Full name: " << account.getFullName() << endl;
-    cout << "Phone number: " << account.getPhoneNumber() << endl;
-    cout << "\n";
+     cout << left << setw(30) << "User name"
+         << setw(20) << "Full name"
+         << setw(15) << "Phone number"
+         << setw(20) << "Id type"
+         << setw(15) << "Id number"
+         << setw(15) << "License number"
+         << setw(25) << "License expiry date"
+         << setw(25) << "Credit points"
+         << setw(15) << "City"
+         << setw(15) << "Owned motorbike" << endl;
+
+    cout << setfill('-') << setw(170) << "-" << setfill(' ') << endl;
+
+    for (User &user : users)
+    {
+        string city = cityToString(user.getCity());
+        vector<Motorbike> motorbikes = user.getOwnedMotorbike();
+        string motorbikeModel = "";
+        if (motorbikes.size() > 0) {
+            motorbikeModel = motorbikes[0].getModel();
+        };
+        cout << left << setw(30) << user.getUserName()
+             << setw(20) << user.getFullName()
+             << setw(15) << user.getPhoneNumber()
+             << setw(20) << user.getIdType()
+             << setw(15) << user.getIdNum()
+             << setw(15) << user.getLicenseNum()
+             << setw(25) << user.getExDate()
+             << setw(20) << user.getCreditPoint()
+             << setw(15) << city
+             << setw(15) << motorbikeModel
+             << endl;
+    }
 }
 
 string Admin::getAdminID() const
