@@ -16,7 +16,7 @@ using namespace std;
 void guest_dashboard(vector<Motorbike> &bikes);
 void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList);
 void admin_dashboard(vector<Motorbike> &bikes, vector<User> &userList);
-void viewGuestBikeDash(vector<Motorbike> &bikes);
+void viewGuestBikeDash(vector<Motorbike> &bikes, string city);
 void viewAdminBikeDash(vector<Motorbike> &bikes);
 void viewAdminUserDash(vector<User> &userList);
 void viewBikeDash(User &user, vector<Motorbike> &bikes);
@@ -133,6 +133,7 @@ void guest_dashboard(vector<Motorbike> &bikes)
 {
     int choice;
     bool dashboardRun = false;
+
     while (!dashboardRun)
     {
 
@@ -153,10 +154,10 @@ void guest_dashboard(vector<Motorbike> &bikes)
         switch (choice)
         {
         case 1:
-            viewGuestBikeDash(bikes); // TODO: Ha noi
+            viewGuestBikeDash(bikes, "Ha noi"); // TODO: Ha noi
             break;
         case 2:
-            viewGuestBikeDash(bikes); // TODO: Ho Chi Minh
+            viewGuestBikeDash(bikes, "Saigon"); // TODO: Ho Chi Minh
             break;
         case 3:
 
@@ -279,16 +280,25 @@ void admin_dashboard(vector<Motorbike> &bikes, vector<User> &userList) {
 
 };
 
-void viewGuestBikeDash(vector<Motorbike> &bikes)
+void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
 {
     system("cls");
     int choice;
     bool dashboardRun = false;
+    City city;
+    if (cityStr == "Ha noi") {
+        city = City::Hanoi;
+    }
+    else {
+        city = City::Saigon;
+    }
+
     cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
     for (Motorbike &bike : bikes)
     {
-        cout << left << setw(12) << bike.getMotorbikeId()
+        if (bike.getCity() == city) {
+             cout << left << setw(12) << bike.getMotorbikeId()
              << setw(20) << bike.getModel()
              << setw(10) << bike.getColor()
              << setw(10) << bike.getEngine()
@@ -297,8 +307,8 @@ void viewGuestBikeDash(vector<Motorbike> &bikes)
              << setw(20) << bike.getDes()
              << setw(8) << bike.getRating()
              << "\n";
+        }
     }
-    
 }
 
 void viewAdminBikeDash(vector<Motorbike> &bikes)
@@ -320,7 +330,6 @@ void viewAdminBikeDash(vector<Motorbike> &bikes)
              << setw(8) << bike.getRating()
              << endl;
     }
-    
 }
 
 void viewAdminUserDash(vector<User> &users) 
