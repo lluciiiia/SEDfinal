@@ -316,10 +316,11 @@ void viewAdminBikeDash(vector<Motorbike> &bikes)
     system("cls");
     int choice;
     bool dashboardRun = false;
-    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
-    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
+    cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
     for (Motorbike &bike : bikes)
     {
+        string cityStr = cityToString(bike.getCity());
         cout << left << setw(12) << bike.getMotorbikeId()
              << setw(20) << bike.getModel()
              << setw(10) << bike.getColor()
@@ -328,6 +329,7 @@ void viewAdminBikeDash(vector<Motorbike> &bikes)
              << setw(12) << bike.getYear()
              << setw(20) << bike.getDes()
              << setw(8) << bike.getRating()
+             << setw(8) << cityStr
              << endl;
     }
 }
