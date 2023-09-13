@@ -18,8 +18,6 @@ void guest_dashboard(vector<Motorbike> &bikes);
 void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList);
 void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userList);
 void viewGuestBikeDash(vector<Motorbike> &bikes, string city);
-//void viewAdminBikeDash(vector<Motorbike> &bikes);
-void viewAdminUserDash(vector<User> &userList);
 void viewBikeDash(User &user, vector<Motorbike> &bikes);
 void displayUserInfo(User &user, vector<User> &userList);
 
@@ -266,7 +264,9 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
         switch (choice)
         {
         case 1:
-            viewAdminUserDash(userList);
+        system("cls");
+            admin.viewAccounts(userList);
+            //viewAdminUserDash(userList);
             break;
         case 2:
             system("cls");
@@ -319,71 +319,6 @@ void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
         }
     }
 }
-
-// void viewAdminBikeDash(vector<Motorbike> &bikes)
-// {
-//     system("cls");
-//     int choice;
-//     bool dashboardRun = false;
-//     cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
-//     cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
-//     for (Motorbike &bike : bikes)
-//     {
-//         string cityStr = cityToString(bike.getCity());
-//         cout << left << setw(12) << bike.getMotorbikeId()
-//              << setw(20) << bike.getModel()
-//              << setw(10) << bike.getColor()
-//              << setw(10) << bike.getEngine()
-//              << setw(15) << bike.getOwner()
-//              << setw(12) << bike.getYear()
-//              << setw(20) << bike.getDes()
-//              << setw(8) << bike.getRating()
-//              << setw(8) << cityStr
-//              << endl;
-//     }
-// }
-
-void viewAdminUserDash(vector<User> &users) 
-{
-    system("cls");
-    int choice;
-    bool dashboardRun = false;
-    
-    cout << left << setw(30) << "User name"
-         << setw(20) << "Full name"
-         << setw(15) << "Phone number"
-         << setw(20) << "Id type"
-         << setw(15) << "Id number"
-         << setw(15) << "License number"
-         << setw(25) << "License expiry date"
-         << setw(25) << "Credit points"
-         << setw(15) << "City"
-         << setw(15) << "Owned motorbike" << endl;
-
-    cout << setfill('-') << setw(170) << "-" << setfill(' ') << endl;
-
-    for (User &user : users)
-    {
-        string city = cityToString(user.getCity());
-        vector<Motorbike> motorbikes = user.getOwnedMotorbike();
-        string motorbikeModel = "";
-        if (motorbikes.size() > 0) {
-            motorbikeModel = motorbikes[0].getModel();
-        };
-        cout << left << setw(30) << user.getUserName()
-             << setw(20) << user.getFullName()
-             << setw(15) << user.getPhoneNumber()
-             << setw(20) << user.getIdType()
-             << setw(15) << user.getIdNum()
-             << setw(15) << user.getLicenseNum()
-             << setw(25) << user.getExDate()
-             << setw(20) << user.getCreditPoint()
-             << setw(15) << city
-             << setw(15) << motorbikeModel
-             << endl;
-    }
-}
-
 
 void viewBikeDash(User &user, vector<Motorbike> &bikes)
 {
