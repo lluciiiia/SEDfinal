@@ -79,7 +79,7 @@ void Admin::setAdminID(string adminID)
     this->adminID = adminID;
 }
 
-bool adminLogin() {
+bool Admin::adminLogin() {
 	//Temporary admin user and pass
 	string providedAdminUsername = "admin"; 
 	string providedAdminPass = "admin";
