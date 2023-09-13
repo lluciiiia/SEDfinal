@@ -83,10 +83,13 @@ bool adminLogin() {
 	//Temporary admin user and pass
 	string providedAdminUsername = "admin"; 
 	string providedAdminPass = "admin";
+	//What the user enters
 	string username; 
 	string pass;
 	bool usernameFlag = false;
 	bool passFlag = false;
+
+//Check username
 while (!usernameFlag) {
 	cout << "Enter admin username: ";
 	getline(cin, username);
@@ -103,22 +106,20 @@ while (!usernameFlag) {
 		break;
 		}
 	}
+}
 
+//Check password
 while (!passwordFlag) {
 	cout << "Enter admin password: ";
 	getline(cin, pass);
-		if (pass.compare(providedPass) == 0)
-		{
-		//Not sure about this so i comment it out for now
-		//admin = Admin( username, pass, admin.getFullName(), admin.getPhoneNumber(), admin.getAdminID() ); 
-		//load admin dashboard (will see how)
-		passFlag = true;
-		break;
-		} 
-		else 
-		{
-			cout << "Incorrect password!\n";
-		}
+	if (pass.compare(providedPass) == 0)
+	{
+	passFlag = true;
+	break;
+	} 
+	else 
+	{
+		cout << "Incorrect password!\n";
 	}
 }
 	system("cls");
@@ -126,6 +127,5 @@ while (!passwordFlag) {
 	{
 		return true;
 	}
-
 	return false;
 }
