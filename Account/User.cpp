@@ -118,6 +118,7 @@ string User::getUserName()
 {
     return Account::getUsername();
 }
+
 string User::getIdType()
 {
     return this->IDtype;
@@ -148,7 +149,7 @@ City User::getCity()
     return this->city;
 }
 
-vector<Motorbike> User::getOwneMotorbike()
+vector<Motorbike> User::getOwnedMotorbike()
 {
     return this->OwnedMotorbikes;
 }

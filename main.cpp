@@ -15,8 +15,10 @@ using namespace std;
 
 void guest_dashboard(vector<Motorbike> &bikes);
 void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList);
-void admin_dashboard();
+void admin_dashboard(vector<Motorbike> &bikes, vector<User> &userList);
 void viewGuestBikeDash(vector<Motorbike> &bikes);
+void viewAdminBikeDash(vector<Motorbike> &bikes);
+void viewAdminUserDash(vector<User> &userList);
 void viewBikeDash(User &user, vector<Motorbike> &bikes);
 void displayUserInfo(User &user, vector<User> &userList);
 
@@ -97,7 +99,7 @@ int main()
             cout << "Logging in as a Admin \n";
             cout << "Your are on a Admin Mode.\n";
 
-            admin_dashboard();
+            admin_dashboard(motorbikeList, userList);
             system("cls");
             break;
         }
@@ -162,7 +164,7 @@ void guest_dashboard(vector<Motorbike> &bikes)
             cout << "Logging out...\n";
             break;
         default:
-            cout << "Invalid choice. Please enter a valid option (1-4).\n";
+            cout << "Invalid choice. Please enter a valid option (1-3).\n";
             break;
         }
         // Pause to allow the user to read the message
@@ -217,9 +219,6 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
             break;
         case 4:
-
-            break;
-        case 5:
             dashboardRun = true;
             cout << "Logging out...\n";
             break;
@@ -234,7 +233,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
     }
 }
 
-void admin_dashboard() {
+void admin_dashboard(vector<Motorbike> &bikes, vector<User> &userList) {
     int choice;
     bool dashboardRun = false;
 
@@ -242,17 +241,16 @@ void admin_dashboard() {
     {
 
         system("cls");
-   
+
         // Display the admin dashboard menu
         cout << "|==========================|\n";
-        cout << "|      Adin Dashboard      |  Hello, " << "\n"; // TODO: Admin info
+        cout << "|      Admin Dashboard     |  Hello, " << "\n"; // TODO: Admin info
         cout << "|==========================|\n";
-        cout << "| 1. ablablablabalbalbl    |\n";
-        cout << "| 2. ablablablabalbalbl    |\n";
-        cout << "| 3. ablablablabalbalbl    |\n";
-        cout << "| 4. Logout                |\n";
+        cout << "| 1. View all users        |\n";
+        cout << "| 2. View all motorbikes   |\n";
+        cout << "| 3. Logout                |\n";
         cout << "|==========================|\n";
-        cout << "Enter your choice (1-4): ";
+        cout << "Enter your choice (1-3): ";
 
         cin >> choice;
         cin.ignore(); // Consume the newline character
@@ -260,21 +258,12 @@ void admin_dashboard() {
         switch (choice)
         {
         case 1:
-            //displayUserInfo(user, userList);
-
+            viewAdminUserDash(userList);
             break;
         case 2:
-            //user.addBike(bikes);
-
+            viewAdminBikeDash(bikes);
             break;
         case 3:
-            //viewBikeDash(user, bikes);
-
-            break;
-        case 4:
-
-            break;
-        case 5:
             dashboardRun = true;
             cout << "Logging out...\n";
             break;
@@ -307,10 +296,74 @@ void viewGuestBikeDash(vector<Motorbike> &bikes)
              << setw(12) << bike.getYear()
              << setw(20) << bike.getDes()
              << setw(8) << bike.getRating()
+             << "\n";
+    }
+    
+}
+
+void viewAdminBikeDash(vector<Motorbike> &bikes)
+{
+    system("cls");
+    int choice;
+    bool dashboardRun = false;
+    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
+    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+    for (Motorbike &bike : bikes)
+    {
+        cout << left << setw(12) << bike.getMotorbikeId()
+             << setw(20) << bike.getModel()
+             << setw(10) << bike.getColor()
+             << setw(10) << bike.getEngine()
+             << setw(15) << bike.getOwner()
+             << setw(12) << bike.getYear()
+             << setw(20) << bike.getDes()
+             << setw(8) << bike.getRating()
              << endl;
     }
     
 }
+
+void viewAdminUserDash(vector<User> &users) 
+{
+    system("cls");
+    int choice;
+    bool dashboardRun = false;
+    
+    cout << left << setw(30) << "User name"
+         << setw(20) << "Full name"
+         << setw(15) << "Phone number"
+         << setw(20) << "Id type"
+         << setw(15) << "Id number"
+         << setw(15) << "License number"
+         << setw(25) << "License expiry date"
+         << setw(25) << "Credit points"
+         << setw(15) << "City"
+         << setw(15) << "Owned motorbike" << endl;
+
+    cout << setfill('-') << setw(170) << "-" << setfill(' ') << endl;
+
+    for (User &user : users)
+    {
+        string city = cityToString(user.getCity());
+        vector<Motorbike> motorbikes = user.getOwnedMotorbike();
+        string motorbikeModel = "";
+        if (motorbikes.size() > 0) {
+            motorbikeModel = motorbikes[0].getModel();
+        };
+        cout << left << setw(30) << user.getUserName()
+             << setw(20) << user.getFullName()
+             << setw(15) << user.getPhoneNumber()
+             << setw(20) << user.getIdType()
+             << setw(15) << user.getIdNum()
+             << setw(15) << user.getLicenseNum()
+             << setw(25) << user.getExDate()
+             << setw(20) << user.getCreditPoint()
+             << setw(15) << city
+             << setw(15) << motorbikeModel
+             << endl;
+    }
+}
+
 
 void viewBikeDash(User &user, vector<Motorbike> &bikes)
 {
