@@ -200,12 +200,13 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         cout << "|==========================|\n";
         cout << "|      User Dashboard      |  Hello, " << user.getUsername() << "\n";
         cout << "|==========================|  Credit point: " << user.getCreditPoint() << "\n";
-        cout << "| 1. Add your motorbike    |  Your owned bike: " << model << "\n";
-        cout << "| 2. View Bikes to rent    |\n";
-        cout << "| 3. View request          |\n";
-        cout << "| 4. Logout                |\n";
+        cout << "| 1. View your bio         |  Your owned bike: " << model << "\n";
+        cout << "| 2. Add your motorbike    |\n";
+        cout << "| 3. View Bikes to rent    |\n";
+        cout << "| 4. View request          |\n";
+        cout << "| 5. Logout                |\n";
         cout << "|==========================|\n";
-        cout << "Enter your choice (1-4): ";
+        cout << "Enter your choice (1-5): ";
 
         cin >> choice;
         cin.ignore(); // Consume the newline character
@@ -213,18 +214,25 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         switch (choice)
         {
         case 1:
-            //displayUserInfo(user, userList);
-            user.addBike(bikes);
+            displayUserInfo(user, userList);
+            
             break;
         case 2:
-            viewBikeDash(user, bikes);
+            if(user.addBike(bikes)){
+                cout<< "Add bike succesfully ! \n";
+            }else{
+                cout<< "Failed to add bike \n";
+            }
 
             break;
         case 3:
-            
+            viewBikeDash(user, bikes);
 
             break;
         case 4:
+            
+            break;
+        case 5:
             dashboardRun = true;
             cout << "Logging out...\n";
             break;
@@ -350,10 +358,9 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes)
 
 void displayUserInfo(User &user, vector<User> &userList)
 {
+    system("cls");
     bool flag = false;
     int choice;
-    while (!flag)
-    {
         cout << "Username: " << user.getUsername() << endl;
         cout << "Full Name: " << user.getFullName() << endl;
         cout << "Phone Number: " << user.getPhoneNumber() << endl;
@@ -365,6 +372,10 @@ void displayUserInfo(User &user, vector<User> &userList)
         cout << "----------------------------------" << endl;
         cout << "1.Change your password. \n";
         cout << "2.Return. \n";
+        cout<< "Enter your choice: ";
+    while (!flag)
+    {
+        
         cin >> choice;
         cin.ignore();
 
