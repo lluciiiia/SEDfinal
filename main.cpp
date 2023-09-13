@@ -266,12 +266,10 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
         case 1:
         system("cls");
             admin.viewAccounts(userList);
-            //viewAdminUserDash(userList);
             break;
         case 2:
             system("cls");
             admin.viewMotorbikeInfo(bikes);
-            // viewAdminBikeDash(bikes);
             break;
         case 3:
             dashboardRun = true;
