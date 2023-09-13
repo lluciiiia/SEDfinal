@@ -207,15 +207,15 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         switch (choice)
         {
         case 1:
-            displayUserInfo(user, userList);
-
+            //displayUserInfo(user, userList);
+            user.addBike(bikes);
             break;
         case 2:
-            user.addBike(bikes);
+            viewBikeDash(user, bikes);
 
             break;
         case 3:
-            viewBikeDash(user, bikes);
+            
 
             break;
         case 4:
