@@ -31,12 +31,7 @@ int main()
 
     City city = City::Saigon;
 
-    // User user1("john_doe", "password123", "John Doe", "1234567890", "Passport", "ID12345", "License67890", "2023-12-31", 100.0, city);
-
-    // User user2("alice_smith", "securePass123", "Alice Smith", "9876543210", "Driver's License", "DL6789", "License98765", "2023-11-30", 150.0,city);
-
-    // userList.push_back(user1);
-    // userList.push_back(user2);
+ 
 
     cout << "EEET2482/COSC2082 ASSIGNMENT"
          << "\n";
@@ -95,7 +90,7 @@ int main()
         }
         case 3:
         {
-            // TODO: check if the login is admin account
+            // check if the login is admin account
             cout << "Logging in as a Admin \n";
             cout << "Your are on a Admin Mode.\n";
 
@@ -125,6 +120,10 @@ int main()
             exitProgram = true;
             cout << "Bye! See you later!! \n";
             break;
+        }
+        default:{
+            cout<< "Invalid input! Please try again. \n";
+            cin>> choice;
         }
         }
     }
@@ -189,6 +188,13 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
         system("cls");
         string model;
+        if (!user.getOwnedMotorbike().empty()) {
+            model = user.getOwnedMotorbike()[0].getModel();
+            cout << "Motorbike model: " << model << endl;
+        } else {
+            cout << "No owned motorbikes." << endl;
+        }
+
         for (auto &bike : bikes)
         {
             if (bike.getOwner() == user.getUsername())
@@ -392,8 +398,6 @@ void displayUserInfo(User &user, vector<User> &userList)
                 cout << "Enter your new password: ";
                 getline(cin, newPass);
 
-                cout<< "Password correct! \n";
-
                 user.setPassword(newPass);
                 cout << "Password changed successfully.\n";
 
@@ -411,7 +415,7 @@ void displayUserInfo(User &user, vector<User> &userList)
         }
 
         case 2:
-            return; // Exit the function or loop
+            return; 
     }
 }
 

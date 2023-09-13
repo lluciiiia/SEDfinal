@@ -28,10 +28,10 @@ private:
 
 public:
     User();
-    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> userRatings, double creditPoint);
+    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> userRatings, double creditPoint,vector <Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint);
+    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city,vector <Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
-    
     string toStringAccount();
     string getUserName();
     string getIdType();
@@ -41,6 +41,7 @@ public:
     double getCreditPoint();
     City getCity();
     vector<Motorbike> getOwnedMotorbike();
+    vector<Motorbike>& getOwned();
     friend bool login(User &cus, vector<User> &userList);
 
 
