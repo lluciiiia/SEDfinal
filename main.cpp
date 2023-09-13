@@ -40,7 +40,7 @@ int main()
     // userList.push_back(user1);
     // userList.push_back(user2);
 
-    std::cout << "EEET2482/COSC2082 ASSIGNMENT"
+    cout << "EEET2482/COSC2082 ASSIGNMENT"
          << "\n";
     cout << "MOTORBIKE RENTAL APPLICATION."
          << "\n\n";

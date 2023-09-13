@@ -118,6 +118,7 @@ string User::getUserName()
 {
     return Account::getUsername();
 }
+
 string User::getIdType()
 {
     return this->IDtype;
@@ -148,7 +149,7 @@ City User::getCity()
     return this->city;
 }
 
-vector<Motorbike> User::getOwneMotorbike()
+vector<Motorbike> User::getOwnedMotorbike()
 {
     return this->OwnedMotorbikes;
 }
@@ -210,7 +211,7 @@ bool login(User &cus, vector<User> &userList)
 
 bool User::addBike(vector<Motorbike> &bikes)
 {
-    if(this->OwnedMotorbikes.size() == 0){
+    if(this->OwnedMotorbikes.size() == 1){
         cout << "You can only own one bike at a time." << endl;
         return false;
     }
@@ -308,7 +309,7 @@ bool User::addBike(vector<Motorbike> &bikes)
                     Account::getUsername(),
                     transmissionmode,
                     yearMade,
-                    description,consumingPoints,0);
+                    description,consumingPoints,0,9);
     bikes.push_back(motor);
     OwnedMotorbikes.push_back(motor);
     return true;
@@ -537,7 +538,9 @@ void User::searchAvailableMotorbikes(){};
 //     motorbike.addRequest(request);
 // }
 
-void User::viewRequests(){};
+void User::viewRequests(){
+    
+};
 
 // void User::acceptRequest(vector<Request> &requests, Request request){
 //     // 1. change the request status to Accepted

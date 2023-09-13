@@ -1,8 +1,6 @@
 #include "Motorbike.h"
 
-
 using namespace std;
-
 
 // TimeSlot Motorbike::getTimeSlot()
 // {
@@ -11,40 +9,46 @@ using namespace std;
 
 Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating)
 {
-        this->model= model;
-        this->motorbikeID= motorbikeID;
-        this->color= color;
-        this->engineSize=engineSize;
-        this->city=city;
-        this->owner= owner;
-        this->transmissionMode= transmissionMode;
-        this->yearMade=yearMade;
-        this->description=description;
-        this->consumingPoints=consumingPoints;
-        this->rentalAmount=rentalAmount;
-        this->minRenterRating=minRenterRating;
-        this->motorbikeRating=motorbikeRating;
+        this->model = model;
+        this->motorbikeID = motorbikeID;
+        this->color = color;
+        this->engineSize = engineSize;
+        this->city = city;
+        this->owner = owner;
+        this->transmissionMode = transmissionMode;
+        this->yearMade = yearMade;
+        this->description = description;
+        this->consumingPoints = consumingPoints;
+        this->rentalAmount = rentalAmount;
+        this->minRenterRating = minRenterRating;
+        this->motorbikeRating = motorbikeRating;
 }
 
-Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount)
+Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating)
 {
         this->model = model;
-        this->motorbikeID=motorbikeID;
-        this->color=color;
-        this->engineSize= engineSize;
-        this->city= city;
-        this->owner= owner;
-        this-> transmissionMode = transmissionMode;
+        this->motorbikeID = motorbikeID;
+        this->color = color;
+        this->engineSize = engineSize;
+        this->city = city;
+        this->owner = owner;
+        this->transmissionMode = transmissionMode;
         this->yearMade = yearMade;
-        this->description=description;
-        this->consumingPoints= consumingPoints;
-        this->rentalAmount=rentalAmount;
+        this->description = description;
+        this->consumingPoints = consumingPoints;
+        this->rentalAmount = rentalAmount;
+        this->minRenterRating = minRenterRating;
 }
 
 string Motorbike::getOwner()
 
 {
         return owner;
+}
+
+City Motorbike::getCity()
+{
+        return city;
 }
 
 int Motorbike::getYear()
@@ -59,12 +63,13 @@ string Motorbike::getDes()
 
 double Motorbike::getRating()
 {
-        double average=0;
-        double total=0;
-        for(auto rating: ratings){
-               total+= rating.getScore();
+        double average = 0;
+        double total = 0;
+        for (auto rating : ratings)
+        {
+                total += rating.getScore();
         }
-        average= total/ratings.size();
+        average = total / ratings.size();
         return average;
 }
 
@@ -108,7 +113,6 @@ void Motorbike::setOwner(string owner)
         this->owner = owner;
 }
 
-
 void Motorbike::setMotorbikeID(int motorbikeID)
 
 {
@@ -126,13 +130,15 @@ void Motorbike::addRequest(const Request &request)
 }
 
 void Motorbike::viewRequests()
-{       int i = 1;
+{
+        int i = 1;
         cout << "View requests of the motorbike " << motorbikeID << "\n";
-        for (Request request : requests) {
+        for (Request request : requests)
+        {
                 cout << "Request " << i << ":\n";
                 request.showInfo();
         }
-}       
+}
 
 bool Motorbike::checkAvailability(bool availability)
 {
@@ -146,7 +152,7 @@ bool Motorbike::checkAvailability(bool availability)
 
 string Motorbike::toStringMotorBike()
 {
-string cityStr;
+        string cityStr;
         switch (city)
         {
         case City::Saigon:
@@ -155,19 +161,20 @@ string cityStr;
         case City::Hanoi:
                 cityStr = "Hanoi";
                 break;
-    // Handle other cases if needed
+                // Handle other cases if needed
         default:
                 cityStr = "Unknown";
-    }
-        return this->model+","+
-                to_string(motorbikeID)+","+
-                this->color+","+
-                this->engineSize+","+
-                cityStr+","+
-                this->owner+","+
-                this->transmissionMode+","+
-                to_string(yearMade)+","+
-                this->description+","+
-                to_string(this->consumingPoints)+","+
-                to_string(this->rentalAmount);
+        }
+        return this->model + "," +
+               to_string(motorbikeID) + "," +
+               this->color + "," +
+               this->engineSize + "," +
+               cityStr + "," +
+               this->owner + "," +
+               this->transmissionMode + "," +
+               to_string(yearMade) + "," +
+               this->description + "," +
+               to_string(this->consumingPoints) + "," +
+               to_string(this->rentalAmount) + "," +
+               to_string(this->minRenterRating);
 }

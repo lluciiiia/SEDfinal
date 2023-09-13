@@ -40,7 +40,7 @@ public:
     string getExDate();
     double getCreditPoint();
     City getCity();
-    vector<Motorbike> getOwneMotorbike();
+    vector<Motorbike> getOwnedMotorbike();
     friend bool login(User &cus, vector<User> &userList);
 
 
