@@ -66,6 +66,8 @@ public:
 
     //to string
     string toStringMotorBike();
+
+    friend class User;
 };
 
 #endif
