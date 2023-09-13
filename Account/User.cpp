@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <regex>
@@ -114,10 +113,12 @@ string User::toStringAccount()
            cityStr;
 }
 
+
 string User::getUserName()
 {
     return Account::getUsername();
 }
+
 string User::getIdType()
 {
     return this->IDtype;
@@ -148,7 +149,7 @@ City User::getCity()
     return this->city;
 }
 
-vector<Motorbike> User::getOwneMotorbike()
+vector<Motorbike> User::getOwnedMotorbike()
 {
     return this->OwnedMotorbikes;
 }
@@ -159,7 +160,7 @@ bool login(User &cus, vector<User> &userList)
     string pass;
     bool usernameFlag = false;
     bool passFlag = false;
-    while (!usernameFlag)
+    while (!usernameFlag) 
     {
         cout << "Enter your username: ";
         getline(cin, username);
@@ -167,45 +168,46 @@ bool login(User &cus, vector<User> &userList)
         if (username.empty())
         {
             cout << "Username cannot be empty! \n";
-        }
-        else
+        } else 
         {
             for (auto &user : userList)
             {
-                if (user.getUserName() == username)
+                if (user.getUserName() == username )
                 {
-                    usernameFlag = true;
+                    usernameFlag= true;
                     break;
                 }
             }
         }
     }
-    cout << "Enter your password: ";
-    getline(cin, pass);
-    for (auto &user : userList)
-    {
-        if (user.getPassword() == pass)
-        {
-            cus = User(username, pass, user.getFullName(),
-                       user.getPhoneNumber(),
-                       user.getIdType(),
-                       user.getIdNum(),
-                       user.getLicenseNum(),
-                       user.getExDate(),
-                       user.getCreditPoint(),
-                       user.getCity());
-            passFlag = true;
-            break;
-        }
-    }
+    cout<< "Enter your password: ";
+    getline(cin,pass);
+        for (auto &user : userList)
+            {
+                if ( user.getPassword() == pass)
+                    {
+                        cus= User(username,pass,user.getFullName(),
+                        user.getPhoneNumber(),
+                        user.getIdType(),
+                        user.getIdNum(),
+                        user.getLicenseNum(),
+                        user.getExDate(),
+                        user.getCreditPoint(),
+                        user.getCity());
+                        passFlag= true;
+                        break;
+                    }
+            }
     system("cls");
-    if (usernameFlag == true && passFlag == true)
-    {
+    if(usernameFlag== true && passFlag== true){
         return true;
-    }
-
+    } 
+    
     return false;
+   
 }
+
+
 
 bool User::addBike(vector<Motorbike> &bikes)
 {
@@ -215,128 +217,104 @@ bool User::addBike(vector<Motorbike> &bikes)
     }
     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     string model, color, enginSize, transmissionmode;
-    string description = "";
+    string description="";
     int yearMade;
-    cout << "Please enter all of needed informations: \n";
-    while (true)
-    {
-        cout << "Enter your model: ";
+    cout<< "Please enter all of needed informations: \n";
+    while(true){
+        cout<< "Enter your model: ";
         getline(cin, model);
-        if (model.empty())
-        {
-            cout << "Password cannot be empty! \n";
-        }
-        else
-        {
+        if(model.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
             break;
         }
     }
-    // color
-    while (true)
-    {
-        cout << "Enter your color: ";
+    //color
+    while(true){
+        cout<< "Enter your color: ";
         getline(cin, color);
-        if (color.empty())
-        {
-            cout << "Password cannot be empty! \n";
-        }
-        else
-        {
+        if(color.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
             break;
         }
     }
 
-    while (true)
-    {
-        cout << "Enter your engine size: ";
+    while(true){
+        cout<< "Enter your engine size: ";
         getline(cin, enginSize);
-        if (enginSize.empty())
-        {
-            cout << "Password cannot be empty! \n";
-        }
-        else
-        {
+        if(enginSize.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
             break;
         }
     }
 
-    while (true)
-    {
-        cout << "Enter year made: ";
-        cin >> yearMade;
+    while (true){
+        cout<< "Enter year made: ";
+        cin>>yearMade;
         cin.ignore();
-        string num = to_string(yearMade);
-        if (!regex_match(num, regexp))
-        {
-            cout << "Invalid input for year made! Please enter agian. ";
-        }
-        else
-        {
+        string num= to_string(yearMade);
+        if(!regex_match(num,regexp)){
+            cout<< "Invalid input for year made! Please enter agian. ";
+        }else{
             break;
         }
     }
-    while (true)
-    {
-        cout << "Enter your transmission mode: ";
+    while(true){
+        cout<< "Enter your transmission mode: ";
         getline(cin, transmissionmode);
-        if (transmissionmode.empty())
-        {
-            cout << "Password cannot be empty! \n";
-        }
-        else
-        {
+        if(transmissionmode.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
             break;
         }
     }
 
-    cout << "Add some description for the bike: ";
-    getline(cin, description);
+    cout<< "Add some description for the bike: ";
+    getline(cin,description);
     std::string cityStr;
     City selectedCity;
 
-    while (true)
-    {
+    while (true) {
         std::cout << "Enter your city (Saigon or Hanoi): ";
         std::cin >> cityStr;
 
         selectedCity = stringToCity(cityStr);
 
-        if (selectedCity != static_cast<City>(-1))
-        {
-            break;
+        if (selectedCity != static_cast<City>(-1)) {
+            break; 
         }
 
         std::cout << "Invalid city. Please enter Saigon or Hanoi.\n";
     }
 
-    int motorbikeID = bikes.size() + 1;
+
+    int motorbikeID= bikes.size()+1;
     int consumingPoints;
-    while (true)
-    {
-        cout << "Enter the price for the bike: ";
-        cin >> consumingPoints;
+    while (true){
+        cout<< "Enter the price for the bike: ";
+        cin>>consumingPoints;
         cin.ignore();
-        string num = to_string(consumingPoints);
-        if (!regex_match(num, regexp))
-        {
-            cout << "Invalid input for year made! Please enter agian. ";
-        }
-        else
-        {
+        string num= to_string(consumingPoints);
+        if(!regex_match(num,regexp)){
+            cout<< "Invalid input for year made! Please enter agian. ";
+        }else{
             break;
         }
     }
-    Motorbike motor(model, motorbikeID,
-                    color, enginSize,
+    Motorbike motor(model,motorbikeID,
+                    color,enginSize,
                     selectedCity,
                     Account::getUsername(),
                     transmissionmode,
                     yearMade,
-                    description, consumingPoints, 0);
+                    description,consumingPoints,0,9);
     bikes.push_back(motor);
     OwnedMotorbikes.push_back(motor);
     return true;
 }
+
 
 void User::addMotorInnitial(Motorbike motor)
 {
@@ -346,254 +324,196 @@ void User::addMotorInnitial(Motorbike motor)
 
 City User::stringToCity(const std::string &cityStr)
 {
-    if (cityStr == "Saigon")
-    {
+    if (cityStr == "Saigon") {
         return City::Saigon;
-    }
-    else if (cityStr == "Hanoi")
-    {
+    } else if (cityStr == "Hanoi") {
         return City::Hanoi;
     }
     return static_cast<City>(-1); // Invalid city, return -1
 }
 
-// register
-bool User::registerAccount(vector<User> &userList)
+
+
+
+
+// register 
+ bool User::registerAccount(vector <User>& userList)
 {
     system("cls");
     string username, password, fullname, phoneNumber, idtype, idnum, licenseNum, licenseExdate;
     double creditpoint;
-    bool flag = true;
-    cout << "Starting to register. \n";
+    bool flag=true;
+    cout<< "Starting to register. \n";
 
-    while (true)
-    {
+    while (true) {
         cout << "Enter your username: ";
         getline(cin, username);
 
-        if (username.empty())
-        {
+        if (username.empty()) {
             cout << "Username cannot be empty! \n";
-        }
-        else
-        {
+        } else {
             bool usernameExists = false;
 
-            for (auto &user : userList)
-            {
-                if (username == user.getUserName())
-                {
+            for ( auto& user : userList) {
+                if (username == user.getUserName()) {
                     usernameExists = true;
-                    break;
+                    break; 
                 }
             }
 
-            if (usernameExists)
-            {
+            if (usernameExists) {
                 cout << "Sorry! Username already exists! Please use another one! \n";
-            }
-            else
-            {
+            } else {
                 break;
             }
         }
     }
 
-    while (true)
-    {
-        cout << "Enter your password: ";
+    while(true){
+        cout<< "Enter your password: ";
         getline(cin, password);
-        if (password.empty())
-        {
-            cout << "Password cannot be empty! \n";
-        }
-        else
-        {
+        if(password.empty()){
+            cout<< "Password cannot be empty! \n";
+        }else{
             break;
         }
     }
 
-    while (true)
-    {
-        cout << "Enter your full name: \n";
+    while(true){
+        cout<< "Enter your full name: \n";
         getline(cin, fullname);
-        if (fullname.empty())
-        {
-            cout << "Full name cannot be empty! \n";
-        }
-        else
-        {
+        if(fullname.empty()){
+            cout<< "Full name cannot be empty! \n";
+        }else{
             break;
         }
     }
 
-    while (true)
-    {
-        cout << "Enter your phone number: \n";
+    while(true){
+        cout<< "Enter your phone number: \n";
         getline(cin, phoneNumber);
-        if (phoneNumber.empty())
-        {
-            cout << "Phone Number cannot be empty! \n";
-        }
-        else
-        {
+        if(phoneNumber.empty()){
+            cout<< "Phone Number cannot be empty! \n";
+        }else{
             break;
+
         }
     }
 
     int choice;
-    while (true)
-    {
-        cout << "Enter your ID type: \n";
-        cout << "Enter 1: Citizen ID \n";
-        cout << "Enter 2: Passport\n";
-        cin >> choice;
+    while(true){
+        cout<< "Enter your ID type: \n";
+        cout<< "Enter 1: Citizen ID \n";
+        cout<< "Enter 2: Passport\n";
+        cin>> choice;
         cin.ignore();
-        string choiceString = to_string(choice);
-        if (choiceString.empty())
-        {
-            cout << "Its cannot be empty! \n";
-        }
-        else
-        {
-            if (choice == 1)
-            {
+        string choiceString= to_string(choice);
+        if(choiceString.empty()){
+            cout<< "Its cannot be empty! \n";
+        }else{
+            if(choice == 1 ){
                 idtype = "Citizen ID";
                 break;
-            }
-            else if (choice == 2)
-            {
+            }else if( choice == 2){
                 idtype = "Passport";
                 break;
-            }
-            else
-            {
-                cout << "Invalid input !\n";
+            }else{
+                cout<< "Invalid input !\n";
             }
         }
     }
 
-    if (choice == 1)
-    {
-        while (true)
-        {
-            cout << "Enter citizen ID: ";
+    if(choice == 1){
+        while(true){
+            cout<< "Enter citizen ID: ";
             getline(cin, idnum);
-            if (idnum.empty())
-            {
-                cout << "Id num cannot be empty!! \n";
-            }
-            else
-            {
+            if(idnum.empty()){
+                cout<< "Id num cannot be empty!! \n";
+            }else{
                 break;
             }
         }
-    }
-    else if (choice == 2)
-    {
-        while (true)
-        {
-            cout << "Enter passport: ";
+    }else if(choice == 2){
+        while(true){
+            cout<< "Enter passport: ";
             getline(cin, idnum);
-            if (idnum.empty())
-            {
-                cout << "Id num cannot be empty!! \n";
-            }
-            else
-            {
+            if(idnum.empty()){
+                cout<< "Id num cannot be empty!! \n";
+            }else{
                 break;
             }
         }
     }
 
-    while (true)
-    {
-        cout << "Enter your expiry date: \n";
+    while(true){
+        cout<< "Enter your expiry date: \n";
         getline(cin, licenseExdate);
-        if (licenseExdate.empty())
-        {
-            cout << "License Expiry Date cannot be empty! \n";
-        }
-        else
-        {
+        if(licenseExdate.empty()){
+            cout<< "License Expiry Date cannot be empty! \n";
+        }else{
             break;
         }
     }
 
-    while (true)
-    {
-        cout << "Enter your license number: \n";
+    while(true){
+        cout<< "Enter your license number: \n";
         getline(cin, licenseNum);
-        if (licenseNum.empty())
-        {
-            cout << "License Number cannot be empty! \n";
-        }
-        else
-        {
+        if(licenseNum.empty()){
+            cout<< "License Number cannot be empty! \n";
+        }else{
             break;
         }
     }
     std::string cityStr;
     City selectedCity;
 
-    while (true)
-    {
+    while (true) {
         std::cout << "Enter your city (Saigon or Hanoi): ";
         std::cin >> cityStr;
 
         selectedCity = stringToCity(cityStr);
 
-        if (selectedCity != static_cast<City>(-1))
-        {
-            break;
+        if (selectedCity != static_cast<City>(-1)) {
+            break; 
         }
 
         std::cout << "Invalid city. Please enter Saigon or Hanoi.\n";
     }
 
     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
-    bool addSuccess = false;
-    while (true)
-    {
-        cout << "In order to register, you need to add to your balance (At least 20$ for first register)\n";
-        cout << "Please enter the money you want to add: ";
-        cin >> creditpoint;
+    bool addSuccess=false;
+    while(true){
+        cout<< "In order to register, you need to add to your balance (At least 20$ for first register)\n";
+        cout<< "Please enter the money you want to add: ";
+        cin>> creditpoint;
         cin.ignore();
         string creditToString = to_string(creditpoint);
-        if (!regex_match(creditToString, regexp))
-        {
-            cout << "Invalid input! Please input the right amount of money!\n ";
-        }
-        else
-        {
-            if (creditpoint >= 20)
-            {
-                cout << "Register successfully! You can now log in to the program\n";
+        if(!regex_match(creditToString, regexp)){
+            cout<< "Invalid input! Please input the right amount of money!\n ";
+        }else{
+            if(creditpoint >= 20){
+                cout<<"Register successfully! You can now log in to the program\n";
                 addSuccess = true;
                 break;
-            }
-            else
-            {
+            }else{
                 char decision;
-                cout << "You can only add at least 20$ to sign up for the first time! \n";
-                cout << "Continue? (Y/N)";
-                cin >> decision;
+                cout<< "You can only add at least 20$ to sign up for the first time! \n";
+                cout<< "Continue? (Y/N)";
+                cin>> decision;
                 cin.ignore();
-                if (decision == 'Y' || decision == 'y')
-                {
-                    cout << "Please do as the instruction\n";
-                }
-                else if (decision == 'N' || decision == 'n')
-                {
-                    cout << "Thank you for your time! See you again! \n";
+                if(decision == 'Y' || decision == 'y'){
+                    cout<< "Please do as the instruction\n";
+                }else if(decision == 'N' || decision == 'n'){
+                    cout<< "Thank you for your time! See you again! \n";
                     break;
                 }
             }
         }
     }
 
-    if (addSuccess)
-    {
+    
+
+    if(addSuccess){
         User user23(username, password, fullname, phoneNumber, idtype, idnum, licenseNum, licenseExdate, creditpoint, selectedCity);
         userList.push_back(user23);
         return true;
@@ -602,47 +522,33 @@ bool User::registerAccount(vector<User> &userList)
     return false;
 }
 
-// end register
+// end register 
 
-// TODO: make the algorithm between rateUser and rateMotorbike the same
-void User::rateUser(User &ratedUser, float score, const std::string comment)
-{
+void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike, float userScore, float motorbikeScore, std::string userComment, std::string motorbikeComment) {
 
-   // UserRating rating(ratedUser.getUserName(), score, comment);
+    UserRating userRate(ratedUser.getUserName(), userScore, userComment);
+    ratedUser.userRatings.push_back(userRate);
 
-    //ratedUser.userRatings.push_back(rating);
+    MotorbikeRating motorbikeRate(ratedMotorbike.getMotorbikeId(), motorbikeScore, motorbikeComment);
+    ratedMotorbike.ratings.push_back(motorbikeRate);
 
-    //float totalRating = 0;
-    //for (const UserRating &rating : ratedUser.userRatings)
-    //{
-        //totalRating += rating.getScore();
-    //}
+}
 
-    //float averageRating = totalRating / ratedUser.userRatings.size();
-
-    // TODO: Add a function to get average rating in rating class
-};
-
-// void User::rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment)
-// {
-//     MotorbikeRating rating(ratedMotorbike.motorbikeID, score, comment);
-
-//     // ratedMotorbike.addRating(rating);
-// };
 // listMotorbike()
 // unlistMotorbike()
 void User::searchAvailableMotorbikes(){};
 
-// void *User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+// void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 // {
-//     Request request(this->getUserName(), motorbike.getMotorbikeId(), timeSlot, RequestStatus::PENDING);
+//     Request request(this, &motorbike, timeSlot);
 //     motorbike.addRequest(request);
 // }
 
-void User::viewRequests(){};
+void User::viewRequests(){
+    
+};
 
-// void User::acceptRequest(vector<Request> &requests, Request request)
-// {
+// void User::acceptRequest(vector<Request> &requests, Request request){
 //     // 1. change the request status to Accepted
 //     request.setStatus(RequestStatus::ACCEPTED);
 
@@ -651,15 +557,37 @@ void User::viewRequests(){};
 //     // motorbikeToRequest->setAvailability(false);
 
 //     // 3. payment from the requester
-
+    
 //     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+
 // };
+
 
 // listMotorbike()
 // unlistMotorbike()
 
 
+// void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+// {
+//     // Request request(this, &motorbike, timeSlot);
+//     //motorbike.addRequest(request);
+// }
 
+// void User::viewRequests(){};
+
+// void User::acceptRequest(vector<Request> &requests, Request request){
+//     // 1. change the request status to Accepted
+//    request.setStatus(RequestStatus::ACCEPTED);
+
+//   // 2. change the availability of the motorbike
+// //   Motorbike* motorbikeToRequest = request.getMotorbike();
+// // motorbikeToRequest->setAvailability(false);
+
+// // 3. payment from the requester
+    
+// // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+
+// };
 
 
 // vector<Motorbike> User::addOwnedMotorbike(Motorbike bike)
@@ -676,3 +604,5 @@ void User::viewRequests(){};
 // {
 //     return vector<Request>();
 // }
+
+

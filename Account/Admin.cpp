@@ -103,3 +103,54 @@ void Admin::setAdminID(string adminID)
 {
     this->adminID = adminID;
 }
+
+bool Admin::adminLogin() {
+	//Temporary admin user and pass
+	string providedAdminUsername = "admin"; 
+	string providedAdminPass = "admin";
+	//What the user enters
+	string username; 
+	string pass;
+	bool usernameFlag = false;
+	bool passFlag = false;
+
+//Check username
+while (!usernameFlag) {
+	cout << "Enter admin username: ";
+	getline(cin, username);
+
+	if (username.empty()) 
+	{
+		cout << "Username cannot be empty!\n";
+	}
+	else
+		{
+		if (username.compare(providedAdminUsername) == 0) 
+		{
+		usernameFlag = true;
+		break;
+		}
+	}
+}
+
+//Check password
+while (!passFlag) {
+	cout << "Enter admin password: ";
+	getline(cin, pass);
+	if (pass.compare(providedAdminPass) == 0)
+	{
+	passFlag = true;
+	break;
+	} 
+	else 
+	{
+		cout << "Incorrect password!\n";
+	}
+}
+	system("cls");
+	if (usernameFlag == true && passFlag == true)
+	{
+		return true;
+	}
+	return false;
+}

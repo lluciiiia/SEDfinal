@@ -53,7 +53,7 @@ vector<User> saveToFile::loadAccount(vector<Motorbike> &moto)
     for(auto &user : users){
         for(auto &mot : moto){
             if(user.getUsername() == mot.getOwner()){
-                user.getOwneMotorbike().push_back(mot);
+                user.getOwnedMotorbike().push_back(mot);
             }
         }
     }
@@ -89,11 +89,12 @@ vector<Motorbike> saveToFile::loadMotor()
             tokens.push_back(token);
         }
 
-        if(tokens.size()== 11){
+        if(tokens.size()== 12){
             int motorBike= stoi(tokens[1]);
             int yearMade= stoi(tokens[7]);
             double consumingPoints= stod(tokens[9]);
             double retalAmount = stod(tokens[10]);
+            double minRating= stod(tokens[11]);
             City myCity;
             if (tokens[4] == "Saigon")
             {
@@ -103,7 +104,7 @@ vector<Motorbike> saveToFile::loadMotor()
             {
                 myCity = City::Hanoi;
             }
-            Motorbike motor = Motorbike(tokens[0], motorBike, tokens[2], tokens[3], myCity, tokens[5], tokens[6], yearMade, tokens[8], consumingPoints, retalAmount);
+            Motorbike motor = Motorbike(tokens[0], motorBike, tokens[2], tokens[3], myCity, tokens[5], tokens[6], yearMade, tokens[8], consumingPoints, retalAmount,minRating);
             motors.push_back(motor);
 
         }

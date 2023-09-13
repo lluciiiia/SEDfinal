@@ -19,7 +19,8 @@ public:
           string fullName,
           string phoneNumber,
           string adminID);
-
+    
+    bool adminLogin(); 
     void viewMemberInfo(User user);
     void viewMotorbikeInfo(vector<Motorbike> &bikes);
     void viewAccounts(vector<User> &users);

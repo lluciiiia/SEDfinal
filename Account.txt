@@ -1,5 +1,8 @@
 john_doe,password123,John Doe,1234567890,Passport,ID12345,License67890,2023-12-31,100.000000,Saigon
 alice_smith,securePass123,Alice Smith,9876543210,Driver's License,DL6789,License98765,2023-11-30,150.000000,Saigon
 phatnamki123,phat123,huynh tan hpat,1238,Citizen ID,askldjf123,als;kd123,12/2202,20.000000,Hanoi
-phat1,1234,Huynh tan phat,0703564489,Citizen ID,192831123,12831238,09/31,21.000000,Hanoi
+phat1,123,Huynh tan phat,0703564489,Citizen ID,192831123,12831238,09/31,21.000000,Hanoi
 phat,1234,jaja,182391283,Passport,190283890132,1928381239,08/23,21.000000,Saigon
+lucia,yoyo,Seokyung Kim,12903821,Passport,123,23,23,234567765432.000000,Saigon
+bruh,bruh,bruh,213,Passport,2323,23,232,12345.000000,Hanoi
+hanoimem,yo,kimkim,2134567,Citizen ID,232,123,23-11-11,2345678.000000,Hanoi
