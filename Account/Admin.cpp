@@ -1,5 +1,7 @@
 #include "Admin.h"
 #include <iostream>
+#include <cstdlib>
+#include <iomanip>
 
 using namespace std;
 
@@ -34,27 +36,25 @@ void Admin::viewMemberInfo(User user)
     cout << "\n";
 }
 
-// Make change parameter -> vector
-void Admin::viewMotorbikeInfo(Motorbike motorbike)
+
+void Admin::viewMotorbikeInfo(vector<Motorbike> &bikes)
 {
-    // model, motorbikeID, color, engineSize, city, owner, transmissionMode, yearMade , description, consumingPoints, rentalAmount, motorbikeRating, requests, availability
-    
-    // those attributes are private cannot access directly like that
-    
-    // cout << "\nMotorbike information:\n";
-    // cout << "Model: " << motorbike.getMode() << endl;
-    // cout << "Motorbike ID: " << motorbike.getMotorbikeId() << endl;
-    // cout << "Color: " << motorbike. << endl;
-    // cout << "Engine size: " << motorbike.engineSize << endl;
-    // cout << "City: " << __STRINGIFY(motorbike.city) << endl;
-    // cout << "Owner name: " << motorbike.owner << endl;
-    // cout << "Transmission mode: " << motorbike.transmissionMode << endl;
-    // cout << "Year made: " << motorbike.yearMade << endl;
-    // cout << "Description: " << motorbike.description << endl;
-    // cout << "Consuming points: " << motorbike.consumingPoints << endl;
-    // cout << "Rental amount: " << motorbike.rentalAmount << endl;
-    // cout << "Rating: " << motorbike.motorbikeRating << endl;
-    // cout << "Availability: " << motorbike.getAvailability()<< endl;
+   cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
+    cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
+    for (Motorbike &bike : bikes)
+    {
+        string cityStr = cityToString(bike.getCity());
+        cout << left << setw(12) << bike.getMotorbikeId()
+             << setw(20) << bike.getModel()
+             << setw(10) << bike.getColor()
+             << setw(10) << bike.getEngine()
+             << setw(15) << bike.getOwner()
+             << setw(12) << bike.getYear()
+             << setw(20) << bike.getDes()
+             << setw(8) << bike.getRating()
+             << setw(8) << cityStr
+             << endl;
+    }
 }
 
 // View a specific account (Might change parameter -> vector)

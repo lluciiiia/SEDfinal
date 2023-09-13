@@ -22,7 +22,7 @@ public:
     
     bool adminLogin(); 
     void viewMemberInfo(User user);
-    void viewMotorbikeInfo(Motorbike motorbike);
+    void viewMotorbikeInfo(vector<Motorbike> &bikes);
     void viewAccounts(Account account);
 
     string getAdminID() const;
