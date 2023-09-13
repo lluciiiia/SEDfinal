@@ -19,9 +19,8 @@ public:
           string fullName,
           string phoneNumber,
           string adminID);
-
-    //Need to implment adminList, maybe have a file containing pre-provided admin info and load from that file
-    bool login(); 
+    
+    bool adminLogin(); 
     void viewMemberInfo(User user);
     void viewMotorbikeInfo(Motorbike motorbike);
     void viewAccounts(Account account);
