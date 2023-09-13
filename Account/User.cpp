@@ -524,10 +524,16 @@ City User::stringToCity(const std::string &cityStr)
 
 // end register 
 
+void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike, float userScore, float motorbikeScore, std::string userComment, std::string motorbikeComment) {
 
+    UserRating userRate(ratedUser.getUserName(), userScore, userComment);
+    ratedUser.userRatings.push_back(userRate);
 
-// void User::rateUser(){};
-// void User::rateMotorbike(){}
+    MotorbikeRating motorbikeRate(ratedMotorbike.getMotorbikeId(), motorbikeScore, motorbikeComment);
+    ratedMotorbike.ratings.push_back(motorbikeRate);
+
+}
+
 // listMotorbike()
 // unlistMotorbike()
 void User::searchAvailableMotorbikes(){};
