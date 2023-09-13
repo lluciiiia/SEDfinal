@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
+#include <regex>
 // #include "Borrow.h"
 
 using namespace std;
@@ -20,7 +21,7 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
 void viewGuestBikeDash(vector<Motorbike> &bikes, string city);
 void viewBikeDash(User &user, vector<Motorbike> &bikes);
 void displayUserInfo(User &user, vector<User> &userList);
-
+void addCredit(User &user, vector<User> &userList);
 int main()
 {
     User user;
@@ -188,12 +189,12 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
         system("cls");
         string model;
-        if (!user.getOwnedMotorbike().empty()) {
-            model = user.getOwnedMotorbike()[0].getModel();
-            cout << "Motorbike model: " << model << endl;
-        } else {
-            cout << "No owned motorbikes." << endl;
-        }
+        // if (!user.getOwnedMotorbike().empty()) {
+        //     model = user.getOwnedMotorbike()[0].getModel();
+        //     cout << "Motorbike model: " << model << endl;
+        // } else {
+        //     cout << "No owned motorbikes." << endl;
+        // }
 
         for (auto &bike : bikes)
         {
@@ -208,11 +209,12 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         cout << "|==========================|  Credit point: " << user.getCreditPoint() << "\n";
         cout << "| 1. View your bio         |  Your owned bike: " << model << "\n";
         cout << "| 2. Add your motorbike    |\n";
-        cout << "| 3. View Bikes to rent    |\n";
-        cout << "| 4. View request          |\n";
-        cout << "| 5. Logout                |\n";
+        cout << "| 3. Add credit points     |\n";
+        cout << "| 4. View Bikes to rent    |\n";
+        cout << "| 5. View request          |\n";
+        cout << "| 6. Logout                |\n";
         cout << "|==========================|\n";
-        cout << "Enter your choice (1-5): ";
+        cout << "Enter your choice (1-6): ";
 
         cin >> choice;
         cin.ignore(); // Consume the newline character
@@ -232,13 +234,16 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
             break;
         case 3:
-            viewBikeDash(user, bikes);
+            addCredit(user,userList);
 
             break;
         case 4:
             
             break;
         case 5:
+            viewBikeDash(user, bikes);
+            break;
+        case 6: 
             user = User();
             dashboardRun = true;
             cout << "Logging out...\n";
@@ -419,4 +424,36 @@ void displayUserInfo(User &user, vector<User> &userList)
     }
 }
 
+}
+
+void addCredit(User &user, vector<User> &userList)
+{
+    string input;
+    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+    while (true) {
+        cout << "Enter amount of points (Q to quit): ";
+        getline(cin, input);
+        if (input == "Q" || input == "q") {
+            break;
+        } else {
+            if (!regex_match(input, regexp)) {
+                cout << "Invalid input! Please enter again!";
+            } else {
+                double credit = stod(input);
+                if (credit <= 0) {
+                    cout << "Please input a valid amount. \n";
+                } else {
+                    user.setCreditPoint(user.getCreditPoint() + credit);
+                    for (auto& u : userList) {
+                        if (user.getUserName() == u.getUserName()) {
+                            u.setCreditPoint(u.getCreditPoint() + credit);
+                            cout << "Add money successfully! ";
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
 }

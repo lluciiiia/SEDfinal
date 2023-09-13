@@ -49,6 +49,7 @@ public:
     // listMotorbike()
     // unlistMotorbike()
     void searchAvailableMotorbikes();
+    void setCreditPoint(double credit);
     void requestToRent(Motorbike &motorbike, TimeSlot timeSlot);
     void viewRequests();
     void acceptRequest(vector<Request> &requests, Request request);

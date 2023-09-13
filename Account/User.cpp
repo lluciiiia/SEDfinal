@@ -511,7 +511,10 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike, floa
 
 // listMotorbike()
 // unlistMotorbike()
-void User::searchAvailableMotorbikes(){};
+void User::searchAvailableMotorbikes(){}
+void User::setCreditPoint(double credit){
+    this->creditPoint= credit;
+};
 
 // void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 // {
