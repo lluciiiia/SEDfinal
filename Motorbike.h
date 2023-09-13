@@ -46,6 +46,7 @@ public:
     string getModel();
     string getColor();
     string getEngine();
+    City getCity();
     string getOwner();
     int getYear();
     string getDes();
