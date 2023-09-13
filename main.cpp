@@ -1,4 +1,5 @@
 #include "Account/User.h"
+#include "Account/Admin.h"
 #include "savingToFile.h"
 #include "Account/Account.h"
 #include "City.h"
@@ -25,6 +26,7 @@ void displayUserInfo(User &user, vector<User> &userList);
 int main()
 {
     User user;
+    Admin admin;
     saveToFile fileSave;
     vector<Motorbike> motorbikeList = fileSave.loadMotor();
     vector<User> userList = fileSave.loadAccount(motorbikeList);
@@ -51,7 +53,7 @@ int main()
          << "\n";
     cout << "s3939114, Student Name: Seokyung Kim"
          << "\n";
-    cout << "s3929218, Student Name: Huynh Tan Phat"
+    cout << "s3978268, Student Name: Nguyen Hoang Duy"
          << "\n";
     cout << "s3929218, Student Name: Huynh Tan Phat"
          << "\n\n\n";
@@ -99,8 +101,13 @@ int main()
             cout << "Logging in as a Admin \n";
             cout << "Your are on a Admin Mode.\n";
 
-            admin_dashboard(motorbikeList, userList);
-            system("cls");
+            if ( admin.adminLogin() ) {
+                admin_dashboard(motorbikeList, userList);
+                system("cls");
+            } 
+            else {
+                cout << "Login failed! Incorrect admin username/password\n";
+            }
             break;
         }
         case 4:

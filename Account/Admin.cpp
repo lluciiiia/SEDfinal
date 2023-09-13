@@ -100,7 +100,7 @@ while (!usernameFlag) {
 	}
 	else
 		{
-		if (username.compare(providedUsername) == 0) 
+		if (username.compare(providedAdminUsername) == 0) 
 		{
 		usernameFlag = true;
 		break;
@@ -109,10 +109,10 @@ while (!usernameFlag) {
 }
 
 //Check password
-while (!passwordFlag) {
+while (!passFlag) {
 	cout << "Enter admin password: ";
 	getline(cin, pass);
-	if (pass.compare(providedPass) == 0)
+	if (pass.compare(providedAdminPass) == 0)
 	{
 	passFlag = true;
 	break;
