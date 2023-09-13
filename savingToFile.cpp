@@ -53,7 +53,7 @@ vector<User> saveToFile::loadAccount(vector<Motorbike> &moto)
     for(auto &user : users){
         for(auto &mot : moto){
             if(user.getUsername() == mot.getOwner()){
-                user.getOwneMotorbike().push_back(mot);
+                user.getOwnedMotorbike().push_back(mot);
             }
         }
     }
