@@ -499,14 +499,34 @@ City User::stringToCity(const std::string &cityStr)
 
 // end register 
 
-void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike, float userScore, float motorbikeScore, std::string userComment, std::string motorbikeComment) {
+//Rate user and motorbike 
+void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike) {
+    //Variables for score and comment
+    float userScore = 0, motorbikeScore = 0;
+    string userComment = "", motorbikeComment = "";
 
+    //Rate user
+    cout << "Enter score for user: ";
+    cin >> userScore;
+    cin.ignore();
+    cout << "Enter comment for user: ";
+    getline(cin, userComment);
+    cout << endl;
+
+    //Rate motorbike
+    cout << "Enter score for motorbike: ";
+    cin >> motorbikeScore;
+    cin.ignore();
+    cout << "Enter comment for motorbike " << ratedMotorbike.getMotorbikeId() << ": ";
+    getline(cin, motorbikeComment);
+    cout << endl;
+    
+    //Adding rating to list
     UserRating userRate(ratedUser.getUserName(), userScore, userComment);
     ratedUser.userRatings.push_back(userRate);
 
     MotorbikeRating motorbikeRate(ratedMotorbike.getMotorbikeId(), motorbikeScore, motorbikeComment);
     ratedMotorbike.ratings.push_back(motorbikeRate);
-
 }
 
 // listMotorbike()
