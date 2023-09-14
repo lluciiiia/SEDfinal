@@ -56,10 +56,6 @@ public:
     bool addBike(vector<Motorbike> &bikes);
     void addMotorInnitial(Motorbike motor);
     City stringToCity(const std::string& cityStr);
-    bool login(User &cus);
-    bool login(const string &username,
-                 const string &pass,
-                 vector<User> &userList);
     // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
     // vector <Motorbike> rentBikes();
     // vector <Request> receiveRequest();

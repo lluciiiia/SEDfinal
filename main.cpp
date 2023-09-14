@@ -109,6 +109,22 @@ int main()
                 cout<< "Bye! See you later!! \n";
                 break;
             }
+<<<<<<< Updated upstream
+=======
+            break;
+        }
+        case 5:
+        {
+            exitProgram = true;
+            cout << "Bye! See you later!! \n";
+            break;
+        }
+        default:{
+            cout<< "Invalid input! Please try again. \n";
+            cin>> choice;
+            cin.ignore();
+        }
+>>>>>>> Stashed changes
         }
     }
 
@@ -128,10 +144,65 @@ int main()
 
 void user_dashboard(User &user, vector<Motorbike> &bikes){
     int choice;
+<<<<<<< Updated upstream
     bool dashboardRun= false;
     
     while (!dashboardRun) {
     
+=======
+    bool dashboardRun = false;
+
+    while (!dashboardRun)
+    {
+
+        system("cls");
+        // Display the user dashboard menu
+        cout << "|==========================|\n";
+        cout << "|      Guest Dashboard     |  Hello, Guest\n";
+        cout << "|==========================| \n";
+        cout << "| 1. View Bikes in Ha Noi  |  You can only view motorbikes by cities\n";
+        cout << "| 2. View Bikes in Saigon  |\n";
+        cout << "| 3. Logout                |\n";
+        cout << "|==========================|\n";
+        cout << "Enter your choice (1-3): ";
+
+        cin >> choice;
+        cin.ignore(); // Consume the newline character
+
+        switch (choice)
+        {
+        case 1:
+            viewGuestBikeDash(bikes, "Ha noi"); // TODO: Ha noi
+            break;
+        case 2:
+            viewGuestBikeDash(bikes, "Saigon"); // TODO: Ho Chi Minh
+            break;
+        case 3:
+
+            dashboardRun = true;
+            cout << "Logging out...\n";
+            break;
+        default:
+             cout << "Invalid input! Please try again. \n";
+            cin.clear();          // Clear error flags
+            cin.ignore(10000, '\n');
+            break;
+        }
+        // Pause to allow the user to read the message
+        cout << "Press Enter to continue...";
+        cin.ignore();
+    }
+}
+
+void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList)
+{
+    int choice;
+    bool dashboardRun = false;
+
+    while (!dashboardRun)
+    {
+
+>>>>>>> Stashed changes
         system("cls");
         string model;
          for(auto &bike : bikes){
