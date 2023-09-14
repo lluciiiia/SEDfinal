@@ -595,6 +595,7 @@ bool User::processPayment(User &requester, Request request) {
 }
 
 //error on request
+
 // double User::calculateRentalAmount(Request request) {
 //     TimeSlot timeSlot = request.getTimeSlot();
 //     string startTime = timeSlot.getStartTime();
@@ -610,6 +611,7 @@ bool User::processPayment(User &requester, Request request) {
 // }
 
 //error on strptime
+
 // int User::calculateDaysBetweenDates(const std::string &start, const std::string &end) {
 //     struct tm start_tm;
 //     struct tm end_tm;
@@ -635,6 +637,7 @@ bool User::processPayment(User &requester, Request request) {
 // }
 
 //error on request
+
 // void User::acceptRequest(User &requester, vector<Request> &requests, Request request) {
 //     // 1. Payment from the requester (top-up/credits)
 //     bool paymentSuccessful = processPayment(requester, request);
