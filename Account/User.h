@@ -28,10 +28,10 @@ private:
 
 public:
     User();
-    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> userRatings, double creditPoint);
+    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> userRatings, double creditPoint,vector <Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint);
+    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city,vector <Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
-    
     string toStringAccount();
     string getUserName();
     string getIdType();
@@ -41,6 +41,7 @@ public:
     double getCreditPoint();
     City getCity();
     vector<Motorbike> getOwnedMotorbike();
+    vector<Motorbike>& getOwned();
     friend bool login(User &cus, vector<User> &userList);
 
 
@@ -48,11 +49,12 @@ public:
     // listMotorbike()
     // unlistMotorbike()
     void searchAvailableMotorbikes();
+    void setCreditPoint(double credit);
     void requestToRent(Motorbike &motorbike, TimeSlot timeSlot);
     void viewRequests();
     void acceptRequest(vector<Request> &requests, Request request);
 
-    void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike, float userScore, float motorbikeScore, std::string userComment, std::string motorbikeComment);
+    void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
     bool addBike(vector<Motorbike> &bikes);
     void addMotorInnitial(Motorbike motor);
     City stringToCity(const std::string& cityStr);
