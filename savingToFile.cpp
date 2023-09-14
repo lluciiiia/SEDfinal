@@ -117,9 +117,18 @@ vector<Motorbike> saveToFile::loadMotor()
     return motors;
 }
 
-// void saveToFile::SaveRequestToFIle(vector<Request> &request)
-// {
-// }
+void saveToFile::SaveRequestToFIle(vector<Request> &request)
+{
+    ofstream myFile(requestFile);
+    if(myFile.is_open()){
+        for(Request &re: request){
+                myFile << re.requestToString()<<"\n";
+        }
+        myFile.close();
+    }else{
+        cerr<< "Error opening account file";
+    }
+}
 
 // vector<Request> saveToFile::loadRequest()
 // {

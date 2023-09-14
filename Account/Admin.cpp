@@ -70,21 +70,16 @@ void Admin::viewAccounts(vector<User> &users)
          << setw(15) << "City"
          << setw(15) << "Owned motorbike" << endl;
 
-    cout << setfill('-') << setw(170) << "-" << setfill(' ') << endl;
+    cout << setfill('-') << setw(200) << "-" << setfill(' ') << endl;
 
     for (User &user : users)
     {
-        
         string city = cityToString(user.getCity());
-        vector<Motorbike> motorbikes = user.getOwned();
-        string motorbikeModel;
-
-        if (!motorbikes.empty()) {
-            for (int i = 0; i < motorbikes.size(); i++) {
-                    motorbikeModel = motorbikes[i].getModel();
-
-    }
-}
+        vector<Motorbike> motorbikes = user.getOwnedMotorbike();
+        string motorbikeModel = "";
+        if (motorbikes.size() > 0) {
+            motorbikeModel = motorbikes[0].getModel();
+        };
         cout << left << setw(30) << user.getUserName()
              << setw(20) << user.getFullName()
              << setw(15) << user.getPhoneNumber()

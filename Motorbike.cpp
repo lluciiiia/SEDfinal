@@ -63,6 +63,10 @@ string Motorbike::getDes()
 
 double Motorbike::getRating()
 {
+        if (ratings.size() == 0)
+        {
+                return 0.0;
+        }
         double average = 0;
         double total = 0;
         for (auto rating : ratings)

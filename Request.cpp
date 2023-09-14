@@ -52,6 +52,32 @@ void Request::setTimeSlot(TimeSlot timeslot)
     this->timeSlot = timeSlot;
 }
 
+string Request::requestToString()
+{
+    string requestSta;
+    switch(this->status){
+        case RequestStatus::PENDING:
+        requestSta= "PENDING";
+        break;
+        case RequestStatus::ACCEPTED:
+        requestSta= "ACCEPTED";
+        break;
+        case RequestStatus::REJECTED:
+        requestSta= "REJECTED";
+        break;
+        default:
+        requestSta= "UNKNOWN"; 
+        break;
+    }
+    
+    return this->requester+","+
+            to_string(this->motorbike)+","+
+            requestSta+","+
+            timeSlot.getStartTime()+","+
+            timeSlot.getEndTime()+",";
+    
+}
+
 void Request::showInfo()
 {
     cout << "Requester: " << requester<< "\n";
