@@ -32,7 +32,7 @@ public:
     void setMotorbike(string motorbike);
     void setStatus(RequestStatus status);
     void setTimeSlot(TimeSlot timeSlot);
-
+    string requestToString();
     void showInfo();
 };
 
