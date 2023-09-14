@@ -1,4 +1,3 @@
-
 #include "Account/User.h"
 #include "Account/Admin.h"
 #include "savingToFile.h"
@@ -246,7 +245,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             viewBikeDash(user, bikes);
             break;
         case 5:
-
+            viewBikeDash(user, bikes);
             break;
         case 6:
             user = User();
@@ -428,7 +427,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes)
                  << setw(12) << bike.getYear()
                  << setw(20) << bike.getDes()
                  << setw(8) << bike.getRating()
-                 //TODO: add city
+                 // TODO: add city
                  << endl;
         }
     }
@@ -440,6 +439,51 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes)
         cin.ignore();
     }
 }
+
+void addCredit(User &user, vector<User> &userList)
+{
+    string input;
+    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+    while (true)
+    {
+        cout << "Enter amount of points (Q to quit): ";
+        getline(cin, input);
+        if (input == "Q" || input == "q")
+        {
+            break;
+        }
+        else
+        {
+            if (!regex_match(input, regexp))
+            {
+                cout << "Invalid input! Please enter again!";
+            }
+            else
+            {
+                double credit = stod(input);
+                if (credit <= 0)
+                {
+                    cout << "Please input a valid amount. \n";
+                }
+                else
+                {
+                    user.setCreditPoint(user.getCreditPoint() + credit);
+                    for (auto &u : userList)
+                    {
+                        if (user.getUserName() == u.getUserName())
+                        {
+                            u.setCreditPoint(u.getCreditPoint() + credit);
+                            cout << "Add money successfully! ";
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+}
+
 
 void displayUserInfo(User &user, vector<User> &userList)
 {
@@ -500,50 +544,6 @@ void displayUserInfo(User &user, vector<User> &userList)
 
         case 2:
             return;
-        }
-    }
-}
-
-void addCredit(User &user, vector<User> &userList)
-{
-    string input;
-    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
-    while (true)
-    {
-        cout << "Enter amount of points (Q to quit): ";
-        getline(cin, input);
-        if (input == "Q" || input == "q")
-        {
-            break;
-        }
-        else
-        {
-            if (!regex_match(input, regexp))
-            {
-                cout << "Invalid input! Please enter again!";
-            }
-            else
-            {
-                double credit = stod(input);
-                if (credit <= 0)
-                {
-                    cout << "Please input a valid amount. \n";
-                }
-                else
-                {
-                    user.setCreditPoint(user.getCreditPoint() + credit);
-                    for (auto &u : userList)
-                    {
-                        if (user.getUserName() == u.getUserName())
-                        {
-                            u.setCreditPoint(u.getCreditPoint() + credit);
-                            cout << "Add money successfully! ";
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
         }
     }
 }
