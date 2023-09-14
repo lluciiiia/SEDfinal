@@ -59,7 +59,7 @@ int main()
         int choice;
         cout << "MOTORBIKE RENTAL APPLICATION."
              << "\n\n";
-        cout << "Use the app as 1. Guest  2. Member  3.Admin  4.Register  5. Exit the program\n\n";
+        cout << "Login as: \n1. Guest  \n2. Member  \n3. Admin  \n4. Register  \n5. Exit the program\n\nEnter your choice: ";
         cin >> choice;
         cin.ignore();
         switch (choice)
