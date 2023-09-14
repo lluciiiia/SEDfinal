@@ -1,3 +1,4 @@
+
 #include "Account/User.h"
 #include "Account/Admin.h"
 #include "savingToFile.h"
@@ -16,17 +17,19 @@
 using namespace std;
 
 void guest_dashboard(vector<Motorbike> &bikes);
-void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList);
+void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList,vector<Request> &requests);
 void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userList);
 void viewGuestBikeDash(vector<Motorbike> &bikes, string city);
-void viewBikeDash(User &user, vector<Motorbike> &bikes);
+void viewBikeDash(User &user, vector<Motorbike> &bikes,vector<Request> requests);
 void displayUserInfo(User &user, vector<User> &userList);
 void addCredit(User &user, vector<User> &userList);
+void searchDisPlay(User &user, vector<Motorbike> &bikes);
 int main()
 {
     User user;
     Admin admin;
     saveToFile fileSave;
+    vector <Request> requests;
     vector<Motorbike> motorbikeList = fileSave.loadMotor();
     vector<User> userList = fileSave.loadAccount(motorbikeList);
 
@@ -80,7 +83,7 @@ int main()
             cout << "Your are logging in.\n";
             if (login(user, userList))
             {
-                user_dashboard(user, motorbikeList, userList);
+                user_dashboard(user, motorbikeList, userList,requests);
                 system("cls");
             }
             else
@@ -131,6 +134,7 @@ int main()
 
     fileSave.SaveAccountToFile(userList);
     fileSave.SaveMotobikeToFile(motorbikeList);
+    fileSave.SaveRequestToFIle(requests);
     return 0;
 }
 
@@ -179,7 +183,7 @@ void guest_dashboard(vector<Motorbike> &bikes)
     }
 }
 
-void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList)
+void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &request)
 {
     int choice;
     bool dashboardRun = false;
@@ -238,10 +242,10 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
             break;
         case 4:
-            
+            viewBikeDash(user, bikes, request);
             break;
         case 5:
-            viewBikeDash(user, bikes);
+            
             break;
         case 6: 
             user = User();
@@ -340,15 +344,18 @@ void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
     }
 }
 
-void viewBikeDash(User &user, vector<Motorbike> &bikes)
+void viewBikeDash(User &user, vector<Motorbike> &bikes,vector<Request> requests)
 {
     system("cls");
-    int choice;
-    bool dashboardRun = false;
-    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
-    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+    int choice; 
+    bool dashboardRun= false;
+
+    while(!dashboardRun){
+        cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
+        cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
     for (Motorbike &bike : bikes)
     {
+        // TODO: city filter!!
         cout << left << setw(12) << bike.getMotorbikeId()
              << setw(20) << bike.getModel()
              << setw(10) << bike.getColor()
@@ -359,13 +366,31 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes)
              << setw(8) << bike.getRating()
              << endl;
     }
-    while (!dashboardRun)
-    {
+    cout<<"\n\n";
+    cout<< "1.Search for the bike. \n";
+    cout<< "2.Rent a bike. \n";
+    cout<< "3.Exit\n";
+    cout<< "Enter your choice(1-3): ";
+    cin>>choice;
+    cin.ignore();
+    switch(choice){
+        case 1: 
+            searchDisPlay(user,bikes);
+            break;
+        case 2:
 
-        cout << "Enter your choice: ";
-        cin >> choice;
-        cin.ignore();
+        break;
+        case 3:
+            dashboardRun = true;
+            cout << "Logging out...\n";
+            break;
+        default: 
+            cout<< "Invalid input! Please enter it correctly. \n";
     }
+    cout << "Press Enter to continue...";
+    cin.ignore();
+    }
+    
 }
 
 void displayUserInfo(User &user, vector<User> &userList)
@@ -455,5 +480,94 @@ void addCredit(User &user, vector<User> &userList)
                 }
             }
         }
+    }
+}
+
+void searchDisPlay(User &user, vector<Motorbike> &bikes){
+    system("cls");
+    int choice;
+    bool dashboardRun = false;
+    // TODO: Search engine implementation (member’s credit points / rating / city)
+    double desiredPoints = -1.0; // default minimum value
+    double desiredRating = -1.0; // default minimum value
+    string desiredCity = ""; // default value
+
+    cout << "Do you want to use the search filter?\n"
+         << endl;
+    cout << "Please enter 1 to use the search filter\n"
+         << endl;
+    cout << "             2 not to use the search filter\n"
+         << endl;
+    string searchFilterUsage;
+    cin >> searchFilterUsage;
+
+    if (searchFilterUsage == "1")
+    {
+        cout << "    Search Filter    \n";
+        cout << "======================\n";
+
+        while (true)
+        {
+            cout << "Enter desired points (>=0): ";
+            cin >> desiredPoints;
+
+            if (desiredPoints >= 0)
+            {
+                break;
+            }
+
+            std::cout << "Invalid point value. Please enter a positive number.\n";
+        }
+
+        while (true)
+        {
+            cout << "Enter desired rating (>=0): ";
+            cin >> desiredRating;
+
+            if (desiredRating >= 0)
+            {
+                break;
+            }
+
+            std::cout << "Invalid rating value. Please enter a positive number.\n";
+        }
+
+        while (true)
+        {
+            std::cout << "Enter your city (Saigon or Hanoi): ";
+            std::cin >> desiredCity;
+
+            if (desiredCity == "Saigon" || desiredCity == "Hanoi")
+            {
+                break;
+            }
+
+            std::cout << "Invalid city. Please enter Saigon or Hanoi.\n";
+        }
+    }
+
+    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
+    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+    for (Motorbike &bike : bikes)
+    {
+        // TODO: city filter!!
+        if (bike.getConsumingPoints() >= desiredPoints && bike.getRating() >= desiredRating) {
+            cout << left << setw(12) << bike.getMotorbikeId()
+             << setw(20) << bike.getModel()
+             << setw(10) << bike.getColor()
+             << setw(10) << bike.getEngine()
+             << setw(15) << bike.getOwner()
+             << setw(12) << bike.getYear()
+             << setw(20) << bike.getDes()
+             << setw(8) << bike.getRating()
+             << endl;
+        }  
+    }
+    while (!dashboardRun)
+    {
+
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
     }
 }
