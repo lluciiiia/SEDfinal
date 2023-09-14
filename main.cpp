@@ -20,7 +20,7 @@ void guest_dashboard(vector<Motorbike> &bikes);
 void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList,vector<Request> &requests);
 void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userList);
 void viewGuestBikeDash(vector<Motorbike> &bikes, string city);
-void viewBikeDash(User &user, vector<Motorbike> &bikes,vector<Request> requests);
+void viewBikeDash(User &user, vector<Motorbike> &bikes,vector<Request> &requests,vector<User> &userList);
 void displayUserInfo(User &user, vector<User> &userList);
 void addCredit(User &user, vector<User> &userList);
 void searchDisPlay(User &user, vector<Motorbike> &bikes);
@@ -242,7 +242,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
             break;
         case 4:
-            viewBikeDash(user, bikes, request);
+            viewBikeDash(user, bikes, request,userList);
             break;
         case 5:
             
@@ -344,7 +344,7 @@ void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
     }
 }
 
-void viewBikeDash(User &user, vector<Motorbike> &bikes,vector<Request> requests)
+void viewBikeDash(User &user, vector<Motorbike> &bikes,vector<Request> &requests,vector<User> &userList)
 {
     system("cls");
     int choice; 
@@ -378,7 +378,8 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes,vector<Request> requests)
             searchDisPlay(user,bikes);
             break;
         case 2:
-
+           
+            user.requestToRent(bikes,requests);
         break;
         case 3:
             dashboardRun = true;
