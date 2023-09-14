@@ -1,4 +1,5 @@
 #include "Borrow.h"
+#include <iostream>
 
 Borrow::Borrow(TimeSlot timeSlot, string username, string motorbikeId, double price)
     : timeSlot(timeSlot), username(username), motorbikeId(motorbikeId), price(price) {
@@ -33,5 +34,16 @@ void Borrow::setMotorbikeId(string motorbikeId) {
 }
 
 void Borrow::setPrice(double price) {
-    price = price;
+    if (price >= 0) {
+        this->price = price;
+    } else {
+        std::cout << "Invalid price value. Price cannot be negative." << std::endl;
+    }
+}
+
+string Borrow::toString() const {
+    return "Time Slot: " + timeSlot.getStartTime() + " to " + timeSlot.getEndTime() +
+           "\nUsername: " + username +
+           "\nMotorbike ID: " + motorbikeId +
+           "\nPrice: $" + std::to_string(price);
 }

@@ -27,6 +27,7 @@ public:
     void setUsername(string username);
     void setMotorbikeId(string motorbikeId);
     void setPrice(double price);
+    string toString() const;
 };
 
 #endif
