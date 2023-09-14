@@ -66,6 +66,11 @@ public:
 
     //to string
     string toStringMotorBike();
+
+    void setCreditPoint(double creditPoints)
+    {
+        this->consumingPoints = creditPoints;
+    }
 };
 
 #endif

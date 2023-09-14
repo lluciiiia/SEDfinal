@@ -532,29 +532,141 @@ City User::stringToCity(const std::string &cityStr)
 // unlistMotorbike()
 void User::searchAvailableMotorbikes(){};
 
-// void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
-// {
-//     Request request(this, &motorbike, timeSlot);
-//     motorbike.addRequest(request);
+void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+{
+    Request request(getUserName(), motorbike.getMotorbikeId(), timeSlot, RequestStatus::PENDING);
+    motorbike.addRequest(request);
+    requests.push_back(request);
+    cout << "Request to rent motorbike " << motorbike.getMotorbikeId() << " has been sent." << endl;
+}
+
+
+void User::viewRequests()
+{
+    if (requests.empty())
+    {
+        std::cout << "You have no pending requests." << std::endl;
+    }
+    else
+    {
+        std::cout << "Pending Requests:" << std::endl;
+        for (const Request &request : requests)
+        {
+            if (request.getStatus() == RequestStatus::PENDING)
+            {
+                cout << "Motorbike ID: " << request.getMotorbikeID() << endl;
+                cout << "Requester: " << request.getRequester() << endl;
+                std::cout << "Time Slot: " << request.getTimeSlot().getStartTime() << " - " << request.getTimeSlot().getEndTime() << std::endl;
+                std::string statusStr;
+                switch (request.getStatus())
+                {
+                    case RequestStatus::PENDING:
+                        statusStr = "Pending";
+                        break;
+                    case RequestStatus::ACCEPTED:
+                        statusStr = "Accepted";
+                        break;
+                    case RequestStatus::REJECTED:
+                        statusStr = "Rejected";
+                        break;
+                    default:
+                        statusStr = "Unknown";
+                        break;
+                }
+                std::cout << "Status: " << statusStr << std::endl;
+                std::cout << "------------------------" << std::endl;
+            }
+        }
+    }
+}
+bool User::processPayment(User &requester, Request request) {
+    double rentalAmount = calculateRentalAmount(request);
+
+    if (requester.getCreditPoint() >= rentalAmount) {
+        double newRequesterCredit = requester.getCreditPoint() - rentalAmount;
+        requester.setCreditPoint(newRequesterCredit);
+
+
+        return true;
+    } else {
+        std::cout << "Insufficient credit to make the payment." << std::endl;
+        return false;
+    }
+}
+
+//error on request
+// double User::calculateRentalAmount(Request request) {
+//     TimeSlot timeSlot = request.getTimeSlot();
+//     string startTime = timeSlot.getStartTime();
+//     string endTime = timeSlot.getEndTime();
+
+//     int rentalDurationInDays = calculateDaysBetweenDates(startTime, endTime);
+
+//     double rentalPricePerDay = request.getMotorbike()->getRentalAmount();
+
+//     double rentalAmount = rentalDurationInDays * rentalPricePerDay;
+
+//     return rentalAmount;
 // }
 
-void User::viewRequests(){
+//error on strptime
+// int User::calculateDaysBetweenDates(const std::string &start, const std::string &end) {
+//     struct tm start_tm;
+//     struct tm end_tm;
     
-};
-
-// void User::acceptRequest(vector<Request> &requests, Request request){
-//     // 1. change the request status to Accepted
-//     request.setStatus(RequestStatus::ACCEPTED);
-
-//     // 2. change the availability of the motorbike
-//     // Motorbike* motorbikeToRequest = request.getMotorbike();
-//     // motorbikeToRequest->setAvailability(false);
-
-//     // 3. payment from the requester
+//     if (strptime(start.c_str(), "%Y-%m-%d", &start_tm) == nullptr ||
+//         strptime(end.c_str(), "%Y-%m-%d", &end_tm) == nullptr) {
+//         // Error parsing date strings
+//         return -1;
+//     }
     
-//     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+//     time_t start_time = mktime(&start_tm);
+//     time_t end_time = mktime(&end_tm);
+    
+//     if (start_time == -1 || end_time == -1) {
+//         return -1; 
+//     }
+    
+//     double seconds_diff = difftime(end_time, start_time);
+    
+//     int days_diff = static_cast<int>(seconds_diff / (24 * 3600));
+    
+//     return days_diff;
+// }
 
-// };
+//error on request
+// void User::acceptRequest(User &requester, vector<Request> &requests, Request request) {
+//     // 1. Payment from the requester (top-up/credits)
+//     bool paymentSuccessful = processPayment(requester, request);
+
+//     if (paymentSuccessful) {
+//         // 2. Increase the credits ($1 = 1 credit point) for both requester and the owner
+//         double rentalAmount = calculateRentalAmount(request);
+//         double requesterCredit = requester.getCreditPoint();
+//         double ownerCredit = request.getMotorbike()->getOwnerUsername()->getCreditPoint();
+
+//         requesterCredit -= rentalAmount;
+//         ownerCredit += rentalAmount;
+
+//         requester.setCreditPoint(requesterCredit);
+//         request.getMotorbike()->getOwnerUsername()->setCreditPoint(ownerCredit);
+
+//         request.getMotorbike()->setAvailability(false);
+
+//         request.setStatus(RequestStatus::ACCEPTED);
+
+//         requester.addRequest(request);
+
+//         requests.push_back(request);
+//     } else {
+//         std::cout << "Payment was not successful. Request cannot be accepted." << std::endl;
+//     }
+// }
+
+void User::addRequest(const Request &request) {
+    userRequests.push_back(request);
+}
+
 
 
 // listMotorbike()

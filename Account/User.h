@@ -9,6 +9,7 @@
 #include "../City.h"
 #include "../TimeSlot.h"
 
+
 class Motorbike;
 class Request;
 class UserRating;
@@ -23,6 +24,8 @@ private:
     vector<UserRating> userRatings;
     vector<Motorbike> OwnedMotorbikes;
     vector<Motorbike> RentingBikes;
+    vector<Request> requests;
+    vector<Request> userRequests;
     double creditPoint;
     City city;
 
@@ -39,6 +42,9 @@ public:
     string getLicenseNum();
     string getExDate();
     double getCreditPoint();
+    void setCreditPoint(double credit) {
+    creditPoint = credit;
+    }
     City getCity();
     vector<Motorbike> getOwnedMotorbike();
     friend bool login(User &cus, vector<User> &userList);
@@ -50,7 +56,12 @@ public:
     void searchAvailableMotorbikes();
     void requestToRent(Motorbike &motorbike, TimeSlot timeSlot);
     void viewRequests();
+    bool processPayment(User &requester, Request request);
+    double calculateRentalAmount(Request request);
+    int calculateDaysBetweenDates(const std::string &start, const std::string &end);
+    void acceptRequest(User &requester, vector<Request> &requests, Request request);
     void acceptRequest(vector<Request> &requests, Request request);
+    void addRequest(const Request &request);
 
     void rateUser(User &ratedUser, float score, const std::string comment);
     void rateMotorbike(Motorbike &ratedMotorbike, float score, std::string comment);
