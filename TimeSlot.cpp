@@ -16,6 +16,11 @@ TimeSlot::TimeSlot(const string &startTime, const string &endTime)
     this->endTime = endTime;
 }
 
+TimeSlot::TimeSlot(const string &startTime)
+{
+    this->startTime= startTime;
+}
+
 string TimeSlot::getStartTime() const
 {
     return startTime;

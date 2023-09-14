@@ -11,7 +11,7 @@
 #include <cstdlib>
 class UserRating;
 class MotorbikeRating;
-
+using namespace std;
 User::User()
     : Account("", "", "", ""),
       IDtype(""),
@@ -546,19 +546,19 @@ void User::viewRequests(){
     
 };
 
-// void User::acceptRequest(vector<Request> &requests, Request request){
-//     // 1. change the request status to Accepted
-//     request.setStatus(RequestStatus::ACCEPTED);
+void User::acceptRequest(vector<Request> &requests, Request request){
+    // 1. change the request status to Accepted
+    request.setStatus(RequestStatus::ACCEPTED);
 
-//     // 2. change the availability of the motorbike
-//     // Motorbike* motorbikeToRequest = request.getMotorbike();
-//     // motorbikeToRequest->setAvailability(false);
+    // 2. change the availability of the motorbike
+    // Motorbike* motorbikeToRequest = request.getMotorbike();
+    // motorbikeToRequest->setAvailability(false);
 
-//     // 3. payment from the requester
+    // 3. payment from the requester
     
-//     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+    // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
-// };
+};
 
 
 // listMotorbike()

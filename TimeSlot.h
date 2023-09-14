@@ -14,6 +14,7 @@ private:
 public:
     TimeSlot();
     TimeSlot(const string &startTime, const string &endTime);
+    TimeSlot(const string &startTime);
 
     string getStartTime() const;
     string getEndTime() const;
