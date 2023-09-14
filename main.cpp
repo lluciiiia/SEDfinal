@@ -200,12 +200,16 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         // } else {
         //     cout << "No owned motorbikes." << endl;
         // }
-
+        int count = 0;
         for (auto &bike : bikes)
         {
             if (bike.getOwner() == user.getUsername())
             {
-                model = bike.getModel();
+                if (count > 0) {
+                    model += ", ";
+                }
+                model += bike.getModel();
+                count++;
             }
         }
         // Display the user dashboard menu

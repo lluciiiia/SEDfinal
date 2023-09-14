@@ -2,3 +2,4 @@ Bugatu,1,Green,12v,Saigon,phat1,gAS,2021,Its good,2.000000,0.000000,9.000000,tru
 Honda,2,Red,50v,Saigon,lucia,idk,2022,idk,10.000000,0.000000,9.000000,true
 Honda,3,Blue,39v,Hanoi,hanoimem,222,2010,dope,22.000000,0.000000,9.000000,true
 Honda,4,Black,20,Saigon,bu,222,2022,good,20.000000,0.000000,9.000000,true
+Honda2,5,Green,29,Saigon,lucia,22,2022,supergood,2.000000,0.000000,2.000000,true
