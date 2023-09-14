@@ -37,6 +37,7 @@ public:
     string getIdType();
     string getIdNum();
     string getLicenseNum();
+    double getRating();
     string getExDate();
     double getCreditPoint();
     City getCity();

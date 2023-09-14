@@ -376,9 +376,9 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> requests
                  << endl;
         }
         cout << "\n\n";
-        cout << "1.Search for the bike by filter. \n";
-        cout << "2.Rent a bike. \n";
-        cout << "3.Exit\n";
+        cout << "1. Search for all available suitable motorbikes for a particular city. \n";
+        cout << "2. Rent a bike. \n";
+        cout << "3. Exit\n";
         cout << "Enter your choice(1-3): ";
         cin >> choice;
         cin.ignore();
@@ -514,43 +514,15 @@ void searchDisPlay(User &user, vector<Motorbike> &bikes)
     system("cls");
     int choice;
     bool dashboardRun = false;
-    // TODO: Search engine implementation (member’s credit points / rating / city)
-    double desiredPoints = -1.0; // default minimum value
-    double desiredRating = -1.0; // default minimum value
-    string desiredCity = "";     // default value
 
-    cout << "    Search Filter    \n";
-    cout << "======================\n";
+    string desiredCity = ""; // default value
+    City city;
+    double userPoints = user.getCreditPoint(); // default minimum value
+    double userRating = user.getRating();      // default minimum value
 
     while (true)
     {
-        cout << "Enter desired points (>=0): ";
-        cin >> desiredPoints;
-
-        if (desiredPoints >= 0)
-        {
-            break;
-        }
-
-        std::cout << "Invalid point value. Please enter a positive number.\n";
-    }
-
-    while (true)
-    {
-        cout << "Enter desired rating (>=0): ";
-        cin >> desiredRating;
-
-        if (desiredRating >= 0)
-        {
-            break;
-        }
-
-        std::cout << "Invalid rating value. Please enter a positive number.\n";
-    }
-
-    while (true)
-    {
-        std::cout << "Enter your city (Saigon or Hanoi): ";
+        std::cout << "Enter the city to search in (Saigon or Hanoi): ";
         std::cin >> desiredCity;
 
         if (desiredCity == "Saigon" || desiredCity == "Hanoi")
@@ -561,22 +533,37 @@ void searchDisPlay(User &user, vector<Motorbike> &bikes)
         std::cout << "Invalid city. Please enter Saigon or Hanoi.\n";
     }
 
-    cout << left << setw(12) << "\nMotorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
+    if (desiredCity == "Saigon")
+    {
+        city = City::Saigon;
+    }
+    else
+    {
+        city = City::Hanoi;
+    }
+
+    cout << "My credit point: " << userPoints << "\n";
+    cout << "My rating score: " << userRating << "\n";
+
+    cout << left << setw(12) << "\nMotorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
     for (Motorbike &bike : bikes)
     {
-        // TODO: city filter!!
-        if (bike.getConsumingPoints() >= desiredPoints && bike.getRating() >= desiredRating)
+        if (bike.getCity() == city)
         {
-            cout << left << setw(12) << bike.getMotorbikeId()
-                 << setw(20) << bike.getModel()
-                 << setw(10) << bike.getColor()
-                 << setw(10) << bike.getEngine()
-                 << setw(15) << bike.getOwner()
-                 << setw(12) << bike.getYear()
-                 << setw(20) << bike.getDes()
-                 << setw(8) << bike.getRating()
-                 << endl;
+            if (bike.getConsumingPoints() >= userPoints && bike.getRating() >= userRating)
+            {
+                cout << left << setw(12) << bike.getMotorbikeId()
+                     << setw(20) << bike.getModel()
+                     << setw(10) << bike.getColor()
+                     << setw(10) << bike.getEngine()
+                     << setw(15) << bike.getOwner()
+                     << setw(12) << bike.getYear()
+                     << setw(20) << bike.getDes()
+                     << setw(8) << bike.getRating()
+                     << setw(8) << desiredCity
+                     << endl;
+            }
         }
     }
 
@@ -589,6 +576,7 @@ void searchDisPlay(User &user, vector<Motorbike> &bikes)
         switch (choice)
         {
         case 1:
+            // TODO: go to the renting mode
             break;
         case 2:
             dashboardRun = true;

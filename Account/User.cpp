@@ -154,6 +154,21 @@ string User::getIdNum()
     return this->idNum;
 }
 
+double User::getRating() {
+    if (userRatings.size() == 0)
+        {
+                return 0.0;
+        }
+        double average = 0;
+        double total = 0;
+        for (auto rating : userRatings)
+        {
+                total += rating.getScore();
+        }
+        average = total / userRatings.size();
+        return average;
+}
+
 string User::getLicenseNum()
 {
     return this->licenseNumber;
