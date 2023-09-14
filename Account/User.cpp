@@ -597,47 +597,36 @@ bool User::processPayment(User &requester, Request request) {
 //error on request
 
 // double User::calculateRentalAmount(Request request) {
-//     TimeSlot timeSlot = request.getTimeSlot();
-//     string startTime = timeSlot.getStartTime();
-//     string endTime = timeSlot.getEndTime();
+//     // Retrieve the start and end times from the request's time slot
+//     string startTime = request.getTimeSlot().getStartTime();
+//     string endTime = request.getTimeSlot().getEndTime();
 
-//     int rentalDurationInDays = calculateDaysBetweenDates(startTime, endTime);
+//     // Implement the logic to calculate the rental duration
+//     // This will depend on the format of your time strings
+//     // For simplicity, let's assume the format is "HH:MM" (e.g., "08:00")
 
-//     double rentalPricePerDay = request.getMotorbike()->getRentalAmount();
+//     // Extract the hours and minutes from the start and end times (parsing logic needed)
+//     int startHour, startMinute, endHour, endMinute;
 
-//     double rentalAmount = rentalDurationInDays * rentalPricePerDay;
+//     // Parse the start time (e.g., "08:00")
+//     sscanf(startTime.c_str(), "%d:%d", &startHour, &startMinute);
+
+//     // Parse the end time (e.g., "16:00")
+//     sscanf(endTime.c_str(), "%d:%d", &endHour, &endMinute);
+
+//     // Calculate the rental duration in hours (you can adjust this logic based on your needs)
+//     int rentalDurationInHours = (endHour - startHour) + ((endMinute - startMinute) / 60);
+
+//     // Define the rental price per hour (you can adjust this value)
+//     double rentalPricePerHour = request.getMotorbike()->getRentalAmount();
+
+//     // Calculate the total rental amount
+//     double rentalAmount = rentalDurationInHours * rentalPricePerHour;
 
 //     return rentalAmount;
 // }
 
-//error on strptime
-
-// int User::calculateDaysBetweenDates(const std::string &start, const std::string &end) {
-//     struct tm start_tm;
-//     struct tm end_tm;
-    
-//     if (strptime(start.c_str(), "%Y-%m-%d", &start_tm) == nullptr ||
-//         strptime(end.c_str(), "%Y-%m-%d", &end_tm) == nullptr) {
-//         // Error parsing date strings
-//         return -1;
-//     }
-    
-//     time_t start_time = mktime(&start_tm);
-//     time_t end_time = mktime(&end_tm);
-    
-//     if (start_time == -1 || end_time == -1) {
-//         return -1; 
-//     }
-    
-//     double seconds_diff = difftime(end_time, start_time);
-    
-//     int days_diff = static_cast<int>(seconds_diff / (24 * 3600));
-    
-//     return days_diff;
-// }
-
 //error on request
-
 // void User::acceptRequest(User &requester, vector<Request> &requests, Request request) {
 //     // 1. Payment from the requester (top-up/credits)
 //     bool paymentSuccessful = processPayment(requester, request);
@@ -646,13 +635,13 @@ bool User::processPayment(User &requester, Request request) {
 //         // 2. Increase the credits ($1 = 1 credit point) for both requester and the owner
 //         double rentalAmount = calculateRentalAmount(request);
 //         double requesterCredit = requester.getCreditPoint();
-//         double ownerCredit = request.getMotorbike()->getOwnerUsername()->getCreditPoint();
+//         double ownerCredit = request.getMotorbike()->getOwner()->getCreditPoint();
 
 //         requesterCredit -= rentalAmount;
 //         ownerCredit += rentalAmount;
 
 //         requester.setCreditPoint(requesterCredit);
-//         request.getMotorbike()->getOwnerUsername()->setCreditPoint(ownerCredit);
+//         request.getMotorbike()->getOwner()->setCreditPoint(ownerCredit);
 
 //         request.getMotorbike()->setAvailability(false);
 
