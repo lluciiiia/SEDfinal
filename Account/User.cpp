@@ -31,7 +31,7 @@ User::User(string username,
            string licenseNumber,
            string licenseExpiryDate,
            std::vector<UserRating> userRatings,
-           double creditPoint) : Account(username,
+           double creditPoint,vector <Motorbike> own) : Account(username,
                                          password,
                                          fullName,
                                          phoneNumber)
@@ -42,6 +42,7 @@ User::User(string username,
     this->licenseExpiryDate = licenseExpiryDate;
     this->userRatings = userRatings;
     this->creditPoint = creditPoint;
+    this->OwnedMotorbikes= own;
 };
 
 User::User(string username,
@@ -73,6 +74,29 @@ User::User(string username,
            string licenseNumber,
            string licenseExpiryDate,
            double creditPoint,
+           City city,vector <Motorbike> owm) : Account(username,
+                                password,
+                                fullName,
+                                phoneNumber)
+{
+    this->IDtype = IDtype;
+    this->idNum = idNum;
+    this->licenseNumber = licenseNumber;
+    this->licenseExpiryDate = licenseExpiryDate;
+    this->creditPoint = creditPoint;
+    this->city = city;
+    this->OwnedMotorbikes=owm;
+}
+
+User::User(string username,
+           string password,
+           string fullName,
+           string phoneNumber,
+           string IDtype,
+           string idNum,
+           string licenseNumber,
+           string licenseExpiryDate,
+           double creditPoint,
            City city) : Account(username,
                                 password,
                                 fullName,
@@ -84,6 +108,7 @@ User::User(string username,
     this->licenseExpiryDate = licenseExpiryDate;
     this->creditPoint = creditPoint;
     this->city = city;
+
 }
 
 string User::toStringAccount()
@@ -154,60 +179,10 @@ vector<Motorbike> User::getOwnedMotorbike()
     return this->OwnedMotorbikes;
 }
 
-bool login(User &cus, vector<User> &userList)
+vector<Motorbike> &User::getOwned()
 {
-    string username;
-    string pass;
-    bool usernameFlag = false;
-    bool passFlag = false;
-    while (!usernameFlag) 
-    {
-        cout << "Enter your username: ";
-        getline(cin, username);
-
-        if (username.empty())
-        {
-            cout << "Username cannot be empty! \n";
-        } else 
-        {
-            for (auto &user : userList)
-            {
-                if (user.getUserName() == username )
-                {
-                    usernameFlag= true;
-                    break;
-                }
-            }
-        }
-    }
-    cout<< "Enter your password: ";
-    getline(cin,pass);
-        for (auto &user : userList)
-            {
-                if ( user.getPassword() == pass)
-                    {
-                        cus= User(username,pass,user.getFullName(),
-                        user.getPhoneNumber(),
-                        user.getIdType(),
-                        user.getIdNum(),
-                        user.getLicenseNum(),
-                        user.getExDate(),
-                        user.getCreditPoint(),
-                        user.getCity());
-                        passFlag= true;
-                        break;
-                    }
-            }
-    system("cls");
-    if(usernameFlag== true && passFlag== true){
-        return true;
-    } 
-    
-    return false;
-   
+    return this->OwnedMotorbikes;
 }
-
-
 
 bool User::addBike(vector<Motorbike> &bikes)
 {
@@ -536,7 +511,10 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike, floa
 
 // listMotorbike()
 // unlistMotorbike()
-void User::searchAvailableMotorbikes(){};
+void User::searchAvailableMotorbikes(){}
+void User::setCreditPoint(double credit){
+    this->creditPoint= credit;
+};
 
 // void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
 // {
@@ -605,4 +583,53 @@ void User::viewRequests(){
 //     return vector<Request>();
 // }
 
+bool login(User &cus, vector<User> &userList)
+{
+    string username;
+    string pass;
+    bool usernameFlag = false;
+    bool passFlag = false;
+    
+    while (!usernameFlag) 
+    {
+        cout << "Enter your username: ";
+        getline(cin, username);
 
+        if (username.empty())
+        {
+            cout << "Username cannot be empty! \n";
+        } 
+        else 
+        {
+            for (auto &user : userList)
+            {
+                if (user.getUserName() == username)
+                {
+                    usernameFlag = true;
+                    break;
+                }
+            }
+        }
+    }
+    
+    cout << "Enter your password: ";
+    getline(cin, pass);
+    
+    if (usernameFlag)
+    {
+        for (auto &user : userList)
+        {
+            if (user.getUserName() == username && user.getPassword() == pass)
+            {
+                cus = User(username, pass, user.getFullName(),
+                           user.getPhoneNumber(), user.getIdType(),
+                           user.getIdNum(), user.getLicenseNum(),
+                           user.getExDate(), user.getCreditPoint(),
+                           user.getCity());
+                return true;
+            }
+        }
+    }
+
+    return false;
+}

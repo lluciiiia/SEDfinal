@@ -22,8 +22,8 @@ public:
     
     bool adminLogin(); 
     void viewMemberInfo(User user);
-    void viewMotorbikeInfo(Motorbike motorbike);
-    void viewAccounts(Account account);
+    void viewMotorbikeInfo(vector<Motorbike> &bikes);
+    void viewAccounts(vector<User> &users);
 
     string getAdminID() const;
     void setAdminID(string adminID);
