@@ -20,7 +20,7 @@ void guest_dashboard(vector<Motorbike> &bikes);
 void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &requests);
 void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userList);
 void viewGuestBikeDash(vector<Motorbike> &bikes, string city);
-void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> requests);
+void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &requests, vector<User> &userList);
 void displayUserInfo(User &user, vector<User> &userList);
 void addCredit(User &user, vector<User> &userList);
 void searchDisPlay(User &user, vector<Motorbike> &bikes);
@@ -246,7 +246,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
             break;
         case 4:
-            viewBikeDash(user, bikes, request);
+            viewBikeDash(user, bikes, request, userList);
             break;
         case 5:
 
@@ -352,7 +352,7 @@ void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
     }
 }
 
-void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> requests)
+void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &requests, vector<User> &userList)
 {
     system("cls");
     int choice;
@@ -364,7 +364,6 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> requests
         cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
         for (Motorbike &bike : bikes)
         {
-            // TODO: city filter!!
             cout << left << setw(12) << bike.getMotorbikeId()
                  << setw(20) << bike.getModel()
                  << setw(10) << bike.getColor()
@@ -388,8 +387,9 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> requests
             searchDisPlay(user, bikes);
             break;
         case 2:
-
-            break;
+           
+            user.requestToRent(bikes,requests);
+        break;
         case 3:
             dashboardRun = true;
             cout << "Logging out...\n";
@@ -551,7 +551,7 @@ void searchDisPlay(User &user, vector<Motorbike> &bikes)
     {
         if (bike.getCity() == city)
         {
-            if (bike.getConsumingPoints() >= userPoints && bike.getRating() >= userRating)
+            if (bike.getConsumingPoints() <= userPoints && bike.getRating() <= userRating)
             {
                 cout << left << setw(12) << bike.getMotorbikeId()
                      << setw(20) << bike.getModel()

@@ -94,7 +94,7 @@ vector<Motorbike> saveToFile::loadMotor()
             tokens.push_back(token);
         }
 
-        if(tokens.size()== 12){
+        if(tokens.size()== 13){
             int motorBike= stoi(tokens[1]);
             int yearMade= stoi(tokens[7]);
             double consumingPoints= stod(tokens[9]);
@@ -109,7 +109,13 @@ vector<Motorbike> saveToFile::loadMotor()
             {
                 myCity = City::Hanoi;
             }
-            Motorbike motor = Motorbike(tokens[0], motorBike, tokens[2], tokens[3], myCity, tokens[5], tokens[6], yearMade, tokens[8], consumingPoints, retalAmount,minRating);
+            bool avai;
+            if(tokens[12] == "true"){
+                avai =true;
+            }else if(tokens[12] == "false"){
+                avai= false;
+            }
+            Motorbike motor = Motorbike(tokens[0], motorBike, tokens[2], tokens[3], myCity, tokens[5], tokens[6], yearMade, tokens[8], consumingPoints, retalAmount,minRating,avai);
             motors.push_back(motor);
 
         }

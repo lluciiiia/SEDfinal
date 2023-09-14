@@ -1,13 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <regex>
-
+#include <iomanip>
 #include "Account.h"
 #include "../Rating.h"
 #include "User.h"
 #include "../Motorbike.h"
 #include "../Request.h"
 #include "../RequestStatus.h"
+#include <ctime>
+#include <chrono>
 #include <cstdlib>
 class UserRating;
 class MotorbikeRating;
@@ -293,13 +295,25 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
+    int minRate;
+    while (true){
+        cout<< "Enter the min rating renters: ";
+        cin>>minRate;
+        cin.ignore();
+        string num= to_string(minRate);
+        if(!regex_match(num,regexp)){
+            cout<< "Invalid input for year made! Please enter agian. ";
+        }else{
+            break;
+        }
+    }
     Motorbike motor(model,motorbikeID,
                     color,enginSize,
                     selectedCity,
                     Account::getUsername(),
                     transmissionmode,
                     yearMade,
-                    description,consumingPoints,0,9);
+                    description,consumingPoints,0,minRate,true);
     bikes.push_back(motor);
     OwnedMotorbikes.push_back(motor);
     return true;
@@ -549,13 +563,87 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike) {
 void User::searchAvailableMotorbikes(){}
 void User::setCreditPoint(double credit){
     this->creditPoint= credit;
+}
+void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests){
+    
+    system("cls");
+    
+    time_t now= time(0);
+
+    tm*ltm = localtime(&now);
+
+    string day=to_string(ltm->tm_mday);
+    string month= to_string(1+ ltm-> tm_mon);
+    if(day.length() == 1){
+        day= "0"+day;
+    }
+    if(month.length() == 1){
+        month= "0"+month;
+    }
+    string dayAndMon= day +"/"+month;
+
+    for (Motorbike &bike : bikes)
+    {
+        // TODO: city filter!!
+        if(bike.getAvailability() == true && this->creditPoint>= bike.getConsumingPoints() && this->city == bike.getCity()){
+            cout << left << setw(12) << bike.getMotorbikeId()
+             << setw(20) << bike.getModel()
+             << setw(10) << bike.getColor()
+             << setw(10) << bike.getEngine()
+             << setw(15) << bike.getYear()
+             << setw(12) << bike.getConsumingPoints()
+             << setw(20) << bike.getDes()
+             << setw(8) << bike.getRating()
+             << endl;
+        }
+    }
+    string input;
+    while (true) {
+    cout << "Enter the bike model you want to rent (Q to quit): ";
+    getline(cin, input);
+    
+    if (input == "Q" || input == "q") {
+        break;
+    } else {
+        for (auto &bi : bikes) {
+            
+            if (input == bi.getModel()) {
+                while (true) { 
+                    string rentdays;
+                    cout << "How many days you want to rent? (Q to quit) ";
+                    getline(cin, rentdays);
+                    
+                    if (rentdays == "Q" || rentdays == "q") {
+                        cout << "Rent canceled! \n";
+                        break; 
+                    } else {
+                        double totalDays = stod(rentdays); // Convert to integer
+
+                        if (this->creditPoint < bi.getConsumingPoints() * totalDays) {
+                            cout << "You don't have enough credit points to rent! Please lower your days or quit \n";
+                        } else {
+                            TimeSlot time(dayAndMon, rentdays); 
+                            RequestStatus status = RequestStatus::PENDING;
+                            
+                            Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status);
+                            
+                            bi.getRequests().push_back(reque);
+                            requests.push_back(reque);
+                            cout << "Rent successful! \n";
+            
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        break;
+    }
+}
+
 };
 
-// void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
-// {
-//     Request request(this, &motorbike, timeSlot);
-//     motorbike.addRequest(request);
-// }
+
 
 void User::viewRequests(){
     
