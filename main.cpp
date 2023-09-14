@@ -99,11 +99,13 @@ int main()
             cout << "Logging in as a Admin \n";
             cout << "Your are on a Admin Mode.\n";
 
-            if ( admin.adminLogin() ) {
+            if (admin.adminLogin())
+            {
                 admin_dashboard(admin, motorbikeList, userList);
                 system("cls");
-            } 
-            else {
+            }
+            else
+            {
                 cout << "Login failed! Incorrect admin username/password\n";
             }
             break;
@@ -215,13 +217,16 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         {
         case 1:
             displayUserInfo(user, userList);
-            
+
             break;
         case 2:
-            if(user.addBike(bikes)){
-                cout<< "Add bike succesfully ! \n";
-            }else{
-                cout<< "Failed to add bike \n";
+            if (user.addBike(bikes))
+            {
+                cout << "Add bike succesfully ! \n";
+            }
+            else
+            {
+                cout << "Failed to add bike \n";
             }
 
             break;
@@ -230,7 +235,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
             break;
         case 4:
-            
+
             break;
         case 5:
             dashboardRun = true;
@@ -247,7 +252,8 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
     }
 }
 
-void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userList) {
+void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userList)
+{
     int choice;
     bool dashboardRun = false;
 
@@ -258,7 +264,8 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
 
         // Display the admin dashboard menu
         cout << "|==========================|\n";
-        cout << "|      Admin Dashboard     |  Hello, Admin!" << "\n"; 
+        cout << "|      Admin Dashboard     |  Hello, Admin!"
+             << "\n";
         cout << "|==========================|\n";
         cout << "| 1. View all users        |\n";
         cout << "| 2. View all motorbikes   |\n";
@@ -272,7 +279,7 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
         switch (choice)
         {
         case 1:
-        system("cls");
+            system("cls");
             admin.viewAccounts(userList);
             break;
         case 2:
@@ -292,7 +299,6 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
         cout << "Press Enter to continue...";
         cin.ignore();
     }
-
 };
 
 void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
@@ -301,10 +307,12 @@ void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
     int choice;
     bool dashboardRun = false;
     City city;
-    if (cityStr == "Ha noi") {
+    if (cityStr == "Ha noi")
+    {
         city = City::Hanoi;
     }
-    else {
+    else
+    {
         city = City::Saigon;
     }
 
@@ -312,16 +320,17 @@ void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
     for (Motorbike &bike : bikes)
     {
-        if (bike.getCity() == city) {
-             cout << left << setw(12) << bike.getMotorbikeId()
-             << setw(20) << bike.getModel()
-             << setw(10) << bike.getColor()
-             << setw(10) << bike.getEngine()
-             << setw(15) << bike.getOwner()
-             << setw(12) << bike.getYear()
-             << setw(20) << bike.getDes()
-             << setw(8) << bike.getRating()
-             << "\n";
+        if (bike.getCity() == city)
+        {
+            cout << left << setw(12) << bike.getMotorbikeId()
+                 << setw(20) << bike.getModel()
+                 << setw(10) << bike.getColor()
+                 << setw(10) << bike.getEngine()
+                 << setw(15) << bike.getOwner()
+                 << setw(12) << bike.getYear()
+                 << setw(20) << bike.getDes()
+                 << setw(8) << bike.getRating()
+                 << "\n";
         }
     }
 }
@@ -331,11 +340,72 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes)
     system("cls");
     int choice;
     bool dashboardRun = false;
+    // TODO: Search engine implementation (member’s credit points / rating / city)
+    double desiredPoints = -1.0; // default minimum value
+    double desiredRating = -1.0; // default minimum value
+    string desiredCity = ""; // default value
+
+    cout << "Do you want to use the search filter?\n"
+         << endl;
+    cout << "Please enter 1 to use the search filter\n"
+         << endl;
+    cout << "             2 not to use the search filter\n"
+         << endl;
+    string searchFilterUsage;
+    cin >> searchFilterUsage;
+
+    if (searchFilterUsage == "1")
+    {
+        cout << "    Search Filter    \n";
+        cout << "======================";
+
+        while (true)
+        {
+            cout << "Enter desired points (>=0): ";
+            cin >> desiredPoints;
+
+            if (desiredPoints >= 0)
+            {
+                break;
+            }
+
+            std::cout << "Invalid point value. Please enter a positive number.\n";
+        }
+
+        while (true)
+        {
+            cout << "Enter desired rating (>=0): ";
+            cin >> desiredRating;
+
+            if (desiredRating >= 0)
+            {
+                break;
+            }
+
+            std::cout << "Invalid rating value. Please enter a positive number.\n";
+        }
+
+        while (true)
+        {
+            std::cout << "Enter your city (Saigon or Hanoi): ";
+            std::cin >> desiredCity;
+
+            if (desiredCity == "Saigon" || desiredCity == "Hanoi")
+            {
+                break;
+            }
+
+            std::cout << "Invalid city. Please enter Saigon or Hanoi.\n";
+        }
+    }
+
     cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
     for (Motorbike &bike : bikes)
     {
-        cout << left << setw(12) << bike.getMotorbikeId()
+        // TODO: city filter!!
+        if (bike.getConsumingPoints() >= desiredPoints && bike.getRating() >= desiredRating) {
+            cout << left << setw(12) << bike.getMotorbikeId()
              << setw(20) << bike.getModel()
              << setw(10) << bike.getColor()
              << setw(10) << bike.getEngine()
@@ -344,6 +414,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes)
              << setw(20) << bike.getDes()
              << setw(8) << bike.getRating()
              << endl;
+        }  
     }
     while (!dashboardRun)
     {
@@ -359,21 +430,21 @@ void displayUserInfo(User &user, vector<User> &userList)
     system("cls");
     bool flag = false;
     int choice;
-        cout << "Username: " << user.getUsername() << endl;
-        cout << "Full Name: " << user.getFullName() << endl;
-        cout << "Phone Number: " << user.getPhoneNumber() << endl;
-        cout << "ID Type: " << user.getIdType() << endl;
-        cout << "ID Number: " << user.getIdNum() << endl;
-        cout << "License Number: " << user.getLicenseNum() << endl;
-        cout << "License Expiry Date: " << user.getExDate() << endl;
-        cout << "City: " << (user.getCity() == City::Saigon ? "Saigon" : "Hanoi") << endl;
-        cout << "----------------------------------" << endl;
-        cout << "1.Change your password. \n";
-        cout << "2.Return. \n";
-        cout<< "Enter your choice: ";
+    cout << "Username: " << user.getUsername() << endl;
+    cout << "Full Name: " << user.getFullName() << endl;
+    cout << "Phone Number: " << user.getPhoneNumber() << endl;
+    cout << "ID Type: " << user.getIdType() << endl;
+    cout << "ID Number: " << user.getIdNum() << endl;
+    cout << "License Number: " << user.getLicenseNum() << endl;
+    cout << "License Expiry Date: " << user.getExDate() << endl;
+    cout << "City: " << (user.getCity() == City::Saigon ? "Saigon" : "Hanoi") << endl;
+    cout << "----------------------------------" << endl;
+    cout << "1.Change your password. \n";
+    cout << "2.Return. \n";
+    cout << "Enter your choice: ";
     while (!flag)
     {
-        
+
         cin >> choice;
         cin.ignore();
 
