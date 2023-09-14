@@ -36,8 +36,8 @@ private:
         std:: vector<Rating> ratings;
 
 public:
-    Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating);
     Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating);
+    Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating,bool avai);
     // Getters
 
     int getMotorbikeId();
@@ -51,6 +51,7 @@ public:
     int getYear();
     string getDes();
     double getRating();
+    vector<Request> &getRequests();
     // Setters
     void setOwner(string Owner);
     void setMotorbikeID(int motorbikeID);

@@ -32,6 +32,7 @@ public:
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city,vector <Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
+    
     string toStringAccount();
     string getUserName();
     string getIdType();
@@ -50,7 +51,7 @@ public:
     // unlistMotorbike()
     void searchAvailableMotorbikes();
     void setCreditPoint(double credit);
-    void requestToRent(Motorbike &motorbike, TimeSlot timeSlot);
+    void requestToRent(vector<Motorbike> &bike, vector <Request> &requests);
     void viewRequests();
     void acceptRequest(vector<Request> &requests, Request request);
 
