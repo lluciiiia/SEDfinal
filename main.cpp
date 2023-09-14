@@ -59,7 +59,7 @@ int main()
         int choice;
         cout << "MOTORBIKE RENTAL APPLICATION."
              << "\n\n";
-        cout << "Use the app as 1. Guest  2. Member  3.Admin  4.Register  5. Exit the program\n\n";
+        cout << "Login as: \n1. Guest  \n2. Member  \n3. Admin  \n4. Register  \n5. Exit the program\n\nEnter your choice: ";
         cin >> choice;
         cin.ignore();
         switch (choice)
@@ -67,7 +67,7 @@ int main()
         case 1:
         {
             cout << "Logging in as a Guest \n";
-            cout << "Your are on a Guest Mode.\n";
+            cout << "Your are on Guest Mode.\n";
 
             guest_dashboard(motorbikeList);
             system("cls");
@@ -76,7 +76,7 @@ int main()
         }
         case 2:
         {
-            cout << "Logging in as a Member\n";
+            cout << "Logging in as Member\n";
             cout << "Your are logging in.\n";
             if (login(user, userList))
             {
@@ -85,15 +85,15 @@ int main()
             }
             else
             {
-                cout << "Login fail! Wrong username or password! \n";
+                cout << "Login failed! Incorrect username or password! \n";
             }
             break;
         }
         case 3:
         {
             // check if the login is admin account
-            cout << "Logging in as a Admin \n";
-            cout << "Your are on a Admin Mode.\n";
+            cout << "Logging in as Admin \n";
+            cout << "Your are on Admin Mode.\n";
 
             if ( admin.adminLogin() ) {
                 admin_dashboard(admin, motorbikeList, userList);

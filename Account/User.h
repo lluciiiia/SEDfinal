@@ -54,7 +54,7 @@ public:
     void viewRequests();
     void acceptRequest(vector<Request> &requests, Request request);
 
-    void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike, float userScore, float motorbikeScore, std::string userComment, std::string motorbikeComment);
+    void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
     bool addBike(vector<Motorbike> &bikes);
     void addMotorInnitial(Motorbike motor);
     City stringToCity(const std::string& cityStr);
