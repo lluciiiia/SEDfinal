@@ -112,8 +112,10 @@ User::User(string username,
     this->city = city;
 }
 
+
 string User::toStringAccount()
 {
+    // TODO: replace the usage of this method with cityToString method
     string cityStr;
     switch (city)
     {
