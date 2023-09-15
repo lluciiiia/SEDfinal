@@ -35,23 +35,6 @@ Motorbike::Motorbike(string model, int motorbikeID, string color, string engineS
         this->availability= avai;
 }
 
-Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating, TimeSlot availableTimeSlot)
-{
-        this->model = model;
-        this->motorbikeID = motorbikeID;
-        this->color = color;
-        this->engineSize = engineSize;
-        this->city = city;
-        this->owner = owner;
-        this->transmissionMode = transmissionMode;
-        this->yearMade = yearMade;
-        this->description = description;
-        this->consumingPoints = consumingPoints;
-        this->rentalAmount = rentalAmount;
-        this->minRenterRating = minRenterRating;
-        this->availableTimeSlot = availableTimeSlot;
-}
-
 string Motorbike::getOwner()
 
 {
@@ -124,10 +107,6 @@ string Motorbike::getEngine()
         return engineSize;
 }
 
-TimeSlot Motorbike::getAvailableTimeSlot() {
-        return availableTimeSlot;
-}
-
 void Motorbike::setAvailability(bool availability)
 {
         this->availability = availability;
@@ -147,10 +126,6 @@ void Motorbike::setMotorbikeID(int motorbikeID)
 void Motorbike::setConsumingPoints(double consumingPoints)
 {
         this->consumingPoints = consumingPoints;
-}
-
-void Motorbike::setAvailableTimeSlot(TimeSlot newTimeSlot) {
-        this->availableTimeSlot = newTimeSlot;
 }
 
 void Motorbike::addRequest(const Request &request)
