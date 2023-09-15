@@ -28,7 +28,8 @@ User::User(string username,
            string licenseNumber,
            string licenseExpiryDate,
            std::vector<UserRating> userRatings,
-           double creditPoint, vector<Motorbike> own) : Account(username,
+           double creditPoint, vector<Motorbike> own,
+           vector<Request> sentRequests) : Account(username,
                                                                 password,
                                                                 fullName,
                                                                 phoneNumber)
@@ -40,6 +41,7 @@ User::User(string username,
     this->userRatings = userRatings;
     this->creditPoint = creditPoint;
     this->OwnedMotorbikes = own;
+    this->sentRequests = sentRequests;
 };
 
 // TODO: do we need this? - Lucia
@@ -172,6 +174,10 @@ double User::getCreditPoint()
 City User::getCity()
 {
     return this->city;
+}
+
+vector<Request> &User::getSentRequests() {
+    return this->sentRequests;
 }
 
 // TODO: choose one of these

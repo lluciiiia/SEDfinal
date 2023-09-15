@@ -26,12 +26,13 @@ private:
     vector<UserRating> userRatings;
     vector<Motorbike> OwnedMotorbikes;
     vector<Motorbike> RentingBikes;
+    vector<Request> sentRequests;
     double creditPoint;
     City city;
 
 public:
     User();
-    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> userRatings, double creditPoint, vector<Motorbike> owm);
+    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> userRatings, double creditPoint, vector<Motorbike> owm, vector<Request> sentRequests);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city, vector<Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
@@ -47,6 +48,7 @@ public:
     City getCity();
     vector<Motorbike> getOwnedMotorbike();
     vector<Motorbike> &getOwned();
+    vector<Request> &getSentRequests();
 
     string toStringAccount();
     friend bool login(User &cus, vector<User> &userList);
