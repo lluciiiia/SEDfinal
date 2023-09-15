@@ -28,11 +28,11 @@ private:
 
 public:
     User();
-    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> userRatings, double creditPoint,vector <Motorbike> owm);
+    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, vector<UserRating> userRatings, double creditPoint, vector<Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint);
-    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city,vector <Motorbike> owm);
+    User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city, vector<Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
-    
+
     string toStringAccount();
     string getUserName();
     string getIdType();
@@ -43,28 +43,25 @@ public:
     double getCreditPoint();
     City getCity();
     vector<Motorbike> getOwnedMotorbike();
-    vector<Motorbike>& getOwned();
+    vector<Motorbike> &getOwned();
     friend bool login(User &cus, vector<User> &userList);
 
-
-     bool registerAccount(vector <User>& userList);
-    // listMotorbike()
-    // unlistMotorbike()
+    bool registerAccount(vector<User> &userList);
     void searchAvailableMotorbikes();
     void setCreditPoint(double credit);
-    void requestToRent(vector<Motorbike> &bike, vector <Request> &requests);
+    void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
     void viewRequests();
     void acceptRequest(vector<Request> &requests, Request request);
 
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
-    bool addBike(vector<Motorbike> &bikes);
+    bool addBike(vector<Motorbike> &bikes);    // = list
+    void removeBike(vector<Motorbike> &bikes); // = unlist
     void addMotorInnitial(Motorbike motor);
-    City stringToCity(const std::string& cityStr);
-    bool login(User &cus);
+    City stringToCity(const std::string &cityStr);
+    bool login(User &cus); // TODO: do we need this?
     bool login(const string &username,
-                 const string &pass,
-                 vector<User> &userList);
-    // vector <Motorbike> addOwnedMotorbike(Motorbike bike);
+               const string &pass,
+               vector<User> &userList); // TODO: do we need this?
     // vector <Motorbike> rentBikes();
     // vector <Request> receiveRequest();
 

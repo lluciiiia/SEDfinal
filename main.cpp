@@ -23,7 +23,7 @@ void viewGuestBikeDash(vector<Motorbike> &bikes, string city);
 void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &requests, vector<User> &userList);
 void displayUserInfo(User &user, vector<User> &userList);
 void addCredit(User &user, vector<User> &userList);
-void searchDisPlay(User &user, vector<Motorbike> &bikes);
+void searchEngine(User &user, vector<Motorbike> &bikes);
 int main()
 {
     User user;
@@ -164,10 +164,10 @@ void guest_dashboard(vector<Motorbike> &bikes)
         switch (choice)
         {
         case 1:
-            viewGuestBikeDash(bikes, "Ha noi"); // TODO: Ha noi
+            viewGuestBikeDash(bikes, "Ha noi"); 
             break;
         case 2:
-            viewGuestBikeDash(bikes, "Saigon"); // TODO: Ho Chi Minh
+            viewGuestBikeDash(bikes, "Saigon"); 
             break;
         case 3:
 
@@ -194,12 +194,6 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
         system("cls");
         string model;
-        // if (!user.getOwnedMotorbike().empty()) {
-        //     model = user.getOwnedMotorbike()[0].getModel();
-        //     cout << "Motorbike model: " << model << endl;
-        // } else {
-        //     cout << "No owned motorbikes." << endl;
-        // }
         int count = 0;
         for (auto &bike : bikes)
         {
@@ -218,10 +212,11 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         cout << "|==========================|  Credit point: " << user.getCreditPoint() << "\n";
         cout << "| 1. View your bio         |  Your owned bike: " << model << "\n";
         cout << "| 2. Add your motorbike    |\n";
-        cout << "| 3. Add credit points     |\n";
-        cout << "| 4. View Bikes to rent    |\n";
-        cout << "| 5. View request          |\n";
-        cout << "| 6. Logout                |\n";
+        cout << "| 3. Delete your motorbike |\n";
+        cout << "| 4. Add credit points     |\n";
+        cout << "| 5. View Bikes to rent    |\n";
+        cout << "| 6. View request          |\n";
+        cout << "| 7. Logout                |\n";
         cout << "|==========================|\n";
         cout << "Enter your choice (1-6): ";
 
@@ -232,7 +227,6 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         {
         case 1:
             displayUserInfo(user, userList);
-
             break;
         case 2:
             if (user.addBike(bikes))
@@ -243,19 +237,20 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             {
                 cout << "Failed to add bike \n";
             }
-
             break;
         case 3:
-            addCredit(user, userList);
-
+            user.removeBike(bikes);
             break;
         case 4:
-            viewBikeDash(user, bikes, request, userList);
+            addCredit(user, userList);
             break;
         case 5:
-
+            viewBikeDash(user, bikes, request, userList);
             break;
         case 6:
+
+            break;
+        case 7:
             user = User();
             dashboardRun = true;
             cout << "Logging out...\n";
@@ -388,10 +383,9 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
         switch (choice)
         {
         case 1:
-            searchDisPlay(user, bikes);
+            searchEngine(user, bikes);
             break;
         case 2:
-           
             user.requestToRent(bikes,requests);
         break;
         case 3:
@@ -513,7 +507,7 @@ void addCredit(User &user, vector<User> &userList)
     }
 }
 
-void searchDisPlay(User &user, vector<Motorbike> &bikes)
+void searchEngine(User &user, vector<Motorbike> &bikes)
 {
     system("cls");
     int choice;
