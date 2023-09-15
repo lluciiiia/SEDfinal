@@ -33,7 +33,7 @@ private:
         double motorbikeRating;
         bool availability;
         std::vector<Request> requests;
-        std:: vector<Rating> ratings;
+        std::vector<Rating> ratings;
 
 public:
     // Constructors
@@ -53,6 +53,7 @@ public:
     int getYear();
     string getDes();
     double getRating();
+    vector<Rating> &getRatings();
     vector<Request> &getRequests();
     // Setters
     void setOwner(string Owner);

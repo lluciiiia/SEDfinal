@@ -37,8 +37,7 @@ public:
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city, vector<Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
 
-    
-    string getUserName();
+        string getUserName();
     string getIdType();
     string getIdNum();
     string getLicenseNum();
@@ -65,6 +64,7 @@ public:
     void addRequest(const Request &request);
     // void acceptRequest(vector<Request> &requests, Request request, s);
 
+    void viewReviews(vector<Motorbike> &bikes);
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
     bool addBike(vector<Motorbike> &bikes);    // = list
     void removeBike(vector<Motorbike> &bikes); // = unlist
