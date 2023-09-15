@@ -278,8 +278,7 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
 
         // Display the admin dashboard menu
         cout << "|==========================|\n";
-        cout << "|      Admin Dashboard     |  Hello, "
-             << "\n"; // TODO: Admin info
+        cout << "|      Admin Dashboard     |  Hello, "<< "\n"; // TODO: Admin info
         cout << "|==========================|\n";
         cout << "| 1. View all users        |\n";
         cout << "| 2. View all motorbikes   |\n";
