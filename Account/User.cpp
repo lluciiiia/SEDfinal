@@ -964,6 +964,69 @@ bool login(User &cus, vector<User> &userList)
 //     return rentalAmount;
 // }
 
+double User::calculateRentalAmount(Request &request) {
+    Motorbike bikeToRent = request.getMotorbike();
+
+    double dailyRentalPrice = bikeToRent.getrentalAmount();
+
+    string startTime = request.getTimeSlot().getStartTime();
+    string endTime = request.getTimeSlot().getEndTime();
+
+    // Convert start and end times to hours and minutes
+    int startHour, startMinute, endHour, endMinute;
+    sscanf(startTime.c_str(), "%d:%d", &startHour, &startMinute);
+    sscanf(endTime.c_str(), "%d:%d", &endHour, &endMinute);
+
+    int rentalDurationInHours = (endHour - startHour) + ((endMinute - startMinute) / 60);
+    if (rentalDurationInHours <= 0) {
+        // If the duration is less than or equal to 0, consider it as 1 day.
+        rentalDurationInHours = 24;
+    }
+
+    // Calculate the rental amount based on the daily rate
+    double rentalAmount = rentalDurationInHours * dailyRentalPrice;
+
+    return rentalAmount;
+}
+
+void User::acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users) {
+    // Calculate the rental amount
+    double rentalAmount = calculateRentalAmount(request);
+
+    // Check if the requester has sufficient credits to make the payment
+    if (requester.getCreditPoint() >= rentalAmount) {
+        // Deduct the rental amount from the requester's credits
+        double requesterCredit = requester.getCreditPoint();
+        requesterCredit -= rentalAmount;
+        requester.setCreditPoint(requesterCredit);
+
+        // Find the owner of the motorbike and increase their credits
+        Motorbike bikeToAccept = request.getMotorbike();
+        string ownerName = bikeToAccept.getOwner();
+        User owner;
+
+        for (auto &user : users) {
+            if (user.getUserName() == ownerName) {
+                owner = user;
+                break;
+            }
+        }
+
+        double ownerCredit = owner.getCreditPoint();
+        ownerCredit += rentalAmount;
+        owner.setCreditPoint(ownerCredit);
+
+        bikeToAccept.setAvailability(false);
+
+        request.setStatus(RequestStatus::ACCEPTED);
+
+        requests.push_back(request);
+
+        cout << "Request from " << requester.getUserName() << " to rent motorbike " << bikeToAccept.getMotorbikeId() << " has been accepted." << endl;
+    } else {
+        cout << "Payment was not successful. Request cannot be accepted." << endl;
+    }
+}
 
 // void User::acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users) {
 //     // 1. Payment from the requester (top-up/credits)
