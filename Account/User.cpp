@@ -205,7 +205,7 @@ bool User::addBike(vector<Motorbike> &bikes)
         cout << "You can own only one bike." << endl;
         return false;
     }
-
+    
     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     string model, color, enginSize, transmissionmode;
     string description = "";
@@ -253,7 +253,7 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-    // Year made
+    //Year made
     while (true)
     {
         cout << "Enter year made: ";
@@ -269,7 +269,7 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-    // Transmission mode
+    //Transmission mode
     while (true)
     {
         cout << "Enter your transmission mode: ";
@@ -283,12 +283,12 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-    // Motorbike Description
+    //Motorbike Description
     cout << "Add some description for the bike: ";
     getline(cin, description);
     std::string cityStr;
     City selectedCity;
-    // City
+    //City
     while (true)
     {
         std::cout << "Enter your city (Saigon or Hanoi): ";
@@ -306,7 +306,7 @@ bool User::addBike(vector<Motorbike> &bikes)
 
     int motorbikeID = bikes.size() + 1;
     int consumingPoints;
-    // Bike price
+    //Bike price
     while (true)
     {
         cout << "Enter the price for the bike: ";
@@ -322,7 +322,7 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-    // Rating
+    //Rating
     int minRate;
     while (true)
     {
@@ -338,36 +338,33 @@ bool User::addBike(vector<Motorbike> &bikes)
         {
             break;
         }
-        // Available TimeSlot
-        while (true)
-        {
-            // Make sure dates follow format (mm/dd/yyyy)
-            static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$");
-            string startTime = "", endTime = "";
+    //Available TimeSlot
+    while (true) 
+    {
+        //Make sure dates follow format (mm/dd/yyyy)
+        static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$");
+        string startTime = "", endTime = "";
 
-            while (!regex_match(startTime, dateRegex))
-            {
-                cout << "Enter start time for bike rental period in the format (mm/dd/yyyy): ";
-                cin >> startTime;
-                if (!regex_match(startTime, dateRegex))
-                {
-                    cout << "Start time is in the wrong format! Please try again.\n";
-                }
-            }
-
-            while (!regex_match(endTime, dateRegex))
-            {
-                cout << "Enter end time for bike retal period in the format (mm/dd/yyyy): ";
-                cin >> endTime;
-                if (!regex_match(endTime, dateRegex))
-                {
-                    cout << "End time is in the wrong format! Please try again.\n";
-                }
-            }
-
-            cout << "Your motorbike is available for rental from: " << startTime << " - " << endTime << endl;
-            break;
+        while (!regex_match(startTime, dateRegex)) {
+        cout << "Enter start time for bike rental period in the format (mm/dd/yyyy): ";
+        cin >> startTime;
+        if (!regex_match(startTime, dateRegex)) { 
+            cout << "Start time is in the wrong format! Please try again.\n";
+        } 
         }
+
+        while (!regex_match(endTime, dateRegex)) {
+        cout << "Enter end time for bike retal period in the format (mm/dd/yyyy): ";
+        cin >> endTime;
+        if (!regex_match(endTime, dateRegex)) {
+            cout << "End time is in the wrong format! Please try again.\n";
+        }
+        }
+
+        cout << "Your motorbike is available for rental from: " << startTime << " - " << endTime << endl;
+        break;
+    }
+
     }
 
     Motorbike motor(model, motorbikeID,
@@ -384,7 +381,6 @@ bool User::addBike(vector<Motorbike> &bikes)
 
 void User::removeBike(vector<Motorbike> &bikes)
 {
-    system("cls");
     vector<Motorbike> OwnedMotorbikes = this->getOwned();
 
     cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
@@ -406,24 +402,22 @@ void User::removeBike(vector<Motorbike> &bikes)
     }
 
     int idToRemove;
-    bool removed = false;
-    while (!removed)
+    while (true)
     {
-        cout << "\nEnter the id of the bike to remove: ";
+        cout << "\n\nEnter the id of the bike to remove:";
         cin >> idToRemove;
-    
-        for (int i = 0; i < bikes.size(); i++)
+
+        for (auto bikeToDelete = OwnedMotorbikes.begin(); bikeToDelete != OwnedMotorbikes.end(); ++bikeToDelete)
         {
-            if (bikes[i].getMotorbikeId() == idToRemove)
+            if (bikeToDelete->getMotorbikeId() == idToRemove)
             {
-                // Remove the bike from the vector
-                bikes.erase(bikes.begin() + i);
-                cout << "Remove bike successfully!\n";
-                removed = true;
-                // TODO: update the bikes so the user can see the updated list
+                bikes.erase(bikeToDelete);
+                OwnedMotorbikes.erase(bikeToDelete);
+                cout << "Remove bike succesfully ! \n";
+                break;
             }
         }
-        cout << "Bike with ID " << idToRemove << " not found.\n";
+        std::cout << "Invalid ID. Please enter a valid ID.\n";
     }
 };
 
@@ -875,7 +869,7 @@ void User::viewBikeRequests()
 
 void User::setOwnedBikes(vector<Motorbike> &bikes)
 {
-    this->OwnedMotorbikes = bikes;
+    this-> OwnedMotorbikes= bikes;
 }
 
 void User::viewReviews(vector<Motorbike> &bikes)
@@ -977,9 +971,11 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
 //     // double rentalAmount = calculateRentalAmount(request);
 //     int bikeIDtoRent = request.getMotorbikeID();
 
+
 //     if (requester.getCreditPoint() >= rentalAmount) {
 //         double newRequesterCredit = requester.getCreditPoint() - rentalAmount;
 //         requester.setCreditPoint(newRequesterCredit);
+
 
 //         return true;
 //     } else {
@@ -1008,6 +1004,7 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
 
 //     return rentalAmount;
 // }
+
 
 // void User::acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users) {
 //     // 1. Payment from the requester (top-up/credits)
@@ -1047,6 +1044,7 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
 // void User::rejectRequest(User &requester, Request &request) {
 //     request.setStatus(RequestStatus::REJECTED);
 // }
+
 
 // vector<Motorbike> User::rentBikes()
 // {
