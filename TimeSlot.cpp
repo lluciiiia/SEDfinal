@@ -6,12 +6,6 @@
 
 using namespace std;
 
-//Make sure date follows format "xx/xx/xxxx". Example: "09/15/2023", 09 = month, 15 = date, 2023 = year
-static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$");
-
-bool TimeSlot::isValidDateFormat(const std::string& date) const {
-  return std::regex_match(date, dateRegex);
-}
 
 TimeSlot::TimeSlot()
 {
@@ -47,6 +41,14 @@ bool TimeSlot::isDateWithinTimeSlot(const std::string& date) const {
     }
 
     return date >= startTime && date <= endTime;
+}
+
+
+//Make sure date follows format "xx/xx/xxxx". Example: "09/15/2023", 09 = month, 15 = date, 2023 = year
+static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$");
+
+bool TimeSlot::isValidDateFormat(const std::string& date) const {
+  return std::regex_match(date, dateRegex);
 }
 
 

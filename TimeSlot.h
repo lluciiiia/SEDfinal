@@ -19,7 +19,7 @@ public:
     string getEndTime() const;
 
     void showInfo();
-    bool TimeSlot::isValidDateFormat(const std::string& date) const;
+    bool isValidDateFormat(const std::string& date) const;
     bool isDateWithinTimeSlot(const string& date) const;
 };
 

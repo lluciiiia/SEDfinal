@@ -6,7 +6,6 @@
 #include <chrono>
 #include <cstdlib>
 #include "User.h"
-#include "TimeSlot.h"
 class UserRating;
 class MotorbikeRating;
 
@@ -702,7 +701,7 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
     ratedUser.userRatings.push_back(userRate);
 
     MotorbikeRating motorbikeRate(ratedMotorbike.getMotorbikeId(), motorbikeScore, motorbikeComment);
-    ratedMotorbike.ratings.push_back(motorbikeRate);
+    ratedMotorbike.getRatings().push_back(motorbikeRate);
 }
 
 void User::searchAvailableMotorbikes() {}
