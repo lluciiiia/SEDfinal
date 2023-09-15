@@ -1,10 +1,21 @@
 #include "Request.h"
 
+Request::Request()
+{
+}
 
-Request::Request(string requester, int motorbike, TimeSlot timeSlot, RequestStatus status)
+Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike)
 {
     this->requester= requester;
-    this->motorbike= motorbike;
+    this->motorbikeID= motorbikeID;
+    this->timeSlot= timeSlot;
+    this->status= status;
+}
+
+Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status)
+{
+    this->requester= requester;
+    this->motorbikeID= motorbikeID;
     this->timeSlot= timeSlot;
     this->status= status;
 }

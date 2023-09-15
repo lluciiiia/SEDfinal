@@ -18,7 +18,7 @@ void saveToFile::SaveAccountToFile(vector<User>& users)
     }
 }
 
-vector<User> saveToFile::loadAccount(vector<Motorbike> &moto)
+vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector <Request> &requests)
 {
     vector<User> users;
     fstream myFile(accountFile, ios::in);
@@ -60,6 +60,13 @@ vector<User> saveToFile::loadAccount(vector<Motorbike> &moto)
         }
     }
   
+     for(auto &user : users){
+        for(auto &re : requests){
+            if(user.getUsername() == re.getRequester()){
+                user.getSentRequests().push_back(re);
+            }
+        }
+    }
 
     myFile.close();
     return users;
@@ -79,7 +86,7 @@ void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
     }
 }
 
-vector<Motorbike> saveToFile::loadMotor()
+vector<Motorbike> saveToFile::loadMotor(vector<Request> &requests)
 {
     vector <Motorbike> motors;
     fstream myFile(motobikeFile, ios:: in);
@@ -120,6 +127,15 @@ vector<Motorbike> saveToFile::loadMotor()
 
         }
     }
+    
+    for(auto &mo : motors){
+        for(auto &re : requests){
+            if(mo.getMotorbikeId() == re.getMotorbikeID()){
+                mo.getRequests().push_back(re);
+            }
+        }
+    }
+    myFile.close();
     return motors;
 }
 
@@ -136,10 +152,43 @@ void saveToFile::SaveRequestToFIle(vector<Request> &request)
     }
 }
 
-// vector<Request> saveToFile::loadRequest()
-// {
-//     return vector<Request>();
-// }
+vector<Request> saveToFile::loadRequest()
+{
+    vector<Request> requests;
+    fstream myFile(requestFile, ios:: in);
+    string line;
+while(getline(myFile, line)){
+        stringstream ss(line);
+        vector<string> tokens;
+        string token;
+        while(getline(ss,token,',')){
+            tokens.push_back(token);
+        }
+
+        if(tokens.size()== 5){
+            TimeSlot time= TimeSlot(tokens[3],tokens[4]);
+            RequestStatus sta;
+            if (tokens[2] == "PENDING")
+            {
+                sta = RequestStatus::PENDING;
+            }
+            else if (tokens[2] == "ACCEPTED")
+            {
+                sta = RequestStatus::ACCEPTED;
+            }else if(tokens[2] == "REJECTED"){
+                sta = RequestStatus::REJECTED;
+            }
+            int motobikeID= stoi(tokens[2]);
+            Request reque = Request(tokens[0],motobikeID,time,sta);
+            requests.push_back(reque);
+        }
+    }
+
+    myFile.close();
+    
+    return requests;
+    
+}
 
 // void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
 // {

@@ -18,10 +18,9 @@ private:
     int motobikeID;
     
 public:
-
-    Request(string requester, int motorbike, TimeSlot timeSlot, RequestStatus status);
-
-
+    Request();
+    Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike);
+    Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status);
     string getRequester() const;
     string getMotorbike() const;
     void setMotorbikeID(int motorbikeID);

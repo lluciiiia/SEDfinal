@@ -582,7 +582,9 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests){
              << endl;
         }
     }
+    cout<< "akjsdhakjsdhakjsdhajksdhajkhsd"<< dayAndMon;
     string input;
+<<<<<<< Updated upstream
     while (true) {
     cout << "Enter the bike model you want to rent (Q to quit): ";
     getline(cin, input);
@@ -622,10 +624,133 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests){
                 }
             }
         }
+=======
+    int choice;
+                cout<< "Please enter bike Id to rent the bike\n";
+                cin>> choice;
+                cin.ignore();
+                string days;
+                cout<< "How many days you want to rent? \n";
+                getline(cin,days);
+
+                TimeSlot time(dayAndMon, days);
+                RequestStatus status = RequestStatus::PENDING;
+                Request reque;
+                bool found= false;
+                int biId;
+                for (auto& bi : bikes) {
+                    if (bi.getMotorbikeId() == choice) {
+                        found = true;
+                        biId=bi.getMotorbikeId();
+                    }
+                }
+                if(found){
+                     reque = Request(this->getUsername(), biId, time, status);
+                    
+                }   
+            
+                        
+                        
+                cout<< "helloasjkldasjkdhasd   "<< reque.getMotorbikeID();
+                cout<< "helloasjkldasjkdhasd   "<< reque.getRequester();
+                requests.push_back(reque);
+                // this->sentRequests.push_back(reque);
+                cout << "Rent successful!\n";
+            
+   
+};
+
+void User::viewRequestsDash()
+{
+    system("cls");
+    int choice;
+    bool dashboardRun = false;
+    cout << "\n";
+    cout << "----------------------------------------\n";
+    cout << "1. View requests that I sent. \n";
+    cout << "2. View requests for my motorbikes. \n";
+    cout << "3. Exit\n";
+    cout << "Enter your choice(1-3): ";
+    cin >> choice;
+    cin.ignore();
+    switch (choice)
+    {
+    case 1:
+        this->viewSentRequests();
+>>>>>>> Stashed changes
         break;
     }
 }
 
+<<<<<<< Updated upstream
+=======
+void User::viewBikeRequests()
+{
+}
+
+void User::setRequestSend(vector<Request> &re)
+{
+    this->sentRequests= re;
+}
+
+void User::setRentingBikes(vector<Motorbike> &bikes)
+{
+    this->RentingBikes= bikes;
+}
+
+void User::setRatingList(vector<UserRating> &ratings)
+{
+    this->userRatings= ratings;
+}
+
+void User::setOwnedBikes(vector<Motorbike> &bikes)
+{
+    this-> OwnedMotorbikes= bikes;
+}
+
+void User::viewReviews(vector<Motorbike> &bikes)
+{
+    // TODO: select motorbikeID to view
+    int IDtoView;
+    bool foundMotorbike = false;
+    while (!foundMotorbike)
+    {
+        cout << "Enter a motorbike ID to view: ";
+        cin >> IDtoView;
+        for (auto &bike : bikes)
+        {
+            int bikeID = bike.getMotorbikeId();
+            if (IDtoView == bikeID)
+            {
+                vector<MotorbikeRating> bikeRatings = bike.getRatings();
+
+                if (bikeRatings.empty())
+                {
+                    std::cout << "The motorbike doesn't have reviews yet." << std::endl;
+                }
+                else
+                {
+                    cout << left << setw(12) << "MotorbikeID" << setw(20) << "Score" << setw(10) << "Comment" << endl;
+                    cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+
+                    for (const Rating &bikeRating : bikeRatings)
+                    {
+                        cout << left << setw(12) << bike.getMotorbikeId()
+                             << setw(20) << bikeRating.getScore()
+                             << setw(10) << bikeRating.getComment() << endl;
+                    }
+                }
+                foundMotorbike = true;
+                break;
+            }
+        }
+        if (foundMotorbike)
+        {
+            break;
+        }
+        cout << "Invalid ID format! Please enter a valid ID from the list!\n";
+    }
+>>>>>>> Stashed changes
 };
 
 
@@ -734,6 +859,11 @@ bool login(User &cus, vector<User> &userList)
                            user.getIdNum(), user.getLicenseNum(),
                            user.getExDate(), user.getCreditPoint(),
                            user.getCity());
+<<<<<<< Updated upstream
+=======
+                cus.setOwnedBikes(user.getOwned());
+                cus.setRequestSend(user.getSentRequests());
+>>>>>>> Stashed changes
                 return true;
             }
         }

@@ -29,9 +29,9 @@ int main()
     User user;
     Admin admin;
     saveToFile fileSave;
-    vector <Request> requests;
-    vector<Motorbike> motorbikeList = fileSave.loadMotor();
-    vector<User> userList = fileSave.loadAccount(motorbikeList);
+    vector<Request> requests=fileSave.loadRequest();
+    vector<Motorbike> motorbikeList = fileSave.loadMotor(requests);
+    vector<User> userList = fileSave.loadAccount(motorbikeList,requests);
 
     City city = City::Saigon;
 
@@ -230,10 +230,14 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             
             break;
         case 2:
-            if(user.addBike(bikes)){
-                cout<< "Add bike succesfully ! \n";
-            }else{
-                cout<< "Failed to add bike \n";
+            
+            if (user.addBike(bikes))
+            {
+                cout << "Add bike succesfully ! \n";
+            }
+            else
+            {
+                cout << "Failed to add bike \n";
             }
 
             break;
