@@ -192,28 +192,44 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
 
     while (!dashboardRun)
     {
-
+        // get owned bikes
         system("cls");
         string model;
-        int count = 0;
+        int i = 0;
         for (auto &bike : bikes)
         {
             if (bike.getOwner() == user.getUsername())
             {
-                if (count > 0)
+                if (i > 0)
                 {
                     model += ", ";
                 }
                 model += bike.getModel();
-                count++;
+                i++;
             }
         }
+
+        // get rented bikes
+        string rentingBikes;
+        int j = 0;
+        for (auto &sentRequest: user.getSentRequests()) {
+            if (sentRequest.getStatus() == RequestStatus::ACCEPTED) {
+                 if (j > 0)
+                {
+                    rentingBikes += ", ";
+                }
+                // TODO: after motorbike object in Request class
+                //rentingBikes += sentRequest.getMotorbike().getModel();
+                j++;
+            }
+        }
+
         // Display the user dashboard menu
         cout << "|==========================|\n";
         cout << "|      User Dashboard      |  Hello, " << user.getUsername() << "\n";
         cout << "|==========================|  Credit point: " << user.getCreditPoint() << "\n";
         cout << "| 1. View your bio         |  Your owned bike: " << model << "\n";
-        cout << "| 2. Add your motorbike    |\n";
+        cout << "| 2. Add your motorbike    |  Bikes you are renting: "<< rentingBikes <<"\n"; 
         cout << "| 3. Delete your motorbike |\n";
         cout << "| 4. Add credit points     |\n";
         cout << "| 5. View Bikes to rent    |\n";
