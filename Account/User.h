@@ -62,7 +62,6 @@ public:
     double calculateRentalAmount(Request &request);
     void acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users);
     void addRequest(const Request &request);
-    // void acceptRequest(vector<Request> &requests, Request request, s);
 
     void viewReviews(vector<Motorbike> &bikes);
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
