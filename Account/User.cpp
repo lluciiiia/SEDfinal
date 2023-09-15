@@ -30,9 +30,9 @@ User::User(string username,
            std::vector<UserRating> userRatings,
            double creditPoint, vector<Motorbike> own,
            vector<Request> sentRequests) : Account(username,
-                                                                password,
-                                                                fullName,
-                                                                phoneNumber)
+                                                   password,
+                                                   fullName,
+                                                   phoneNumber)
 {
     this->IDtype = IDtype;
     this->idNum = idNum;
@@ -176,7 +176,8 @@ City User::getCity()
     return this->city;
 }
 
-vector<Request> &User::getSentRequests() {
+vector<Request> &User::getSentRequests()
+{
     return this->sentRequests;
 }
 
@@ -803,12 +804,33 @@ void User::viewRequestsDash()
     cin.ignore();
 };
 
-void User::viewSentRequests() {
+void User::viewSentRequests()
+{
+    if (this->sentRequests.empty())
+    {
+        std::cout << "You have no requests." << std::endl;
+    }
+    else
+    {
+        cout << left << setw(12) << "Requester" << setw(20) << "MotorbikeID" << setw(10) << "Time Slot" << setw(10) << "Request Status" << setw(15) << endl;
+        cout << setfill('-') << setw(60) << "-" << setfill(' ') << endl;
 
+        for (const Request &request : this->sentRequests)
+        {
+            if (request.getStatus() == RequestStatus::PENDING)
+            {
+                cout << left << setw(12) << request.getRequester()
+                     << setw(20) << request.getMotorbikeID()
+                     << setw(10) << "Time Slot: " << request.getTimeSlot().getStartTime() << " - " << request.getTimeSlot().getEndTime() << "\n";
+                std::string statusStr = statusToString(request.getStatus());
+                cout << left << setw(10) << "Status: " << statusStr << std::endl;
+            }
+        }
+    }
 }
 
-void User::viewBikeRequests() {
-
+void User::viewBikeRequests()
+{
 }
 
 // void User::acceptRequest(vector<Request> &requests, Request request){
