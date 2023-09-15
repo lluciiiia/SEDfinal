@@ -864,6 +864,11 @@ void User::viewBikeRequests()
 {
 }
 
+void User::setOwnedBikes(vector<Motorbike> &bikes)
+{
+    this-> OwnedMotorbikes= bikes;
+}
+
 void User::viewReviews(vector<Motorbike> &bikes)
 {
     // TODO: select motorbikeID to view
@@ -878,7 +883,7 @@ void User::viewReviews(vector<Motorbike> &bikes)
             int bikeID = bike.getMotorbikeId();
             if (IDtoView == bikeID)
             {
-                vector<Rating> bikeRatings = bike.getRatings();
+                vector<MotorbikeRating> bikeRatings = bike.getRatings();
 
                 if (bikeRatings.empty())
                 {
@@ -908,7 +913,7 @@ void User::viewReviews(vector<Motorbike> &bikes)
     }
 };
 
-bool login(User &cus, vector<User> &userList)
+bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
 {
     string username;
     string pass;
@@ -951,6 +956,7 @@ bool login(User &cus, vector<User> &userList)
                            user.getIdNum(), user.getLicenseNum(),
                            user.getExDate(), user.getCreditPoint(),
                            user.getCity());
+                cus.setOwnedBikes(user.getOwned());
                 return true;
             }
         }

@@ -80,7 +80,7 @@ int main()
         {
             cout << "Logging in as Member\n";
             cout << "Your are logging in.\n";
-            if (login(user, userList))
+            if (login(user, userList,motorbikeList))
             {
                 user_dashboard(user, motorbikeList, userList, requests);
                 system("cls");
@@ -249,6 +249,9 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             displayUserInfo(user, userList);
             break;
         case 2:
+            for(int i=0; i<user.getOwned().size(); i++){
+                cout<< "Helllaosdasljdjkasd" << user.getOwned()[i].getModel();
+            }
             if (user.addBike(bikes))
             {
                 cout << "Add bike succesfully ! \n";

@@ -50,7 +50,7 @@ public:
     vector<Request> &getSentRequests();
 
     string toStringAccount();
-    friend bool login(User &cus, vector<User> &userList);
+    friend bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes);
     bool registerAccount(vector<User> &userList);
     void searchAvailableMotorbikes();
     void setCreditPoint(double credit);
@@ -63,7 +63,7 @@ public:
     void acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users);
     void addRequest(const Request &request);
     // void acceptRequest(vector<Request> &requests, Request request, s);
-
+    void setOwnedBikes(vector <Motorbike> &bikes);
     void viewReviews(vector<Motorbike> &bikes);
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
     bool addBike(vector<Motorbike> &bikes);    // = list
