@@ -7,4 +7,6 @@ enum class RequestStatus {
     REJECTED
 };
 
+std::string statusToString(RequestStatus status);
+
 #endif

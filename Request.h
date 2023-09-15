@@ -12,23 +12,23 @@ class Request
 {
 private:
     string requester;  
-    int motorbike;  
     RequestStatus status;
     TimeSlot timeSlot;
-    int motobikeID;
+    int motorbikeID;
+    Motorbike* bike;
     
 public:
     Request();
     Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike);
     Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status);
     string getRequester() const;
-    string getMotorbike() const;
+    Motorbike getMotorbike();
     void setMotorbikeID(int motorbikeID);
     RequestStatus getStatus() const;
     TimeSlot getTimeSlot() const;
     int getMotorbikeID() const;
     void setRequester(string requester);
-    void setMotorbike(string motorbike);
+    //void setMotorbike(string motorbike);
     void setStatus(RequestStatus status);
     void setTimeSlot(TimeSlot timeSlot);
     string requestToString();

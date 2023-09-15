@@ -11,6 +11,9 @@
 #include "User.h"
 #include "../Request.h"
 #include "../RequestStatus.h"
+#include "User.h"
+#include "../Request.h"
+#include "../RequestStatus.h"
 
 class Motorbike;
 class Request;
@@ -37,7 +40,7 @@ public:
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city, vector<Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
 
-    string getUserName();
+        string getUserName();
     string getIdType();
     string getIdNum();
     string getLicenseNum();

@@ -13,13 +13,14 @@ private:
 
 public:
     TimeSlot();
-    TimeSlot(const string &startTime, const string &endTime);
+    TimeSlot(const string& startTime, const string& endTime);
 
     string getStartTime() const;
     string getEndTime() const;
 
     void showInfo();
-
+    bool isValidDateFormat(const std::string& date) const;
+    bool isDateWithinTimeSlot(const string& date) const;
 };
 
 #endif

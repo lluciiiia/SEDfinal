@@ -2,13 +2,6 @@
 
 using namespace std;
 
-// TimeSlot Motorbike::getTimeSlot()
-// {
-//         return
-// }
-
-
-
 Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating)
 {
         this->model = model;
@@ -153,8 +146,12 @@ void Motorbike::viewRequests()
 
 bool Motorbike::checkAvailability(bool availability)
 {
-        return availability;
+        return this->availability;
 }
+
+vector<MotorbikeRating> &Motorbike::getRatings(){
+        return this->ratings;
+};
 
 // void Motorbike::addCreditPoints(double points)
 // {

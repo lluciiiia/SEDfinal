@@ -12,22 +12,27 @@ Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestSt
     this->status= status;
 }
 
-Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status)
+Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status){}
+Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike)
 {
     this->requester= requester;
     this->motorbikeID= motorbikeID;
     this->timeSlot= timeSlot;
     this->status= status;
+    *this->bike = bike;
 }
 
 string Request::getRequester() const
 {
     return requester;
 }
-
+Motorbike Request::getMotorbike()
+{
+    return *bike;
+}
 int Request::getMotorbikeID() const
 {
-    return motorbike;
+    return motorbikeID;
 }
 
 RequestStatus Request::getStatus() const
@@ -47,7 +52,7 @@ void Request::setRequester(string requester)
 
 void Request::setMotorbikeID(int motorbikeID)
 {
-    this->motobikeID= motorbikeID;
+    this->motorbikeID= motorbikeID;
 }
 
 
@@ -82,7 +87,7 @@ string Request::requestToString()
     }
     
     return this->requester+","+
-            to_string(this->motorbike)+","+
+            to_string(this->motorbikeID)+","+
             requestSta+","+
             timeSlot.getStartTime()+","+
             timeSlot.getEndTime();
@@ -92,7 +97,7 @@ string Request::requestToString()
 void Request::showInfo()
 {
     cout << "Requester: " << requester<< "\n";
-    cout << "Motorbike: " << motobikeID << "\n";
+    cout << "Motorbike: " << motorbikeID << "\n";
     cout << "Request Status: " << __STRINGIFY(status) << "\n";
     //timeSlot.showInfo();
 };
