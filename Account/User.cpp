@@ -834,29 +834,45 @@ void User::viewBikeRequests()
 
 void User::viewReviews(vector<Motorbike> &bikes)
 {
-    system("cls");
-    // TODO: select motorbikeID to view 
-
-    for (auto &bike : bikes)
+    // TODO: select motorbikeID to view
+    int IDtoView;
+    bool foundMotorbike = false;
+    while (!foundMotorbike)
     {
-        vector<Rating> bikeRatings = bike.getRatings();
-
-        if (bikeRatings.empty())
+        cout << "Enter a motorbike ID to view: ";
+        cin >> IDtoView;
+        for (auto &bike : bikes)
         {
-            std::cout << "The motorbike doesn't have reviews yet." << std::endl;
-        }
-        else
-        {
-            cout << left << setw(12) << "MotorbikeID" << setw(20) << "Score" << setw(10) << "Comment" << endl;
-            cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
-
-            for (const Rating &bikeRating : bikeRatings)
+            int bikeID = bike.getMotorbikeId();
+            if (IDtoView == bikeID)
             {
-                cout << left << setw(12) << bike.getMotorbikeId()
-                     << setw(20) << bikeRating.getScore()
-                     << setw(10) << bikeRating.getComment() << endl;
+                vector<Rating> bikeRatings = bike.getRatings();
+
+                if (bikeRatings.empty())
+                {
+                    std::cout << "The motorbike doesn't have reviews yet." << std::endl;
+                }
+                else
+                {
+                    cout << left << setw(12) << "MotorbikeID" << setw(20) << "Score" << setw(10) << "Comment" << endl;
+                    cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+
+                    for (const Rating &bikeRating : bikeRatings)
+                    {
+                        cout << left << setw(12) << bike.getMotorbikeId()
+                             << setw(20) << bikeRating.getScore()
+                             << setw(10) << bikeRating.getComment() << endl;
+                    }
+                }
+                foundMotorbike = true;
+                break;
             }
         }
+        if (foundMotorbike)
+        {
+            break;
+        }
+        cout << "Invalid ID format! Please enter a valid ID from the list!\n";
     }
 };
 

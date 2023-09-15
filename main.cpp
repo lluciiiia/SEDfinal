@@ -396,7 +396,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
         default:
             cout << "Invalid input! Please enter it correctly. \n";
         }
-        cout << "Press Enter to continue...";
+        cout << "Press Enter to continue..." << endl;
         cin.ignore();
     }
 }
