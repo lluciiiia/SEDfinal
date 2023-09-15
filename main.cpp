@@ -376,6 +376,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
             searchEngine(user, bikes);
             break;
         case 2:
+            // TODO: view reviews for each bike if the user wants to
             user.requestToRent(bikes,requests);
         break;
         case 3:
