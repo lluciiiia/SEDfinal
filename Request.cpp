@@ -4,7 +4,7 @@ Request::Request()
 {
 }
 
-Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike)
+Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status)
 {
     this->requester= requester;
     this->motorbikeID= motorbikeID;
@@ -12,7 +12,7 @@ Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestSt
     this->status= status;
 }
 
-Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status){}
+
 Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike)
 {
     this->requester= requester;

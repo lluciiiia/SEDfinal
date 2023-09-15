@@ -387,8 +387,14 @@ void User::removeBike(vector<Motorbike> &bikes)
     system("cls");
     vector<Motorbike> OwnedMotorbikes = this->getOwned();
 
-    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
-    cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
+    
+
+    int idToRemove;
+    bool removed = false;
+    while (!removed)
+    {
+        cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
+        cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
     for (auto &bike : OwnedMotorbikes)
     {
         string cityStr = cityToString(bike.getCity());
@@ -404,11 +410,6 @@ void User::removeBike(vector<Motorbike> &bikes)
              << setw(8) << cityStr
              << endl;
     }
-
-    int idToRemove;
-    bool removed = false;
-    while (!removed)
-    {
         cout << "\nEnter the id of the bike to remove: ";
         cin >> idToRemove;
     
@@ -871,6 +872,11 @@ void User::viewSentRequests()
 
 void User::viewBikeRequests()
 {
+}
+
+void User::setRequestSend(vector<Request> &re)
+{
+    this->sentRequests= re;
 }
 
 void User::setOwnedBikes(vector<Motorbike> &bikes)
