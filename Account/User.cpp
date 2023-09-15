@@ -671,8 +671,6 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
     ratedMotorbike.ratings.push_back(motorbikeRate);
 }
 
-// listMotorbike()
-// unlistMotorbike()
 void User::searchAvailableMotorbikes() {}
 void User::setCreditPoint(double credit)
 {
@@ -833,55 +831,6 @@ void User::viewBikeRequests()
 {
 }
 
-// void User::acceptRequest(vector<Request> &requests, Request request){
-//     // 1. change the request status to Accepted
-//     request.setStatus(RequestStatus::ACCEPTED);
-
-//     // 2. change the availability of the motorbike
-//     // Motorbike* motorbikeToRequest = request.getMotorbike();
-//     // motorbikeToRequest->setAvailability(false);
-
-//     // 3. payment from the requester
-
-//     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
-
-// };
-
-// listMotorbike()
-// unlistMotorbike()
-
-// void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
-// {
-//     // Request request(this, &motorbike, timeSlot);
-//     //motorbike.addRequest(request);
-// }
-
-// void User::viewRequests(){};
-
-// void User::acceptRequest(vector<Request> &requests, Request request){
-//     // 1. change the request status to Accepted
-//    request.setStatus(RequestStatus::ACCEPTED);
-
-//   // 2. change the availability of the motorbike
-// //   Motorbike* motorbikeToRequest = request.getMotorbike();
-// // motorbikeToRequest->setAvailability(false);
-
-// // 3. payment from the requester
-
-// // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
-
-// };
-
-// vector<Motorbike> User::rentBikes()
-// {
-//     return vector<Motorbike>();
-// }
-
-// vector<Request> User::receiveRequest()
-// {
-//     return vector<Request>();
-// }
-
 bool login(User &cus, vector<User> &userList)
 {
     string username;
@@ -932,3 +881,33 @@ bool login(User &cus, vector<User> &userList)
 
     return false;
 }
+
+// void User::acceptRequest(vector<Request> &requests, Request request){
+//     // 1. change the request status to Accepted
+//     request.setStatus(RequestStatus::ACCEPTED);
+
+//     // 2. change the availability of the motorbike
+//     // Motorbike* motorbikeToRequest = request.getMotorbike();
+//     // motorbikeToRequest->setAvailability(false);
+
+//     // 3. payment from the requester
+
+//     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
+
+// };
+
+// void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
+// {
+//     // Request request(this, &motorbike, timeSlot);
+//     //motorbike.addRequest(request);
+// }
+
+// vector<Motorbike> User::rentBikes()
+// {
+//     return vector<Motorbike>();
+// }
+
+// vector<Request> User::receiveRequest()
+// {
+//     return vector<Request>();
+// }
