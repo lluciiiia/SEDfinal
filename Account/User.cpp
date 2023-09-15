@@ -753,6 +753,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                  << endl;
         }
     }
+    cout<< "akjsdhakjsdhakjsdhajksdhajkhsd"<< dayAndMon;
     string input;
     while (true)
     {
@@ -785,29 +786,31 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                         {
                             double totalDays = stod(rentdays); // Convert to integer
 
-                            if (this->creditPoint < bi.getConsumingPoints() * totalDays)
-                            {
-                                cout << "You don't have enough credit points to rent! Please lower your days or quit \n";
-                            }
-                            else
-                            {
-                                TimeSlot time(dayAndMon, rentdays);
-                                RequestStatus status = RequestStatus::PENDING;
-
-                                Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status, bi);
-                                bi.getRequests().push_back(reque);
-                                requests.push_back(reque);
-                                cout << "Rent successful! \n";
-                            }
-                            break;
+                        if (this->creditPoint < bi.getConsumingPoints() * totalDays) {
+                            cout << "You don't have enough credit points to rent! Please lower your days or quit \n";
+                        } else {
+                            TimeSlot time(dayAndMon, rentdays); 
+                            RequestStatus status = RequestStatus::PENDING;
+                            
+                            Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status);
+                            
+                            bi.getRequests().push_back(reque);
+                            requests.push_back(reque);
+                            cout << "Rent successful! \n";
+            
                         }
+                        break;
                     }
                 }
             }
-            break;
         }
+        break;
     }
+}
+
 };
+
+
 
 void User::viewRequestsDash()
 {
@@ -962,7 +965,6 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
                            user.getIdNum(), user.getLicenseNum(),
                            user.getExDate(), user.getCreditPoint(),
                            user.getCity());
-                cus.setOwnedBikes(user.getOwned());
                 return true;
             }
         }

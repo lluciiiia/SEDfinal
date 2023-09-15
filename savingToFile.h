@@ -22,9 +22,9 @@ class saveToFile{
 
     public: 
     void SaveAccountToFile( vector<User>&users);
-    vector<User> loadAccount(vector<Motorbike> &moto);
+    vector<User> loadAccount(vector<Motorbike> &moto, vector <Request> &requests);
     void SaveMotobikeToFile(vector <Motorbike> &moto);
-    vector<Motorbike> loadMotor();
+    vector<Motorbike> loadMotor(vector<Request> &requests);
     void SaveRequestToFIle(vector <Request> &request);
     vector <Request> loadRequest();
     void saveBorrowToFile(vector<Borrow> &borrow);

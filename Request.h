@@ -20,6 +20,7 @@ private:
 public:
     Request();
     Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike);
+    Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status);
     string getRequester() const;
     Motorbike getMotorbike();
     void setMotorbikeID(int motorbikeID);

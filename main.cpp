@@ -30,9 +30,9 @@ int main()
     User user;
     Admin admin;
     saveToFile fileSave;
-    vector<Request> requests;
-    vector<Motorbike> motorbikeList = fileSave.loadMotor();
-    vector<User> userList = fileSave.loadAccount(motorbikeList);
+    vector<Request> requests=fileSave.loadRequest();
+    vector<Motorbike> motorbikeList = fileSave.loadMotor(requests);
+    vector<User> userList = fileSave.loadAccount(motorbikeList,requests);
 
     City city = City::Saigon;
 
@@ -249,9 +249,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             displayUserInfo(user, userList);
             break;
         case 2:
-            for(int i=0; i<user.getOwned().size(); i++){
-                cout<< "Helllaosdasljdjkasd" << user.getOwned()[i].getModel();
-            }
+            
             if (user.addBike(bikes))
             {
                 cout << "Add bike succesfully ! \n";

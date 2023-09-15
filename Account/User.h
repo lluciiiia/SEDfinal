@@ -11,6 +11,9 @@
 #include "User.h"
 #include "../Request.h"
 #include "../RequestStatus.h"
+#include "User.h"
+#include "../Request.h"
+#include "../RequestStatus.h"
 
 class Motorbike;
 class Request;
@@ -58,6 +61,10 @@ public:
     void viewRequestsDash();
     void viewSentRequests();
     void viewBikeRequests();
+
+    void setRequestSend(vector <Request> &re);
+    void setRentingBikes(vector <Motorbike> &bikes);
+    void setRatingList(vector <UserRating> &ratings);
     bool processPayment(User &requester, Request request);
     double calculateRentalAmount(Request &request);
     void acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users);
