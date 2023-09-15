@@ -34,7 +34,7 @@ private:
         double motorbikeRating;
         bool availability; //If the motorbike is currently rented => Make it unavailble*
         std::vector<Request> requests;
-        std::vector<Rating> ratings;
+        std::vector<MotorbikeRating> ratings;
         TimeSlot availableTimeSlot;
 
 public:
@@ -54,7 +54,7 @@ public:
     int getYear();
     string getDes();
     double getRating();
-    vector<Rating> &getRatings();
+    vector<MotorbikeRating> &getRatings();
     vector<Request> &getRequests();
 
     TimeSlot getAvailableTimeSlot();
