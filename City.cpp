@@ -2,7 +2,6 @@
 #include <string>
 #include "City.h"
 
-// Function to convert City enum to string
 string cityToString(City city) {
     static map<City, string> cityMap = {
         {City::Saigon, "Saigon"},
@@ -15,4 +14,17 @@ string cityToString(City city) {
     } else {
         return "Unknown"; // Handle unknown enum values
     }
+}
+
+City stringToCity(const std::string &cityStr)
+{
+    if (cityStr == "Saigon")
+    {
+        return City::Saigon;
+    }
+    else if (cityStr == "Hanoi")
+    {
+        return City::Hanoi;
+    }
+    return static_cast<City>(-1); // Invalid city, return -1
 }

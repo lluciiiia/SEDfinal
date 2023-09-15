@@ -12,6 +12,7 @@ enum class City
 };
 
 std::string cityToString(City city);
+City stringToCity(const std::string &cityStr);
 
 #endif
 
