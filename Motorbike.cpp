@@ -174,7 +174,7 @@ bool Motorbike::checkAvailability(bool availability)
         return this->availability;
 }
 
-vector<Rating> &Motorbike::getRatings(){
+vector<MotorbikeRating> &Motorbike::getRatings(){
         return this->ratings;
 };
 
