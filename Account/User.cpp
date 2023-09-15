@@ -754,8 +754,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                                 TimeSlot time(dayAndMon, rentdays);
                                 RequestStatus status = RequestStatus::PENDING;
 
-                                Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status);
-
+                                Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status, bi);
                                 bi.getRequests().push_back(reque);
                                 requests.push_back(reque);
                                 cout << "Rent successful! \n";
@@ -882,44 +881,46 @@ bool login(User &cus, vector<User> &userList)
     return false;
 }
 
-bool User::processPayment(User &requester, Request request) {
-    double rentalAmount = calculateRentalAmount(request);
-
-    if (requester.getCreditPoint() >= rentalAmount) {
-        double newRequesterCredit = requester.getCreditPoint() - rentalAmount;
-        requester.setCreditPoint(newRequesterCredit);
+// bool User::processPayment(User &requester, Request request) {
+//     // double rentalAmount = calculateRentalAmount(request);
+//     int bikeIDtoRent = request.getMotorbikeID();
 
 
-        return true;
-    } else {
-        std::cout << "Insufficient credit to make the payment." << std::endl;
-        return false;
-    }
-}
-
-//error on request
-
-double User::calculateRentalAmount(Request &request) {
-    string startTime = request.getTimeSlot().getStartTime();
-    string endTime = request.getTimeSlot().getEndTime();
-
-    int startHour, startMinute, endHour, endMinute;
-
-    sscanf(startTime.c_str(), "%d:%d", &startHour, &startMinute);
-
-    sscanf(endTime.c_str(), "%d:%d", &endHour, &endMinute);
-
-    int rentalDurationInHours = (endHour - startHour) + ((endMinute - startMinute) / 60);
-
-    double rentalPricePerHour = request.getMotorbikeID()->getRentalAmount();
-
-    double rentalAmount = rentalDurationInHours * rentalPricePerHour;
-
-    return rentalAmount;
-}
+//     if (requester.getCreditPoint() >= rentalAmount) {
+//         double newRequesterCredit = requester.getCreditPoint() - rentalAmount;
+//         requester.setCreditPoint(newRequesterCredit);
 
 
-void User::acceptRequest(User &requester, vector<Request> &requests, Request &request) {
+//         return true;
+//     } else {
+//         std::cout << "Insufficient credit to make the payment." << std::endl;
+//         return false;
+//     }
+// }
+
+// //error on request
+
+// double User::calculateRentalAmount(Request &request) {
+//     string startTime = request.getTimeSlot().getStartTime();
+//     string endTime = request.getTimeSlot().getEndTime();
+
+//     int startHour, startMinute, endHour, endMinute;
+
+//     sscanf(startTime.c_str(), "%d:%d", &startHour, &startMinute);
+
+//     sscanf(endTime.c_str(), "%d:%d", &endHour, &endMinute);
+
+//     int rentalDurationInHours = (endHour - startHour) + ((endMinute - startMinute) / 60);
+
+//     double rentalPricePerDay = request.getMotorbikeID()->getRentalAmount();
+
+//     double rentalAmount = rentalDurationInHours * rentalPricePerHour;
+
+//     return rentalAmount;
+// }
+
+
+void User::acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users) {
     // 1. Payment from the requester (top-up/credits)
     bool paymentSuccessful = processPayment(requester, request);
 
@@ -927,19 +928,26 @@ void User::acceptRequest(User &requester, vector<Request> &requests, Request &re
         // 2. Increase the credits ($1 = 1 credit point) for both requester and the owner
         double rentalAmount = calculateRentalAmount(request);
         double requesterCredit = requester.getCreditPoint();
-        double ownerCredit = request.getMotorbikeID()->getOwner()->getCreditPoint();
 
+        Motorbike bikeToAccept = request.getMotorbike();
+        string ownerName = bikeToAccept.getOwner();
+        User owner;
+        for (auto &user : users) {
+            if (user.getUserName() == ownerName) {
+                owner = user;
+                break;
+            }
+        }
+        double ownerCredit = owner.getCreditPoint();
         requesterCredit -= rentalAmount;
         ownerCredit += rentalAmount;
 
         requester.setCreditPoint(requesterCredit);
-        request.getMotorbike()->getOwner()->setCreditPoint(ownerCredit);
+        owner.setCreditPoint(ownerCredit);
 
-        request.getMotorbike()->setAvailability(false);
+        bikeToAccept.setAvailability(false);
 
         request.setStatus(RequestStatus::ACCEPTED);
-
-        requester.addRequest(request);
 
         requests.push_back(request);
     } else {
@@ -947,9 +955,10 @@ void User::acceptRequest(User &requester, vector<Request> &requests, Request &re
     }
 }
 
-void User::addRequest(const Request &request) {
-    userRequests.push_back(request);
-}
+// void User::rejectRequest(User &requester, Request &request) {
+//     request.setStatus(RequestStatus::REJECTED);
+// }
+
 
 // vector<Motorbike> User::rentBikes()
 // {

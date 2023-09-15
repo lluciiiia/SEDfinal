@@ -36,6 +36,8 @@ private:
         std:: vector<Rating> ratings;
 
 public:
+    // Constructors
+    Motorbike();
     Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating);
     Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating,bool avai);
     // Getters

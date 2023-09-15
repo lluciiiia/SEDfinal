@@ -59,7 +59,11 @@ public:
     void viewRequestsDash();
     void viewSentRequests();
     void viewBikeRequests();
-    void acceptRequest(vector<Request> &requests, Request request);
+    bool processPayment(User &requester, Request request);
+    double calculateRentalAmount(Request &request);
+    void acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users);
+    void addRequest(const Request &request);
+    // void acceptRequest(vector<Request> &requests, Request request, s);
 
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
     bool addBike(vector<Motorbike> &bikes);    // = list
