@@ -2,15 +2,10 @@
 #include <vector>
 #include <regex>
 #include <iomanip>
-#include "Account.h"
-#include "../Rating.h"
-#include "User.h"
-#include "../Motorbike.h"
-#include "../Request.h"
-#include "../RequestStatus.h"
 #include <ctime>
 #include <chrono>
 #include <cstdlib>
+#include "User.h"
 class UserRating;
 class MotorbikeRating;
 
@@ -115,20 +110,7 @@ User::User(string username,
 
 string User::toStringAccount()
 {
-    // TODO: replace the usage of this method with cityToString method
-    string cityStr;
-    switch (city)
-    {
-    case City::Saigon:
-        cityStr = "Saigon";
-        break;
-    case City::Hanoi:
-        cityStr = "Hanoi";
-        break;
-    // Handle other cases if needed
-    default:
-        cityStr = "Unknown";
-    }
+    string cityStr = cityToString(city);
     return Account::getUsername() + "," +
            Account::getPassword() + "," +
            Account::getFullName() + "," +
@@ -379,7 +361,6 @@ void User::removeBike(vector<Motorbike> &bikes)
              << endl;
     }
 
-
     int idToRemove;
     while (true)
     {
@@ -406,21 +387,6 @@ void User::addMotorInnitial(Motorbike motor)
     OwnedMotorbikes.push_back(motor);
 }
 
-// TODO: move this to City class
-City User::stringToCity(const std::string &cityStr)
-{
-    if (cityStr == "Saigon")
-    {
-        return City::Saigon;
-    }
-    else if (cityStr == "Hanoi")
-    {
-        return City::Hanoi;
-    }
-    return static_cast<City>(-1); // Invalid city, return -1
-}
-
-// register
 bool User::registerAccount(vector<User> &userList)
 {
     system("cls");

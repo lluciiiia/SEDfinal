@@ -8,6 +8,9 @@
 #include "../Motorbike.h"
 #include "../City.h"
 #include "../TimeSlot.h"
+#include "User.h"
+#include "../Request.h"
+#include "../RequestStatus.h"
 
 class Motorbike;
 class Request;
@@ -57,11 +60,10 @@ public:
     bool addBike(vector<Motorbike> &bikes);    // = list
     void removeBike(vector<Motorbike> &bikes); // = unlist
     void addMotorInnitial(Motorbike motor);
-    City stringToCity(const std::string &cityStr);
-    bool login(User &cus); // TODO: do we need this?
-    bool login(const string &username,
-               const string &pass,
-               vector<User> &userList); // TODO: do we need this?
+    // bool login(User &cus); // TODO: do we need this?
+    // bool login(const string &username,
+    //            const string &pass,
+    //            vector<User> &userList); // TODO: do we need this?
     // vector <Motorbike> rentBikes();
     // vector <Request> receiveRequest();
 
