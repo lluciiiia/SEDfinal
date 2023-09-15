@@ -2,28 +2,6 @@
 
 using namespace std;
 
-// TimeSlot Motorbike::getTimeSlot()
-// {
-//         return
-// }
-
-Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, double motorbikeRating)
-{
-        this->model = model;
-        this->motorbikeID = motorbikeID;
-        this->color = color;
-        this->engineSize = engineSize;
-        this->city = city;
-        this->owner = owner;
-        this->transmissionMode = transmissionMode;
-        this->yearMade = yearMade;
-        this->description = description;
-        this->consumingPoints = consumingPoints;
-        this->rentalAmount = rentalAmount;
-        this->minRenterRating = minRenterRating;
-        this->motorbikeRating = motorbikeRating;
-}
-
 Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating)
 {
         this->model = model;
@@ -38,6 +16,23 @@ Motorbike::Motorbike(string model, int motorbikeID, string color, string engineS
         this->consumingPoints = consumingPoints;
         this->rentalAmount = rentalAmount;
         this->minRenterRating = minRenterRating;
+}
+
+Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, bool avai)
+{
+        this->model = model;
+        this->motorbikeID = motorbikeID;
+        this->color = color;
+        this->engineSize = engineSize;
+        this->city = city;
+        this->owner = owner;
+        this->transmissionMode = transmissionMode;
+        this->yearMade = yearMade;
+        this->description = description;
+        this->consumingPoints = consumingPoints;
+        this->rentalAmount = rentalAmount;
+        this->minRenterRating = minRenterRating;
+        this->availability= avai;
 }
 
 string Motorbike::getOwner()
@@ -63,6 +58,10 @@ string Motorbike::getDes()
 
 double Motorbike::getRating()
 {
+        if (ratings.size() == 0)
+        {
+                return 0.0;
+        }
         double average = 0;
         double total = 0;
         for (auto rating : ratings)
@@ -71,6 +70,11 @@ double Motorbike::getRating()
         }
         average = total / ratings.size();
         return average;
+}
+
+vector<Request> &Motorbike::getRequests()
+{
+        return this->requests;
 }
 
 int Motorbike::getMotorbikeId()
@@ -165,6 +169,7 @@ string Motorbike::toStringMotorBike()
         default:
                 cityStr = "Unknown";
         }
+        string bo= (this->availability) ? "true" :"false";
         return this->model + "," +
                to_string(motorbikeID) + "," +
                this->color + "," +
@@ -176,5 +181,6 @@ string Motorbike::toStringMotorBike()
                this->description + "," +
                to_string(this->consumingPoints) + "," +
                to_string(this->rentalAmount) + "," +
-               to_string(this->minRenterRating);
+               to_string(this->minRenterRating)+","+
+               bo;
 }

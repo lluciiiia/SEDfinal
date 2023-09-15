@@ -36,10 +36,9 @@ void Admin::viewMemberInfo(User user)
     cout << "\n";
 }
 
-
 void Admin::viewMotorbikeInfo(vector<Motorbike> &bikes)
 {
-   cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
+    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
     cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
     for (Motorbike &bike : bikes)
     {
@@ -59,7 +58,7 @@ void Admin::viewMotorbikeInfo(vector<Motorbike> &bikes)
 
 void Admin::viewAccounts(vector<User> &users)
 {
-     cout << left << setw(30) << "User name"
+    cout << left << setw(30) << "User name"
          << setw(20) << "Full name"
          << setw(15) << "Phone number"
          << setw(20) << "Id type"
@@ -70,21 +69,25 @@ void Admin::viewAccounts(vector<User> &users)
          << setw(15) << "City"
          << setw(15) << "Owned motorbike" << endl;
 
-    cout << setfill('-') << setw(170) << "-" << setfill(' ') << endl;
+    cout << setfill('-') << setw(200) << "-" << setfill(' ') << endl;
 
     for (User &user : users)
     {
-        
         string city = cityToString(user.getCity());
-        vector<Motorbike> motorbikes = user.getOwned();
-        string motorbikeModel;
+        vector<Motorbike> motorbikes = user.getOwnedMotorbike();
+        string motorbikeModel = "";
 
-        if (!motorbikes.empty()) {
-            for (int i = 0; i < motorbikes.size(); i++) {
-                    motorbikeModel = motorbikes[i].getModel();
+        int count = 0;
+        for (auto &bike : motorbikes)
+        {
+            if (count > 0)
+            {
+                motorbikeModel += ", ";
+            }
+            motorbikeModel += bike.getModel();
+            count++;
+        }
 
-    }
-}
         cout << left << setw(30) << user.getUserName()
              << setw(20) << user.getFullName()
              << setw(15) << user.getPhoneNumber()
@@ -109,53 +112,56 @@ void Admin::setAdminID(string adminID)
     this->adminID = adminID;
 }
 
-bool Admin::adminLogin() {
-	//Temporary admin user and pass
-	string providedAdminUsername = "admin"; 
-	string providedAdminPass = "admin";
-	//What the user enters
-	string username; 
-	string pass;
-	bool usernameFlag = false;
-	bool passFlag = false;
+bool Admin::adminLogin()
+{
+    // Temporary admin user and pass
+    string providedAdminUsername = "admin";
+    string providedAdminPass = "admin";
+    // What the user enters
+    string username;
+    string pass;
+    bool usernameFlag = false;
+    bool passFlag = false;
 
-//Check username
-while (!usernameFlag) {
-	cout << "Enter admin username: ";
-	getline(cin, username);
+    // Check username
+    while (!usernameFlag)
+    {
+        cout << "Enter admin username: ";
+        getline(cin, username);
 
-	if (username.empty()) 
-	{
-		cout << "Username cannot be empty!\n";
-	}
-	else
-		{
-		if (username.compare(providedAdminUsername) == 0) 
-		{
-		usernameFlag = true;
-		break;
-		}
-	}
-}
+        if (username.empty())
+        {
+            cout << "Username cannot be empty!\n";
+        }
+        else
+        {
+            if (username.compare(providedAdminUsername) == 0)
+            {
+                usernameFlag = true;
+                break;
+            }
+        }
+    }
 
-//Check password
-while (!passFlag) {
-	cout << "Enter admin password: ";
-	getline(cin, pass);
-	if (pass.compare(providedAdminPass) == 0)
-	{
-	passFlag = true;
-	break;
-	} 
-	else 
-	{
-		cout << "Incorrect password!\n";
-	}
-}
-	system("cls");
-	if (usernameFlag == true && passFlag == true)
-	{
-		return true;
-	}
-	return false;
+    // Check password
+    while (!passFlag)
+    {
+        cout << "Enter admin password: ";
+        getline(cin, pass);
+        if (pass.compare(providedAdminPass) == 0)
+        {
+            passFlag = true;
+            break;
+        }
+        else
+        {
+            cout << "Incorrect password!\n";
+        }
+    }
+    system("cls");
+    if (usernameFlag == true && passFlag == true)
+    {
+        return true;
+    }
+    return false;
 }

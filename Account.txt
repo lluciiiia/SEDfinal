@@ -7,3 +7,6 @@ lucia,yoyo,Seokyung Kim,12903821,Passport,123,23,23,234567765432.000000,Saigon
 bruh,bruh,bruh,213,Passport,2323,23,232,12345.000000,Hanoi
 hanoimem,yo,kimkim,2134567,Citizen ID,232,123,23-11-11,2345678.000000,Hanoi
 haha123,123,Jaj,129312390,Passport,192381239,1928319283,02/12,20.000000,Saigon
+bu,bu,bubu,2345432,Citizen ID,123456,12345,234567,2345678765432.000000,Saigon
+SaigonSeller,yo,idk,234,Citizen ID,234,234,12345,234565432.000000,Saigon
+norequirerating,no,ha,20,Passport,222,33,333,20.000000,Saigon

@@ -1,10 +1,10 @@
 #include "Request.h"
 
 
-Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status)
+Request::Request(string requester, int motorbike, TimeSlot timeSlot, RequestStatus status)
 {
     this->requester= requester;
-    this->motobikeID= motorbikeID;
+    this->motorbike= motorbike;
     this->timeSlot= timeSlot;
     this->status= status;
 }
@@ -16,7 +16,7 @@ string Request::getRequester() const
 
 int Request::getMotorbikeID() const
 {
-    return motobikeID;
+    return motorbike;
 }
 
 RequestStatus Request::getStatus() const
@@ -50,6 +50,32 @@ void Request::setStatus(RequestStatus status)
 void Request::setTimeSlot(TimeSlot timeslot)
 {
     this->timeSlot = timeSlot;
+}
+
+string Request::requestToString()
+{
+    string requestSta;
+    switch(this->status){
+        case RequestStatus::PENDING:
+        requestSta= "PENDING";
+        break;
+        case RequestStatus::ACCEPTED:
+        requestSta= "ACCEPTED";
+        break;
+        case RequestStatus::REJECTED:
+        requestSta= "REJECTED";
+        break;
+        default:
+        requestSta= "UNKNOWN"; 
+        break;
+    }
+    
+    return this->requester+","+
+            to_string(this->motorbike)+","+
+            requestSta+","+
+            timeSlot.getStartTime()+","+
+            timeSlot.getEndTime();
+    
 }
 
 void Request::showInfo()
