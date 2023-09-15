@@ -28,10 +28,11 @@ User::User(string username,
            string licenseNumber,
            string licenseExpiryDate,
            std::vector<UserRating> userRatings,
-           double creditPoint, vector<Motorbike> own) : Account(username,
-                                                                password,
-                                                                fullName,
-                                                                phoneNumber)
+           double creditPoint, vector<Motorbike> own,
+           vector<Request> sentRequests) : Account(username,
+                                                   password,
+                                                   fullName,
+                                                   phoneNumber)
 {
     this->IDtype = IDtype;
     this->idNum = idNum;
@@ -40,6 +41,7 @@ User::User(string username,
     this->userRatings = userRatings;
     this->creditPoint = creditPoint;
     this->OwnedMotorbikes = own;
+    this->sentRequests = sentRequests;
 };
 
 // TODO: do we need this? - Lucia
@@ -108,7 +110,6 @@ User::User(string username,
     this->city = city;
 }
 
-
 string User::toStringAccount()
 {
     string cityStr = cityToString(city);
@@ -173,6 +174,11 @@ double User::getCreditPoint()
 City User::getCity()
 {
     return this->city;
+}
+
+vector<Request> &User::getSentRequests()
+{
+    return this->sentRequests;
 }
 
 // TODO: choose one of these
@@ -766,9 +772,66 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
     }
 };
 
-void User::viewRequests(){
-
+void User::viewRequestsDash()
+{
+    system("cls");
+    int choice;
+    bool dashboardRun = false;
+    cout << "\n";
+    cout << "----------------------------------------\n";
+    cout << "1. View requests that I sent. \n";
+    cout << "2. View requests for my motorbikes. \n";
+    cout << "3. Exit\n";
+    cout << "Enter your choice(1-3): ";
+    cin >> choice;
+    cin.ignore();
+    switch (choice)
+    {
+    case 1:
+        this->viewSentRequests();
+        break;
+    case 2:
+        this->viewBikeRequests();
+        break;
+    case 3:
+        dashboardRun = true;
+        cout << "Logging out...\n";
+        break;
+    default:
+        cout << "Invalid input! Please enter it correctly. \n";
+    }
+    cout << "Press Enter to continue...";
+    cin.ignore();
 };
+
+void User::viewSentRequests()
+{
+    if (this->sentRequests.empty())
+    {
+        std::cout << "You have no requests." << std::endl;
+    }
+    else
+    {
+        cout << left << setw(12) << "Requester" << setw(20) << "MotorbikeID" << setw(10) << "Time Slot" << setw(10) << "Request Status" << setw(15) << endl;
+        cout << setfill('-') << setw(60) << "-" << setfill(' ') << endl;
+
+        for (const Request &request : this->sentRequests)
+        {
+            if (request.getStatus() == RequestStatus::PENDING)
+            {
+                cout << left << setw(12) << request.getRequester()
+                     << setw(20) << request.getMotorbikeID()
+                     << setw(10) << "Time Slot: " << request.getTimeSlot().getStartTime() << " - " << request.getTimeSlot().getEndTime() << "\n";
+                std::string statusStr = statusToString(request.getStatus());
+                cout << left << setw(10) << "Status: " << statusStr << std::endl;
+            }
+        }
+    }
+}
+
+void User::viewBikeRequests()
+{
+}
 
 // void User::acceptRequest(vector<Request> &requests, Request request){
 //     // 1. change the request status to Accepted

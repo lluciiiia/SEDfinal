@@ -249,7 +249,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             viewBikeDash(user, bikes, request, userList);
             break;
         case 6:
-
+            user.viewRequestsDash();
             break;
         case 7:
             user = User();
