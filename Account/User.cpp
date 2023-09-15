@@ -626,34 +626,34 @@ bool User::processPayment(User &requester, Request request) {
 //     return rentalAmount;
 // }
 
-//error on request
-// void User::acceptRequest(User &requester, vector<Request> &requests, Request request) {
-//     // 1. Payment from the requester (top-up/credits)
-//     bool paymentSuccessful = processPayment(requester, request);
 
-//     if (paymentSuccessful) {
-//         // 2. Increase the credits ($1 = 1 credit point) for both requester and the owner
-//         double rentalAmount = calculateRentalAmount(request);
-//         double requesterCredit = requester.getCreditPoint();
-//         double ownerCredit = request.getMotorbike()->getOwner()->getCreditPoint();
+void User::acceptRequest(User &requester, vector<Request> &requests, Request request) {
+    // 1. Payment from the requester (top-up/credits)
+    bool paymentSuccessful = processPayment(requester, request);
 
-//         requesterCredit -= rentalAmount;
-//         ownerCredit += rentalAmount;
+    if (paymentSuccessful) {
+        // 2. Increase the credits ($1 = 1 credit point) for both requester and the owner
+        double rentalAmount = calculateRentalAmount(request);
+        double requesterCredit = requester.getCreditPoint();
+        double ownerCredit = request.getMotorbike()->getOwner()->getCreditPoint();
 
-//         requester.setCreditPoint(requesterCredit);
-//         request.getMotorbike()->getOwner()->setCreditPoint(ownerCredit);
+        requesterCredit -= rentalAmount;
+        ownerCredit += rentalAmount;
 
-//         request.getMotorbike()->setAvailability(false);
+        requester.setCreditPoint(requesterCredit);
+        request.getMotorbike()->getOwner()->setCreditPoint(ownerCredit);
 
-//         request.setStatus(RequestStatus::ACCEPTED);
+        request.getMotorbike()->setAvailability(false);
 
-//         requester.addRequest(request);
+        request.setStatus(RequestStatus::ACCEPTED);
 
-//         requests.push_back(request);
-//     } else {
-//         std::cout << "Payment was not successful. Request cannot be accepted." << std::endl;
-//     }
-// }
+        requester.addRequest(request);
+
+        requests.push_back(request);
+    } else {
+        std::cout << "Payment was not successful. Request cannot be accepted." << std::endl;
+    }
+}
 
 void User::addRequest(const Request &request) {
     userRequests.push_back(request);
