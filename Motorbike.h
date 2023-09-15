@@ -33,7 +33,7 @@ private:
         double motorbikeRating;
         bool availability;
         std::vector<Request> requests;
-        std:: vector<Rating> ratings;
+        std::vector<Rating> ratings;
 
 public:
     Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating);
@@ -51,6 +51,7 @@ public:
     int getYear();
     string getDes();
     double getRating();
+    vector<Rating> &getRatings();
     vector<Request> &getRequests();
     // Setters
     void setOwner(string Owner);

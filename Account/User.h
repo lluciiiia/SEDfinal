@@ -61,6 +61,7 @@ public:
     void viewBikeRequests();
     void acceptRequest(vector<Request> &requests, Request request);
 
+    void viewReviews(vector<Motorbike> &bikes);
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
     bool addBike(vector<Motorbike> &bikes);    // = list
     void removeBike(vector<Motorbike> &bikes); // = unlist

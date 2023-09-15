@@ -672,13 +672,14 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
 }
 
 void User::searchAvailableMotorbikes() {}
+
 void User::setCreditPoint(double credit)
 {
     this->creditPoint = credit;
 }
+
 void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
 {
-
     system("cls");
 
     time_t now = time(0);
@@ -830,6 +831,34 @@ void User::viewSentRequests()
 void User::viewBikeRequests()
 {
 }
+
+void User::viewReviews(vector<Motorbike> &bikes)
+{
+    system("cls");
+    // TODO: select motorbikeID to view 
+
+    for (auto &bike : bikes)
+    {
+        vector<Rating> bikeRatings = bike.getRatings();
+
+        if (bikeRatings.empty())
+        {
+            std::cout << "The motorbike doesn't have reviews yet." << std::endl;
+        }
+        else
+        {
+            cout << left << setw(12) << "MotorbikeID" << setw(20) << "Score" << setw(10) << "Comment" << endl;
+            cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+
+            for (const Rating &bikeRating : bikeRatings)
+            {
+                cout << left << setw(12) << bike.getMotorbikeId()
+                     << setw(20) << bikeRating.getScore()
+                     << setw(10) << bikeRating.getComment() << endl;
+            }
+        }
+    }
+};
 
 bool login(User &cus, vector<User> &userList)
 {
