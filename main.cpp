@@ -217,7 +217,8 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         cout << "| 4. Add credit points     |\n";
         cout << "| 5. View Bikes to rent    |\n";
         cout << "| 6. View request          |\n";
-        cout << "| 7. Logout                |\n";
+        cout << "| 7. Return motorbike      |\n";
+        cout << "| 8. Logout                |\n";
         cout << "|==========================|\n";
         cout << "Enter your choice (1-6): ";
 
@@ -252,6 +253,9 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             user.viewRequestsDash();
             break;
         case 7:
+            // TODO: return motorbike
+            break;
+        case 8:
             user = User();
             dashboardRun = true;
             cout << "Logging out...\n";
