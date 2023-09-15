@@ -920,40 +920,40 @@ bool login(User &cus, vector<User> &userList)
 // }
 
 
-void User::acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users) {
-    // 1. Payment from the requester (top-up/credits)
-    bool paymentSuccessful = processPayment(requester, request);
+// void User::acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users) {
+//     // 1. Payment from the requester (top-up/credits)
+//     bool paymentSuccessful = processPayment(requester, request);
 
-    if (paymentSuccessful) {
-        // 2. Increase the credits ($1 = 1 credit point) for both requester and the owner
-        double rentalAmount = calculateRentalAmount(request);
-        double requesterCredit = requester.getCreditPoint();
+//     if (paymentSuccessful) {
+//         // 2. Increase the credits ($1 = 1 credit point) for both requester and the owner
+//         double rentalAmount = calculateRentalAmount(request);
+//         double requesterCredit = requester.getCreditPoint();
 
-        Motorbike bikeToAccept = request.getMotorbike();
-        string ownerName = bikeToAccept.getOwner();
-        User owner;
-        for (auto &user : users) {
-            if (user.getUserName() == ownerName) {
-                owner = user;
-                break;
-            }
-        }
-        double ownerCredit = owner.getCreditPoint();
-        requesterCredit -= rentalAmount;
-        ownerCredit += rentalAmount;
+//         Motorbike bikeToAccept = request.getMotorbike();
+//         string ownerName = bikeToAccept.getOwner();
+//         User owner;
+//         for (auto &user : users) {
+//             if (user.getUserName() == ownerName) {
+//                 owner = user;
+//                 break;
+//             }
+//         }
+//         double ownerCredit = owner.getCreditPoint();
+//         requesterCredit -= rentalAmount;
+//         ownerCredit += rentalAmount;
 
-        requester.setCreditPoint(requesterCredit);
-        owner.setCreditPoint(ownerCredit);
+//         requester.setCreditPoint(requesterCredit);
+//         owner.setCreditPoint(ownerCredit);
 
-        bikeToAccept.setAvailability(false);
+//         bikeToAccept.setAvailability(false);
 
-        request.setStatus(RequestStatus::ACCEPTED);
+//         request.setStatus(RequestStatus::ACCEPTED);
 
-        requests.push_back(request);
-    } else {
-        std::cout << "Payment was not successful. Request cannot be accepted." << std::endl;
-    }
-}
+//         requests.push_back(request);
+//     } else {
+//         std::cout << "Payment was not successful. Request cannot be accepted." << std::endl;
+//     }
+// }
 
 // void User::rejectRequest(User &requester, Request &request) {
 //     request.setStatus(RequestStatus::REJECTED);

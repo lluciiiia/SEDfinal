@@ -15,7 +15,7 @@ private:
     RequestStatus status;
     TimeSlot timeSlot;
     int motorbikeID;
-    Motorbike bike;
+    Motorbike* bike;
     
 public:
     Request();
