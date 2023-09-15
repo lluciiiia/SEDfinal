@@ -165,10 +165,10 @@ void guest_dashboard(vector<Motorbike> &bikes)
         switch (choice)
         {
         case 1:
-            viewGuestBikeDash(bikes, "Hanoi"); 
+            viewGuestBikeDash(bikes, "Hanoi");
             break;
         case 2:
-            viewGuestBikeDash(bikes, "Saigon"); 
+            viewGuestBikeDash(bikes, "Saigon");
             break;
         case 3:
 
@@ -200,7 +200,8 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         {
             if (bike.getOwner() == user.getUsername())
             {
-                if (count > 0) {
+                if (count > 0)
+                {
                     model += ", ";
                 }
                 model += bike.getModel();
@@ -248,12 +249,13 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             break;
         case 5:
             viewBikeDash(user, bikes, request, userList);
+            // TODO: in the bike dash / view review and requestToRent
             break;
         case 6:
             user.viewRequestsDash();
             break;
         case 7:
-            // TODO: return motorbike
+            // TODO: return motorbike + review
             break;
         case 8:
             user = User();
@@ -283,7 +285,8 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
 
         // Display the admin dashboard menu
         cout << "|==========================|\n";
-        cout << "|      Admin Dashboard     |  Hello, Admin!"<< "\n"; 
+        cout << "|      Admin Dashboard     |  Hello, Admin!"
+             << "\n";
         cout << "|==========================|\n";
         cout << "| 1. View all users        |\n";
         cout << "| 2. View all motorbikes   |\n";
@@ -370,7 +373,8 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
         cout << "\n\n";
         cout << "1. Search for all available suitable motorbikes for a particular city. \n";
         cout << "2. Rent a bike. \n";
-        cout << "3. Exit\n";
+        cout << "3. View a review of a bike. \n";
+        cout << "4. Exit\n";
         cout << "Enter your choice(1-3): ";
         cin >> choice;
         cin.ignore();
@@ -380,17 +384,19 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
             searchEngine(user, bikes);
             break;
         case 2:
-            // TODO: view reviews for each bike if the user wants to
-            user.requestToRent(bikes,requests);
-        break;
+            user.requestToRent(bikes, requests);
+            break;
         case 3:
+            user.viewReviews(bikes);
+            break;
+        case 4:
             dashboardRun = true;
             cout << "Logging out...\n";
             break;
         default:
             cout << "Invalid input! Please enter it correctly. \n";
         }
-        cout << "Press Enter to continue...";
+        cout << "Press Enter to continue..." << endl;
         cin.ignore();
     }
 }
