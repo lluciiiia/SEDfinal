@@ -42,6 +42,7 @@ User::User(string username,
     this->OwnedMotorbikes = own;
 };
 
+// TODO: do we need this? - Lucia
 User::User(string username,
            string password,
            string fullName,
