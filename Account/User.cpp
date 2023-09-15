@@ -6,6 +6,7 @@
 #include <chrono>
 #include <cstdlib>
 #include "User.h"
+#include "TimeSlot.h"
 class UserRating;
 class MotorbikeRating;
 
@@ -205,11 +206,13 @@ bool User::addBike(vector<Motorbike> &bikes)
         cout << "You can own only one bike." << endl;
         return false;
     }
+    
     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     string model, color, enginSize, transmissionmode;
     string description = "";
     int yearMade;
     cout << "Please enter all of needed informations: \n";
+    // Model
     while (true)
     {
         cout << "Enter your model: ";
@@ -223,7 +226,7 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-    // color
+    // Color
     while (true)
     {
         cout << "Enter your color: ";
@@ -237,7 +240,7 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-
+    // Engine size
     while (true)
     {
         cout << "Enter your engine size: ";
@@ -251,7 +254,7 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-
+    //Year made
     while (true)
     {
         cout << "Enter year made: ";
@@ -267,6 +270,7 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
+    //Transmission mode
     while (true)
     {
         cout << "Enter your transmission mode: ";
@@ -280,12 +284,12 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-
+    //Motorbike Description
     cout << "Add some description for the bike: ";
     getline(cin, description);
     std::string cityStr;
     City selectedCity;
-
+    //City
     while (true)
     {
         std::cout << "Enter your city (Saigon or Hanoi): ";
@@ -303,6 +307,7 @@ bool User::addBike(vector<Motorbike> &bikes)
 
     int motorbikeID = bikes.size() + 1;
     int consumingPoints;
+    //Bike price
     while (true)
     {
         cout << "Enter the price for the bike: ";
@@ -318,6 +323,7 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
+    //Rating
     int minRate;
     while (true)
     {
@@ -333,7 +339,35 @@ bool User::addBike(vector<Motorbike> &bikes)
         {
             break;
         }
+    //Available TimeSlot
+    while (true) 
+    {
+        //Make sure dates follow format (mm/dd/yyyy)
+        static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$");
+        string startTime = "", endTime = "";
+
+        while (!regex_match(startTime, dateRegex)) {
+        cout << "Enter start time for bike rental period in the format (mm/dd/yyyy): ";
+        cin >> startTime;
+        if (!regex_match(startTime, dateRegex)) { 
+            cout << "Start time is in the wrong format! Please try again.\n";
+        } 
+        }
+
+        while (!regex_match(endTime, dateRegex)) {
+        cout << "Enter end time for bike retal period in the format (mm/dd/yyyy): ";
+        cin >> endTime;
+        if (!regex_match(endTime, dateRegex)) {
+            cout << "End time is in the wrong format! Please try again.\n";
+        }
+        }
+
+        cout << "Your motorbike is available for rental from: " << startTime << " - " << endTime << endl;
+        break;
     }
+
+    }
+
     Motorbike motor(model, motorbikeID,
                     color, enginSize,
                     selectedCity,
