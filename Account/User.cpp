@@ -108,7 +108,6 @@ User::User(string username,
     this->city = city;
 }
 
-
 string User::toStringAccount()
 {
     string cityStr = cityToString(city);
@@ -766,9 +765,45 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
     }
 };
 
-void User::viewRequests(){
-
+void User::viewRequestsDash()
+{
+    system("cls");
+    int choice;
+    bool dashboardRun = false;
+    cout << "\n";
+    cout << "----------------------------------------\n";
+    cout << "1. View requests that I sent. \n";
+    cout << "2. View requests for my motorbikes. \n";
+    cout << "3. Exit\n";
+    cout << "Enter your choice(1-3): ";
+    cin >> choice;
+    cin.ignore();
+    switch (choice)
+    {
+    case 1:
+        this->viewSentRequests();
+        break;
+    case 2:
+        this->viewBikeRequests();
+        break;
+    case 3:
+        dashboardRun = true;
+        cout << "Logging out...\n";
+        break;
+    default:
+        cout << "Invalid input! Please enter it correctly. \n";
+    }
+    cout << "Press Enter to continue...";
+    cin.ignore();
 };
+
+void User::viewSentRequests() {
+
+}
+
+void User::viewBikeRequests() {
+
+}
 
 // void User::acceptRequest(vector<Request> &requests, Request request){
 //     // 1. change the request status to Accepted

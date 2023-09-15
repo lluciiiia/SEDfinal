@@ -54,7 +54,9 @@ public:
     void searchAvailableMotorbikes();
     void setCreditPoint(double credit);
     void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
-    void viewRequests();
+    void viewRequestsDash();
+    void viewSentRequests();
+    void viewBikeRequests();
     void acceptRequest(vector<Request> &requests, Request request);
 
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
