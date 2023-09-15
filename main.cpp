@@ -196,15 +196,15 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         system("cls");
         string model;
         int i = 0;
-        for (auto &bike : bikes)
+        for (int i=0; i< user.getOwned().size(); i++)
         {
-            if (bike.getOwner() == user.getUsername())
+            if (user.getOwned()[i].getOwner() == user.getUsername())
             {
                 if (i > 0)
                 {
                     model += ", ";
                 }
-                model += bike.getModel();
+                model += user.getOwned()[i].getModel();
                 i++;
             }
         }

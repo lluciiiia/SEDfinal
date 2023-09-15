@@ -384,48 +384,66 @@ bool User::addBike(vector<Motorbike> &bikes)
 
 void User::removeBike(vector<Motorbike> &bikes)
 {
-    system("cls");
-    vector<Motorbike> OwnedMotorbikes = this->getOwned();
-
+    // system("cls");
     
-
-    int idToRemove;
-    bool removed = false;
-    while (!removed)
-    {
-        cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
-        cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
-    for (auto &bike : OwnedMotorbikes)
-    {
-        string cityStr = cityToString(bike.getCity());
-
-        cout << left << setw(12) << bike.getMotorbikeId()
-             << setw(20) << bike.getModel()
-             << setw(10) << bike.getColor()
-             << setw(10) << bike.getEngine()
-             << setw(15) << bike.getOwner()
-             << setw(12) << bike.getYear()
-             << setw(20) << bike.getDes()
-             << setw(8) << bike.getRating()
-             << setw(8) << cityStr
-             << endl;
+    int bikeId;
+    for(int i=0; i <1; i++){
+        bikeId = this->OwnedMotorbikes[i].getMotorbikeId();
     }
-        cout << "\nEnter the id of the bike to remove: ";
-        cin >> idToRemove;
     
-        for (int i = 0; i < bikes.size(); i++)
+    for (int i = 0; i < bikes.size(); i++)
         {
-            if (bikes[i].getMotorbikeId() == idToRemove)
+            if (bikes[i].getMotorbikeId() == bikeId)
             {
                 // Remove the bike from the vector
                 bikes.erase(bikes.begin() + i);
                 cout << "Remove bike successfully!\n";
-                removed = true;
+                OwnedMotorbikes.clear();
+    
                 // TODO: update the bikes so the user can see the updated list
             }
         }
-        cout << "Bike with ID " << idToRemove << " not found.\n";
-    }
+
+    // uncomment to use your theory
+
+    // int idToRemove;
+    // bool removed = false;
+    // while (!removed)
+    // {
+    //     cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
+    //     cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
+    // for (auto &bike : this->OwnedMotorbikes)
+    // {
+    //     string cityStr = cityToString(bike.getCity());
+
+    //     cout << left << setw(12) << bike.getMotorbikeId()
+    //          << setw(20) << bike.getModel()
+    //          << setw(10) << bike.getColor()
+    //          << setw(10) << bike.getEngine()
+    //          << setw(15) << bike.getOwner()
+    //          << setw(12) << bike.getYear()
+    //          << setw(20) << bike.getDes()
+    //          << setw(8) << bike.getRating()
+    //          << setw(8) << cityStr
+    //          << endl;
+    // }
+    //     cout << "\nEnter the id of the bike to remove: ";
+    //     cin >> idToRemove;
+    
+    //     for (int i = 0; i < bikes.size(); i++)
+    //     {
+    //         if (bikes[i].getMotorbikeId() == idToRemove)
+    //         {
+    //             // Remove the bike from the vector
+    //             bikes.erase(bikes.begin() + i);
+    //             cout << "Remove bike successfully!\n";
+    //             OwnedMotorbikes.clear();
+    //             removed = true;
+    //             // TODO: update the bikes so the user can see the updated list
+    //         }
+    //     }
+    //     cout << "Bike with ID " << idToRemove << " not found.\n";
+    // }
 };
 
 // TODO: Do we need this?
@@ -879,6 +897,11 @@ void User::setRequestSend(vector<Request> &re)
     this->sentRequests= re;
 }
 
+void User::setRentingBikes(vector<Motorbike> &bikes)
+{
+    this->RentingBikes= bikes;
+}
+
 void User::setOwnedBikes(vector<Motorbike> &bikes)
 {
     this->OwnedMotorbikes = bikes;
@@ -971,6 +994,8 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
                            user.getIdNum(), user.getLicenseNum(),
                            user.getExDate(), user.getCreditPoint(),
                            user.getCity());
+                cus.setOwnedBikes(user.getOwned());
+                cus.setRequestSend(user.getSentRequests());
                 return true;
             }
         }

@@ -178,7 +178,7 @@ while(getline(myFile, line)){
             }else if(tokens[2] == "REJECTED"){
                 sta = RequestStatus::REJECTED;
             }
-            int motobikeID= stoi(tokens[2]);
+            int motobikeID= stoi(tokens[1]);
             Request reque = Request(tokens[0],motobikeID,time,sta);
             requests.push_back(reque);
         }
