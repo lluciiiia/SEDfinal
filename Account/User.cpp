@@ -357,7 +357,7 @@ bool User::addBike(vector<Motorbike> &bikes)
 
 void User::removeBike(vector<Motorbike> &bikes)
 {
-    vector<Motorbike> OwnedMotorbikes = this->getOwnedMotorbike();
+    vector<Motorbike> OwnedMotorbikes = this->getOwned();
 
     cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
     cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
@@ -377,11 +377,11 @@ void User::removeBike(vector<Motorbike> &bikes)
              << endl;
     }
 
-    cout << setfill('-') << setw(150);
+
     int idToRemove;
     while (true)
     {
-        cout << "\nEnter the id of the bike to remove:";
+        cout << "\n\nEnter the id of the bike to remove:";
         cin >> idToRemove;
 
         for (auto bikeToDelete = OwnedMotorbikes.begin(); bikeToDelete != OwnedMotorbikes.end(); ++bikeToDelete)
