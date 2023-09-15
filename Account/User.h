@@ -36,7 +36,7 @@ public:
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city, vector<Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
 
-    string toStringAccount();
+    
     string getUserName();
     string getIdType();
     string getIdNum();
@@ -47,8 +47,9 @@ public:
     City getCity();
     vector<Motorbike> getOwnedMotorbike();
     vector<Motorbike> &getOwned();
-    friend bool login(User &cus, vector<User> &userList);
 
+    string toStringAccount();
+    friend bool login(User &cus, vector<User> &userList);
     bool registerAccount(vector<User> &userList);
     void searchAvailableMotorbikes();
     void setCreditPoint(double credit);

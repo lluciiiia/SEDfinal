@@ -24,6 +24,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
 void displayUserInfo(User &user, vector<User> &userList);
 void addCredit(User &user, vector<User> &userList);
 void searchEngine(User &user, vector<Motorbike> &bikes);
+
 int main()
 {
     User user;
@@ -164,7 +165,7 @@ void guest_dashboard(vector<Motorbike> &bikes)
         switch (choice)
         {
         case 1:
-            viewGuestBikeDash(bikes, "Ha noi"); 
+            viewGuestBikeDash(bikes, "Hanoi"); 
             break;
         case 2:
             viewGuestBikeDash(bikes, "Saigon"); 
@@ -278,7 +279,7 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
 
         // Display the admin dashboard menu
         cout << "|==========================|\n";
-        cout << "|      Admin Dashboard     |  Hello, "<< "\n"; // TODO: Admin info
+        cout << "|      Admin Dashboard     |  Hello, Admin!"<< "\n"; 
         cout << "|==========================|\n";
         cout << "| 1. View all users        |\n";
         cout << "| 2. View all motorbikes   |\n";
@@ -294,12 +295,10 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
         case 1:
             system("cls");
             admin.viewAccounts(userList);
-            // viewAdminUserDash(userList);
             break;
         case 2:
             system("cls");
             admin.viewMotorbikeInfo(bikes);
-            // viewAdminBikeDash(bikes);
             break;
         case 3:
             dashboardRun = true;
@@ -321,15 +320,7 @@ void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
     system("cls");
     int choice;
     bool dashboardRun = false;
-    City city;
-    if (cityStr == "Ha noi")
-    {
-        city = City::Hanoi;
-    }
-    else
-    {
-        city = City::Saigon;
-    }
+    City city = stringToCity(cityStr);
 
     cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
