@@ -706,13 +706,14 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
 }
 
 void User::searchAvailableMotorbikes() {}
+
 void User::setCreditPoint(double credit)
 {
     this->creditPoint = credit;
 }
+
 void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
 {
-
     system("cls");
 
     time_t now = time(0);
@@ -788,8 +789,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                                 TimeSlot time(dayAndMon, rentdays);
                                 RequestStatus status = RequestStatus::PENDING;
 
-                                Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status);
-
+                                Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status, bi);
                                 bi.getRequests().push_back(reque);
                                 requests.push_back(reque);
                                 cout << "Rent successful! \n";
@@ -865,6 +865,50 @@ void User::viewBikeRequests()
 {
 }
 
+void User::viewReviews(vector<Motorbike> &bikes)
+{
+    // TODO: select motorbikeID to view
+    int IDtoView;
+    bool foundMotorbike = false;
+    while (!foundMotorbike)
+    {
+        cout << "Enter a motorbike ID to view: ";
+        cin >> IDtoView;
+        for (auto &bike : bikes)
+        {
+            int bikeID = bike.getMotorbikeId();
+            if (IDtoView == bikeID)
+            {
+                vector<Rating> bikeRatings = bike.getRatings();
+
+                if (bikeRatings.empty())
+                {
+                    std::cout << "The motorbike doesn't have reviews yet." << std::endl;
+                }
+                else
+                {
+                    cout << left << setw(12) << "MotorbikeID" << setw(20) << "Score" << setw(10) << "Comment" << endl;
+                    cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+
+                    for (const Rating &bikeRating : bikeRatings)
+                    {
+                        cout << left << setw(12) << bike.getMotorbikeId()
+                             << setw(20) << bikeRating.getScore()
+                             << setw(10) << bikeRating.getComment() << endl;
+                    }
+                }
+                foundMotorbike = true;
+                break;
+            }
+        }
+        if (foundMotorbike)
+        {
+            break;
+        }
+        cout << "Invalid ID format! Please enter a valid ID from the list!\n";
+    }
+};
+
 bool login(User &cus, vector<User> &userList)
 {
     string username;
@@ -916,25 +960,84 @@ bool login(User &cus, vector<User> &userList)
     return false;
 }
 
-// void User::acceptRequest(vector<Request> &requests, Request request){
-//     // 1. change the request status to Accepted
-//     request.setStatus(RequestStatus::ACCEPTED);
+// bool User::processPayment(User &requester, Request request) {
+//     // double rentalAmount = calculateRentalAmount(request);
+//     int bikeIDtoRent = request.getMotorbikeID();
 
-//     // 2. change the availability of the motorbike
-//     // Motorbike* motorbikeToRequest = request.getMotorbike();
-//     // motorbikeToRequest->setAvailability(false);
 
-//     // 3. payment from the requester
+//     if (requester.getCreditPoint() >= rentalAmount) {
+//         double newRequesterCredit = requester.getCreditPoint() - rentalAmount;
+//         requester.setCreditPoint(newRequesterCredit);
 
-//     // 4. increase the credits ($1 = 1 credit point) for both requester and the owner
 
-// };
-
-// void User::requestToRent(Motorbike &motorbike, TimeSlot timeSlot)
-// {
-//     // Request request(this, &motorbike, timeSlot);
-//     //motorbike.addRequest(request);
+//         return true;
+//     } else {
+//         std::cout << "Insufficient credit to make the payment." << std::endl;
+//         return false;
+//     }
 // }
+
+// //error on request
+
+// double User::calculateRentalAmount(Request &request) {
+//     string startTime = request.getTimeSlot().getStartTime();
+//     string endTime = request.getTimeSlot().getEndTime();
+
+//     int startHour, startMinute, endHour, endMinute;
+
+//     sscanf(startTime.c_str(), "%d:%d", &startHour, &startMinute);
+
+//     sscanf(endTime.c_str(), "%d:%d", &endHour, &endMinute);
+
+//     int rentalDurationInHours = (endHour - startHour) + ((endMinute - startMinute) / 60);
+
+//     double rentalPricePerDay = request.getMotorbikeID()->getRentalAmount();
+
+//     double rentalAmount = rentalDurationInHours * rentalPricePerHour;
+
+//     return rentalAmount;
+// }
+
+
+// void User::acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users) {
+//     // 1. Payment from the requester (top-up/credits)
+//     bool paymentSuccessful = processPayment(requester, request);
+
+//     if (paymentSuccessful) {
+//         // 2. Increase the credits ($1 = 1 credit point) for both requester and the owner
+//         double rentalAmount = calculateRentalAmount(request);
+//         double requesterCredit = requester.getCreditPoint();
+
+//         Motorbike bikeToAccept = request.getMotorbike();
+//         string ownerName = bikeToAccept.getOwner();
+//         User owner;
+//         for (auto &user : users) {
+//             if (user.getUserName() == ownerName) {
+//                 owner = user;
+//                 break;
+//             }
+//         }
+//         double ownerCredit = owner.getCreditPoint();
+//         requesterCredit -= rentalAmount;
+//         ownerCredit += rentalAmount;
+
+//         requester.setCreditPoint(requesterCredit);
+//         owner.setCreditPoint(ownerCredit);
+
+//         bikeToAccept.setAvailability(false);
+
+//         request.setStatus(RequestStatus::ACCEPTED);
+
+//         requests.push_back(request);
+//     } else {
+//         std::cout << "Payment was not successful. Request cannot be accepted." << std::endl;
+//     }
+// }
+
+// void User::rejectRequest(User &requester, Request &request) {
+//     request.setStatus(RequestStatus::REJECTED);
+// }
+
 
 // vector<Motorbike> User::rentBikes()
 // {

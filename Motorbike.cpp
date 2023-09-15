@@ -171,8 +171,12 @@ void Motorbike::viewRequests()
 
 bool Motorbike::checkAvailability(bool availability)
 {
-        return availability;
+        return this->availability;
 }
+
+vector<Rating> &Motorbike::getRatings(){
+        return this->ratings;
+};
 
 // void Motorbike::addCreditPoints(double points)
 // {
