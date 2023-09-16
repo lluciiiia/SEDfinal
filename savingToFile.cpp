@@ -1,5 +1,6 @@
 #include<iostream>
 #include <fstream>
+#include <regex>
 #include "savingToFile.h"
 #include "Account/User.h"
 #include "Motorbike.h"
@@ -18,7 +19,7 @@ void saveToFile::SaveAccountToFile(vector<User>& users)
     }
 }
 
-vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector <Request> &requests)
+vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector <Request> &requests, vector <UserRating> &ratings)
 {
     vector<User> users;
     fstream myFile(accountFile, ios::in);
@@ -58,6 +59,11 @@ vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector <Request> &
                 user.getOwned().push_back(mot);
             }
         }
+        for(auto &v : ratings){
+            if(v.getUsername() == user.getUsername()){
+                user.getRatings().push_back(v);
+            } 
+        }
     }
   
      for(auto &user : users){
@@ -86,7 +92,7 @@ void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
     }
 }
 
-vector<Motorbike> saveToFile::loadMotor(vector<Request> &requests)
+vector<Motorbike> saveToFile::loadMotor(vector<Request> &requests, vector<MotorbikeRating> &ratings)
 {
     vector <Motorbike> motors;
     fstream myFile(motobikeFile, ios:: in);
@@ -128,14 +134,20 @@ vector<Motorbike> saveToFile::loadMotor(vector<Request> &requests)
 
         }
     }
-    
+    // add into vector of motorbike when start the program
     for(auto &mo : motors){
         for(auto &re : requests){
             if(mo.getMotorbikeId() == re.getMotorbikeID()){
                 mo.getRequests().push_back(re);
             }
         }
+        for(auto &re: ratings){
+            if(re.getBikeId()==mo.getMotorbikeId()){
+                mo.getRatings().push_back(re);
+            }
+        }
     }
+    
     myFile.close();
     return motors;
 }
@@ -191,20 +203,95 @@ while(getline(myFile, line)){
     
 }
 
-// void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
-// {
-// }
+void saveToFile::loadRating(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings)
+{
+     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+    fstream myFile(ratingFile, ios:: in);
+    string line;
+    while(getline(myFile,line)){
+        stringstream ss(line);
+        vector<string> tokens;
+        string token;
+        while(getline(ss,token,',')){
+            tokens.push_back(token);
+        }
+        if(tokens.size() == 3){
+            if(regex_match(tokens[0], regexp)){
+                int bikeId= stoi(tokens[0]);
+                float score= stof(tokens[1]);
+                MotorbikeRating mo= MotorbikeRating(bikeId,score,tokens[2]);
+                mRatings.push_back(mo);
+            }else{
+                float score= stof(tokens[1]);
+                UserRating u= UserRating(tokens[0], score, tokens[2]);
+                uraitngs.push_back(u);
+            }
+        }
+    }
 
-// vector<Borrow> saveToFile::loadBorrow()
-// {
-//     return vector<Borrow>();
-// }
 
-// void saveToFile::saveRatingToFile(vector<Rating> &ratings)
-// {
-// }
 
-// vector<Rating> saveToFile::loadRating()
-// {
-//     return vector<Rating>();
-// }
+
+    myFile.close();
+}
+
+void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
+{
+    ofstream myFile(requestFile);
+    if(myFile.is_open()){
+        for(auto &re: borrow){
+                myFile << re.borrowtoString()<<"\n";
+        }
+        myFile.close();
+    }else{
+        cerr<< "Error opening borrow file";
+    }
+}
+
+vector<Borrow> saveToFile::loadBorrow()
+{
+     vector<Borrow> borrows;
+    fstream myFile(borrowFile, ios:: in);
+    string line;
+while(getline(myFile, line)){
+        stringstream ss(line);
+        vector<string> tokens;
+        string token;
+        while(getline(ss,token,',')){
+            tokens.push_back(token);
+        }
+
+        if(tokens.size()== 5){
+            string username= tokens[0];
+            int motobikeID= stoi(tokens[1]);
+            double price= stod (tokens[2]);
+            string start= tokens[4];
+            string end= tokens[5];
+            TimeSlot time(start,end);
+            Borrow bo= Borrow(time,username,motobikeID,price);
+            borrows.push_back(bo);
+        }
+    }
+
+    myFile.close();
+    
+    return borrows;
+}
+
+void saveToFile::saveRatingToFile(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings)
+{
+    ofstream myFile(motobikeFile);
+    if(myFile.is_open()){
+        for(auto &v: uraitngs ){
+            myFile<< v.uRatingtoString()<< "\n";
+        }
+        for(auto &v: mRatings ){
+            myFile<< v.mRatingtoString()<< "\n";
+        }
+        myFile.close();
+    }else{
+        cout<< "Error opening rating file";
+    }
+}
+
+

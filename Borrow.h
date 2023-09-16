@@ -10,16 +10,16 @@ class Borrow {
 private:
     TimeSlot timeSlot;
     string username;
-    string motorbikeId;
+    int motorbikeId;
     double price;
 
 public:
-    Borrow(TimeSlot timeSlot, string username, string motorbikeId, double price);
+    Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price);
     
     //getters
     TimeSlot getTimeSlot() const;
     string getUsername() const;
-    string getMotorbikeID() const;
+    int getMotorbikeID() const;
     double getPrice() const;
 
     //setters
@@ -27,6 +27,7 @@ public:
     void setUsername(string username);
     void setMotorbikeId(string motorbikeId);
     void setPrice(double price);
+    string borrowtoString();
 };
 
 #endif

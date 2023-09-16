@@ -51,7 +51,7 @@ public:
     vector<Motorbike> getOwnedMotorbike();
     vector<Motorbike> &getOwned();
     vector<Request> &getSentRequests();
-
+    vector<UserRating> &getRatings();
     string toStringAccount();
     friend bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes);
     bool registerAccount(vector<User> &userList);

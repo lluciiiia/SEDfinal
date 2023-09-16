@@ -181,6 +181,11 @@ vector<Request> &User::getSentRequests()
     return this->sentRequests;
 }
 
+vector<UserRating> &User::getRatings()
+{
+    return this->userRatings;
+}
+
 // TODO: choose one of these
 vector<Motorbike> User::getOwnedMotorbike()
 {

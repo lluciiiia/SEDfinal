@@ -34,6 +34,11 @@ public:
     UserRating(std::string username, float score, std::string comment);
     // Getter
     std::string getUsername() const;
+    string uRatingtoString(){
+        return username+","+
+                to_string(Rating::getScore())+","+
+                Rating::getComment();
+    }
 };
 
 class MotorbikeRating : public Rating
@@ -47,8 +52,14 @@ public:
     MotorbikeRating(int bikeID, float score, std::string comment);
     // Getter
     int getBikeId() const;
+
     // Setter
     void setBikeId(int bikeID);
+    string mRatingtoString(){
+        return to_string(bikeID)+","+
+                to_string(Rating::getScore())+","+
+                Rating::getComment();
+    }
 };
 
 #endif

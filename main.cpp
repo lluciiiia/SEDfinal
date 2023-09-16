@@ -30,9 +30,11 @@ int main()
     User user;
     Admin admin;
     saveToFile fileSave;
+    vector<UserRating> uRatings;
+    vector<MotorbikeRating> mRatings;
     vector<Request> requests=fileSave.loadRequest();
-    vector<Motorbike> motorbikeList = fileSave.loadMotor(requests);
-    vector<User> userList = fileSave.loadAccount(motorbikeList,requests);
+    vector<Motorbike> motorbikeList = fileSave.loadMotor(requests,mRatings);
+    vector<User> userList = fileSave.loadAccount(motorbikeList,requests,uRatings);
 
     City city = City::Saigon;
 
@@ -137,6 +139,7 @@ int main()
     fileSave.SaveAccountToFile(userList);
     fileSave.SaveMotobikeToFile(motorbikeList);
     fileSave.SaveRequestToFIle(requests);
+    fileSave.saveRatingToFile(uRatings,mRatings);
     return 0;
 }
 

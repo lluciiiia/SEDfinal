@@ -22,15 +22,15 @@ class saveToFile{
 
     public: 
     void SaveAccountToFile( vector<User>&users);
-    vector<User> loadAccount(vector<Motorbike> &moto, vector <Request> &requests);
+    vector<User> loadAccount(vector<Motorbike> &moto, vector <Request> &requests, vector <UserRating> &ratings);
     void SaveMotobikeToFile(vector <Motorbike> &moto);
-    vector<Motorbike> loadMotor(vector<Request> &requests);
+    vector<Motorbike> loadMotor(vector<Request> &requests, vector<MotorbikeRating> &ratings);
     void SaveRequestToFIle(vector <Request> &request);
     vector <Request> loadRequest();
     void saveBorrowToFile(vector<Borrow> &borrow);
     vector <Borrow> loadBorrow();
-    void saveRatingToFile(vector <Rating> &ratings);
-    vector <Rating> loadRating();
+    void saveRatingToFile(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings);
+    void loadRating(vector <UserRating> &uraitngs, vector <MotorbikeRating> &mRatings);
 };
 
 
