@@ -1,81 +1,216 @@
-#ifndef MOTORBIKE_H
-#define MOTORBIKE_H
-
-#include <iostream>
-#include <string>
-#include <vector>
-#include "Request.h"
-#include "TimeSlot.h"
 #include "Motorbike.h"
-#include "City.h"
-#include "Account/User.h"
-#include "Request.h"
-#include "Rating.h"
-#include "TimeSlot.h"
-class User;
-class Rating;
-class Request;
-class Motorbike
+
+using namespace std;
+
+Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating)
 {
-private:
-    
-        std::string model;
-        int motorbikeID;
-        std::string color;
-        std::string engineSize;
-        City city;
-        string owner;
-        std::string transmissionMode;
-        int yearMade;
-        std::string description;
-        double consumingPoints;
-        double rentalAmount;
-        double minRenterRating;
-        double motorbikeRating;
-        bool availability; //If the motorbike is currently rented => Make it unavailble*
-        std::vector<Request> requests;
-        std::vector<Rating> ratings;
-        TimeSlot availableTimeSlot;
+        this->model = model;
+        this->motorbikeID = motorbikeID;
+        this->color = color;
+        this->engineSize = engineSize;
+        this->city = city;
+        this->owner = owner;
+        this->transmissionMode = transmissionMode;
+        this->yearMade = yearMade;
+        this->description = description;
+        this->consumingPoints = consumingPoints;
+        this->rentalAmount = rentalAmount;
+        this->minRenterRating = minRenterRating;
+}
 
-public:
-    Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating);
-    Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating,bool avai);
-    Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating, TimeSlot availableTimeSlot);
-   
-    // Getters
-    int getMotorbikeId();
-    double getConsumingPoints();
-    bool getAvailability();
-    string getModel();
-    string getColor();
-    string getEngine();
-    City getCity();
-    string getOwner();
-    int getYear();
-    string getDes();
-    double getRating();
-    vector<Rating> &getRatings();
-    vector<Request> &getRequests();
+Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount, double minRenterRating, bool avai)
+{
+        this->model = model;
+        this->motorbikeID = motorbikeID;
+        this->color = color;
+        this->engineSize = engineSize;
+        this->city = city;
+        this->owner = owner;
+        this->transmissionMode = transmissionMode;
+        this->yearMade = yearMade;
+        this->description = description;
+        this->consumingPoints = consumingPoints;
+        this->rentalAmount = rentalAmount;
+        this->minRenterRating = minRenterRating;
+        this->availability= avai;
+}
 
-    TimeSlot getAvailableTimeSlot();
-    // Setters
-    void setOwner(string Owner);
-    void setMotorbikeID(int motorbikeID);
-    void setConsumingPoints(double consumingPoints);
-    void setAvailability(bool availability);
-    void setAvailableTimeSlot(TimeSlot newTimeSlot);
-    // Request / Availability / Credit Points
-    void addRequest(const Request &request);
-    void viewRequest(const Request &request);
-    void viewRequests();
-    bool checkAvailability(bool availability);
-    void reserveTimeSlot(const TimeSlot &timeSlot);
-    void addCreditPoints(double &points);   
-    
-    //to string
-    string toStringMotorBike();
+Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating, bool avai, TimeSlot availableTimeSlot)
+{
+        this->model = model;
+        this->motorbikeID = motorbikeID;
+        this->color = color;
+        this->engineSize = engineSize;
+        this->city = city;
+        this->owner = owner;
+        this->transmissionMode = transmissionMode;
+        this->yearMade = yearMade;
+        this->description = description;
+        this->consumingPoints = consumingPoints;
+        this->rentalAmount = rentalAmount;
+        this->minRenterRating = minRenterRating;
+        this->availability = avai;
+        this->availableTimeSlot = availableTimeSlot;
+}
 
-    friend class User;
+string Motorbike::getOwner()
+
+{
+        return owner;
+}
+
+City Motorbike::getCity()
+{
+        return city;
+}
+
+int Motorbike::getYear()
+{
+        return this->yearMade;
+}
+
+string Motorbike::getDes()
+{
+        return this->description;
+}
+
+double Motorbike::getRating()
+{
+        if (ratings.size() == 0)
+        {
+                return 0.0;
+        }
+        double average = 0;
+        double total = 0;
+        for (auto rating : ratings)
+        {
+                total += rating.getScore();
+        }
+        average = total / ratings.size();
+        return average;
+}
+
+vector<Request> &Motorbike::getRequests()
+{
+        return this->requests;
+}
+
+int Motorbike::getMotorbikeId()
+{
+        return motorbikeID;
+}
+
+double Motorbike::getConsumingPoints()
+{
+        return consumingPoints;
+}
+
+bool Motorbike::getAvailability()
+{
+        return availability;
+}
+
+string Motorbike::getModel()
+{
+        return model;
+}
+
+string Motorbike::getColor()
+{
+        return this->color;
+}
+
+string Motorbike::getEngine()
+{
+        return engineSize;
+}
+
+TimeSlot Motorbike::getAvailableTimeSlot() {
+        return availableTimeSlot;
+}
+
+void Motorbike::setAvailability(bool availability)
+{
+        this->availability = availability;
+}
+
+void Motorbike::setOwner(string owner)
+{
+        this->owner = owner;
+}
+
+void Motorbike::setMotorbikeID(int motorbikeID)
+
+{
+        this->motorbikeID = motorbikeID;
+}
+
+void Motorbike::setConsumingPoints(double consumingPoints)
+{
+        this->consumingPoints = consumingPoints;
+}
+
+void Motorbike::setAvailableTimeSlot(TimeSlot newTimeSlot) {
+        this->availableTimeSlot = newTimeSlot;
+}
+
+void Motorbike::addRequest(const Request &request)
+{
+        requests.push_back(request);
+}
+
+void Motorbike::viewRequests()
+{
+        int i = 1;
+        cout << "View requests of the motorbike " << motorbikeID << "\n";
+        for (Request request : requests)
+        {
+                cout << "Request " << i << ":\n";
+                request.showInfo();
+        }
+}
+
+bool Motorbike::checkAvailability(bool availability)
+{
+        return this->availability;
+}
+
+vector<MotorbikeRating> &Motorbike::getRatings(){
+        return this->ratings;
 };
 
-#endif
+// void Motorbike::addCreditPoints(double points)
+// {
+
+// }
+
+string Motorbike::toStringMotorBike()
+{
+        string cityStr;
+        switch (city)
+        {
+        case City::Saigon:
+                cityStr = "Saigon";
+                break;
+        case City::Hanoi:
+                cityStr = "Hanoi";
+                break;
+                // Handle other cases if needed
+        default:
+                cityStr = "Unknown";
+        }
+        string bo= (this->availability) ? "true" :"false";
+        return this->model + "," +
+               to_string(motorbikeID) + "," +
+               this->color + "," +
+               this->engineSize + "," +
+               cityStr + "," +
+               this->owner + "," +
+               this->transmissionMode + "," +
+               to_string(yearMade) + "," +
+               this->description + "," +
+               to_string(this->consumingPoints) + "," +
+               to_string(this->rentalAmount) + "," +
+               to_string(this->minRenterRating)+","+
+               bo;
+}
