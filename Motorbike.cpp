@@ -35,7 +35,7 @@ Motorbike::Motorbike(string model, int motorbikeID, string color, string engineS
         this->availability= avai;
 }
 
-Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating, TimeSlot availableTimeSlot)
+Motorbike::Motorbike(string model, int motorbikeID, string color, string engineSize, City city, string owner, string transmissionMode, int yearMade, string description, double consumingPoints, double rentalAmount,double minRenterRating, bool avai, TimeSlot availableTimeSlot)
 {
         this->model = model;
         this->motorbikeID = motorbikeID;
@@ -49,6 +49,7 @@ Motorbike::Motorbike(string model, int motorbikeID, string color, string engineS
         this->consumingPoints = consumingPoints;
         this->rentalAmount = rentalAmount;
         this->minRenterRating = minRenterRating;
+        this->availability = avai;
         this->availableTimeSlot = availableTimeSlot;
 }
 
