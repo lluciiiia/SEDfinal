@@ -30,9 +30,9 @@ int main()
     User user;
     Admin admin;
     saveToFile fileSave;
-    vector<Request> requests;
-    vector<Motorbike> motorbikeList = fileSave.loadMotor();
-    vector<User> userList = fileSave.loadAccount(motorbikeList);
+    vector<Request> requests=fileSave.loadRequest();
+    vector<Motorbike> motorbikeList = fileSave.loadMotor(requests);
+    vector<User> userList = fileSave.loadAccount(motorbikeList,requests);
 
     City city = City::Saigon;
 
@@ -80,7 +80,7 @@ int main()
         {
             cout << "Logging in as Member\n";
             cout << "Your are logging in.\n";
-            if (login(user, userList))
+            if (login(user, userList,motorbikeList))
             {
                 user_dashboard(user, motorbikeList, userList, requests);
                 system("cls");
@@ -196,15 +196,15 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         system("cls");
         string model;
         int i = 0;
-        for (auto &bike : bikes)
+        for (int i=0; i< user.getOwned().size(); i++)
         {
-            if (bike.getOwner() == user.getUsername())
+            if (user.getOwned()[i].getOwner() == user.getUsername())
             {
                 if (i > 0)
                 {
                     model += ", ";
                 }
-                model += bike.getModel();
+                model += user.getOwned()[i].getModel();
                 i++;
             }
         }
@@ -249,6 +249,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             displayUserInfo(user, userList);
             break;
         case 2:
+            
             if (user.addBike(bikes))
             {
                 cout << "Add bike succesfully ! \n";

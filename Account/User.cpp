@@ -865,9 +865,8 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
         break;
     }
 }
-
+  
 };
-
 
 
 void User::viewRequestsDash()
