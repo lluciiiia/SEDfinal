@@ -230,13 +230,12 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         cout << "|      User Dashboard      |  Hello, " << user.getUsername() << "\n";
         cout << "|==========================|  Credit point: " << user.getCreditPoint() << "\n";
         cout << "| 1. View your bio         |  Your owned bike: " << model << "\n";
-        cout << "| 2. Add your motorbike    |  Bikes you are renting: " << rentingBikes << "\n";
-        cout << "| 3. Delete your motorbike |\n";
-        cout << "| 4. Add credit points     |\n";
-        cout << "| 5. View Bikes to rent    |\n";
-        cout << "| 6. View request          |\n";
-        cout << "| 7. Return motorbike      |\n";
-        cout << "| 8. Logout                |\n";
+        cout << "| 2. Your bike             |  Bikes you are renting: " << rentingBikes << "\n";
+        cout << "| 3. Add credit points     |\n";
+        cout << "| 4. View Bikes to rent    |\n";
+        cout << "| 5. View request          |\n";
+        cout << "| 6. Return motorbike      |\n";
+        cout << "| 7. Logout                |\n";
         cout << "|==========================|\n";
         cout << "Enter your choice (1-6): ";
 
@@ -250,32 +249,30 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             break;
         case 2:
             
-            if (user.addBike(bikes))
-            {
-                cout << "Add bike succesfully ! \n";
-            }
-            else
-            {
-                cout << "Failed to add bike \n";
-            }
-            break;
-        case 3:
+            // if (user.addBike(bikes))
+            // {
+            //     cout << "Add bike succesfully ! \n";
+            // }
+            // else
+            // {
+            //     cout << "Failed to add bike \n";
+            // }
             user.removeBike(bikes);
             break;
-        case 4:
+        case 3:
             addCredit(user, userList);
             break;
-        case 5:
+        case 4:
             viewBikeDash(user, bikes, request, userList);
             // TODO: in the bike dash / view review and requestToRent
             break;
-        case 6:
+        case 5:
             user.viewRequestsDash();
             break;
-        case 7:
+        case 6:
             // TODO: return motorbike + review
             break;
-        case 8:
+        case 7:
             user = User();
             dashboardRun = true;
             cout << "Logging out...\n";
