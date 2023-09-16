@@ -212,5 +212,7 @@ string Motorbike::toStringMotorBike()
                to_string(this->consumingPoints) + "," +
                to_string(this->rentalAmount) + "," +
                to_string(this->minRenterRating)+","+
-               bo;
+               bo+","+
+                availableTimeSlot.getStartTime()+","+
+                availableTimeSlot.getEndTime();
 }

@@ -401,7 +401,7 @@ void User::removeBike(vector<Motorbike> &bikes)
     
     system("cls");
     
-    string idToRemove;
+   string idToRemove;
     
     while (true)
     {
@@ -810,60 +810,112 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
         }
     }
     //What is this
-    cout << "akjsdhakjsdhakjsdhajksdhajkhsd"<< dayAndMon;
-    string input;
-    while (true)
-    {
-        cout << "Enter the bike model you want to rent (Q to quit): ";
-        getline(cin, input);
-
-        if (input == "Q" || input == "q")
-        {
+    
+   
+    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+    while(true){
+        string input;
+        cout<< "Enter the bike id you want to rent (Q to quit): ";
+        getline(cin,input);
+        if(input== "q" || input == "Q"){
             break;
-        }
-        else
-        {
-            for (auto &bi : bikes)
-            {
-
-                if (input == bi.getModel())
-                {
-                    while (true)
-                    {
-                        string rentdays;
-                        cout << "How many days you want to rent? (Q to quit) ";
-                        getline(cin, rentdays);
-
-                        if (rentdays == "Q" || rentdays == "q")
-                        {
-                            cout << "Rent canceled! \n";
-                            break;
-                        }
-                        else
-                        {
-                            double totalDays = stod(rentdays); // Convert to integer
-
-                        if (this->creditPoint < bi.getConsumingPoints() * totalDays) {
-                            cout << "You don't have enough credit points to rent! Please lower your days or quit \n";
-                        } else {
-                            TimeSlot time(dayAndMon, rentdays); 
-                            RequestStatus status = RequestStatus::PENDING;
+        }else if(!regex_match(input, regexp)){
+            cout<<"Invalid input. Please provide another input! \n";
+        }else{
+            bool quit= false;
+            while (!quit) {
+                bool bikeExists = false;
+                for (Motorbike &bike : bikes) {
+                    if (bike.getAvailability() == true && this->creditPoint >= bike.getConsumingPoints() && this->city == bike.getCity()) {
+                        if (bike.getMotorbikeId() == stoi(input)) {
+                            bikeExists = true;
+                            string days;
+                            cout << "How many days you want to rent the bike? (Q to quit): ";
+                            getline(cin, days);
                             
-                            Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status);
+                            if (days == "q" || days == "Q") {
+                                quit= true;
+                                break;
+                            }
                             
-                            bi.getRequests().push_back(reque);
-                            requests.push_back(reque);
-                            cout << "Rent successful! \n";
-            
+                            if (this->creditPoint < bike.getConsumingPoints() * stoi(days)) {
+                                cout << "You don't have enough credit points to rent! Please lower your days or quit\n";
+                            } else if (!regex_match(days, regexp) || stoi(days) <= 0) {
+                                cout << "Invalid input! Please provide a valid day!\n";
+                            } else {
+                                TimeSlot time(dayAndMon, days);
+                                RequestStatus status = RequestStatus::PENDING;
+                                Request reque = Request(this->getUsername(), bike.getMotorbikeId(), time, status);
+                                bike.getRequests().push_back(reque);
+                                requests.push_back(reque);
+                                cout << "Rent successful!\n";
+                                quit= true;
+                            }
                         }
-                        break;
                     }
+                }
+                if (!bikeExists) {
+                    cout << "No bike with the entered ID exists. Please try again.\n";
+                    quit = true;
                 }
             }
         }
-        break;
     }
-}
+
+
+
+//     while (true)
+//     {
+//         cout << "Enter the bike model you want to rent (Q to quit): ";
+//         getline(cin, input);
+
+//         if (input == "Q" || input == "q")
+//         {
+//             break;
+//         }
+//         else
+//         {
+//             for (auto &bi : bikes)
+//             {
+
+//                 if (input == bi.getModel())
+//                 {
+//                     while (true)
+//                     {
+//                         string rentdays;
+//                         cout << "How many days you want to rent? (Q to quit) ";
+//                         getline(cin, rentdays);
+
+//                         if (rentdays == "Q" || rentdays == "q")
+//                         {
+//                             cout << "Rent canceled! \n";
+//                             break;
+//                         }
+//                         else
+//                         {
+//                             double totalDays = stod(rentdays); // Convert to integer
+
+//                         if (this->creditPoint < bi.getConsumingPoints() * totalDays) {
+//                             cout << "You don't have enough credit points to rent! Please lower your days or quit \n";
+//                         } else {
+//                             TimeSlot time(dayAndMon, rentdays); 
+//                             RequestStatus status = RequestStatus::PENDING;
+                            
+//                             Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status);
+                            
+//                             bi.getRequests().push_back(reque);
+//                             requests.push_back(reque);
+//                             cout << "Rent successful! \n";
+            
+//                         }
+//                         break;
+//                     }
+//                 }
+//             }
+//         }
+//         break;
+//     }
+// }
   
 };
 
