@@ -9,6 +9,8 @@
 class UserRating;
 class MotorbikeRating;
 
+static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$");
+
 User::User()
     : Account("", "", "", ""),
       IDtype(""),
@@ -258,15 +260,16 @@ bool User::addBike(vector<Motorbike> &bikes)
         }
     }
     // Year made (Must be a valid year, be int only, have max 4 digits)
+    std::regex yearMadeRegex("^[0-9]{4}$");
     while (true)
     {
         cout << "Enter year made: ";
         cin >> yearMade;
         cin.ignore();
         string num = to_string(yearMade);
-        if (!regex_match(num, regexp))
+        if (!regex_match(num, yearMadeRegex))
         {
-            cout << "Invalid input for year made! Please enter agian. ";
+            cout << "Invalid input for year made! Please enter again. \n";
         }
         else
         {
@@ -343,11 +346,12 @@ bool User::addBike(vector<Motorbike> &bikes)
         {
             break;
         }
+    }
         // Available TimeSlot TODO: Adjust it so that the start time is always smaller than the end time, and it must be smaller by at least 1 day
-        while (true)
-        {
+    while (true)
+    {
             // Make sure dates follow format (mm/dd/yyyy)
-            static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$");
+            //static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$");
             string startTime = "", endTime = "";
 
             while (!regex_match(startTime, dateRegex))
@@ -375,13 +379,11 @@ bool User::addBike(vector<Motorbike> &bikes)
                         cout << "End time must be larger than start time by at least 1 day. Please try again!\n";
                     }
                 }
-
             }
             availableTimeSlot.setStartTime(startTime);
             availableTimeSlot.setEndTime(endTime);
             cout << "Your motorbike is available for rental from: " << startTime << " - " << endTime << endl;
             break;
-        }
     }
 
     Motorbike motor(model, motorbikeID,
@@ -472,7 +474,7 @@ void User::addMotorInnitial(Motorbike motor)
     static const std::regex passportRegex("^[A-Za-z]\\d{7}$"); // Passport
     static const std::regex usernameRegex("^[a-zA-Z0-9]{1,30}$"); // Username
     static const std::regex passwordRegex("^(\\S+)$"); // Password (No spaces)
-    static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$"); // Date
+    //static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$"); // Date
 
 bool User::registerAccount(vector<User> &userList)
 {
@@ -540,6 +542,7 @@ bool User::registerAccount(vector<User> &userList)
         if (fullname.empty())
         {
             cout << "Full name cannot be empty! \n";
+            continue;
         }
         else
         {
@@ -865,8 +868,9 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
         break;
     }
 }
-  
+
 };
+
 
 
 void User::viewRequestsDash()
