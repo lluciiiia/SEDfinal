@@ -18,6 +18,9 @@ public:
     string getStartTime() const;
     string getEndTime() const;
 
+    void setStartTime(string newStartTime);
+    void setEndTime(string newEndTime); 
+
     void showInfo();
     bool isValidDateFormat(const std::string& date) const;
     bool isDateWithinTimeSlot(const string& date) const;
