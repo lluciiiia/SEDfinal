@@ -6,7 +6,7 @@
 
 using namespace std;
 
-
+//Constructors
 TimeSlot::TimeSlot()
 {
     this->startTime = "";
@@ -19,6 +19,7 @@ TimeSlot::TimeSlot(const string &startTime, const string &endTime)
     this->endTime = endTime;
 }
 
+//Getters
 string TimeSlot::getStartTime() const
 {
     return startTime;
@@ -29,6 +30,16 @@ string TimeSlot::getEndTime() const
     return endTime;
 }
 
+//Setters
+void TimeSlot::setStartTime(string newStartTime) {
+    this->startTime = newStartTime;
+}
+
+void TimeSlot::setEndTime(string newEndTime) {
+    this->endTime = newEndTime;
+}
+
+//Other
 void TimeSlot::showInfo()
 {
     cout << "Start time: " << startTime << "\nEnd time: " << endTime << "\n";
@@ -42,7 +53,6 @@ bool TimeSlot::isDateWithinTimeSlot(const std::string& date) const {
 
     return date >= startTime && date <= endTime;
 }
-
 
 //Make sure date follows format "xx/xx/xxxx". Example: "09/15/2023", 09 = month, 15 = date, 2023 = year
 static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$");
