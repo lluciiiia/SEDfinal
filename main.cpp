@@ -270,7 +270,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             // TODO: in the bike dash / view review and requestToRent
             break;
         case 5:
-            user.viewRequestsDash();
+            user.viewRequestsDash(userList);
             break;
         case 6:
             // TODO: return motorbike + review

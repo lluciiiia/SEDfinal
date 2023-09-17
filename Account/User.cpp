@@ -816,7 +816,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
     }
 };
 
-void User::viewRequestsDash()
+void User::viewRequestsDash(vector<User> &userList)
 {
     system("cls");
     int choice;
@@ -835,7 +835,7 @@ void User::viewRequestsDash()
         this->viewSentRequests();
         break;
     case 2:
-        this->viewBikeRequests();
+        this->viewBikeRequests(userList);
         break;
     case 3:
         dashboardRun = true;
@@ -873,8 +873,126 @@ void User::viewSentRequests()
     }
 }
 
-void User::viewBikeRequests()
+void User::viewBikeRequests(vector<User> &userList)
 {
+    // view the list of owned motorbikes
+    vector<Motorbike> ownedBikes = this->OwnedMotorbikes;
+    cout << left << setw(12) << "\nMotorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Requests" << endl;
+    cout << setfill('-') << setw(70) << "-" << setfill(' ') << endl;
+    for (Motorbike &bike : ownedBikes)
+    {
+        int count = 0;
+        for (Request &request : bike.getRequests())
+        {
+            count++;
+        }
+        cout << left << setw(12) << bike.getMotorbikeId()
+             << setw(20) << bike.getModel()
+             << setw(10) << bike.getColor()
+             << setw(10) << count
+             << endl;
+    }
+    // choose the motorbike id
+    int IDtoView;
+    bool foundMotorbike = false;
+    while (!foundMotorbike)
+    {
+        cout << "Enter a motorbike ID to view: ";
+        cin >> IDtoView;
+        for (auto &bike : OwnedMotorbikes)
+        {
+            int bikeID = bike.getMotorbikeId();
+            if (IDtoView == bikeID)
+            {
+                vector<Request> bikeRequests = bike.getRequests();
+
+                if (bikeRequests.empty())
+                {
+                    std::cout << "The motorbike doesn't have reviews yet." << std::endl;
+                }
+                else
+                {
+                    cout << left << setw(12) << "Request ID" << setw(20) << "Requester" << setw(10) << "TimeSlot" << setw(20) << "Status" << endl;
+                    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+
+                    // for (const Request &bikeRequest : bikeRequests)
+                    // {
+                    for (int i = 0; i < bikeRequests.size(); i++)
+                    {
+                        Request &bikeRequest = bikeRequests[i];
+                        cout << left << setw(12) << i + 1
+                             << setw(20) << bikeRequest.getRequester()
+                             << setw(10) << bikeRequest.getTimeSlot().getStartTime()
+                             << " - " << bikeRequest.getTimeSlot().getEndTime() << "\n";
+                        string statusStr = statusToString(bikeRequest.getStatus());
+                        cout << left << setw(10) << statusStr
+                             << endl;
+                    }
+                }
+                // choose a request (i-1) from the request list -> accept / reject
+                // choose the motorbike id
+                int requestIndex;
+                bool foundRequest = false;
+                while (!foundRequest)
+                {
+                    cout << "Enter a Request ID to view: ";
+                    cin >> requestIndex;
+                    for (int i = 0; i < bikeRequests.size(); i++)
+                    {
+                        if (i == requestIndex - 1)
+                        {
+                            Request &bikeRequest = bikeRequests[i];
+                            string requesterStr = bikeRequest.getRequester();
+                            User requester;
+                            for (auto &user : userList)
+                            {
+                                if (user.getUserName() == requesterStr)
+                                {
+                                    requester = user;
+                                }
+
+                                cout << "Enter 1 to accept, 2 to reject\n";
+                                int choice;
+                                cin >> choice;
+                                cin.ignore();
+                                switch (choice)
+                                {
+                                case 1:
+                                    this->acceptRequest(requester, bikeRequests, bikeRequest, userList);
+                                    break;
+                                case 2:
+                                    // TODO
+                                    // this->rejectRequest(bikeRequest);
+                                    break;
+                                default:
+                                    cout << "Invalid input! Please enter it correctly. \n";
+                                }
+                                cout << "Press Enter to continue...";
+                                cin.ignore();
+                                bool foundRequest = true;
+                                break;
+                            }
+                        }
+                        if (foundRequest)
+                        {
+                            break;
+                        }
+                        cout << "Invalid ID format! Please enter a valid ID from the list!\n";
+                    }
+                }
+                cout << "Invalid ID format! Please enter a valid ID from the list!\n";
+                foundMotorbike = true;
+                break;
+            }
+        }
+        if (foundMotorbike)
+        {
+            break;
+        }
+        cout << "Invalid ID format! Please enter a valid ID from the list!\n";
+    }
+
+    // choose a request (i-1) from the request list -> accept / reject
 }
 
 void User::setOwnedBikes(vector<Motorbike> &bikes)
@@ -994,61 +1112,77 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
 // }
 
 // //error on request
+double User::calculateRentalAmount(Request &request)
+{
+    Motorbike bikeToRent = request.getMotorbike();
 
-// double User::calculateRentalAmount(Request &request) {
-//     string startTime = request.getTimeSlot().getStartTime();
-//     string endTime = request.getTimeSlot().getEndTime();
+    double dailyRentalPrice = bikeToRent.getConsumingPoints();
 
-//     int startHour, startMinute, endHour, endMinute;
+    string startTime = request.getTimeSlot().getStartTime();
+    string endTime = request.getTimeSlot().getEndTime();
 
-//     sscanf(startTime.c_str(), "%d:%d", &startHour, &startMinute);
+    // Convert start and end times to hours and minutes
+    int startHour, startMinute, endHour, endMinute;
+    sscanf(startTime.c_str(), "%d:%d", &startHour, &startMinute);
+    sscanf(endTime.c_str(), "%d:%d", &endHour, &endMinute);
 
-//     sscanf(endTime.c_str(), "%d:%d", &endHour, &endMinute);
+    int rentalDurationInHours = (endHour - startHour) + ((endMinute - startMinute) / 60);
+    if (rentalDurationInHours <= 0)
+    {
+        // If the duration is less than or equal to 0, consider it as 1 day.
+        rentalDurationInHours = 24;
+    }
 
-//     int rentalDurationInHours = (endHour - startHour) + ((endMinute - startMinute) / 60);
+    // Calculate the rental amount based on the daily rate
+    double rentalAmount = rentalDurationInHours * dailyRentalPrice;
 
-//     double rentalPricePerDay = request.getMotorbikeID()->getRentalAmount();
+    return rentalAmount;
+}
 
-//     double rentalAmount = rentalDurationInHours * rentalPricePerHour;
+void User::acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users)
+{
+    // Calculate the rental amount
+    double rentalAmount = calculateRentalAmount(request);
 
-//     return rentalAmount;
-// }
+    // Check if the requester has sufficient credits to make the payment
+    if (requester.getCreditPoint() >= rentalAmount)
+    {
+        // Deduct the rental amount from the requester's credits
+        double requesterCredit = requester.getCreditPoint();
+        requesterCredit -= rentalAmount;
+        requester.setCreditPoint(requesterCredit);
 
-// void User::acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users) {
-//     // 1. Payment from the requester (top-up/credits)
-//     bool paymentSuccessful = processPayment(requester, request);
+        // Find the owner of the motorbike and increase their credits
+        Motorbike bikeToAccept = request.getMotorbike();
+        string ownerName = bikeToAccept.getOwner();
+        User owner;
 
-//     if (paymentSuccessful) {
-//         // 2. Increase the credits ($1 = 1 credit point) for both requester and the owner
-//         double rentalAmount = calculateRentalAmount(request);
-//         double requesterCredit = requester.getCreditPoint();
+        for (auto &user : users)
+        {
+            if (user.getUserName() == ownerName)
+            {
+                owner = user;
+                break;
+            }
+        }
 
-//         Motorbike bikeToAccept = request.getMotorbike();
-//         string ownerName = bikeToAccept.getOwner();
-//         User owner;
-//         for (auto &user : users) {
-//             if (user.getUserName() == ownerName) {
-//                 owner = user;
-//                 break;
-//             }
-//         }
-//         double ownerCredit = owner.getCreditPoint();
-//         requesterCredit -= rentalAmount;
-//         ownerCredit += rentalAmount;
+        double ownerCredit = owner.getCreditPoint();
+        ownerCredit += rentalAmount;
+        owner.setCreditPoint(ownerCredit);
 
-//         requester.setCreditPoint(requesterCredit);
-//         owner.setCreditPoint(ownerCredit);
+        bikeToAccept.setAvailability(false);
 
-//         bikeToAccept.setAvailability(false);
+        request.setStatus(RequestStatus::ACCEPTED);
 
-//         request.setStatus(RequestStatus::ACCEPTED);
+        requests.push_back(request);
 
-//         requests.push_back(request);
-//     } else {
-//         std::cout << "Payment was not successful. Request cannot be accepted." << std::endl;
-//     }
-// }
-
+        cout << "Request from " << requester.getUserName() << " to rent motorbike " << bikeToAccept.getMotorbikeId() << " has been accepted." << endl;
+    }
+    else
+    {
+        cout << "Payment was not successful. Request cannot be accepted." << endl;
+    }
+}
 // void User::rejectRequest(User &requester, Request &request) {
 //     request.setStatus(RequestStatus::REJECTED);
 // }
