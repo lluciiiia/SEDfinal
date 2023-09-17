@@ -724,6 +724,8 @@ void User::setCreditPoint(double credit)
     this->creditPoint = credit;
 }
 
+
+// TODO: Add timeslot feature (Duy: I'm thinking how to implement it into this)
 void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
 {
     system("cls");
@@ -760,61 +762,75 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                  << endl;
         }
     }
-    string input;
+    // TODO: What is this
+
+    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     while (true)
     {
-        cout << "Enter the bike model you want to rent (Q to quit): ";
+        string input;
+        cout << "Enter the bike id you want to rent (Q to quit): ";
         getline(cin, input);
-
-        if (input == "Q" || input == "q")
+        if (input == "q" || input == "Q")
         {
             break;
+        }
+        else if (!regex_match(input, regexp))
+        {
+            cout << "Invalid input. Please provide another input! \n";
         }
         else
         {
-            for (auto &bi : bikes)
+            bool quit = false;
+            while (!quit)
             {
-
-                if (input == bi.getModel())
+                bool bikeExists = false;
+                for (Motorbike &bike : bikes)
                 {
-                    while (true)
+                    if (bike.getAvailability() == true && this->creditPoint >= bike.getConsumingPoints() && this->city == bike.getCity())
                     {
-                        string rentdays;
-                        cout << "How many days you want to rent? (Q to quit) ";
-                        getline(cin, rentdays);
-
-                        if (rentdays == "Q" || rentdays == "q")
+                        if (bike.getMotorbikeId() == stoi(input))
                         {
-                            cout << "Rent canceled! \n";
-                            break;
-                        }
-                        else
-                        {
-                            double totalDays = stod(rentdays); // Convert to integer
+                            bikeExists = true;
+                            string days;
+                            cout << "How many days you want to rent the bike? (Q to quit): ";
+                            getline(cin, days);
 
-                            if (this->creditPoint < bi.getConsumingPoints() * totalDays)
+                            if (days == "q" || days == "Q")
                             {
-                                cout << "You don't have enough credit points to rent! Please lower your days or quit \n";
+                                quit = true;
+                                break;
+                            }
+
+                            if (this->creditPoint < bike.getConsumingPoints() * stoi(days))
+                            {
+                                cout << "You don't have enough credit points to rent! Please lower your days or quit\n";
+                            }
+                            else if (!regex_match(days, regexp) || stoi(days) <= 0)
+                            {
+                                cout << "Invalid input! Please provide a valid day!\n";
                             }
                             else
                             {
-                                TimeSlot time(dayAndMon, rentdays);
+                                TimeSlot time(dayAndMon, days);
                                 RequestStatus status = RequestStatus::PENDING;
-
-                                Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status, bi);
-                                bi.getRequests().push_back(reque);
+                                Request reque = Request(this->getUsername(), bike.getMotorbikeId(), time, status);
+                                bike.getRequests().push_back(reque);
                                 requests.push_back(reque);
-                                cout << "Rent successful! \n";
+                                cout << "Rent successful!\n";
+                                quit = true;
                             }
-                            break;
                         }
                     }
                 }
+                if (!bikeExists)
+                {
+                    cout << "No bike with the entered ID exists. Please try again.\n";
+                    quit = true;
+                }
             }
-            break;
         }
     }
-};
+}
 
 void User::viewRequestsDash(vector<User> &userList)
 {
@@ -1003,7 +1019,6 @@ void User::setOwnedBikes(vector<Motorbike> &bikes)
 
 void User::viewReviews(vector<Motorbike> &bikes)
 {
-    // TODO: select motorbikeID to view
     int IDtoView;
     bool foundMotorbike = false;
     while (!foundMotorbike)
@@ -1089,7 +1104,6 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
                            user.getExDate(), user.getCreditPoint(),
                            user.getCity());
                 cus.setOwnedBikes(user.getOwned());
-                return true;
             }
         }
     }
