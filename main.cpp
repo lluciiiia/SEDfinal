@@ -32,11 +32,11 @@ int main()
     saveToFile fileSave;
     vector<UserRating> uRatings;
     vector<MotorbikeRating> mRatings;
-    fileSave.loadRating(uRatings,mRatings);
+    fileSave.loadRating(uRatings, mRatings);
     vector<Request> requests = fileSave.loadRequest();
     vector<Motorbike> motorbikeList = fileSave.loadMotor(requests, mRatings);
     vector<User> userList = fileSave.loadAccount(motorbikeList, requests, uRatings);
-    
+
     City city = City::Saigon;
 
     cout << "EEET2482/COSC2082 ASSIGNMENT"
@@ -373,22 +373,23 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
     int choice;
     bool dashboardRun = false;
 
+    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
+    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+    for (Motorbike &bike : bikes)
+    {
+        cout << left << setw(12) << bike.getMotorbikeId()
+             << setw(20) << bike.getModel()
+             << setw(10) << bike.getColor()
+             << setw(10) << bike.getEngine()
+             << setw(15) << bike.getOwner()
+             << setw(12) << bike.getYear()
+             << setw(20) << bike.getDes()
+             << setw(8) << bike.getRating()
+             << endl;
+    }
+
     while (!dashboardRun)
     {
-        cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << endl;
-        cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
-        for (Motorbike &bike : bikes)
-        {
-            cout << left << setw(12) << bike.getMotorbikeId()
-                 << setw(20) << bike.getModel()
-                 << setw(10) << bike.getColor()
-                 << setw(10) << bike.getEngine()
-                 << setw(15) << bike.getOwner()
-                 << setw(12) << bike.getYear()
-                 << setw(20) << bike.getDes()
-                 << setw(8) << bike.getRating()
-                 << endl;
-        }
         cout << "\n\n";
         cout << "1. Search for all available suitable motorbikes for a particular city. \n";
         cout << "2. Rent a bike. \n";
