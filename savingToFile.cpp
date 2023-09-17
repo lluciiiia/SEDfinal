@@ -237,7 +237,7 @@ void saveToFile::loadRating(vector<UserRating> &uraitngs, vector<MotorbikeRating
 
 void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
 {
-    ofstream myFile(requestFile);
+    ofstream myFile(borrowFile);
     if(myFile.is_open()){
         for(auto &re: borrow){
                 myFile << re.borrowtoString()<<"\n";
@@ -280,7 +280,7 @@ while(getline(myFile, line)){
 
 void saveToFile::saveRatingToFile(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings)
 {
-    ofstream myFile(motobikeFile);
+    ofstream myFile(ratingFile);
     if(myFile.is_open()){
         for(auto &v: uraitngs ){
             myFile<< v.uRatingtoString()<< "\n";

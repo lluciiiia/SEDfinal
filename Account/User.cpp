@@ -908,7 +908,8 @@ void User::viewBikeRequests(vector<User> &userList)
 
                 if (bikeRequests.empty())
                 {
-                    std::cout << "The motorbike doesn't have reviews yet." << std::endl;
+                    std::cout << "The motorbike doesn't have requests yet." << std::endl;
+                    break;
                 }
                 else
                 {
