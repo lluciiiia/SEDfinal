@@ -13,27 +13,25 @@
 #include "Rating.h"
 using namespace std;
 
-class saveToFile{
-    const string accountFile= "Account.txt";
-    const string motobikeFile= "Motorbike.txt";
-    const string requestFile= "Request.txt";
-    const string borrowFile= "Borrow.txt";
-    const string ratingFile= "Rating.txt";
+class saveToFile
+{
+    const string accountFile = "Account.txt";
+    const string motobikeFile = "Motorbike.txt";
+    const string requestFile = "Request.txt";
+    const string borrowFile = "Borrow.txt";
+    const string ratingFile = "Rating.txt";
 
-    public: 
-    void SaveAccountToFile( vector<User>&users);
-    vector<User> loadAccount(vector<Motorbike> &moto, vector <Request> &requests, vector <UserRating> &ratings);
-    void SaveMotobikeToFile(vector <Motorbike> &moto);
+public:
+    void SaveAccountToFile(vector<User> &users);
+    vector<User> loadAccount(vector<Motorbike> &moto, vector<Request> &requests, vector<UserRating> &ratings);
+    void SaveMotobikeToFile(vector<Motorbike> &moto);
     vector<Motorbike> loadMotor(vector<Request> &requests, vector<MotorbikeRating> &ratings);
-    void SaveRequestToFIle(vector <Request> &request);
-    vector <Request> loadRequest();
+    void SaveRequestToFIle(vector<Request> &request);
+    vector<Request> loadRequest();
     void saveBorrowToFile(vector<Borrow> &borrow);
-    vector <Borrow> loadBorrow();
+    vector<Borrow> loadBorrow();
     void saveRatingToFile(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings);
-    void loadRating(vector <UserRating> &uraitngs, vector <MotorbikeRating> &mRatings);
+    void loadRating(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings);
 };
 
-
 #endif
-
-

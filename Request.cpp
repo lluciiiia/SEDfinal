@@ -6,19 +6,18 @@ Request::Request()
 
 Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status)
 {
-    this->requester= requester;
-    this->motorbikeID= motorbikeID;
-    this->timeSlot= timeSlot;
-    this->status= status;
+    this->requester = requester;
+    this->motorbikeID = motorbikeID;
+    this->timeSlot = timeSlot;
+    this->status = status;
 }
-
 
 Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike)
 {
-    this->requester= requester;
-    this->motorbikeID= motorbikeID;
-    this->timeSlot= timeSlot;
-    this->status= status;
+    this->requester = requester;
+    this->motorbikeID = motorbikeID;
+    this->timeSlot = timeSlot;
+    this->status = status;
     *this->bike = bike;
 }
 
@@ -47,16 +46,13 @@ TimeSlot Request::getTimeSlot() const
 
 void Request::setRequester(string requester)
 {
-    this->requester= requester;
+    this->requester = requester;
 }
 
 void Request::setMotorbikeID(int motorbikeID)
 {
-    this->motorbikeID= motorbikeID;
+    this->motorbikeID = motorbikeID;
 }
-
-
-
 
 void Request::setStatus(RequestStatus status)
 {
@@ -71,33 +67,33 @@ void Request::setTimeSlot(TimeSlot timeslot)
 string Request::requestToString()
 {
     string requestSta;
-    switch(this->status){
-        case RequestStatus::PENDING:
-        requestSta= "PENDING";
+    switch (this->status)
+    {
+    case RequestStatus::PENDING:
+        requestSta = "PENDING";
         break;
-        case RequestStatus::ACCEPTED:
-        requestSta= "ACCEPTED";
+    case RequestStatus::ACCEPTED:
+        requestSta = "ACCEPTED";
         break;
-        case RequestStatus::REJECTED:
-        requestSta= "REJECTED";
+    case RequestStatus::REJECTED:
+        requestSta = "REJECTED";
         break;
-        default:
-        requestSta= "UNKNOWN"; 
+    default:
+        requestSta = "UNKNOWN";
         break;
     }
-    
-    return this->requester+","+
-            to_string(this->motorbikeID)+","+
-            requestSta+","+
-            timeSlot.getStartTime()+","+
-            timeSlot.getEndTime();
-    
+
+    return this->requester + "," +
+           to_string(this->motorbikeID) + "," +
+           requestSta + "," +
+           timeSlot.getStartTime() + "," +
+           timeSlot.getEndTime();
 }
 
 void Request::showInfo()
 {
-    cout << "Requester: " << requester<< "\n";
+    cout << "Requester: " << requester << "\n";
     cout << "Motorbike: " << motorbikeID << "\n";
     cout << "Request Status: " << __STRINGIFY(status) << "\n";
-    //timeSlot.showInfo();
+    // timeSlot.showInfo();
 };
