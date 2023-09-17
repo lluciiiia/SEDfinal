@@ -11,9 +11,7 @@
 #include "User.h"
 #include "../Request.h"
 #include "../RequestStatus.h"
-#include "User.h"
-#include "../Request.h"
-#include "../RequestStatus.h"
+
 
 class Motorbike;
 class Request;
@@ -45,13 +43,14 @@ public:
     string getIdNum();
     string getLicenseNum();
     double getRating();
+    vector<UserRating> &getRatings();
     string getExDate();
     double getCreditPoint();
     City getCity();
     vector<Motorbike> getOwnedMotorbike();
     vector<Motorbike> &getOwned();
     vector<Request> &getSentRequests();
-    vector<UserRating> &getRatings();
+
     string toStringAccount();
     friend bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes);
     bool registerAccount(vector<User> &userList);
@@ -61,10 +60,6 @@ public:
     void viewRequestsDash();
     void viewSentRequests();
     void viewBikeRequests();
-
-    void setRequestSend(vector <Request> &re);
-    void setRentingBikes(vector <Motorbike> &bikes);
-    void setRatingList(vector <UserRating> &ratings);
     bool processPayment(User &requester, Request request);
     double calculateRentalAmount(Request &request);
     void acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users);

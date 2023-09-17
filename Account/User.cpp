@@ -8,6 +8,7 @@
 #include "User.h"
 class UserRating;
 class MotorbikeRating;
+class savingToFile;
 
 User::User()
     : Account("", "", "", ""),
@@ -181,16 +182,16 @@ vector<Request> &User::getSentRequests()
     return this->sentRequests;
 }
 
-vector<UserRating> &User::getRatings()
-{
-    return this->userRatings;
-}
-
 // TODO: choose one of these
 vector<Motorbike> User::getOwnedMotorbike()
 {
     return this->OwnedMotorbikes;
 }
+
+vector<UserRating> &User::getRatings()
+{
+    return this->userRatings;
+};
 
 // TODO: choose one of these
 vector<Motorbike> &User::getOwned()
@@ -215,7 +216,6 @@ bool User::addBike(vector<Motorbike> &bikes)
     string model, color, enginSize, transmissionmode;
     string description = "";
     int yearMade;
-    TimeSlot availableTimeSlot;
     cout << "Please enter all of needed informations: \n";
     // Model
     while (true)
@@ -224,7 +224,7 @@ bool User::addBike(vector<Motorbike> &bikes)
         getline(cin, model);
         if (model.empty())
         {
-            cout << "Model cannot be empty! \n";
+            cout << "Password cannot be empty! \n";
         }
         else
         {
@@ -238,31 +238,28 @@ bool User::addBike(vector<Motorbike> &bikes)
         getline(cin, color);
         if (color.empty())
         {
-            cout << "Color cannot be empty! \n";
+            cout << "Password cannot be empty! \n";
         }
         else
         {
             break;
         }
     }
-    // Engine size (Can only be integers. Example: 50 or 175)
-    static const std::regex engineSizeRegex("^[1-9]\\d*$");
+    // Engine size
     while (true)
     {
         cout << "Enter your engine size: ";
         getline(cin, enginSize);
         if (enginSize.empty())
         {
-            cout << "Engine size cannot be empty! \n";
-        } else if (!regex_match(enginSize, engineSizeRegex)) {
-            cout << "Invalid engine size, engine sizes must be a positive integer.\n";
+            cout << "Password cannot be empty! \n";
         }
         else
         {
             break;
         }
     }
-    // Year made (Must be a valid year, be int only, have max 4 digits)
+    // Year made
     while (true)
     {
         cout << "Enter year made: ";
@@ -278,22 +275,21 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-    // Transmission mode TODO: Find out how many transmission modes are there and make constraints for them
+    // Transmission mode
     while (true)
     {
         cout << "Enter your transmission mode: ";
         getline(cin, transmissionmode);
         if (transmissionmode.empty())
         {
-            cout << "Transmission mode cannot be empty! \n";
-            continue;
-        } 
+            cout << "Password cannot be empty! \n";
+        }
         else
         {
             break;
         }
     }
-    // Motorbike Description (Max: 150 words)
+    // Motorbike Description
     cout << "Add some description for the bike: ";
     getline(cin, description);
     std::string cityStr;
@@ -316,7 +312,7 @@ bool User::addBike(vector<Motorbike> &bikes)
 
     int motorbikeID = bikes.size() + 1;
     int consumingPoints;
-    // Bike price TODO: Test
+    // Bike price
     while (true)
     {
         cout << "Enter the price for the bike: ";
@@ -332,7 +328,7 @@ bool User::addBike(vector<Motorbike> &bikes)
             break;
         }
     }
-    // Rating TODO: Test
+    // Rating
     int minRate;
     while (true)
     {
@@ -348,7 +344,7 @@ bool User::addBike(vector<Motorbike> &bikes)
         {
             break;
         }
-        // Available TimeSlot TODO: Adjust it so that the start time is always smaller than the end time, and it must be smaller by at least 1 day
+        // Available TimeSlot
         while (true)
         {
             // Make sure dates follow format (mm/dd/yyyy)
@@ -372,18 +368,9 @@ bool User::addBike(vector<Motorbike> &bikes)
                 if (!regex_match(endTime, dateRegex))
                 {
                     cout << "End time is in the wrong format! Please try again.\n";
-                } 
-
-                //Make sure end time is larger than start time by at least 1 day
-                if (regex_match(endTime, dateRegex)) {
-                    if (startTime > endTime || startTime == endTime) {
-                        cout << "End time must be larger than start time by at least 1 day. Please try again!\n";
-                    }
                 }
-
             }
-            availableTimeSlot.setStartTime(startTime);
-            availableTimeSlot.setEndTime(endTime);
+
             cout << "Your motorbike is available for rental from: " << startTime << " - " << endTime << endl;
             break;
         }
@@ -395,7 +382,7 @@ bool User::addBike(vector<Motorbike> &bikes)
                     Account::getUsername(),
                     transmissionmode,
                     yearMade,
-                    description, consumingPoints, 0, minRate, true, availableTimeSlot);
+                    description, consumingPoints, 0, minRate, true);
     bikes.push_back(motor);
     OwnedMotorbikes.push_back(motor);
     return true;
@@ -403,16 +390,12 @@ bool User::addBike(vector<Motorbike> &bikes)
 
 void User::removeBike(vector<Motorbike> &bikes)
 {
-    
     system("cls");
-    
-   string idToRemove;
-    
-    while (true)
-    {
-        cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
-        cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
-    for (auto &bike : this->OwnedMotorbikes)
+    vector<Motorbike> OwnedMotorbikes = this->getOwned();
+
+    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
+    cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
+    for (auto &bike : OwnedMotorbikes)
     {
         string cityStr = cityToString(bike.getCity());
 
@@ -427,40 +410,27 @@ void User::removeBike(vector<Motorbike> &bikes)
              << setw(8) << cityStr
              << endl;
     }
-        cout<< "You can only add only one bike. \n";
-        cout<<"1.Add a bike: \n";
-        cout<<"2.Delete your bike \n";
-        cout<<"3.Exit";
-        cout << "\nEnter your choice: ";
-        getline(cin,idToRemove);
 
-        if(idToRemove == "1"){
-            this->addBike(bikes);
-        }else if(idToRemove == "2"){
-            int bikeId;
-            for(int i=0; i <1; i++){
-                bikeId = this->OwnedMotorbikes[i].getMotorbikeId();
-            }
-    
-            for (int i = 0; i < bikes.size(); i++)
+    int idToRemove;
+    bool removed = false;
+    while (!removed)
+    {
+        cout << "\nEnter the id of the bike to remove: ";
+        cin >> idToRemove;
+
+        for (int i = 0; i < bikes.size(); i++)
+        {
+            if (bikes[i].getMotorbikeId() == idToRemove)
             {
-                if (bikes[i].getMotorbikeId() == bikeId)
-                {
                 // Remove the bike from the vector
                 bikes.erase(bikes.begin() + i);
                 cout << "Remove bike successfully!\n";
-                OwnedMotorbikes.clear();
-    
-                // TODO: update the bikes so the user can see the updated list
-                }
-            }
-        }else if(idToRemove == "3"){
-            break;
-        }else{
-            cout<< "Invalid input. Please try again! \n";
-        }
+                removed = true;
 
-        
+                // TODO: update the bikes so the user can see the updated list
+            }
+        }
+        cout << "Bike with ID " << idToRemove << " not found.\n";
     }
 };
 
@@ -469,14 +439,6 @@ void User::addMotorInnitial(Motorbike motor)
 {
     OwnedMotorbikes.push_back(motor);
 }
-
-    static const std::regex licensePlateRegex("^[0-9]{3}\\.[0-9]{2}$"); // License number
-    static const std::regex phoneNumberRegex("^[0-9]{10}$"); // Phone number
-    static const std::regex citizenIdRegex("^[0-9]{12}$"); // Citizen ID
-    static const std::regex passportRegex("^[A-Za-z]\\d{7}$"); // Passport
-    static const std::regex usernameRegex("^[a-zA-Z0-9]{1,30}$"); // Username
-    static const std::regex passwordRegex("^(\\S+)$"); // Password (No spaces)
-    static const std::regex dateRegex("^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/(\\d{4})$"); // Date
 
 bool User::registerAccount(vector<User> &userList)
 {
@@ -488,14 +450,12 @@ bool User::registerAccount(vector<User> &userList)
 
     while (true)
     {
-        cout << "Enter your username: "; // Constraint: Be max 30 characters with no special characters. If longer => Print username exceeds 30 character limit. If have special character => Username must not contain special characters
+        cout << "Enter your username: ";
         getline(cin, username);
 
         if (username.empty())
         {
-            cout << "Username cannot be empty! ";
-        } else if (!regex_match(username, usernameRegex)) {
-            cout << "Invalid username, usernames must have only 30 characters, with no special characters or spaces. Please try again.";
+            cout << "Username cannot be empty! \n";
         }
         else
         {
@@ -521,15 +481,13 @@ bool User::registerAccount(vector<User> &userList)
         }
     }
 
-    while (true) 
+    while (true)
     {
         cout << "Enter your password: ";
         getline(cin, password);
         if (password.empty())
         {
             cout << "Password cannot be empty! \n";
-        } else if (!regex_match(password, passwordRegex)) {
-            cout << "Invalid format, passwords must not contain spaces! Please try again.\n";
         }
         else
         {
@@ -537,9 +495,9 @@ bool User::registerAccount(vector<User> &userList)
         }
     }
 
-    while (true) 
+    while (true)
     {
-        cout << "Enter your full name: "; //No constraint
+        cout << "Enter your full name: \n";
         getline(cin, fullname);
         if (fullname.empty())
         {
@@ -551,15 +509,13 @@ bool User::registerAccount(vector<User> &userList)
         }
     }
 
-    while (true) //Must have 10 digits
+    while (true)
     {
-        cout << "Enter your phone number: ";
+        cout << "Enter your phone number: \n";
         getline(cin, phoneNumber);
         if (phoneNumber.empty())
         {
             cout << "Phone Number cannot be empty! \n";
-        } else if (!regex_match(phoneNumber, phoneNumberRegex)) {
-            cout << "Invalid Vietnamese phone number. Please make sure your phone number contains 10 digits!\n";
         }
         else
         {
@@ -573,7 +529,6 @@ bool User::registerAccount(vector<User> &userList)
         cout << "Enter your ID type: \n";
         cout << "Enter 1: Citizen ID \n";
         cout << "Enter 2: Passport\n";
-        cout << "Your choice: ";
         cin >> choice;
         cin.ignore();
         string choiceString = to_string(choice);
@@ -600,7 +555,7 @@ bool User::registerAccount(vector<User> &userList)
         }
     }
 
-    if (choice == 1) //Constraint: 12 digits max
+    if (choice == 1)
     {
         while (true)
         {
@@ -609,8 +564,6 @@ bool User::registerAccount(vector<User> &userList)
             if (idnum.empty())
             {
                 cout << "Id num cannot be empty!! \n";
-            } else if (!regex_match(idNum, citizenIdRegex)) {
-                cout << "Invalid Vietnamese Citizen ID. Please make sure your ID contains all 12 digits!\n";
             }
             else
             {
@@ -622,13 +575,11 @@ bool User::registerAccount(vector<User> &userList)
     {
         while (true)
         {
-            cout << "Enter passport: "; //Constraint: 1 character and 7 digits (Example: B1234567)
+            cout << "Enter passport: ";
             getline(cin, idnum);
             if (idnum.empty())
             {
                 cout << "Id num cannot be empty!! \n";
-            } else if (!regex_match(idnum, passportRegex)) {
-                cout << "Invalid passport format. Example of correct passport: B1234567. Please try again! \n";
             }
             else
             {
@@ -637,15 +588,13 @@ bool User::registerAccount(vector<User> &userList)
         }
     }
 
-    while (true) //Add date constraint 
+    while (true)
     {
-        cout << "Enter your expiry date (mm/dd/yyyy): ";
+        cout << "Enter your expiry date: \n";
         getline(cin, licenseExdate);
         if (licenseExdate.empty())
         {
             cout << "License Expiry Date cannot be empty! \n";
-        } else if (!regex_match(licenseExdate, dateRegex)) {
-            cout << "Invalid date format! Please try again.\n";
         }
         else
         {
@@ -653,15 +602,13 @@ bool User::registerAccount(vector<User> &userList)
         }
     }
 
-    while (true) //Constraint: xxx.xx (Example: 777.77). Consider: License numbers must be distinct 
+    while (true)
     {
-        cout << "Enter your license number: ";
+        cout << "Enter your license number: \n";
         getline(cin, licenseNum);
         if (licenseNum.empty())
         {
             cout << "License Number cannot be empty! \n";
-        } else if (!regex_match(licenseNum, licensePlateRegex)) {
-            cout << "Invalid license number. Please make sure your license number follows this format: xxx.xx (Example: 777.77)\n";
         }
         else
         {
@@ -686,7 +633,7 @@ bool User::registerAccount(vector<User> &userList)
         std::cout << "Invalid city. Please enter Saigon or Hanoi.\n";
     }
 
-    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$"); 
+    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     bool addSuccess = false;
     while (true)
     {
@@ -777,7 +724,6 @@ void User::setCreditPoint(double credit)
     this->creditPoint = credit;
 }
 
-//TODO: Add timeslot feature (Duy: I'm thinking how to implement it into this)
 void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
 {
     system("cls");
@@ -814,116 +760,61 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                  << endl;
         }
     }
-    //What is this
-    
-   
-    regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
-    while(true){
-        string input;
-        cout<< "Enter the bike id you want to rent (Q to quit): ";
-        getline(cin,input);
-        if(input== "q" || input == "Q"){
+    string input;
+    while (true)
+    {
+        cout << "Enter the bike model you want to rent (Q to quit): ";
+        getline(cin, input);
+
+        if (input == "Q" || input == "q")
+        {
             break;
-        }else if(!regex_match(input, regexp)){
-            cout<<"Invalid input. Please provide another input! \n";
-        }else{
-            bool quit= false;
-            while (!quit) {
-                bool bikeExists = false;
-                for (Motorbike &bike : bikes) {
-                    if (bike.getAvailability() == true && this->creditPoint >= bike.getConsumingPoints() && this->city == bike.getCity()) {
-                        if (bike.getMotorbikeId() == stoi(input)) {
-                            bikeExists = true;
-                            string days;
-                            cout << "How many days you want to rent the bike? (Q to quit): ";
-                            getline(cin, days);
-                            
-                            if (days == "q" || days == "Q") {
-                                quit= true;
-                                break;
+        }
+        else
+        {
+            for (auto &bi : bikes)
+            {
+
+                if (input == bi.getModel())
+                {
+                    while (true)
+                    {
+                        string rentdays;
+                        cout << "How many days you want to rent? (Q to quit) ";
+                        getline(cin, rentdays);
+
+                        if (rentdays == "Q" || rentdays == "q")
+                        {
+                            cout << "Rent canceled! \n";
+                            break;
+                        }
+                        else
+                        {
+                            double totalDays = stod(rentdays); // Convert to integer
+
+                            if (this->creditPoint < bi.getConsumingPoints() * totalDays)
+                            {
+                                cout << "You don't have enough credit points to rent! Please lower your days or quit \n";
                             }
-                            
-                            if (this->creditPoint < bike.getConsumingPoints() * stoi(days)) {
-                                cout << "You don't have enough credit points to rent! Please lower your days or quit\n";
-                            } else if (!regex_match(days, regexp) || stoi(days) <= 0) {
-                                cout << "Invalid input! Please provide a valid day!\n";
-                            } else {
-                                TimeSlot time(dayAndMon, days);
+                            else
+                            {
+                                TimeSlot time(dayAndMon, rentdays);
                                 RequestStatus status = RequestStatus::PENDING;
-                                Request reque = Request(this->getUsername(), bike.getMotorbikeId(), time, status);
-                                bike.getRequests().push_back(reque);
+
+                                Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status, bi);
+                                bi.getRequests().push_back(reque);
                                 requests.push_back(reque);
-                                cout << "Rent successful!\n";
-                                quit= true;
+                                cout << "Rent successful! \n";
                             }
+                            break;
                         }
                     }
                 }
-                if (!bikeExists) {
-                    cout << "No bike with the entered ID exists. Please try again.\n";
-                    quit = true;
-                }
             }
+            break;
         }
     }
-
-
-
-//     while (true)
-//     {
-//         cout << "Enter the bike model you want to rent (Q to quit): ";
-//         getline(cin, input);
-
-//         if (input == "Q" || input == "q")
-//         {
-//             break;
-//         }
-//         else
-//         {
-//             for (auto &bi : bikes)
-//             {
-
-//                 if (input == bi.getModel())
-//                 {
-//                     while (true)
-//                     {
-//                         string rentdays;
-//                         cout << "How many days you want to rent? (Q to quit) ";
-//                         getline(cin, rentdays);
-
-//                         if (rentdays == "Q" || rentdays == "q")
-//                         {
-//                             cout << "Rent canceled! \n";
-//                             break;
-//                         }
-//                         else
-//                         {
-//                             double totalDays = stod(rentdays); // Convert to integer
-
-//                         if (this->creditPoint < bi.getConsumingPoints() * totalDays) {
-//                             cout << "You don't have enough credit points to rent! Please lower your days or quit \n";
-//                         } else {
-//                             TimeSlot time(dayAndMon, rentdays); 
-//                             RequestStatus status = RequestStatus::PENDING;
-                            
-//                             Request reque = Request(this->getUsername(), bi.getMotorbikeId(), time, status);
-                            
-//                             bi.getRequests().push_back(reque);
-//                             requests.push_back(reque);
-//                             cout << "Rent successful! \n";
-            
-//                         }
-//                         break;
-//                     }
-//                 }
-//             }
-//         }
-//         break;
-//     }
-// }
-  
 };
-
 
 void User::viewRequestsDash()
 {
@@ -984,16 +875,6 @@ void User::viewSentRequests()
 
 void User::viewBikeRequests()
 {
-}
-
-void User::setRequestSend(vector<Request> &re)
-{
-    this->sentRequests= re;
-}
-
-void User::setRentingBikes(vector<Motorbike> &bikes)
-{
-    this->RentingBikes= bikes;
 }
 
 void User::setOwnedBikes(vector<Motorbike> &bikes)
@@ -1089,7 +970,6 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
                            user.getExDate(), user.getCreditPoint(),
                            user.getCity());
                 cus.setOwnedBikes(user.getOwned());
-                cus.setRequestSend(user.getSentRequests());
                 return true;
             }
         }
