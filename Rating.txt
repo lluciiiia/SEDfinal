@@ -1,13 +1,13 @@
-phat1,8.000000,Good user reliable renter.
-phat1,7.500000,Satisfied with the service.
-phat1,10.000000,Excellent user would rent to again.
-phat1,4.000000,Not a great experience.
-phat1,9.000000,Very polite and responsible user.
-phat1,7.500000,Satisfied with the service.
-phat1,4.000000,Not a great experience.
-phat1,9.000000,Very polite and responsible user.
-1,4.500000,Great bike smooth ride.
-1,8.000000,Average bike could be better.
-1,6.000000,Good bike excellent fuel efficiency.
-1,5.000000,Fantastic bike loved it!
-2,2.500000,Below average bike needs improvement.
+phat1;8.000000;Good user reliable renter.
+phat1;7.500000;Satisfied with the service.
+phat1;10.000000;Excellent user would rent to again.
+phat1;4.000000;Not a great experience.
+phat1;9.000000;Very polite and responsible user.
+phat1;7.500000;Satisfied with the service.
+phat1;4.000000;Not a great experience.
+phat1;9.000000;Very polite and responsible user.
+1;4.500000;Great bike smooth ride.
+1;8.000000;Average bike could be better.
+1;6.000000;Good bike excellent fuel efficiency.
+1;5.000000;Fantastic bike loved it!
+2;2.500000;Below average bike needs improvement.

@@ -245,7 +245,7 @@ void saveToFile::loadRating(vector<UserRating> &uraitngs, vector<MotorbikeRating
         stringstream ss(line);
         vector<string> tokens;
         string token;
-        while (getline(ss, token, ','))
+        while (getline(ss, token, ';'))
         {
             tokens.push_back(token);
         }

@@ -37,8 +37,8 @@ public:
     // Getter
     string getUsername() const;
     string uRatingtoString(){
-        return username+","+
-                to_string(Rating::getScore())+","+
+        return username+";"+
+                to_string(Rating::getScore())+";"+
                 Rating::getComment();
     }
 };
@@ -58,8 +58,8 @@ public:
     // Setter
     void setBikeId(int bikeID);
     string mRatingtoString(){
-        return to_string(bikeID)+","+
-                to_string(Rating::getScore())+","+
+        return to_string(bikeID)+";"+
+                to_string(Rating::getScore())+";"+
                 Rating::getComment();
     }
 };
