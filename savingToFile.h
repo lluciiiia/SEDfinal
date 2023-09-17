@@ -18,7 +18,7 @@ class saveToFile{
     const string motobikeFile= "Motorbike.txt";
     const string requestFile= "Request.txt";
     const string borrowFile= "Borrow.txt";
-    const string ratingFile= "Ratting.txt";
+    const string ratingFile= "Rating.txt";
 
     public: 
     void SaveAccountToFile( vector<User>&users);

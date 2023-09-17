@@ -205,6 +205,7 @@ while(getline(myFile, line)){
 
 void saveToFile::loadRating(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings)
 {
+    cout<<"asidjasodjasojaskasjlkasjsadlk";
      regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     fstream myFile(ratingFile, ios:: in);
     string line;
@@ -216,6 +217,7 @@ void saveToFile::loadRating(vector<UserRating> &uraitngs, vector<MotorbikeRating
             tokens.push_back(token);
         }
         if(tokens.size() == 3){
+            cout<<"asidjasodjasojaskasjlkasjsadlk";
             if(regex_match(tokens[0], regexp)){
                 int bikeId= stoi(tokens[0]);
                 float score= stof(tokens[1]);

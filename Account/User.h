@@ -64,19 +64,12 @@ public:
     double calculateRentalAmount(Request &request);
     void acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users);
     void addRequest(const Request &request);
-    // void acceptRequest(vector<Request> &requests, Request request, s);
     void setOwnedBikes(vector <Motorbike> &bikes);
     void viewReviews(vector<Motorbike> &bikes);
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
     bool addBike(vector<Motorbike> &bikes);    // = list
     void removeBike(vector<Motorbike> &bikes); // = unlist
     void addMotorInnitial(Motorbike motor);
-    // bool login(User &cus); // TODO: do we need this?
-    // bool login(const string &username,
-    //            const string &pass,
-    //            vector<User> &userList); // TODO: do we need this?
-    // vector <Motorbike> rentBikes();
-    // vector <Request> receiveRequest();
 
     friend class Admin;
 };

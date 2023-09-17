@@ -18,7 +18,7 @@ public:
     Rating();
     Rating(float score, string comment);
     // Getters
-    float getScore() const;
+    float &getScore();
     string getComment() const;
     // Setters
     void setScore(float score);

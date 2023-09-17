@@ -1026,7 +1026,7 @@ void User::viewReviews(vector<Motorbike> &bikes)
                     cout << left << setw(12) << "MotorbikeID" << setw(20) << "Score" << setw(10) << "Comment" << endl;
                     cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
 
-                    for (const Rating &bikeRating : bikeRatings)
+                    for (Rating &bikeRating : bikeRatings)
                     {
                         cout << left << setw(12) << bike.getMotorbikeId()
                              << setw(20) << bikeRating.getScore()

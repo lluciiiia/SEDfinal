@@ -32,10 +32,38 @@ int main()
     saveToFile fileSave;
     vector<UserRating> uRatings;
     vector<MotorbikeRating> mRatings;
-    vector<Request> requests=fileSave.loadRequest();
-    vector<Motorbike> motorbikeList = fileSave.loadMotor(requests,mRatings);
-    vector<User> userList = fileSave.loadAccount(motorbikeList,requests,uRatings);
+    fileSave.loadRating(uRatings,mRatings);
+    vector<Request> requests = fileSave.loadRequest();
+    vector<Motorbike> motorbikeList = fileSave.loadMotor(requests, mRatings);
+    vector<User> userList = fileSave.loadAccount(motorbikeList, requests, uRatings);
+    
+    for (auto &rating: mRatings) {
+        cout << rating.getScore()<<endl;
+        cout << rating.getComment()<<endl;
+    }
+    MotorbikeRating rating1(1, 4.5, "Great bike, smooth ride.");
+    MotorbikeRating rating2(1, 8.0, "Average bike, could be better.");
+    MotorbikeRating rating3(1, 6.0, "Good bike, excellent fuel efficiency.");
+    MotorbikeRating rating4(1, 5.0, "Fantastic bike, loved it!");
+    MotorbikeRating rating5(2, 2.5, "Below average bike, needs improvement.");
 
+    UserRating rating12("phat1", 8.0, "Good user, reliable renter.");
+    UserRating rating22("phat1", 7.5, "Satisfied with the service.");
+    UserRating rating32("phat1", 10.0, "Excellent user, would rent to again.");
+    UserRating rating42("phat1", 4.0, "Not a great experience.");
+    UserRating rating52("phat1", 9.0, "Very polite and responsible user.");
+
+    mRatings.push_back(rating1);
+    mRatings.push_back(rating2);
+    mRatings.push_back(rating3);
+    mRatings.push_back(rating4);
+    mRatings.push_back(rating5);
+    uRatings.push_back(rating12);
+    uRatings.push_back(rating22);
+    uRatings.push_back(rating32);
+    uRatings.push_back(rating42);
+    uRatings.push_back(rating52);
+    
     City city = City::Saigon;
 
     cout << "EEET2482/COSC2082 ASSIGNMENT"
@@ -82,7 +110,7 @@ int main()
         {
             cout << "Logging in as Member\n";
             cout << "Your are logging in.\n";
-            if (login(user, userList,motorbikeList))
+            if (login(user, userList, motorbikeList))
             {
                 user_dashboard(user, motorbikeList, userList, requests);
                 system("cls");
@@ -139,7 +167,7 @@ int main()
     fileSave.SaveAccountToFile(userList);
     fileSave.SaveMotobikeToFile(motorbikeList);
     fileSave.SaveRequestToFIle(requests);
-    fileSave.saveRatingToFile(uRatings,mRatings);
+    fileSave.saveRatingToFile(uRatings, mRatings);
     return 0;
 }
 
@@ -199,7 +227,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         system("cls");
         string model;
         int i = 0;
-        for (int i=0; i< user.getOwned().size(); i++)
+        for (int i = 0; i < user.getOwned().size(); i++)
         {
             if (user.getOwned()[i].getOwner() == user.getUsername())
             {
@@ -251,7 +279,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             displayUserInfo(user, userList);
             break;
         case 2:
-            
+
             // if (user.addBike(bikes))
             // {
             //     cout << "Add bike succesfully ! \n";

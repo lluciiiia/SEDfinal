@@ -11,7 +11,7 @@ MotorbikeRating::MotorbikeRating() : Rating(), bikeID() {}
 MotorbikeRating::MotorbikeRating(int bikeID, float score, std::string comment)
     : Rating(score, comment), bikeID(bikeID) {}
 
-float Rating::getScore() const
+float &Rating::getScore() 
 {
     return score;
 }
