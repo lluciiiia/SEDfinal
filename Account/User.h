@@ -65,6 +65,8 @@ public:
     void acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users);
     void addRequest(const Request &request);
     void setOwnedBikes(vector <Motorbike> &bikes);
+    void setUserRating(vector<UserRating> &ratings);
+    void setSentRequest(vector<Request> &requsest);
     void viewReviews(vector<Motorbike> &bikes);
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
     bool addBike(vector<Motorbike> &bikes);    // = list

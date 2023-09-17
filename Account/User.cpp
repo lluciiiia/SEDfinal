@@ -1017,6 +1017,16 @@ void User::setOwnedBikes(vector<Motorbike> &bikes)
     this->OwnedMotorbikes = bikes;
 }
 
+void User::setUserRating(vector<UserRating> &ratings)
+{
+    this->userRatings= ratings;
+}
+
+void User::setSentRequest(vector<Request> &requsest)
+{
+    this->sentRequests= requsest;
+}
+
 void User::viewReviews(vector<Motorbike> &bikes)
 {
     int IDtoView;
@@ -1104,6 +1114,9 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
                            user.getExDate(), user.getCreditPoint(),
                            user.getCity());
                 cus.setOwnedBikes(user.getOwned());
+                cus.setUserRating(user.getRatings());
+                cus.setSentRequest(user.getSentRequests());
+                return true;
             }
         }
     }

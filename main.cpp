@@ -234,7 +234,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         cout << "|      User Dashboard      |  Hello, " << user.getUsername() << "\n";
         cout << "|==========================|  Credit point: " << user.getCreditPoint() << "\n";
         cout << "| 1. View your bio         |  Your owned bike: " << model << "\n";
-        cout << "| 2. Your bike             |\n";
+        cout << "| 2. Your bike             |  Your rating: " << user.getRating() << "\n";
         cout << "| 3. Add credit points     |\n";
         cout << "| 4. View Bikes to rent    |\n";
         cout << "| 5. View request          |\n";
