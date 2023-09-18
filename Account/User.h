@@ -58,12 +58,12 @@ public:
     void searchAvailableMotorbikes();
     void setCreditPoint(double credit);
     void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
-    void viewRequestsDash(vector<User> &userList);
+    void viewRequestsDash(vector<User> &userList, vector<Borrow> &bo);
     void viewSentRequests();
-    void viewBikeRequests(vector<User> &userList);
+    void viewBikeRequests(vector<User> &userList, vector<Borrow> &bo);
     bool processPayment(User &requester, Request request);
     double calculateRentalAmount(Request &request);
-    void acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users);
+    void acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users,vector<Borrow> &bo);
     void addRequest(const Request &request);
     void setOwnedBikes(vector <Motorbike> &bikes);
     void setUserRating(vector<UserRating> &ratings);

@@ -15,14 +15,12 @@ private:
     RequestStatus status;
     TimeSlot timeSlot;
     int motorbikeID;
-    Motorbike* bike;
+    
     
 public:
     Request();
-    Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike);
     Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status);
     string getRequester() const;
-    Motorbike getMotorbike();
     void setMotorbikeID(int motorbikeID);
     RequestStatus getStatus() const;
     TimeSlot getTimeSlot() const;

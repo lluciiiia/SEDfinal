@@ -12,23 +12,12 @@ Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestSt
     this->status = status;
 }
 
-Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status, Motorbike bike)
-{
-    this->requester = requester;
-    this->motorbikeID = motorbikeID;
-    this->timeSlot = timeSlot;
-    this->status = status;
-    *this->bike = bike;
-}
 
 string Request::getRequester() const
 {
     return requester;
 }
-Motorbike Request::getMotorbike()
-{
-    return *bike;
-}
+
 int Request::getMotorbikeID() const
 {
     return motorbikeID;

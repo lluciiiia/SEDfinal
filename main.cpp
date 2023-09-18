@@ -45,7 +45,7 @@ int main()
     cout << "MOTORBIKE RENTAL APPLICATION."
          << "\n\n";
 
-    cout << "Instructor: Dr. Ling Huo-Chong"
+    cout << "Instructor: Dr. Ling Hou Chong"
          << "\n";
     cout << "Group: 3"
          << "\n";
@@ -55,7 +55,7 @@ int main()
          << "\n";
     cout << "s3978268, Student Name: Nguyen Hoang Duy"
          << "\n";
-    cout << "s3866724, Student Name: Minsung Kim"
+    cout << "s3929218, Student Name: Huynh Tan Phat"
          << "\n\n\n";
 
     bool exitProgram = false;
@@ -215,21 +215,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             }
         }
 
-        // get rented bikes
-        string rentingBikes = "";
-        int j = 0;
-        for (auto &sentRequest : user.getSentRequests())
-        {
-            if (sentRequest.getStatus() == RequestStatus::ACCEPTED)
-            {
-                if (j > 0)
-                {
-                    rentingBikes += ", ";
-                }
-                rentingBikes += sentRequest.getMotorbike().getModel();
-                j++;
-            }
-        }
+    
 
         // Display the user dashboard menu
         cout << "|==========================|\n";
@@ -273,7 +259,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             // TODO: in the bike dash / view review and requestToRent
             break;
         case 5:
-            user.viewRequestsDash(userList);
+            user.viewRequestsDash(userList,borrow);
             break;
         case 6:
             // TODO: return motorbike + review
@@ -398,7 +384,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
         cout << "2. Rent a bike. \n";
         cout << "3. View a review of a bike. \n";
         cout << "4. Exit\n";
-        cout << "Enter your choice(1-4): ";
+        cout << "Enter your choice(1-3): ";
         cin >> choice;
         cin.ignore();
         switch (choice)
@@ -588,9 +574,8 @@ void searchEngine(User &user, vector<Motorbike> &bikes)
             }
         }
     }
-    vector<Request> userRequests = user.getSentRequests();
 
-    cout << "\n1. View bikes on normal mode\n";
+    cout << "\n1. Rent a bike\n2. View bikes on normal mode\n";
     while (!dashboardRun)
     {
         cout << "Enter your choice: ";
@@ -599,6 +584,9 @@ void searchEngine(User &user, vector<Motorbike> &bikes)
         switch (choice)
         {
         case 1:
+            // TODO: go to the renting mode
+            break;
+        case 2:
             dashboardRun = true;
             break;
         default:
