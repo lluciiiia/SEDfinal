@@ -1063,9 +1063,9 @@ void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, 
                 getline(cin, decision);
                 if (decision == "Y" || decision == "y")
                 {
-                    confirmation = true;
                     // TODO: do sth for the owner to review the renter
                     bo.erase(bo.begin() + i);
+                    confirmation = true;
                     cout << "Successfully returned the bike! \n";
                     break;
                 }
@@ -1080,6 +1080,10 @@ void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, 
                 }
             }
         }
+    }
+    if (confirmation) {
+        // TODO: call rate Bike
+        // rateBike(bikeToRate);
     }
     if (!confirmation)
     {
@@ -1142,17 +1146,18 @@ void User::viewMyReviews(vector<UserRating> &userRatings)
     cout << left << setw(12) << "Score" << setw(10) << "Comment" << endl;
     cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
     int count = 0;
- 
-        for (auto &userRating : userRatings)
+
+    for (auto &userRating : userRatings)
+    {
+        if (userRating.getUsername() == this->getUserName())
         {
-            if (userRating.getUsername() == this->getUserName())
-            {
-                cout << left << setw(12) << userRating.getScore()
-                     << setw(10) << userRating.getComment() << endl;
-                    count++;
-            }
+            cout << left << setw(12) << userRating.getScore()
+                 << setw(10) << userRating.getComment() << endl;
+            count++;
         }
-    if (count == 0) { // no user ratings for the corresponding user
+    }
+    if (count == 0)
+    { // no user ratings for the corresponding user
         cout << "You don't have any reviews yet!\n";
     }
     cout << "\nEnter to exit." << endl;
