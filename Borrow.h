@@ -6,23 +6,25 @@
 
 using namespace std;
 
-class Borrow {
+class Borrow
+{
 private:
     TimeSlot timeSlot;
     string username;
     int motorbikeId;
     double price;
     string borrowSta;
+
 public:
-    Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price,string status);
-    
-    //getters
+    Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price, string status);
+
+    // getters
     TimeSlot getTimeSlot() const;
     string getUsername() const;
     int getMotorbikeID() const;
     double getPrice() const;
 
-    //setters
+    // setters
     void setTimeSlot(TimeSlot timeSlot);
     void setUsername(string username);
     void setMotorbikeId(string motorbikeId);
@@ -32,4 +34,3 @@ public:
 };
 
 #endif
-
