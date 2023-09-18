@@ -42,7 +42,7 @@ int main()
     cout << "MOTORBIKE RENTAL APPLICATION."
          << "\n\n";
 
-    cout << "Instructor: Dr. Ling Hou Chong"
+    cout << "Instructor: Dr. Ling Huo-Chong"
          << "\n";
     cout << "Group: 3"
          << "\n";
@@ -52,7 +52,7 @@ int main()
          << "\n";
     cout << "s3978268, Student Name: Nguyen Hoang Duy"
          << "\n";
-    cout << "s3929218, Student Name: Huynh Tan Phat"
+    cout << "s3866724, Student Name: Minsung Kim"
          << "\n\n\n";
 
     bool exitProgram = false;
