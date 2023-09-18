@@ -823,7 +823,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                                 Request reque = Request(this->getUsername(), bike.getMotorbikeId(), time, status);
                                 bike.getRequests().push_back(reque);
                                 requests.push_back(reque);
-                                cout << "Rent successful!\n";
+                                cout << "Successfully sent the request!\n";
                                 quit = true;
                             }
                         }
@@ -844,13 +844,12 @@ void User::viewRequestsDash(vector<User> &userList)
     system("cls");
     int choice;
     bool dashboardRun = false;
-    cout << "\n";
-    cout << "----------------------------------------\n";
     cout << "1. View requests that I sent. \n";
     cout << "2. View requests for my motorbikes. \n";
     cout << "3. Exit\n";
     cout << "Enter your choice(1-3): ";
     cin >> choice;
+    cout << "\n";
     cin.ignore();
     switch (choice)
     {
@@ -867,7 +866,6 @@ void User::viewRequestsDash(vector<User> &userList)
     default:
         cout << "Invalid input! Please enter it correctly. \n";
     }
-    cout << "Press Enter to continue...";
     cin.ignore();
 };
 
@@ -1023,8 +1021,6 @@ void User::viewBikeRequests(vector<User> &userList)
         cout << "Invalid ID format! Please enter a valid ID from the list!\n";
         break;
     }
-
-    // choose a request (i-1) from the request list -> accept / reject
 }
 
 void User::setOwnedBikes(vector<Motorbike> &bikes)
