@@ -64,10 +64,11 @@ public:
     bool registerAccount(vector<User> &userList);
 
     // view methods
-    void viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes);
+    void viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings);
     void viewSentRequests();
-    void viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes);
-    void viewReviews(vector<Motorbike> &bikes);
+    void viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings);
+    void viewBikeReviews(vector<Motorbike> &bikes);
+    void viewRequesterReviews(string requesterName, vector<UserRating> &userRatings);
     void viewMyReviews(vector<UserRating> &userRatings);
 
     // request methods

@@ -248,7 +248,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             viewBikeDash(user, bikes, request, userList);
             break;
         case 6:
-            user.viewRequestsDash(userList, borrow, bikes);
+            user.viewRequestsDash(userList, borrow, bikes, userRatings);
             break;
         case 7:
             returnDashBoard(user, userList, bikes, request, borrow);
@@ -381,7 +381,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
             user.requestToRent(bikes, requests);
             break;
         case 3:
-            user.viewReviews(bikes);
+            user.viewBikeReviews(bikes);
             break;
         case 4:
             dashboardRun = true;

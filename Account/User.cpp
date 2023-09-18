@@ -848,7 +848,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
     }
 }
 
-void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes)
+void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings)
 {
     system("cls");
     int choice;
@@ -865,7 +865,7 @@ void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<M
         this->viewSentRequests();
         break;
     case 2:
-        this->viewBikeRequests(userList, bo, bikes);
+        this->viewBikeRequests(userList, bo, bikes, userRatings);
         break;
     case 3:
         dashboardRun = true;
@@ -901,7 +901,7 @@ void User::viewSentRequests()
         }
     }
 }
-void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes)
+void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings)
 {
     vector<Motorbike> ownedBikes = this->OwnedMotorbikes;
     cout << left << setw(12) << "\nMotorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Requests" << endl;
@@ -990,7 +990,7 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                                 break;
                             }
 
-                            cout << "Enter 1 to accept, 2 to reject, 3 to quit: ";
+                            cout << "Enter 1 to accept, 2 to reject, 3 to view the renter's reviews, 4 to quit: ";
                             int choice;
                             cin >> choice;
                             cin.ignore();
@@ -1003,6 +1003,9 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                                 this->rejectRequest(bikeRequest, bikes);
                                 break;
                             case 3:
+                                viewRequesterReviews(requesterStr, userRatings);
+                                break;
+                            case 4:
                                 foundRequest = true;
                                 break;
                             default:
@@ -1096,7 +1099,7 @@ void User::setSentRequest(vector<Request> &requsest)
     this->sentRequests = requsest;
 }
 
-void User::viewReviews(vector<Motorbike> &bikes)
+void User::viewBikeReviews(vector<Motorbike> &bikes)
 {
     int IDtoView;
     bool foundMotorbike = false;
@@ -1137,6 +1140,30 @@ void User::viewReviews(vector<Motorbike> &bikes)
         }
         cout << "Invalid ID format! Please enter a valid ID from the list!\n";
     }
+}
+
+void User::viewRequesterReviews(string requesterName, vector<UserRating> &userRatings)
+{
+    system("cls");
+    cout << "Reviews of " << requesterName << "\n";
+    cout << left << setw(12) << "Score" << setw(10) << "Comment" << endl;
+    cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+    int count = 0;
+
+    for (auto &userRating : userRatings)
+    {
+        if (userRating.getUsername() == requesterName)
+        {
+            cout << left << setw(12) << userRating.getScore()
+                 << setw(10) << userRating.getComment() << endl;
+            count++;
+        }
+    }
+    if (count == 0)
+    { // no user ratings for the corresponding user
+        cout << "There is no review for the requester yet!\n";
+    }
+    cout << "\nEnter to exit." << endl;
 }
 
 void User::viewMyReviews(vector<UserRating> &userRatings)
