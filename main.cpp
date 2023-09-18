@@ -45,7 +45,7 @@ int main()
     cout << "MOTORBIKE RENTAL APPLICATION."
          << "\n\n";
 
-    cout << "Instructor: Dr. Ling Hou Chong"
+    cout << "Instructor: Dr. Ling Huo-Chong"
          << "\n";
     cout << "Group: 3"
          << "\n";
