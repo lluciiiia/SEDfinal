@@ -857,8 +857,6 @@ void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo)
     system("cls");
     int choice;
     bool dashboardRun = false;
-    cout << "\n";
-    cout << "----------------------------------------\n";
     cout << "1. View requests that I sent. \n";
     cout << "2. View requests for my motorbikes. \n";
     cout << "3. Exit\n";
