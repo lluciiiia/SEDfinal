@@ -737,8 +737,6 @@ void User::rateRenter(User &ratedUser)
     ratedUser.userRatings.push_back(userRate);
 }
 
-void User::searchAvailableMotorbikes() {}
-
 void User::setCreditPoint(double credit)
 {
     this->creditPoint = credit;

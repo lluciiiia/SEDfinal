@@ -64,7 +64,6 @@ public:
     bool registerAccount(vector<User> &userList);
 
     // view methods
-    void searchAvailableMotorbikes();
     void viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes);
     void viewSentRequests();
     void viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes);
