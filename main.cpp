@@ -17,14 +17,14 @@
 using namespace std;
 
 void guest_dashboard(vector<Motorbike> &bikes);
-void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &requests,vector<Borrow> &borrow);
+void user_dashboard(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &requests,vector<Borrow> &borrow);
 void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userList);
 void viewGuestBikeDash(vector<Motorbike> &bikes, string city);
 void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &requests, vector<User> &userList);
 void displayUserInfo(User &user, vector<User> &userList);
 void addCredit(User &user, vector<User> &userList);
 void searchEngine(User &user, vector<Motorbike> &bikes);
-void reTurnDashboard( User &user,vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow);
+void returnDashBoard(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings,  User &user,vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow);
 int main()
 {
     User user;
@@ -86,7 +86,7 @@ int main()
             cout << "Your are logging in.\n";
             if (login(user, userList, motorbikeList))
             {
-                user_dashboard(user, motorbikeList, userList, requests,borrowList);
+                user_dashboard(uRatings, mRatings, user, motorbikeList, userList, requests,borrowList);
                 system("cls");
             }
             else
@@ -191,7 +191,7 @@ void guest_dashboard(vector<Motorbike> &bikes)
     }
 }
 
-void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &request,vector <Borrow> &borrow)
+void user_dashboard(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &request,vector <Borrow> &borrow)
 {
     int choice;
     bool dashboardRun = false;
@@ -277,7 +277,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             break;
         case 6:
             // TODO: return motorbike + review
-            reTurnDashboard(user,userList,bikes,request,borrow);
+            returnDashBoard(userRatings, bikeRatings, user,userList,bikes,request,borrow);
             break;
         case 7:
             user = User();
@@ -607,7 +607,7 @@ void searchEngine(User &user, vector<Motorbike> &bikes)
     }
 }
 
-void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow)
+void returnDashBoard(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, User &user, vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow)
 {
     string choice;
     bool dashboard= false;
@@ -638,9 +638,8 @@ void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bike
             cout<< "Enter your choice: ";
             getline(cin,choice);
             if(choice== "1"){
-                user.returnBikes(user,userList,request, borrow,bikes);
+                user.returnBikes(userRatings, bikeRatings, user, userList, request, borrow, bikes);
             }else if(choice == "2"){
-            
                 dashboard= true;
             }
         }

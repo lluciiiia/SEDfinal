@@ -456,12 +456,6 @@ void User::removeBike(vector<Motorbike> &bikes)
     }
 };
 
-// TODO: Do we need this?
-void User::addMotorInnitial(Motorbike motor)
-{
-    OwnedMotorbikes.push_back(motor);
-}
-
 bool User::registerAccount(vector<User> &userList)
 {
     system("cls");
@@ -709,7 +703,7 @@ bool User::registerAccount(vector<User> &userList)
 // end register
 
 // Rate user and motorbike
-void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
+void User::rateUserAndMotorbike(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, string &userNameToRate, int &bikeIDToRate)
 {
     // Variables for score and comment
     float userScore = 0, motorbikeScore = 0;
@@ -727,16 +721,16 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
     cout << "Enter score for motorbike: ";
     cin >> motorbikeScore;
     cin.ignore();
-    cout << "Enter comment for motorbike " << ratedMotorbike.getMotorbikeId() << ": ";
+    cout << "Enter comment for motorbike " << bikeIDToRate << ": ";
     getline(cin, motorbikeComment);
     cout << endl;
 
     // Adding rating to list
-    UserRating userRate(ratedUser.getUserName(), userScore, userComment);
-    ratedUser.userRatings.push_back(userRate);
+    UserRating userRate(userNameToRate, userScore, userComment);
+    userRatings.push_back(userRate);
 
-    MotorbikeRating motorbikeRate(ratedMotorbike.getMotorbikeId(), motorbikeScore, motorbikeComment);
-    ratedMotorbike.getRatings().push_back(motorbikeRate);
+    MotorbikeRating motorbikeRate(bikeIDToRate, motorbikeScore, motorbikeComment);
+    bikeRatings.push_back(motorbikeRate);
 }
 
 void User::searchAvailableMotorbikes() {}
@@ -1050,7 +1044,7 @@ void User::setUserRating(vector<UserRating> &ratings)
     this->userRatings = ratings;
 }
 
-void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes)
+void User::returnBikes(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes)
 {
     int choice;
     bool dashboard = false;
@@ -1097,6 +1091,19 @@ void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, 
                 {
                     bo.erase(bo.begin() + i);
                     cout << "Return successfully! \n";
+
+                    // rate the Owner and the bike
+                    int bikeIDToRate;
+                    string userNameToRate;
+                    for (auto &bike : bikes)
+                    {
+                        if (bike.getMotorbikeId() == bo[i].getMotorbikeID())
+                        {
+                            bikeIDToRate = bike.getMotorbikeId();
+                            userNameToRate = bike.getOwner();
+                        }
+                    }
+                    this->rateUserAndMotorbike(userRatings, bikeRatings, userNameToRate, bikeIDToRate);
                 }
                 else
                 {
