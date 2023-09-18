@@ -880,7 +880,6 @@ void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo)
     default:
         cout << "Invalid input! Please enter it correctly. \n";
     }
-    cout << "Press Enter to continue...";
     cin.ignore();
 };
 
@@ -1208,6 +1207,7 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
 
     return false;
 }
+
 void User::acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo)
 {
     double price = OwnedMotorbikes[0].getConsumingPoints();
@@ -1264,7 +1264,7 @@ void User::acceptRequest(User *requester, vector<Request> &requests, Request &re
 
     Borrow b1o = Borrow(time, requester->getUserName(), bikeid, rentalAmount, "RENTING");
     bo.push_back(b1o);
-    cout << "Successfully accepted the request" << endl;
+    cout << "Successfully accepted the request!" << endl;
 }
 // void User::rejectRequest(User &requester, Request &request) {
 //     request.setStatus(RequestStatus::REJECTED);
