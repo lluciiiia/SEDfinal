@@ -303,7 +303,7 @@ vector<Borrow> saveToFile::loadBorrow()
             tokens.push_back(token);
         }
 
-        if (tokens.size() == 5)
+        if (tokens.size() == 6)
         {
             string username = tokens[0];
             int motobikeID = stoi(tokens[1]);
@@ -311,7 +311,7 @@ vector<Borrow> saveToFile::loadBorrow()
             string start = tokens[4];
             string end = tokens[5];
             TimeSlot time(start, end);
-            Borrow bo = Borrow(time, username, motobikeID, price);
+            Borrow bo = Borrow(time, username, motobikeID, price,tokens[5]);
             borrows.push_back(bo);
         }
     }

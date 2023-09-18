@@ -12,9 +12,9 @@ private:
     string username;
     int motorbikeId;
     double price;
-
+    string borrowSta;
 public:
-    Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price);
+    Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price,string status);
     
     //getters
     TimeSlot getTimeSlot() const;
@@ -27,6 +27,7 @@ public:
     void setUsername(string username);
     void setMotorbikeId(string motorbikeId);
     void setPrice(double price);
+    void setBorrowStatus(string status);
     string borrowtoString();
 };
 

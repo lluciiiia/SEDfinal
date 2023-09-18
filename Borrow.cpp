@@ -1,7 +1,7 @@
 #include "Borrow.h"
 
-Borrow::Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price)
-    : timeSlot(timeSlot), username(username), motorbikeId(motorbikeId), price(price) {
+Borrow::Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price,string status)
+    : timeSlot(timeSlot), username(username), motorbikeId(motorbikeId), price(price),borrowSta(status) {
 }
 
 TimeSlot Borrow::getTimeSlot() const {
@@ -36,11 +36,17 @@ void Borrow::setPrice(double price) {
     price = price;
 }
 
+void Borrow::setBorrowStatus(string status)
+{
+    this->borrowSta= status;
+}
+
 string Borrow::borrowtoString()
 {
     return username+","+
             to_string(motorbikeId)+","+
             to_string(price)+","+
             timeSlot.getStartTime()+","+
-            timeSlot.getEndTime();
+            timeSlot.getEndTime()+","+
+            borrowSta;
 }
