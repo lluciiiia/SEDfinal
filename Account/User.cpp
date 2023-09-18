@@ -871,7 +871,7 @@ void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo)
         this->viewSentRequests();
         break;
     case 2:
-        this->viewBikeRequests(userList,bo);
+        this->viewBikeRequests(userList, bo);
         break;
     case 3:
         dashboardRun = true;
@@ -908,7 +908,6 @@ void User::viewSentRequests()
         }
     }
 }
-
 void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo)
 {
     vector<Motorbike> ownedBikes = this->OwnedMotorbikes;
@@ -1004,18 +1003,18 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo)
                             cin.ignore();
                             switch (choice)
                             {
-                                case 1:
-                                    this->acceptRequest(requester, bikeRequests, bikeRequest, userList, bo);
-                                    break;
-                                case 2:
-                                    // TODO: Implement rejectRequest function
-                                    break;
-                                case 3:
-                                    foundRequest = true;
-                                    break;
-                                default:
-                                    cout << "Invalid choice. Please try again." << endl;
-                                    break;
+                            case 1:
+                                this->acceptRequest(requester, bikeRequests, bikeRequest, userList, bo);
+                                break;
+                            case 2:
+                                // TODO: Implement rejectRequest function
+                                break;
+                            case 3:
+                                foundRequest = true;
+                                break;
+                            default:
+                                cout << "Invalid choice. Please try again." << endl;
+                                break;
                             }
                             foundRequest = true;
                             break;
@@ -1025,7 +1024,8 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo)
                     {
                         cout << "Invalid Request ID. Please try again." << endl;
                     }
-                    else {
+                    else
+                    {
                         break; // Exit the while loop after accepting or rejecting a request
                     }
                 }
@@ -1039,10 +1039,6 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo)
         }
     }
 }
-
-
-    // choose a request (i-1) from the request list -> accept / reject
-
 
 void User::setOwnedBikes(vector<Motorbike> &bikes)
 {
@@ -1212,64 +1208,22 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
 
     return false;
 }
-
-// bool User::processPayment(User &requester, Request request) {
-//     // double rentalAmount = calculateRentalAmount(request);
-//     int bikeIDtoRent = request.getMotorbikeID();
-
-//     if (requester.getCreditPoint() >= rentalAmount) {
-//         double newRequesterCredit = requester.getCreditPoint() - rentalAmount;
-//         requester.setCreditPoint(newRequesterCredit);
-
-//         return true;
-//     } else {
-//         std::cout << "Insufficient credit to make the payment." << std::endl;
-//         return false;
-//     }
-// }
-
-// //error on request
-// double User::calculateRentalAmount(Request &request)
-// {
-    
-//     // Motorbike bikeToRent = request.getMotorbike();
-
-//     // double dailyRentalPrice = bikeToRent.getConsumingPoints();
-
-//     // string startTime = request.getTimeSlot().getStartTime();
-//     // string endTime = request.getTimeSlot().getEndTime();
-
-//     // // Convert start and end times to hours and minutes
-//     // int startHour, startMinute, endHour, endMinute;
-//     // sscanf(startTime.c_str(), "%d:%d", &startHour, &startMinute);
-//     // sscanf(endTime.c_str(), "%d:%d", &endHour, &endMinute);
-
-//     // int rentalDurationInHours = (endHour - startHour) + ((endMinute - startMinute) / 60);
-//     // if (rentalDurationInHours <= 0)
-//     // {
-//     //     // If the duration is less than or equal to 0, consider it as 1 day.
-//     //     rentalDurationInHours = 24;
-//     // }
-
-//     // // Calculate the rental amount based on the daily rate
-//     // double rentalAmount = rentalDurationInHours * dailyRentalPrice;
-
-//     // return rentalAmount;
-// }
-
 void User::acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo)
 {
     double price = OwnedMotorbikes[0].getConsumingPoints();
 
     double rentalAmount = 0;
-    for(auto& re: requests){
-        if(re.getRequester() == requester->getUserName()){
-            rentalAmount = price * (double) stoi(re.getTimeSlot().getEndTime());
+    for (auto &re : requests)
+    {
+        if (re.getRequester() == requester->getUserName())
+        {
+            rentalAmount = price * (double)stoi(re.getTimeSlot().getEndTime());
             break;
         }
     }
 
-    if(rentalAmount > requester->getCreditPoint()){
+    if (rentalAmount > requester->getCreditPoint())
+    {
         cout << "Payment was not successful. Request cannot be accepted." << endl;
         return;
     }
@@ -1280,20 +1234,26 @@ void User::acceptRequest(User *requester, vector<Request> &requests, Request &re
     string startdate;
     string endDate;
     requester->setCreditPoint(requester->getCreditPoint() + rentalAmount);
-    for(auto &v : requests){
-        if(v.getRequester() == requester->getUserName()){
+    for (auto &v : requests)
+    {
+        if (v.getRequester() == requester->getUserName())
+        {
             reSta = RequestStatus::ACCEPTED;
             v.setStatus(reSta);
             startdate = v.getTimeSlot().getStartTime();
             endDate = v.getTimeSlot().getEndTime();
-        } else {
+        }
+        else
+        {
             reSta = RequestStatus::REJECTED;
             v.setStatus(reSta);
         }
     }
 
-    for(int i = 0; i < requester->getSentRequests().size(); i++){
-        if(requester->getUserName() == requester->getSentRequests()[i].getRequester()){
+    for (int i = 0; i < requester->getSentRequests().size(); i++)
+    {
+        if (requester->getUserName() == requester->getSentRequests()[i].getRequester())
+        {
             requester->getSentRequests()[i].setStatus(reSta);
             break;
         }
@@ -1302,19 +1262,10 @@ void User::acceptRequest(User *requester, vector<Request> &requests, Request &re
     TimeSlot time(startdate, endDate);
     int bikeid = requester->getOwned()[0].getMotorbikeId();
 
-    Borrow b1o= Borrow(time, requester->getUserName(), bikeid, rentalAmount, "RENTING");
+    Borrow b1o = Borrow(time, requester->getUserName(), bikeid, rentalAmount, "RENTING");
     bo.push_back(b1o);
+    cout << "Successfully accepted the request" << endl;
 }
 // void User::rejectRequest(User &requester, Request &request) {
 //     request.setStatus(RequestStatus::REJECTED);
-// }
-
-// vector<Motorbike> User::rentBikes()
-// {
-//     return vector<Motorbike>();
-// }
-
-// vector<Request> User::receiveRequest()
-// {
-//     return vector<Request>();
 // }
