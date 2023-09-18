@@ -1133,6 +1133,29 @@ void User::viewReviews(vector<Motorbike> &bikes)
         }
         cout << "Invalid ID format! Please enter a valid ID from the list!\n";
     }
+}
+
+void User::viewMyReviews(vector<UserRating> &userRatings)
+{
+    system("cls");
+
+    cout << left << setw(12) << "Score" << setw(10) << "Comment" << endl;
+    cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+    int count = 0;
+ 
+        for (auto &userRating : userRatings)
+        {
+            if (userRating.getUsername() == this->getUserName())
+            {
+                cout << left << setw(12) << userRating.getScore()
+                     << setw(10) << userRating.getComment() << endl;
+                    count++;
+            }
+        }
+    if (count == 0) { // no user ratings for the corresponding user
+        cout << "You don't have any reviews yet!\n";
+    }
+    cout << "\nEnter to exit." << endl;
 };
 
 bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)

@@ -68,6 +68,7 @@ public:
     void viewSentRequests();
     void viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes);
     void viewReviews(vector<Motorbike> &bikes);
+    void viewMyReviews(vector<UserRating> &userRatings);
 
     // request methods
     void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
