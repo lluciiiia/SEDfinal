@@ -613,8 +613,8 @@ void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bike
 {
     string choice;
     bool dashboard= false;
-    while(!dashboard){
-        if(borrow.empty()){
+    if(borrow.empty()){
+            cout<<"Hello, "<< user.getUsername()<< "\n";
             cout<< "You are not renting any motorbikes yet\n";
         }else{
             for(auto &bo:borrow){
@@ -627,6 +627,8 @@ void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bike
                     }
                 }
             }
+    while(!dashboard){
+        
             cout<< "1.Return motorbike. \n";
             cout<< "2.Quit. \n";
             cout<< "Enter your choice: ";

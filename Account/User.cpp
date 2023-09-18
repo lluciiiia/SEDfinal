@@ -391,11 +391,14 @@ bool User::addBike(vector<Motorbike> &bikes)
 void User::removeBike(vector<Motorbike> &bikes)
 {
     system("cls");
-    vector<Motorbike> OwnedMotorbikes = this->getOwned();
-
-    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
-    cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
-    for (auto &bike : OwnedMotorbikes)
+    
+   string idToRemove;
+    
+    while (true)
+    {
+        cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
+        cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
+    for (auto &bike : this->OwnedMotorbikes)
     {
         string cityStr = cityToString(bike.getCity());
 
@@ -410,27 +413,40 @@ void User::removeBike(vector<Motorbike> &bikes)
              << setw(8) << cityStr
              << endl;
     }
+        cout<< "You can only add only one bike. \n";
+        cout<<"1.Add a bike: \n";
+        cout<<"2.Delete your bike \n";
+        cout<<"3.Exit";
+        cout << "\nEnter your choice: ";
+        getline(cin,idToRemove);
 
-    int idToRemove;
-    bool removed = false;
-    while (!removed)
-    {
-        cout << "\nEnter the id of the bike to remove: ";
-        cin >> idToRemove;
-
-        for (int i = 0; i < bikes.size(); i++)
-        {
-            if (bikes[i].getMotorbikeId() == idToRemove)
+        if(idToRemove == "1"){
+            this->addBike(bikes);
+        }else if(idToRemove == "2"){
+            int bikeId;
+            for(int i=0; i <1; i++){
+                bikeId = this->OwnedMotorbikes[i].getMotorbikeId();
+            }
+    
+            for (int i = 0; i < bikes.size(); i++)
             {
+                if (bikes[i].getMotorbikeId() == bikeId)
+                {
                 // Remove the bike from the vector
                 bikes.erase(bikes.begin() + i);
                 cout << "Remove bike successfully!\n";
-                removed = true;
-
+                OwnedMotorbikes.clear();
+    
                 // TODO: update the bikes so the user can see the updated list
+                }
             }
+        }else if(idToRemove == "3"){
+            break;
+        }else{
+            cout<< "Invalid input. Please try again! \n";
         }
-        cout << "Bike with ID " << idToRemove << " not found.\n";
+
+        
     }
 };
 
@@ -1033,8 +1049,9 @@ void User::returnBikes(User &user,vector<User> &userList, vector<Request> &re, v
         bool confirmation=false;
         for(int i=0; i<bo.size(); i++){
             if(bo[i].getMotorbikeID()== choice && user.getUsername() == bo[i].getUsername()){
-                string decision;
-                switch(true){
+                
+                while(true){
+                    string decision;
                     cout<< "Are you sure that you want to return it right now?(Y/N) ";
                     getline(cin,decision);
                     if(decision == "Y" ||decision == "y" ){
@@ -1055,7 +1072,7 @@ void User::returnBikes(User &user,vector<User> &userList, vector<Request> &re, v
         if(confirmation){
             for(int i=0; i<bo.size(); i++){
                 if(bo[i].getMotorbikeID()== choice && user.getUsername() == bo[i].getUsername()){
-                    bo.erase(bo.begin()+1);
+                    bo.erase(bo.begin()+i);
                     cout<<"Return successfully! \n";
                 }else{
                     cout<< "Return fail! \n";
