@@ -66,11 +66,8 @@ public:
     void setAvailableTimeSlot(TimeSlot newTimeSlot);
     // Request / Availability / Credit Points
     void addRequest(const Request &request);
-    void viewRequest(const Request &request);
     void viewRequests();
     bool checkAvailability(bool availability);
-    void reserveTimeSlot(const TimeSlot &timeSlot);
-    void addCreditPoints(double &points);
 
     // to string
     string toStringMotorBike();

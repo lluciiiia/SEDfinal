@@ -700,9 +700,6 @@ bool User::registerAccount(vector<User> &userList)
     return false;
 }
 
-// end register
-
-// Rate user and motorbike
 void User::rateUserAndMotorbike(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, string &userNameToRate, int &bikeIDToRate)
 {
     // Variables for score and comment
@@ -1133,6 +1130,7 @@ void User::viewReviews(vector<Motorbike> &bikes)
             if (IDtoView == bikeID)
             {
                 vector<MotorbikeRating> bikeRatings = bike.getRatings();
+                // TODO: owner's rating
 
                 if (bikeRatings.empty())
                 {
@@ -1305,14 +1303,4 @@ void User::acceptRequest(User &requester, vector<Request> &requests, Request &re
 }
 // void User::rejectRequest(User &requester, Request &request) {
 //     request.setStatus(RequestStatus::REJECTED);
-// }
-
-// vector<Motorbike> User::rentBikes()
-// {
-//     return vector<Motorbike>();
-// }
-
-// vector<Request> User::receiveRequest()
-// {
-//     return vector<Request>();
 // }

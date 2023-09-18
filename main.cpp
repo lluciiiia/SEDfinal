@@ -5,9 +5,6 @@
 #include "Account/Account.h"
 #include "City.h"
 #include "Motorbike.h"
-// #include "Rating.h"
-// #include "Request.h"
-// #include "TimeSlot.h"
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
@@ -97,7 +94,6 @@ int main()
         }
         case 3:
         {
-            // check if the login is admin account
             cout << "Logging in as Admin \n";
             cout << "Your are on Admin Mode.\n";
 
@@ -254,15 +250,6 @@ void user_dashboard(vector<UserRating> &userRatings, vector<MotorbikeRating> &bi
             displayUserInfo(user, userList);
             break;
         case 2:
-
-            // if (user.addBike(bikes))
-            // {
-            //     cout << "Add bike succesfully ! \n";
-            // }
-            // else
-            // {
-            //     cout << "Failed to add bike \n";
-            // }
             user.removeBike(bikes);
             break;
         case 3:
@@ -270,13 +257,11 @@ void user_dashboard(vector<UserRating> &userRatings, vector<MotorbikeRating> &bi
             break;
         case 4:
             viewBikeDash(user, bikes, request, userList);
-            // TODO: in the bike dash / view review and requestToRent
             break;
         case 5:
             user.viewRequestsDash(userList);
             break;
         case 6:
-            // TODO: return motorbike + review
             returnDashBoard(userRatings, bikeRatings, user,userList,bikes,request,borrow);
             break;
         case 7:
@@ -307,8 +292,7 @@ void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userL
 
         // Display the admin dashboard menu
         cout << "|==========================|\n";
-        cout << "|      Admin Dashboard     |  Hello, Admin!"
-             << "\n";
+        cout << "|      Admin Dashboard     |  Hello, Admin!"<< "\n";
         cout << "|==========================|\n";
         cout << "| 1. View all users        |\n";
         cout << "| 2. View all motorbikes   |\n";
@@ -396,7 +380,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
         cout << "\n\n";
         cout << "1. Search for all available suitable motorbikes for a particular city. \n";
         cout << "2. Rent a bike. \n";
-        cout << "3. View a review of a bike. \n";
+        cout << "3. View a review of a bike and its owner. \n";
         cout << "4. Exit\n";
         cout << "Enter your choice(1-4): ";
         cin >> choice;
