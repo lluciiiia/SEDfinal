@@ -234,15 +234,6 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             displayUserInfo(user, userList);
             break;
         case 2:
-
-            // if (user.addBike(bikes))
-            // {
-            //     cout << "Add bike succesfully ! \n";
-            // }
-            // else
-            // {
-            //     cout << "Failed to add bike \n";
-            // }
             user.removeBike(bikes);
             break;
         case 3:
@@ -512,10 +503,10 @@ void searchEngine(User &user, vector<Motorbike> &bikes)
     int choice;
     bool dashboardRun = false;
 
-    string desiredCity = ""; // default value
+    string desiredCity = ""; 
     City city;
-    double userPoints = user.getCreditPoint(); // default minimum value
-    double userRating = user.getRating();      // default minimum value
+    double userPoints = user.getCreditPoint(); 
+    double userRating = user.getRating();      
 
     while (true)
     {
