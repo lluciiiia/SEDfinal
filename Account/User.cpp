@@ -700,22 +700,11 @@ bool User::registerAccount(vector<User> &userList)
     return false;
 }
 
-// end register
-
-// Rate user and motorbike
-void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
+void User::rateBike(Motorbike &ratedMotorbike)
 {
     // Variables for score and comment
-    float userScore = 0, motorbikeScore = 0;
-    string userComment = "", motorbikeComment = "";
-
-    // Rate user
-    cout << "Enter score for user: ";
-    cin >> userScore;
-    cin.ignore();
-    cout << "Enter comment for user: ";
-    getline(cin, userComment);
-    cout << endl;
+    float motorbikeScore = 0;
+    string motorbikeComment = "";
 
     // Rate motorbike
     cout << "Enter score for motorbike: ";
@@ -725,12 +714,27 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
     getline(cin, motorbikeComment);
     cout << endl;
 
+    MotorbikeRating motorbikeRate(ratedMotorbike.getMotorbikeId(), motorbikeScore, motorbikeComment);
+    ratedMotorbike.getRatings().push_back(motorbikeRate);
+}
+
+void User::rateRenter(User &ratedUser)
+{
+    // Variables for score and comment
+    float userScore = 0;
+    string userComment = "";
+
+    // Rate user
+    cout << "Enter score for user: ";
+    cin >> userScore;
+    cin.ignore();
+    cout << "Enter comment for user: ";
+    getline(cin, userComment);
+    cout << endl;
+
     // Adding rating to list
     UserRating userRate(ratedUser.getUserName(), userScore, userComment);
     ratedUser.userRatings.push_back(userRate);
-
-    MotorbikeRating motorbikeRate(ratedMotorbike.getMotorbikeId(), motorbikeScore, motorbikeComment);
-    ratedMotorbike.getRatings().push_back(motorbikeRate);
 }
 
 void User::searchAvailableMotorbikes() {}

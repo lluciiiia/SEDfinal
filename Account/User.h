@@ -77,7 +77,8 @@ public:
 
     // return and review methods
     void returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes);
-    void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
+    void rateBike(Motorbike &ratedMotorbike);
+    void rateRenter(User &ratedUser);
 
     // owned motorbike methods
     bool addBike(vector<Motorbike> &bikes);    // = list
