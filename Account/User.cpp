@@ -391,62 +391,68 @@ bool User::addBike(vector<Motorbike> &bikes)
 void User::removeBike(vector<Motorbike> &bikes)
 {
     system("cls");
-    
-   string idToRemove;
-    
+
+    string idToRemove;
+
     while (true)
     {
         cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
         cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
-    for (auto &bike : this->OwnedMotorbikes)
-    {
-        string cityStr = cityToString(bike.getCity());
+        for (auto &bike : this->OwnedMotorbikes)
+        {
+            string cityStr = cityToString(bike.getCity());
 
-        cout << left << setw(12) << bike.getMotorbikeId()
-             << setw(20) << bike.getModel()
-             << setw(10) << bike.getColor()
-             << setw(10) << bike.getEngine()
-             << setw(15) << bike.getOwner()
-             << setw(12) << bike.getYear()
-             << setw(20) << bike.getDes()
-             << setw(8) << bike.getRating()
-             << setw(8) << cityStr
-             << endl;
-    }
-        cout<< "You can only add only one bike. \n";
-        cout<<"1.Add a bike: \n";
-        cout<<"2.Delete your bike \n";
-        cout<<"3.Exit";
+            cout << left << setw(12) << bike.getMotorbikeId()
+                 << setw(20) << bike.getModel()
+                 << setw(10) << bike.getColor()
+                 << setw(10) << bike.getEngine()
+                 << setw(15) << bike.getOwner()
+                 << setw(12) << bike.getYear()
+                 << setw(20) << bike.getDes()
+                 << setw(8) << bike.getRating()
+                 << setw(8) << cityStr
+                 << endl;
+        }
+        cout << "You can only add only one bike. \n";
+        cout << "1.Add a bike: \n";
+        cout << "2.Delete your bike \n";
+        cout << "3.Exit";
         cout << "\nEnter your choice: ";
-        getline(cin,idToRemove);
+        getline(cin, idToRemove);
 
-        if(idToRemove == "1"){
+        if (idToRemove == "1")
+        {
             this->addBike(bikes);
-        }else if(idToRemove == "2"){
+        }
+        else if (idToRemove == "2")
+        {
             int bikeId;
-            for(int i=0; i <1; i++){
+            for (int i = 0; i < 1; i++)
+            {
                 bikeId = this->OwnedMotorbikes[i].getMotorbikeId();
             }
-    
+
             for (int i = 0; i < bikes.size(); i++)
             {
                 if (bikes[i].getMotorbikeId() == bikeId)
                 {
-                // Remove the bike from the vector
-                bikes.erase(bikes.begin() + i);
-                cout << "Remove bike successfully!\n";
-                OwnedMotorbikes.clear();
-    
-                // TODO: update the bikes so the user can see the updated list
+                    // Remove the bike from the vector
+                    bikes.erase(bikes.begin() + i);
+                    cout << "Remove bike successfully!\n";
+                    OwnedMotorbikes.clear();
+
+                    // TODO: update the bikes so the user can see the updated list
                 }
             }
-        }else if(idToRemove == "3"){
-            break;
-        }else{
-            cout<< "Invalid input. Please try again! \n";
         }
-
-        
+        else if (idToRemove == "3")
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input. Please try again! \n";
+        }
     }
 };
 
@@ -740,7 +746,6 @@ void User::setCreditPoint(double credit)
     this->creditPoint = credit;
 }
 
-
 // TODO: Add timeslot feature (Duy: I'm thinking how to implement it into this)
 void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
 {
@@ -778,7 +783,6 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                  << endl;
         }
     }
-    // TODO: What is this
 
     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     while (true)
@@ -888,7 +892,7 @@ void User::viewSentRequests()
     }
     else
     {
-        cout << left << setw(12) << "Requester" << setw(20) << "MotorbikeID" << setw(10) << "Time Slot" << setw(10) << "Request Status" << setw(15) << endl;
+        cout << left << setw(12) << "Requester" << setw(20) << "MotorbikeID" << setw(15) << "Time Slot" << setw(10) << "Status" << endl;
         cout << setfill('-') << setw(60) << "-" << setfill(' ') << endl;
 
         for (const Request &request : this->sentRequests)
@@ -897,9 +901,9 @@ void User::viewSentRequests()
             {
                 cout << left << setw(12) << request.getRequester()
                      << setw(20) << request.getMotorbikeID()
-                     << setw(10) << "Time Slot: " << request.getTimeSlot().getStartTime() << " - " << request.getTimeSlot().getEndTime() << "\n";
+                     << request.getTimeSlot().getStartTime() << " + " << request.getTimeSlot().getEndTime() << "days";
                 std::string statusStr = statusToString(request.getStatus());
-                cout << left << setw(10) << "Status: " << statusStr << std::endl;
+                cout << left << "   " << statusStr << std::endl;
             }
         }
     }
@@ -925,16 +929,21 @@ void User::viewBikeRequests(vector<User> &userList)
              << endl;
     }
     // choose the motorbike id
-    int IDtoView;
+    string IDtoView;
     bool foundMotorbike = false;
     while (!foundMotorbike)
     {
-        cout << "Enter a motorbike ID to view: ";
+        cout << "Enter a motorbike ID to view (Q to quit): ";
         cin >> IDtoView;
+        if (IDtoView == "Q" || IDtoView == "q")
+        {
+            foundMotorbike = true;
+            break;
+        }
         for (auto &bike : OwnedMotorbikes)
         {
             int bikeID = bike.getMotorbikeId();
-            if (IDtoView == bikeID)
+            if (IDtoView == __STRINGIFY(bikeID))
             {
                 vector<Request> bikeRequests = bike.getRequests();
 
@@ -948,18 +957,15 @@ void User::viewBikeRequests(vector<User> &userList)
                     cout << left << setw(12) << "Request ID" << setw(20) << "Requester" << setw(10) << "TimeSlot" << setw(20) << "Status" << endl;
                     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
 
-                    // for (const Request &bikeRequest : bikeRequests)
-                    // {
                     for (int i = 0; i < bikeRequests.size(); i++)
                     {
                         Request &bikeRequest = bikeRequests[i];
                         cout << left << setw(12) << i + 1
                              << setw(20) << bikeRequest.getRequester()
-                             << setw(10) << bikeRequest.getTimeSlot().getStartTime()
-                             << " - " << bikeRequest.getTimeSlot().getEndTime() << "\n";
+                             << bikeRequest.getTimeSlot().getStartTime()
+                             << " + " << bikeRequest.getTimeSlot().getEndTime() << "days";
                         string statusStr = statusToString(bikeRequest.getStatus());
-                        cout << left << setw(10) << statusStr
-                             << endl;
+                        cout << left << "   " << statusStr << std::endl;
                     }
                 }
                 // choose a request (i-1) from the request list -> accept / reject
@@ -984,7 +990,7 @@ void User::viewBikeRequests(vector<User> &userList)
                                     requester = user;
                                 }
 
-                                cout << "Enter 1 to accept, 2 to reject\n";
+                                cout << "Enter 1 to accept, 2 to reject, 3 to quit\n";
                                 int choice;
                                 cin >> choice;
                                 cin.ignore();
@@ -996,6 +1002,9 @@ void User::viewBikeRequests(vector<User> &userList)
                                 case 2:
                                     // TODO
                                     // this->rejectRequest(bikeRequest);
+                                    break;
+                                case 3:
+                                    foundRequest = true;
                                     break;
                                 default:
                                     cout << "Invalid input! Please enter it correctly. \n";
@@ -1023,6 +1032,7 @@ void User::viewBikeRequests(vector<User> &userList)
             break;
         }
         cout << "Invalid ID format! Please enter a valid ID from the list!\n";
+        break;
     }
 
     // choose a request (i-1) from the request list -> accept / reject
@@ -1035,57 +1045,69 @@ void User::setOwnedBikes(vector<Motorbike> &bikes)
 
 void User::setUserRating(vector<UserRating> &ratings)
 {
-    this->userRatings= ratings;
+    this->userRatings = ratings;
 }
 
-void User::returnBikes(User &user,vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes)
+void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes)
 {
     int choice;
-    bool dashboard= false;
-    while(!dashboard){
-        cout<< "Enter the motorbike you want to return: ";
-        cin>> choice;
+    bool dashboard = false;
+    while (!dashboard)
+    {
+        cout << "Enter the motorbike you want to return: ";
+        cin >> choice;
         cin.ignore();
-        bool confirmation=false;
-        for(int i=0; i<bo.size(); i++){
-            if(bo[i].getMotorbikeID()== choice && user.getUsername() == bo[i].getUsername()){
-                
-                while(true){
+        bool confirmation = false;
+        for (int i = 0; i < bo.size(); i++)
+        {
+            if (bo[i].getMotorbikeID() == choice && user.getUsername() == bo[i].getUsername())
+            {
+
+                while (true)
+                {
                     string decision;
-                    cout<< "Are you sure that you want to return it right now?(Y/N) ";
-                    getline(cin,decision);
-                    if(decision == "Y" ||decision == "y" ){
-                        confirmation= true;
-                        dashboard= true;
+                    cout << "Are you sure that you want to return it right now?(Y/N) ";
+                    getline(cin, decision);
+                    if (decision == "Y" || decision == "y")
+                    {
+                        confirmation = true;
+                        dashboard = true;
                         break;
-                    }else if(decision == "n" ||decision == "N" ){
-                        confirmation= false;
-                        dashboard= true;
+                    }
+                    else if (decision == "n" || decision == "N")
+                    {
+                        confirmation = false;
+                        dashboard = true;
                         break;
-                    }else{
-                        cout<< "Invalid input! Please enter the correct input! \n";
+                    }
+                    else
+                    {
+                        cout << "Invalid input! Please enter the correct input! \n";
                     }
                 }
-                
             }
         }
-        if(confirmation){
-            for(int i=0; i<bo.size(); i++){
-                if(bo[i].getMotorbikeID()== choice && user.getUsername() == bo[i].getUsername()){
-                    bo.erase(bo.begin()+i);
-                    cout<<"Return successfully! \n";
-                }else{
-                    cout<< "Return fail! \n";
+        if (confirmation)
+        {
+            for (int i = 0; i < bo.size(); i++)
+            {
+                if (bo[i].getMotorbikeID() == choice && user.getUsername() == bo[i].getUsername())
+                {
+                    bo.erase(bo.begin() + i);
+                    cout << "Return successfully! \n";
+                }
+                else
+                {
+                    cout << "Return fail! \n";
                 }
             }
         }
-
     }
 }
 
 void User::setSentRequest(vector<Request> &requsest)
 {
-    this->sentRequests= requsest;
+    this->sentRequests = requsest;
 }
 
 void User::viewReviews(vector<Motorbike> &bikes)
