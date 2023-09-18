@@ -943,7 +943,7 @@ void User::viewBikeRequests(vector<User> &userList)
         for (auto &bike : OwnedMotorbikes)
         {
             int bikeID = bike.getMotorbikeId();
-            if (IDtoView == __STRINGIFY(bikeID))
+            if (stoi(IDtoView) == bikeID)
             {
                 vector<Request> bikeRequests = bike.getRequests();
 
@@ -1011,7 +1011,7 @@ void User::viewBikeRequests(vector<User> &userList)
                                 }
                                 cout << "Press Enter to continue...";
                                 cin.ignore();
-                                bool foundRequest = true;
+                                foundRequest = true;
                                 break;
                             }
                         }
@@ -1019,10 +1019,12 @@ void User::viewBikeRequests(vector<User> &userList)
                         {
                             break;
                         }
-                        cout << "Invalid ID format! Please enter a valid ID from the list!\n";
+                        else
+                        {
+                            cout << "Invalid ID format! Please enter a valid ID from the list!\n";
+                        }
                     }
                 }
-                cout << "Invalid ID format! Please enter a valid ID from the list!\n";
                 foundMotorbike = true;
                 break;
             }
