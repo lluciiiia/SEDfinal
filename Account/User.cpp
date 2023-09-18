@@ -852,7 +852,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
     }
 }
 
-void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo)
+void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes)
 {
     system("cls");
     int choice;
@@ -869,7 +869,7 @@ void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo)
         this->viewSentRequests();
         break;
     case 2:
-        this->viewBikeRequests(userList, bo);
+        this->viewBikeRequests(userList, bo, bikes);
         break;
     case 3:
         dashboardRun = true;
@@ -905,7 +905,7 @@ void User::viewSentRequests()
         }
     }
 }
-void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo)
+void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes)
 {
     vector<Motorbike> ownedBikes = this->OwnedMotorbikes;
     cout << left << setw(12) << "\nMotorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Requests" << endl;
@@ -1004,7 +1004,7 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo)
                                 this->acceptRequest(requester, bikeRequests, bikeRequest, userList, bo);
                                 break;
                             case 2:
-                                // TODO: Implement rejectRequest function
+                                this->rejectRequest(bikeRequest, bikes);
                                 break;
                             case 3:
                                 foundRequest = true;
@@ -1264,6 +1264,25 @@ void User::acceptRequest(User *requester, vector<Request> &requests, Request &re
     bo.push_back(b1o);
     cout << "Successfully accepted the request!" << endl;
 }
-// void User::rejectRequest(User &requester, Request &request) {
-//     request.setStatus(RequestStatus::REJECTED);
-// }
+
+void User::rejectRequest(Request &request, vector<Motorbike> &bikes)
+{
+    // 1. change the request status to rejected
+    request.setStatus(RequestStatus::REJECTED);
+    // 2. remove the request from the request list of the motorbike
+    int bikeIdToReject = request.getMotorbikeID();
+    for (auto &bike : bikes)
+    {
+        if (bikeIdToReject == bike.getMotorbikeId())
+        {
+            vector<Request> &requestsToRemove = bike.getRequests();
+            // Find and remove the request from the vector
+            requestsToRemove.erase(
+                remove(requestsToRemove.begin(), requestsToRemove.end(), request),
+                requestsToRemove.end());
+            cout << "Successfully rejected the request!" << endl;
+            return;
+        }
+    }
+    cout << "Failed to reject the request." << endl;
+}

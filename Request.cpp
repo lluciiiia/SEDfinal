@@ -86,3 +86,13 @@ void Request::showInfo()
     cout << "Request Status: " << __STRINGIFY(status) << "\n";
     // timeSlot.showInfo();
 };
+
+bool Request::operator==(const Request& other) const
+{
+    return this->requester == other.requester &&
+           this->status == other.status &&
+           this->timeSlot == other.timeSlot && 
+           this->motorbikeID == other.motorbikeID;
+}
+
+

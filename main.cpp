@@ -5,9 +5,6 @@
 #include "Account/Account.h"
 #include "City.h"
 #include "Motorbike.h"
-// #include "Rating.h"
-// #include "Request.h"
-// #include "TimeSlot.h"
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
@@ -97,7 +94,6 @@ int main()
         }
         case 3:
         {
-            // check if the login is admin account
             cout << "Logging in as Admin \n";
             cout << "Your are on Admin Mode.\n";
 
@@ -256,7 +252,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             viewBikeDash(user, bikes, request, userList);
             break;
         case 5:
-            user.viewRequestsDash(userList, borrow);
+            user.viewRequestsDash(userList, borrow, bikes);
             break;
         case 6:
             reTurnDashboard(user, userList, bikes, request, borrow);

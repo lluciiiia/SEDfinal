@@ -31,6 +31,7 @@ public:
     void setTimeSlot(TimeSlot timeSlot);
     string requestToString();
     void showInfo();
+    bool operator==(const Request& other) const;
 };
 
 
