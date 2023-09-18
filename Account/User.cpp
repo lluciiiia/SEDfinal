@@ -456,12 +456,6 @@ void User::removeBike(vector<Motorbike> &bikes)
     }
 };
 
-// TODO: Do we need this?
-void User::addMotorInnitial(Motorbike motor)
-{
-    OwnedMotorbikes.push_back(motor);
-}
-
 bool User::registerAccount(vector<User> &userList)
 {
     system("cls");

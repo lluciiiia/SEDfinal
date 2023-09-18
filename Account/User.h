@@ -38,6 +38,7 @@ public:
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city, vector<Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
 
+    // getters
     string getUserName();
     string getIdType();
     string getIdNum();
@@ -51,29 +52,36 @@ public:
     vector<Motorbike> &getOwned();
     vector<Request> &getSentRequests();
 
+    // setters
+    void setOwnedBikes(vector<Motorbike> &bikes);
+    void setUserRating(vector<UserRating> &ratings);
+    void setSentRequest(vector<Request> &requsest);
+    void setCreditPoint(double credit);
+
+    // account methods
     string toStringAccount();
     friend bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes);
     bool registerAccount(vector<User> &userList);
+
+    // view methods
     void searchAvailableMotorbikes();
-    void setCreditPoint(double credit);
-    void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
     void viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes);
     void viewSentRequests();
     void viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes);
-    bool processPayment(User &requester, Request request);
-    double calculateRentalAmount(Request &request);
+    void viewReviews(vector<Motorbike> &bikes);
+
+    // request methods
+    void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
     void acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo);
     void rejectRequest(Request &request, vector<Motorbike> &bikes);
-    void addRequest(const Request &request);
-    void setOwnedBikes(vector<Motorbike> &bikes);
-    void setUserRating(vector<UserRating> &ratings);
+
+    // return and review methods
     void returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes);
-    void setSentRequest(vector<Request> &requsest);
-    void viewReviews(vector<Motorbike> &bikes);
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
+
+    // owned motorbike methods
     bool addBike(vector<Motorbike> &bikes);    // = list
     void removeBike(vector<Motorbike> &bikes); // = unlist
-    void addMotorInnitial(Motorbike motor);
 
     friend class Admin;
 };
