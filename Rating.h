@@ -5,35 +5,42 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 class Rating
 {
 private:
     float score;
-    std::string comment;
+    string comment;
 
 public:
     // Constructors
     Rating();
-    Rating(float score, std::string comment);
+    Rating(float score, string comment);
     // Getters
-    float getScore() const;
-    std::string getComment() const;
+    float &getScore();
+    string getComment() const;
     // Setters
     void setScore(float score);
-    void setComment(std::string comment);
+    void setComment(string comment);
 };
 
 class UserRating : public Rating
 {
 private:
-    std::string username;
+    string username;
 
 public:
     // Constructors
     UserRating();
-    UserRating(std::string username, float score, std::string comment);
+    UserRating(string username, float score, string comment);
     // Getter
-    std::string getUsername() const;
+    string getUsername() const;
+    string uRatingtoString(){
+        return username+";"+
+                to_string(Rating::getScore())+";"+
+                Rating::getComment();
+    }
 };
 
 class MotorbikeRating : public Rating
@@ -44,11 +51,17 @@ private:
 public:
     // Constructors
     MotorbikeRating();
-    MotorbikeRating(int bikeID, float score, std::string comment);
+    MotorbikeRating(int bikeID, float score, string comment);
     // Getter
     int getBikeId() const;
+
     // Setter
     void setBikeId(int bikeID);
+    string mRatingtoString(){
+        return to_string(bikeID)+";"+
+                to_string(Rating::getScore())+";"+
+                Rating::getComment();
+    }
 };
 
 #endif

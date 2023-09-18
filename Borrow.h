@@ -6,28 +6,31 @@
 
 using namespace std;
 
-class Borrow {
+class Borrow
+{
 private:
     TimeSlot timeSlot;
     string username;
-    string motorbikeId;
+    int motorbikeId;
     double price;
+    string borrowSta;
 
 public:
-    Borrow(TimeSlot timeSlot, string username, string motorbikeId, double price);
-    
-    //getters
+    Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price, string status);
+
+    // getters
     TimeSlot getTimeSlot() const;
     string getUsername() const;
-    string getMotorbikeID() const;
+    int getMotorbikeID() const;
     double getPrice() const;
 
-    //setters
+    // setters
     void setTimeSlot(TimeSlot timeSlot);
     void setUsername(string username);
     void setMotorbikeId(string motorbikeId);
     void setPrice(double price);
+    void setBorrowStatus(string status);
+    string borrowtoString();
 };
 
 #endif
-

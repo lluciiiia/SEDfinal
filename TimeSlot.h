@@ -24,6 +24,8 @@ public:
     void showInfo();
     bool isValidDateFormat(const std::string& date) const;
     bool isDateWithinTimeSlot(const string& date) const;
+
+    bool operator==(const TimeSlot& other) const;
 };
 
 #endif

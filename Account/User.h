@@ -11,9 +11,7 @@
 #include "User.h"
 #include "../Request.h"
 #include "../RequestStatus.h"
-#include "User.h"
-#include "../Request.h"
-#include "../RequestStatus.h"
+#include "../Borrow.h"
 
 class Motorbike;
 class Request;
@@ -40,11 +38,13 @@ public:
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city, vector<Motorbike> owm);
     User(string username, string password, string fullName, string phoneNumber, string IDtype, string idNum, string licenseNumber, string licenseExpiryDate, double creditPoint, City city);
 
-        string getUserName();
+    // getters
+    string getUserName();
     string getIdType();
     string getIdNum();
     string getLicenseNum();
     double getRating();
+    vector<UserRating> &getRatings();
     string getExDate();
     double getCreditPoint();
     City getCity();
@@ -52,36 +52,38 @@ public:
     vector<Motorbike> &getOwned();
     vector<Request> &getSentRequests();
 
+    // setters
+    void setOwnedBikes(vector<Motorbike> &bikes);
+    void setUserRating(vector<UserRating> &ratings);
+    void setSentRequest(vector<Request> &requsest);
+    void setCreditPoint(double credit);
+
+    // account methods
     string toStringAccount();
     friend bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes);
     bool registerAccount(vector<User> &userList);
-    void searchAvailableMotorbikes();
-    void setCreditPoint(double credit);
-    void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
-    void viewRequestsDash();
-    void viewSentRequests();
-    void viewBikeRequests();
 
-    void setRequestSend(vector <Request> &re);
-    void setRentingBikes(vector <Motorbike> &bikes);
-    void setRatingList(vector <UserRating> &ratings);
-    bool processPayment(User &requester, Request request);
-    double calculateRentalAmount(Request &request);
-    void acceptRequest(User &requester, vector<Request> &requests, Request &request, vector<User> &users);
-    void addRequest(const Request &request);
-    // void acceptRequest(vector<Request> &requests, Request request, s);
-    void setOwnedBikes(vector <Motorbike> &bikes);
-    void viewReviews(vector<Motorbike> &bikes);
-    void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);
+    // view methods
+    void viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings);
+    void viewSentRequests();
+    void viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings);
+    void viewBikeReviews(vector<Motorbike> &bikes);
+    void viewRequesterReviews(string requesterName, vector<UserRating> &userRatings);
+    void viewMyReviews(vector<UserRating> &userRatings);
+
+    // request methods
+    void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
+    void acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo);
+    void rejectRequest(Request &request, vector<Motorbike> &bikes);
+
+    // return and review methods
+    void returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes);
+    void rateBike(Motorbike &ratedMotorbike);
+    void rateRenter(User &ratedUser);
+
+    // owned motorbike methods
     bool addBike(vector<Motorbike> &bikes);    // = list
     void removeBike(vector<Motorbike> &bikes); // = unlist
-    void addMotorInnitial(Motorbike motor);
-    // bool login(User &cus); // TODO: do we need this?
-    // bool login(const string &username,
-    //            const string &pass,
-    //            vector<User> &userList); // TODO: do we need this?
-    // vector <Motorbike> rentBikes();
-    // vector <Request> receiveRequest();
 
     friend class Admin;
 };

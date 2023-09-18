@@ -61,4 +61,12 @@ bool TimeSlot::isValidDateFormat(const std::string& date) const {
   return std::regex_match(date, dateRegex);
 }
 
+bool TimeSlot::operator==(const TimeSlot& other) const
+{
+    return this->startTime == other.startTime &&
+           this->endTime == other.endTime;
+}
+
+
+
 
