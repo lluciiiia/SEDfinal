@@ -11,6 +11,7 @@
 #include "User.h"
 #include "../Request.h"
 #include "../RequestStatus.h"
+#include "../Borrow.h"
 
 
 class Motorbike;
@@ -66,6 +67,7 @@ public:
     void addRequest(const Request &request);
     void setOwnedBikes(vector <Motorbike> &bikes);
     void setUserRating(vector<UserRating> &ratings);
+    void returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo,vector<Motorbike> &bikes);
     void setSentRequest(vector<Request> &requsest);
     void viewReviews(vector<Motorbike> &bikes);
     void rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike);

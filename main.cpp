@@ -24,7 +24,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
 void displayUserInfo(User &user, vector<User> &userList);
 void addCredit(User &user, vector<User> &userList);
 void searchEngine(User &user, vector<Motorbike> &bikes);
-void reTurnDashboard(vector<User> &user, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow);
+void reTurnDashboard( User &user,vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow);
 int main()
 {
     User user;
@@ -277,7 +277,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             break;
         case 6:
             // TODO: return motorbike + review
-            reTurnDashboard(userList,bikes,request,borrow);
+            reTurnDashboard(user,userList,bikes,request,borrow);
             break;
         case 7:
             user = User();
@@ -609,7 +609,7 @@ void searchEngine(User &user, vector<Motorbike> &bikes)
     }
 }
 
-void reTurnDashboard(vector<User> &user, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow)
+void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow)
 {
     string choice;
     bool dashboard= false;
@@ -620,8 +620,8 @@ void reTurnDashboard(vector<User> &user, vector<Motorbike> &bikes, vector<Reques
             for(auto &bo:borrow){
                 cout<< "Your motorbike renting list: \n";
                 for(auto &v: bikes){
-                    if(bo.getMotorbikeID()== v.getMotorbikeId()){
-                        cout<<v.getModel()<< "\n";
+                    if(bo.getMotorbikeID()== v.getMotorbikeId() && user.getUsername()== bo.getUsername()){
+                        cout<<"Bike name: " <<v.getModel()<< "Bike id is "<< v.getMotorbikeId()<<"\n";
                         cout<< "You must return in "<< bo.getTimeSlot().getEndTime()<<"\n";
 
                     }

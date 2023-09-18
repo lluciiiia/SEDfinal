@@ -1022,6 +1022,50 @@ void User::setUserRating(vector<UserRating> &ratings)
     this->userRatings= ratings;
 }
 
+void User::returnBikes(User &user,vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes)
+{
+    int choice;
+    bool dashboard= false;
+    while(!dashboard){
+        cout<< "Enter the motorbike you want to return: ";
+        cin>> choice;
+        cin.ignore();
+        bool confirmation=false;
+        for(int i=0; i<bo.size(); i++){
+            if(bo[i].getMotorbikeID()== choice && user.getUsername() == bo[i].getUsername()){
+                string decision;
+                switch(true){
+                    cout<< "Are you sure that you want to return it right now?(Y/N) ";
+                    getline(cin,decision);
+                    if(decision == "Y" ||decision == "y" ){
+                        confirmation= true;
+                        dashboard= true;
+                        break;
+                    }else if(decision == "n" ||decision == "N" ){
+                        confirmation= false;
+                        dashboard= true;
+                        break;
+                    }else{
+                        cout<< "Invalid input! Please enter the correct input! \n";
+                    }
+                }
+                
+            }
+        }
+        if(confirmation){
+            for(int i=0; i<bo.size(); i++){
+                if(bo[i].getMotorbikeID()== choice && user.getUsername() == bo[i].getUsername()){
+                    bo.erase(bo.begin()+1);
+                    cout<<"Return successfully! \n";
+                }else{
+                    cout<< "Return fail! \n";
+                }
+            }
+        }
+
+    }
+}
+
 void User::setSentRequest(vector<Request> &requsest)
 {
     this->sentRequests= requsest;
