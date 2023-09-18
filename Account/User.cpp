@@ -1130,8 +1130,7 @@ void User::viewReviews(vector<Motorbike> &bikes)
             if (IDtoView == bikeID)
             {
                 vector<MotorbikeRating> bikeRatings = bike.getRatings();
-                // TODO: owner's rating
-
+                
                 if (bikeRatings.empty())
                 {
                     std::cout << "The motorbike doesn't have reviews yet." << std::endl;
