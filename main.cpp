@@ -613,7 +613,13 @@ void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bike
 {
     string choice;
     bool dashboard= false;
-    if(borrow.empty()){
+    bool found= false;
+    for(auto& bo : borrow){
+        if(bo.getUsername()== user.getUsername()){
+            found =true;
+        }
+    }
+    if(!found){
             cout<<"Hello, "<< user.getUsername()<< "\n";
             cout<< "You are not renting any motorbikes yet\n";
         }else{
@@ -634,8 +640,9 @@ void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bike
             cout<< "Enter your choice: ";
             getline(cin,choice);
             if(choice== "1"){
-                
+                user.returnBikes(user,userList,request, borrow,bikes);
             }else if(choice == "2"){
+            
                 dashboard= true;
             }
         }
