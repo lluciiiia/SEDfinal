@@ -45,7 +45,7 @@ int main()
     cout << "MOTORBIKE RENTAL APPLICATION."
          << "\n\n";
 
-    cout << "Instructor: Dr. Ling Hou Chong"
+    cout << "Instructor: Dr. Ling Huo-Chong"
          << "\n";
     cout << "Group: 3"
          << "\n";
@@ -55,7 +55,7 @@ int main()
          << "\n";
     cout << "s3978268, Student Name: Nguyen Hoang Duy"
          << "\n";
-    cout << "s3929218, Student Name: Huynh Tan Phat"
+    cout << "s3866724, Student Name: Minsung Kim"
          << "\n\n\n";
 
     bool exitProgram = false;
@@ -611,7 +611,13 @@ void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bike
 {
     string choice;
     bool dashboard= false;
-    if(borrow.empty()){
+    bool found= false;
+    for(auto& bo : borrow){
+        if(bo.getUsername()== user.getUsername()){
+            found =true;
+        }
+    }
+    if(!found){
             cout<<"Hello, "<< user.getUsername()<< "\n";
             cout<< "You are not renting any motorbikes yet\n";
         }else{
@@ -632,8 +638,9 @@ void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bike
             cout<< "Enter your choice: ";
             getline(cin,choice);
             if(choice== "1"){
-                
+                user.returnBikes(user,userList,request, borrow,bikes);
             }else if(choice == "2"){
+            
                 dashboard= true;
             }
         }
