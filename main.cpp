@@ -5,9 +5,6 @@
 #include "Account/Account.h"
 #include "City.h"
 #include "Motorbike.h"
-// #include "Rating.h"
-// #include "Request.h"
-// #include "TimeSlot.h"
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
@@ -17,14 +14,14 @@
 using namespace std;
 
 void guest_dashboard(vector<Motorbike> &bikes);
-void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &requests,vector<Borrow> &borrow);
+void user_dashboard(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &requests, vector<Borrow> &borrow);
 void admin_dashboard(Admin &admin, vector<Motorbike> &bikes, vector<User> &userList);
 void viewGuestBikeDash(vector<Motorbike> &bikes, string city);
 void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &requests, vector<User> &userList);
 void displayUserInfo(User &user, vector<User> &userList);
 void addCredit(User &user, vector<User> &userList);
 void searchEngine(User &user, vector<Motorbike> &bikes);
-void reTurnDashboard( User &user,vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow);
+void returnDashBoard(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, User &user, vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow);
 int main()
 {
     User user;
@@ -32,7 +29,7 @@ int main()
     saveToFile fileSave;
     vector<UserRating> uRatings;
     vector<MotorbikeRating> mRatings;
-    vector<Borrow> borrowList= fileSave.loadBorrow();
+    vector<Borrow> borrowList = fileSave.loadBorrow();
     fileSave.loadRating(uRatings, mRatings);
     vector<Request> requests = fileSave.loadRequest();
     vector<Motorbike> motorbikeList = fileSave.loadMotor(requests, mRatings);
@@ -86,7 +83,7 @@ int main()
             cout << "Your are logging in.\n";
             if (login(user, userList, motorbikeList))
             {
-                user_dashboard(user, motorbikeList, userList, requests,borrowList);
+                user_dashboard(uRatings, mRatings, user, motorbikeList, userList, requests, borrowList);
                 system("cls");
             }
             else
@@ -97,7 +94,6 @@ int main()
         }
         case 3:
         {
-            // check if the login is admin account
             cout << "Logging in as Admin \n";
             cout << "Your are on Admin Mode.\n";
 
@@ -191,7 +187,7 @@ void guest_dashboard(vector<Motorbike> &bikes)
     }
 }
 
-void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &request,vector <Borrow> &borrow)
+void user_dashboard(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, User &user, vector<Motorbike> &bikes, vector<User> &userList, vector<Request> &request, vector<Borrow> &borrow)
 {
     int choice;
     bool dashboardRun = false;
@@ -240,15 +236,6 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             displayUserInfo(user, userList);
             break;
         case 2:
-
-            // if (user.addBike(bikes))
-            // {
-            //     cout << "Add bike succesfully ! \n";
-            // }
-            // else
-            // {
-            //     cout << "Failed to add bike \n";
-            // }
             user.removeBike(bikes);
             break;
         case 3:
@@ -256,14 +243,12 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             break;
         case 4:
             viewBikeDash(user, bikes, request, userList);
-            // TODO: in the bike dash / view review and requestToRent
             break;
         case 5:
             user.viewRequestsDash(userList,borrow);
             break;
         case 6:
-            // TODO: return motorbike + review
-            reTurnDashboard(user,userList,bikes,request,borrow);
+            returnDashBoard(userRatings, bikeRatings, user, userList, bikes, request, borrow);
             break;
         case 7:
             user = User();
@@ -413,6 +398,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
 void displayUserInfo(User &user, vector<User> &userList)
 {
     system("cls");
+    system("cls");
     bool flag = false;
     int choice;
     cout << "Username: " << user.getUsername() << endl;
@@ -551,7 +537,8 @@ void searchEngine(User &user, vector<Motorbike> &bikes)
     }
 
     cout << "My credit point: " << userPoints << "\n";
-    cout << "My rating score: " << userRating << "\n";
+    cout << "My rating score: " << userRating << "\n\n";
+    cout << "Search Result, based on the city, credit point and rating" << endl;
 
     cout << left << setw(12) << "\nMotorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
@@ -598,38 +585,48 @@ void searchEngine(User &user, vector<Motorbike> &bikes)
 void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow)
 {
     string choice;
-    bool dashboard= false;
-    bool found= false;
-    for(auto& bo : borrow){
-        if(bo.getUsername()== user.getUsername()){
-            found =true;
+    bool dashboard = false;
+    bool found = false;
+    for (auto &bo : borrow)
+    {
+        if (bo.getUsername() == user.getUsername())
+        {
+            found = true;
         }
     }
-    if(!found){
-            cout<<"Hello, "<< user.getUsername()<< "\n";
-            cout<< "You are not renting any motorbikes yet\n";
-        }else{
-            for(auto &bo:borrow){
-                cout<< "Your motorbike renting list: \n";
-                for(auto &v: bikes){
-                    if(bo.getMotorbikeID()== v.getMotorbikeId() && user.getUsername()== bo.getUsername()){
-                        cout<<"Bike name: " <<v.getModel()<< "Bike id is "<< v.getMotorbikeId()<<"\n";
-                        cout<< "You must return in "<< bo.getTimeSlot().getEndTime()<<"\n";
-
-                    }
+    if (!found)
+    {
+        cout << "Hello, " << user.getUsername() << "\n";
+        cout << "You are not renting any motorbikes yet\n";
+    }
+    else
+    {
+        for (auto &bo : borrow)
+        {
+            cout << "Your motorbike renting list: \n";
+            for (auto &v : bikes)
+            {
+                if (bo.getMotorbikeID() == v.getMotorbikeId() && user.getUsername() == bo.getUsername())
+                {
+                    cout << "Bike name: " << v.getModel() << "Bike id is " << v.getMotorbikeId() << "\n";
+                    cout << "You must return in " << bo.getTimeSlot().getEndTime() << "\n";
                 }
             }
-    while(!dashboard){
-        
-            cout<< "1.Return motorbike. \n";
-            cout<< "2.Quit. \n";
-            cout<< "Enter your choice: ";
-            getline(cin,choice);
-            if(choice== "1"){
-                user.returnBikes(user,userList,request, borrow,bikes);
-            }else if(choice == "2"){
-            
-                dashboard= true;
+        }
+        while (!dashboard)
+        {
+
+            cout << "1.Return motorbike. \n";
+            cout << "2.Quit. \n";
+            cout << "Enter your choice: ";
+            getline(cin, choice);
+            if (choice == "1")
+            {
+                user.returnBikes(userRatings, bikeRatings, user, userList, request, borrow, bikes);
+            }
+            else if (choice == "2")
+            {
+                dashboard = true;
             }
         }
     }

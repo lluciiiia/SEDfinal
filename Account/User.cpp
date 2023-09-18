@@ -201,14 +201,10 @@ vector<Motorbike> &User::getOwned()
 
 bool User::addBike(vector<Motorbike> &bikes)
 {
-    // for (auto &ownedBike : this->getOwned())
-    // {
-    //     cout << ownedBike.getModel();
-    // }
-    // cout << "owned bikes: " << this->getOwned().size() << "\n";
-    if (this->OwnedMotorbikes.size() == 1) // TODO: it's not working
+   
+    if (this->OwnedMotorbikes.size() == 1) 
     {
-        cout << "You can own only one bike." << endl;
+        cout << "You can own only one bike.\n" << endl;
         return false;
     }
 
@@ -456,12 +452,6 @@ void User::removeBike(vector<Motorbike> &bikes)
     }
 };
 
-// TODO: Do we need this?
-void User::addMotorInnitial(Motorbike motor)
-{
-    OwnedMotorbikes.push_back(motor);
-}
-
 bool User::registerAccount(vector<User> &userList)
 {
     system("cls");
@@ -706,10 +696,7 @@ bool User::registerAccount(vector<User> &userList)
     return false;
 }
 
-// end register
-
-// Rate user and motorbike
-void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
+void User::rateUserAndMotorbike(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, string &userNameToRate, int &bikeIDToRate)
 {
     // Variables for score and comment
     float userScore = 0, motorbikeScore = 0;
@@ -727,16 +714,16 @@ void User::rateUserAndMotorbike(User &ratedUser, Motorbike &ratedMotorbike)
     cout << "Enter score for motorbike: ";
     cin >> motorbikeScore;
     cin.ignore();
-    cout << "Enter comment for motorbike " << ratedMotorbike.getMotorbikeId() << ": ";
+    cout << "Enter comment for motorbike " << bikeIDToRate << ": ";
     getline(cin, motorbikeComment);
     cout << endl;
 
     // Adding rating to list
-    UserRating userRate(ratedUser.getUserName(), userScore, userComment);
-    ratedUser.userRatings.push_back(userRate);
+    UserRating userRate(userNameToRate, userScore, userComment);
+    userRatings.push_back(userRate);
 
-    MotorbikeRating motorbikeRate(ratedMotorbike.getMotorbikeId(), motorbikeScore, motorbikeComment);
-    ratedMotorbike.getRatings().push_back(motorbikeRate);
+    MotorbikeRating motorbikeRate(bikeIDToRate, motorbikeScore, motorbikeComment);
+    bikeRatings.push_back(motorbikeRate);
 }
 
 void User::searchAvailableMotorbikes() {}
@@ -836,7 +823,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                                 Request reque = Request(this->getUsername(), bike.getMotorbikeId(), time, status);
                                 bike.getRequests().push_back(reque);
                                 requests.push_back(reque);
-                                cout << "Rent successful!\n";
+                                cout << "Successfully sent the request!\n";
                                 quit = true;
                             }
                         }
@@ -857,13 +844,12 @@ void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo)
     system("cls");
     int choice;
     bool dashboardRun = false;
-    cout << "\n";
-    cout << "----------------------------------------\n";
     cout << "1. View requests that I sent. \n";
     cout << "2. View requests for my motorbikes. \n";
     cout << "3. Exit\n";
     cout << "Enter your choice(1-3): ";
     cin >> choice;
+    cout << "\n";
     cin.ignore();
     switch (choice)
     {
@@ -880,7 +866,6 @@ void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo)
     default:
         cout << "Invalid input! Please enter it correctly. \n";
     }
-    cout << "Press Enter to continue...";
     cin.ignore();
 };
 
@@ -1037,12 +1022,10 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo)
         {
             cout << "Invalid motorbike ID. Please try again." << endl;
         }
+        cout << "Invalid ID format! Please enter a valid ID from the list!\n";
+        break;
     }
 }
-
-
-    // choose a request (i-1) from the request list -> accept / reject
-
 
 void User::setOwnedBikes(vector<Motorbike> &bikes)
 {
@@ -1054,7 +1037,7 @@ void User::setUserRating(vector<UserRating> &ratings)
     this->userRatings = ratings;
 }
 
-void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes)
+void User::returnBikes(vector<UserRating> &userRatings, vector<MotorbikeRating> &bikeRatings, User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes)
 {
     int choice;
     bool dashboard = false;
@@ -1101,6 +1084,19 @@ void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, 
                 {
                     bo.erase(bo.begin() + i);
                     cout << "Return successfully! \n";
+
+                    // rate the Owner and the bike
+                    int bikeIDToRate;
+                    string userNameToRate;
+                    for (auto &bike : bikes)
+                    {
+                        if (bike.getMotorbikeId() == bo[i].getMotorbikeID())
+                        {
+                            bikeIDToRate = bike.getMotorbikeId();
+                            userNameToRate = bike.getOwner();
+                        }
+                    }
+                    this->rateUserAndMotorbike(userRatings, bikeRatings, userNameToRate, bikeIDToRate);
                 }
                 else
                 {
@@ -1130,7 +1126,7 @@ void User::viewReviews(vector<Motorbike> &bikes)
             if (IDtoView == bikeID)
             {
                 vector<MotorbikeRating> bikeRatings = bike.getRatings();
-
+                
                 if (bikeRatings.empty())
                 {
                     std::cout << "The motorbike doesn't have reviews yet." << std::endl;
@@ -1307,14 +1303,4 @@ void User::acceptRequest(User *requester, vector<Request> &requests, Request &re
 }
 // void User::rejectRequest(User &requester, Request &request) {
 //     request.setStatus(RequestStatus::REJECTED);
-// }
-
-// vector<Motorbike> User::rentBikes()
-// {
-//     return vector<Motorbike>();
-// }
-
-// vector<Request> User::receiveRequest()
-// {
-//     return vector<Request>();
 // }
