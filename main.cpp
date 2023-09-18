@@ -21,7 +21,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
 void displayUserInfo(User &user, vector<User> &userList);
 void addCredit(User &user, vector<User> &userList);
 void searchEngine(User &user, vector<Motorbike> &bikes);
-void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow);
+void returnDashBoard(User &user, vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow);
 int main()
 {
     User user;
@@ -255,7 +255,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             user.viewRequestsDash(userList, borrow, bikes);
             break;
         case 6:
-            reTurnDashboard(user, userList, bikes, request, borrow);
+            returnDashBoard(user, userList, bikes, request, borrow);
             break;
         case 7:
             user = User();
@@ -584,8 +584,9 @@ void searchEngine(User &user, vector<Motorbike> &bikes)
     }
 }
 
-void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow)
+void returnDashBoard(User &user, vector<User> &userList, vector<Motorbike> &bikes, vector<Request> &request, vector<Borrow> &borrow)
 {
+    system("cls");
     string choice;
     bool dashboard = false;
     bool found = false;
@@ -603,15 +604,17 @@ void reTurnDashboard(User &user, vector<User> &userList, vector<Motorbike> &bike
     }
     else
     {
+         cout << "     Your motorbike renting list      \n";
+         cout << "--------------------------------------\n";
         for (auto &bo : borrow)
         {
-            cout << "Your motorbike renting list: \n";
+           
             for (auto &v : bikes)
             {
                 if (bo.getMotorbikeID() == v.getMotorbikeId() && user.getUsername() == bo.getUsername())
                 {
                     cout << "Bike name: " << v.getModel() << "Bike id is " << v.getMotorbikeId() << "\n";
-                    cout << "You must return in " << bo.getTimeSlot().getEndTime() << "\n";
+                    cout << "You must return in " << bo.getTimeSlot().getEndTime() << "\n\n";
                 }
             }
         }

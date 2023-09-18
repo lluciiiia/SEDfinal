@@ -1050,57 +1050,44 @@ void User::setUserRating(vector<UserRating> &ratings)
 void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes)
 {
     int choice;
-    bool dashboard = false;
-    while (!dashboard)
-    {
-        cout << "Enter the motorbike you want to return: ";
-        cin >> choice;
-        cin.ignore();
-        bool confirmation = false;
-        for (int i = 0; i < bo.size(); i++)
-        {
-            if (bo[i].getMotorbikeID() == choice && user.getUsername() == bo[i].getUsername())
-            {
+    bool confirmation = false;
 
-                while (true)
-                {
-                    string decision;
-                    cout << "Are you sure that you want to return it right now?(Y/N) ";
-                    getline(cin, decision);
-                    if (decision == "Y" || decision == "y")
-                    {
-                        confirmation = true;
-                        dashboard = true;
-                        break;
-                    }
-                    else if (decision == "n" || decision == "N")
-                    {
-                        confirmation = false;
-                        dashboard = true;
-                        break;
-                    }
-                    else
-                    {
-                        cout << "Invalid input! Please enter the correct input! \n";
-                    }
-                }
-            }
-        }
-        if (confirmation)
+    cout << "Enter the motorbike you want to return: ";
+    cin >> choice;
+    cin.ignore();
+
+    for (int i = 0; i < bo.size(); i++)
+    {
+        if (bo[i].getMotorbikeID() == choice && user.getUsername() == bo[i].getUsername())
         {
-            for (int i = 0; i < bo.size(); i++)
+            while (true)
             {
-                if (bo[i].getMotorbikeID() == choice && user.getUsername() == bo[i].getUsername())
+                string decision;
+                cout << "Are you sure that you want to return it right now? (Y/N) ";
+                getline(cin, decision);
+                if (decision == "Y" || decision == "y")
                 {
+                    confirmation = true;
+                    // TODO: do sth for the owner to review the renter
                     bo.erase(bo.begin() + i);
-                    cout << "Return successfully! \n";
+                    cout << "Successfully returned the bike! \n";
+                    break;
+                }
+                else if (decision == "n" || decision == "N")
+                {
+                    cout << "Failed to return the bike. \n";
+                    break;
                 }
                 else
                 {
-                    cout << "Return fail! \n";
+                    cout << "Invalid input! Please enter 'Y' or 'N'. \n";
                 }
             }
         }
+    }
+    if (!confirmation)
+    {
+        cout << "Motorbike not found or not eligible for return. \n";
     }
 }
 
