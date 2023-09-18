@@ -201,14 +201,10 @@ vector<Motorbike> &User::getOwned()
 
 bool User::addBike(vector<Motorbike> &bikes)
 {
-    // for (auto &ownedBike : this->getOwned())
-    // {
-    //     cout << ownedBike.getModel();
-    // }
-    // cout << "owned bikes: " << this->getOwned().size() << "\n";
-    if (this->OwnedMotorbikes.size() == 1) // TODO: it's not working
+   
+    if (this->OwnedMotorbikes.size() == 1) 
     {
-        cout << "You can own only one bike." << endl;
+        cout << "You can own only one bike.\n" << endl;
         return false;
     }
 
