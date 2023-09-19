@@ -235,7 +235,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             displayUserInfo(user, userList);
             break;
         case 2:
-            user.removeBike(bikes);
+            user.removeBike(bikes, borrow,userRatings);
             break;
         case 3:
             user.viewMyReviews(userRatings);
@@ -248,7 +248,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
             viewBikeDash(user, bikes, request, userList);
             break;
         case 6:
-            user.viewRequestsDash(userList, borrow, bikes);
+            user.viewRequestsDash(userList, borrow, bikes, userRatings,request);
             break;
         case 7:
             returnDashBoard(user, userList, bikes, request, borrow);
@@ -381,7 +381,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
             user.requestToRent(bikes, requests);
             break;
         case 3:
-            user.viewReviews(bikes);
+            user.viewBikeReviews(bikes);
             break;
         case 4:
             dashboardRun = true;
@@ -607,7 +607,7 @@ void returnDashBoard(User &user, vector<User> &userList, vector<Motorbike> &bike
 
             for (auto &v : bikes)
             {
-                if (bo.getMotorbikeID() == v.getMotorbikeId() && user.getUsername() == bo.getUsername())
+                if (bo.getMotorbikeID() == v.getMotorbikeId() && user.getUsername() == bo.getUsername() && bo.getBorrowSta() == "RENTING")
                 {
                     cout << "Bike name: " << v.getModel() << "Bike id is " << v.getMotorbikeId() << "\n";
                     cout << "You must return in " << bo.getTimeSlot().getEndTime() << "\n\n";

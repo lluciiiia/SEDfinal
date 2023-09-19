@@ -5,6 +5,10 @@ Borrow::Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price
 {
 }
 
+Borrow::Borrow()
+{
+}
+
 TimeSlot Borrow::getTimeSlot() const
 {
     return timeSlot;
@@ -23,6 +27,11 @@ int Borrow::getMotorbikeID() const
 double Borrow::getPrice() const
 {
     return price;
+}
+
+string Borrow::getBorrowSta()
+{
+    return borrowSta;
 }
 
 void Borrow::setTimeSlot(TimeSlot timeSlot)
