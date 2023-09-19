@@ -388,15 +388,13 @@ bool User::addBike(vector<Motorbike> &bikes)
     return true;
 }
 
-void User::removeBike(vector<Motorbike> &bikes)
+void User::removeBike(vector<Motorbike> &bikes, vector <Borrow> &borrow, vector <UserRating> &ratings)
 {
     system("cls");
-
+    int id= this->OwnedMotorbikes[1].getMotorbikeId();
+    
     string idToRemove;
-
-    while (true)
-    {
-        cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
+    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
         cout << setfill('-') << setw(150) << "-" << setfill(' ') << endl;
         for (auto &bike : this->OwnedMotorbikes)
         {
@@ -413,10 +411,14 @@ void User::removeBike(vector<Motorbike> &bikes)
                  << setw(8) << cityStr
                  << endl;
         }
+    while (true)
+    {
+        
         cout << "You can only add only one bike. \n";
         cout << "1.Add a bike: \n";
         cout << "2.Delete your bike \n";
-        cout << "3.Exit";
+        cout << "3.Rate the renter of your bike. \n";
+        cout << "4.Exit\n";
         cout << "\nEnter your choice: ";
         getline(cin, idToRemove);
 
@@ -445,7 +447,50 @@ void User::removeBike(vector<Motorbike> &bikes)
                 }
             }
         }
-        else if (idToRemove == "3")
+        else if (idToRemove == "3"){
+            cout << "Borrowing history: \n";
+    for (int i = 0; i < borrow.size(); i++) {
+    if (borrow[i].getMotorbikeID() == id && borrow[i].getBorrowSta() == "RENTED") {
+        cout << "Renter: " << borrow[i].getUsername() << "\n";
+        cout << "Total amount: " << borrow[i].getPrice();
+        string username;
+        
+        while (true) {
+            cout << "Enter name of the renter to rate them: ";
+            getline(cin, username);
+            
+            if (username == borrow[i].getUsername()) {
+                float score;
+                string comment;
+                
+                cout << "Enter score for the renter: ";
+                
+                
+                while (!(cin >> score)) {
+                    cin.clear();  
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
+                    cout << "Invalid input. Enter a valid score: ";
+                }
+                
+                cin.ignore(); 
+                
+                cout << "Do you have any comments for the previous renter: ";
+                cin.ignore();  // Clear newline character
+                getline(cin, comment);
+                
+                UserRating urating(username, score, comment);
+                ratings.push_back(urating);
+                borrow.erase(borrow.begin() + i);
+                break;  
+            } else {
+                cout << "Renter not found in the borrowing history. Try again." << endl;
+            }
+        }
+    }
+}
+
+        }
+        else if (idToRemove == "4")
         {
             break;
         }
@@ -848,7 +893,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
     }
 }
 
-void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings)
+void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings, vector<Request> &requests)
 {
     system("cls");
     int choice;
@@ -865,7 +910,7 @@ void User::viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<M
         this->viewSentRequests();
         break;
     case 2:
-        this->viewBikeRequests(userList, bo, bikes, userRatings);
+        this->viewBikeRequests(userList, bo, bikes, userRatings,requests);
         break;
     case 3:
         dashboardRun = true;
@@ -901,7 +946,7 @@ void User::viewSentRequests()
         }
     }
 }
-void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings)
+void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings,vector<Request> &requests)
 {
     vector<Motorbike> ownedBikes = this->OwnedMotorbikes;
     cout << left << setw(12) << "\nMotorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Requests" << endl;
@@ -923,6 +968,7 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
 
     string IDtoView;
     bool foundMotorbike = false;
+    bool foundRequest = false;
     while (!foundMotorbike)
     {
         cout << "Enter a motorbike ID to view (Q to quit): ";
@@ -946,23 +992,33 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                 }
                 else
                 {
-                    cout << left << setw(12) << "Request ID" << setw(20) << "Requester" << setw(10) << "TimeSlot" << setw(20) << "Status" << endl;
+                    cout << left << setw(12) << "Request ID" << setw(20) << "Requester" << setw(10) << "Date Sent and Date want to rent" << setw(29) << "Status" << endl;
                     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
-
+                    
                     for (int i = 0; i < bikeRequests.size(); i++)
                     {
-                        Request &bikeRequest = bikeRequests[i];
+                        if(bikeRequests[i].getStatus()== RequestStatus::ACCEPTED){
+                            cout<< "Your bike is being reting "<< bikeRequests[i].getRequester()<<"\n";
+                            cout<< "Enter to exit\n";
+                            foundRequest=true;
+                        }else if(bikeRequests[i].getStatus()== RequestStatus::PENDING){
+                            Request &bikeRequest = bikeRequests[i];
                         cout << left << setw(12) << i + 1
                              << setw(20) << bikeRequest.getRequester()
                              << bikeRequest.getTimeSlot().getStartTime()
                              << " + " << bikeRequest.getTimeSlot().getEndTime() << " days";
-                        string statusStr = statusToString(bikeRequest.getStatus());
-                        cout << left << "   " << statusStr << endl;
+                            string statusStr = statusToString(bikeRequest.getStatus());
+                            cout << left << "   " << statusStr << endl;
+                        }else{
+                            cout<< "There is no request ";
+                            cout<< "Enter to exit\n";
+                            foundRequest=true;
+                        }
                     }
                 }
 
                 int requestIndex;
-                bool foundRequest = false;
+                
                 while (!foundRequest)
                 {
                     cout << "Enter a Request ID to view: ";
@@ -974,7 +1030,7 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                             Request &bikeRequest = bikeRequests[i];
                             string requesterStr = bikeRequest.getRequester();
                             User *requester = nullptr;
-
+                            Motorbike *bi= nullptr;
                             for (auto &user : userList)
                             {
                                 if (user.getUserName() == requesterStr)
@@ -983,7 +1039,9 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                                     break;
                                 }
                             }
-
+                            for(auto &bi1: bikes){
+                                bi= &bi1;
+                            }
                             if (requester == nullptr)
                             {
                                 cout << "Requester not found." << endl;
@@ -997,10 +1055,10 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                             switch (choice)
                             {
                             case 1:
-                                this->acceptRequest(requester, bikeRequests, bikeRequest, userList, bo);
+                                this->acceptRequest(requester, bikeRequests, bikeRequest, userList, bo, requests, bi);
                                 break;
                             case 2:
-                                this->rejectRequest(bikeRequest, bikes);
+                                this->rejectRequest(bikeRequest, bikes,requests);
                                 break;
                             case 3:
                                 viewRequesterReviews(requesterStr, userRatings);
@@ -1051,13 +1109,15 @@ void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, 
     int choice;
     bool confirmation = false;
 
+
+    
     cout << "Enter the motorbike you want to return: ";
     cin >> choice;
     cin.ignore();
 
     for (int i = 0; i < bo.size(); i++)
     {
-        if (bo[i].getMotorbikeID() == choice && user.getUsername() == bo[i].getUsername())
+        if (bo[i].getMotorbikeID() == choice && user.getUsername() == bo[i].getUsername()&& bo[i].getBorrowSta()== "RENTING")
         {
             while (true)
             {
@@ -1067,8 +1127,15 @@ void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, 
                 if (decision == "Y" || decision == "y")
                 {
                     // TODO: do sth for the owner to review the renter
-                    bo.erase(bo.begin() + i);
+                    bo[i].setBorrowStatus("RENTED");
+                    for(auto &bi: bikes ){
+                        if(bi.getMotorbikeId()== choice){
+                            bi.setAvailability(true);
+                            break;
+                        }
+                    }
                     confirmation = true;
+                    
                     cout << "Successfully returned the bike! \n";
                     break;
                 }
@@ -1082,6 +1149,7 @@ void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, 
                     cout << "Invalid input! Please enter 'Y' or 'N'. \n";
                 }
             }
+            break;
         }
     }
     if (confirmation) {
@@ -1244,11 +1312,38 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
     return false;
 }
 
-void User::acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo)
+void User::acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo,vector<Request> &totalRequest, Motorbike *bike)
 {
     double price = OwnedMotorbikes[0].getConsumingPoints();
-
+    double bikeID= OwnedMotorbikes[0].getMotorbikeId();
     double rentalAmount = 0;
+    time_t now = time(0);
+
+    tm *ltm = localtime(&now);
+
+    string day = to_string(ltm->tm_mday);
+    string month = to_string(1 + ltm->tm_mon);
+    if (day.length() == 1)
+    {
+        day = "0" + day;
+    }
+    if (month.length() == 1)
+    {
+        month = "0" + month;
+    }
+    string dayAndMon = day + "/" + month;
+    Borrow *b1o;
+    Borrow temp;
+    bool oldcus=false;
+    for(auto &u: bo ){
+        if(u.getMotorbikeID()== bikeID && u.getUsername() == requester->getUsername() && u.getBorrowSta() == "RENTED"){
+            oldcus= true;
+            b1o= &u;
+            break;
+        }
+    }
+    
+
     for (auto &re : requests)
     {
         if (re.getRequester() == requester->getUserName())
@@ -1263,28 +1358,59 @@ void User::acceptRequest(User *requester, vector<Request> &requests, Request &re
         cout << "Payment was not successful. Request cannot be accepted." << endl;
         return;
     }
-
-    requester->setCreditPoint(requester->getCreditPoint() - rentalAmount);
-
+    requester->setCreditPoint(requester->getCreditPoint()-rentalAmount);
+    for(auto &u : users){
+        if(u.getUsername() == this->getUsername()){
+            u.setCreditPoint(u.getCreditPoint() + rentalAmount);
+        }
+    }
+    this->creditPoint = this->creditPoint + rentalAmount;
     RequestStatus reSta;
     string startdate;
     string endDate;
-    requester->setCreditPoint(requester->getCreditPoint() + rentalAmount);
-    for (auto &v : requests)
+   
+        for (auto &v : totalRequest){
+        if (v.getRequester() == requester->getUserName() && v.getMotorbikeID() == bikeID && v.getStatus() == RequestStatus::PENDING &&oldcus== false )
     {
-        if (v.getRequester() == requester->getUserName())
-        {
-            reSta = RequestStatus::ACCEPTED;
-            v.setStatus(reSta);
-            startdate = v.getTimeSlot().getStartTime();
-            endDate = v.getTimeSlot().getEndTime();
-        }
-        else
-        {
-            reSta = RequestStatus::REJECTED;
-            v.setStatus(reSta);
-        }
+        reSta = RequestStatus::ACCEPTED;
+        v.setStatus(reSta);
+        startdate = dayAndMon;
+        endDate = v.getTimeSlot().getEndTime();
+        bike->setAvailability(false);
+        this->RentingBikes.push_back(*bike);
+        TimeSlot time(startdate, endDate);
+        int bikeid = requester->getOwned()[0].getMotorbikeId();
+        temp = Borrow(time, requester->getUserName(), bikeID, rentalAmount, "RENTING");
+        bo.push_back(temp);
+
     }
+    else if(v.getRequester() == requester->getUserName() && v.getMotorbikeID() == bikeID && v.getStatus() == RequestStatus::PENDING &&oldcus== true){
+        reSta = RequestStatus::ACCEPTED;
+        v.setStatus(reSta);
+        startdate = dayAndMon;
+        endDate = v.getTimeSlot().getEndTime();
+        TimeSlot time(startdate, endDate);
+        b1o->setTimeSlot(time);
+        b1o->setBorrowStatus("RENTING");
+        b1o->setPrice(rentalAmount);
+    }
+    
+    
+    if (v.getRequester() != requester->getUserName() && v.getMotorbikeID() == bikeID && v.getStatus() == RequestStatus::PENDING)
+    {
+        cout << "Rejecting request with ID: " << v.getMotorbikeID() << endl; // Debugging statement
+        reSta = RequestStatus::REJECTED;
+        v.setStatus(reSta);
+        bike->setAvailability(false);
+        startdate= dayAndMon;
+        endDate = v.getTimeSlot().getEndTime();
+    }
+        }
+{
+   
+}
+
+    
 
     for (int i = 0; i < requester->getSentRequests().size(); i++)
     {
@@ -1295,15 +1421,14 @@ void User::acceptRequest(User *requester, vector<Request> &requests, Request &re
         }
     }
 
-    TimeSlot time(startdate, endDate);
-    int bikeid = requester->getOwned()[0].getMotorbikeId();
+    
 
-    Borrow b1o = Borrow(time, requester->getUserName(), bikeid, rentalAmount, "RENTING");
-    bo.push_back(b1o);
+   
+    
     cout << "Successfully accepted the request!" << endl;
 }
 
-void User::rejectRequest(Request &request, vector<Motorbike> &bikes)
+void User::rejectRequest(Request &request, vector<Motorbike> &bikes,vector<Request> &totalrequest)
 {
     // 1. change the request status to rejected
     request.setStatus(RequestStatus::REJECTED);

@@ -17,13 +17,13 @@ private:
 
 public:
     Borrow(TimeSlot timeSlot, string username, int motorbikeId, double price, string status);
-
+    Borrow();
     // getters
     TimeSlot getTimeSlot() const;
     string getUsername() const;
     int getMotorbikeID() const;
     double getPrice() const;
-
+    string getBorrowSta();
     // setters
     void setTimeSlot(TimeSlot timeSlot);
     void setUsername(string username);

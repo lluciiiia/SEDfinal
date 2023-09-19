@@ -64,17 +64,17 @@ public:
     bool registerAccount(vector<User> &userList);
 
     // view methods
-    void viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings);
+    void viewRequestsDash(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings, vector<Request> &request);
     void viewSentRequests();
-    void viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings);
+    void viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<UserRating> &userRatings, vector<Request> &requests);
     void viewBikeReviews(vector<Motorbike> &bikes);
     void viewRequesterReviews(string requesterName, vector<UserRating> &userRatings);
     void viewMyReviews(vector<UserRating> &userRatings);
 
     // request methods
     void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
-    void acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo);
-    void rejectRequest(Request &request, vector<Motorbike> &bikes);
+    void acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo,vector<Request> &Totalrequest,Motorbike *bike);
+    void rejectRequest(Request &request, vector<Motorbike> &bikes,vector<Request> &totalrequest);
 
     // return and review methods
     void returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes);
@@ -83,7 +83,7 @@ public:
 
     // owned motorbike methods
     bool addBike(vector<Motorbike> &bikes);    // = list
-    void removeBike(vector<Motorbike> &bikes); // = unlist
+    void removeBike(vector<Motorbike> &bikes, vector <Borrow> &borrow,vector<UserRating> &ratings); // = unlist
 
     friend class Admin;
 };
