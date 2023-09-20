@@ -23,7 +23,7 @@ void saveToFile::SaveAccountToFile(vector<User> &users)
     }
 }
 
-vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector<Request> &requests, vector<UserRating> &ratings)
+vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector<Request> &requests, vector<UserRating> &ratings, vector <Borrow> &borrowList)
 {
     vector<User> users;
     fstream myFile(accountFile, ios::in);
@@ -64,6 +64,11 @@ vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector<Request> &r
             {
                 user.getOwned().push_back(mot);
             }
+            for(auto &v : borrowList){
+            if(v.getUsername() == user.getUsername() && v.getMotorbikeID() == mot.getMotorbikeId()){
+                user.getRentingBikes().push_back(mot);
+            }
+        }
         }
         for (auto &v : ratings)
         {
@@ -83,7 +88,9 @@ vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector<Request> &r
                 user.getSentRequests().push_back(re);
             }
         }
+        
     }
+   
 
     myFile.close();
     return users;

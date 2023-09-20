@@ -182,11 +182,13 @@ vector<Request> &User::getSentRequests()
     return this->sentRequests;
 }
 
-// TODO: choose one of these
-vector<Motorbike> User::getOwnedMotorbike()
+vector<Motorbike> &User::getRentingBikes()
 {
-    return this->OwnedMotorbikes;
+    return RentingBikes;
 }
+
+// TODO: choose one of these
+
 
 vector<UserRating> &User::getRatings()
 {
@@ -1126,7 +1128,10 @@ void User::returnBikes(User &user, vector<User> &userList, vector<Request> &re, 
                 getline(cin, decision);
                 if (decision == "Y" || decision == "y")
                 {
-                    // TODO: do sth for the owner to review the renter
+                    
+                    for(int i=0; i< this->RentingBikes.size(); i++){
+                        RentingBikes.erase(RentingBikes.begin() +i);
+                    }
                     bo[i].setBorrowStatus("RENTED");
                     for(auto &bi: bikes ){
                         if(bi.getMotorbikeId()== choice){
@@ -1377,7 +1382,7 @@ void User::acceptRequest(User *requester, vector<Request> &requests, Request &re
         startdate = dayAndMon;
         endDate = v.getTimeSlot().getEndTime();
         bike->setAvailability(false);
-        this->RentingBikes.push_back(*bike);
+        requester->RentingBikes.push_back(*bike);
         TimeSlot time(startdate, endDate);
         int bikeid = requester->getOwned()[0].getMotorbikeId();
         temp = Borrow(time, requester->getUserName(), bikeID, rentalAmount, "RENTING");
@@ -1389,6 +1394,7 @@ void User::acceptRequest(User *requester, vector<Request> &requests, Request &re
         v.setStatus(reSta);
         startdate = dayAndMon;
         endDate = v.getTimeSlot().getEndTime();
+        requester->RentingBikes.push_back(*bike);
         TimeSlot time(startdate, endDate);
         b1o->setTimeSlot(time);
         b1o->setBorrowStatus("RENTING");

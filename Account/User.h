@@ -48,10 +48,9 @@ public:
     string getExDate();
     double getCreditPoint();
     City getCity();
-    vector<Motorbike> getOwnedMotorbike();
     vector<Motorbike> &getOwned();
     vector<Request> &getSentRequests();
-
+    vector<Motorbike> &getRentingBikes();
     // setters
     void setOwnedBikes(vector<Motorbike> &bikes);
     void setUserRating(vector<UserRating> &ratings);

@@ -33,7 +33,7 @@ int main()
     fileSave.loadRating(uRatings, mRatings);
     vector<Request> requests = fileSave.loadRequest();
     vector<Motorbike> motorbikeList = fileSave.loadMotor(requests, mRatings);
-    vector<User> userList = fileSave.loadAccount(motorbikeList, requests, uRatings);
+    vector<User> userList = fileSave.loadAccount(motorbikeList, requests, uRatings, borrowList);
 
     City city = City::Saigon;
 

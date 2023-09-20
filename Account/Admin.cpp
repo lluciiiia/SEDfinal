@@ -74,7 +74,7 @@ void Admin::viewAccounts(vector<User> &users)
     for (User &user : users)
     {
         string city = cityToString(user.getCity());
-        vector<Motorbike> motorbikes = user.getOwnedMotorbike();
+        vector<Motorbike> motorbikes = user.getOwned();
         string motorbikeModel = "";
 
         int count = 0;
