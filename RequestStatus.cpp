@@ -6,7 +6,7 @@ string statusToString(RequestStatus status) {
     static map<RequestStatus, string> statusMap = {
         {RequestStatus::PENDING, "Pending"},
         {RequestStatus::ACCEPTED, "Accepted"},
-        {RequestStatus::REJECTED, "Rejected"}
+        {RequestStatus::REJECTED, "Rejected"},
     };
 
     auto it = statusMap.find(status);

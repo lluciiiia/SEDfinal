@@ -76,8 +76,8 @@ public:
     void rejectRequest(Request &request, vector<Motorbike> &bikes,vector<Request> &totalrequest);
 
     // return and review methods
-    void returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes);
-    void rateBike(Motorbike &ratedMotorbike);
+    void returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<MotorbikeRating> &ratings);
+    void rateBike(Motorbike *ratedMotorbike, vector<MotorbikeRating> &ratings);
     void rateRenter(User &ratedUser);
 
     // owned motorbike methods

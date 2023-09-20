@@ -23,6 +23,7 @@ public:
     string getUsername() const;
     int getMotorbikeID() const;
     double getPrice() const;
+    TimeSlot &getTimeSlot();
     string getBorrowSta();
     // setters
     void setTimeSlot(TimeSlot timeSlot);

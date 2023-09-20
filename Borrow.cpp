@@ -29,6 +29,11 @@ double Borrow::getPrice() const
     return price;
 }
 
+TimeSlot &Borrow::getTimeSlot()
+{
+    return timeSlot;
+}
+
 string Borrow::getBorrowSta()
 {
     return borrowSta;

@@ -164,7 +164,7 @@ vector<Motorbike> saveToFile::loadMotor(vector<Request> &requests, vector<Motorb
     {
         for (auto &re : requests)
         {
-            if (mo.getMotorbikeId() == re.getMotorbikeID())
+            if (mo.getMotorbikeId() == re.getMotorbikeID() && (re.getStatus()== RequestStatus::PENDING ||re.getStatus()== RequestStatus::ACCEPTED ))
             {
                 mo.getRequests().push_back(re);
             }
@@ -315,8 +315,8 @@ vector<Borrow> saveToFile::loadBorrow()
             string username = tokens[0];
             int motobikeID = stoi(tokens[1]);
             double price = stod(tokens[2]);
-            string start = tokens[4];
-            string end = tokens[5];
+            string start = tokens[3];
+            string end = tokens[4];
             TimeSlot time(start, end);
             Borrow bo = Borrow(time, username, motobikeID, price,tokens[5]);
             borrows.push_back(bo);

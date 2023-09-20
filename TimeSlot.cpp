@@ -67,6 +67,75 @@ bool TimeSlot::operator==(const TimeSlot& other) const
            this->endTime == other.endTime;
 }
 
+string TimeSlot::addDayToDate()
+{
+    istringstream ss(startTime);
+        int day, month;
+        char slash;
+        ss>>day>> slash >>month;
+        
+        int dayToAdd= stoi(endTime);
+
+        day+= dayToAdd;
 
 
+        int maxdayinMonth;
+        if(month ==2){
+            maxdayinMonth == 28;
+        }else if(month == 4 || month == 6 || month == 9 || month == 11){
+            maxdayinMonth == 30;
+        }else {
+            maxdayinMonth = 31;
+        }
 
+        if(day > maxdayinMonth){
+            day= day-maxdayinMonth;
+            month ++;
+            if(month > 12){
+                month== 1;
+            }
+        }
+
+        string daystring= to_string(day);
+        string monthString= to_string(month);
+        if(daystring.length() == 1){
+            daystring = "0"+daystring;
+        }
+        
+        if(monthString.length() == 1){
+            monthString = "0"+monthString;
+        }
+    return daystring+"/"+ monthString;
+}
+
+bool TimeSlot::isDateInRange(const string &date)
+{
+    int day,month;
+    char slash;
+    istringstream ss(date);
+    ss>>day>> slash >>month;
+    
+    int startDay, startMonth;
+    char slash2;
+    istringstream ss1(startTime);
+    ss1>> startDay>> slash2>> startMonth;
+
+    int endDay, endMonth;
+    char slash3;
+    istringstream ss2(endTime);
+    ss2>> endDay>> slash3>> endMonth;
+
+    if (month < startMonth || month > endMonth) {
+        return false; 
+    }
+
+    if (month == startMonth && day < startDay) {
+        return false; 
+    }
+
+    if (month == endMonth && day > endDay) {
+        return false; 
+    }
+
+    return true;
+}
