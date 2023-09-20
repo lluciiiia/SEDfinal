@@ -59,26 +59,19 @@ int main()
 
     while (!exitProgram)
     {
-        int choice;
+        string choice;
         cout << "MOTORBIKE RENTAL APPLICATION."
              << "\n\n";
         cout << "Login as: \n1. Guest  \n2. Member  \n3. Admin  \n4. Register  \n5. Exit the program\n\nEnter your choice: ";
-        cin >> choice;
-        cin.ignore();
-        switch (choice)
-        {
-        case 1:
-        {
+        getline(cin,choice);
+
+        if(choice == "1"){
             cout << "Logging in as a Guest \n";
             cout << "Your are on Guest Mode.\n";
 
             guest_dashboard(motorbikeList);
             system("cls");
-
-            break;
-        }
-        case 2:
-        {
+        }else if (choice == "2"){
             cout << "Logging in as Member\n";
             cout << "Your are logging in.\n";
             if (login(user, userList, motorbikeList))
@@ -90,10 +83,7 @@ int main()
             {
                 cout << "Login failed! Incorrect username or password! \n";
             }
-            break;
-        }
-        case 3:
-        {
+        }else if(choice == "3"){
             cout << "Logging in as Admin \n";
             cout << "Your are on Admin Mode.\n";
 
@@ -106,11 +96,8 @@ int main()
             {
                 cout << "Login failed! Incorrect admin username/password\n";
             }
-            break;
-        }
-        case 4:
-        {
-            if (user.registerAccount(userList))
+        }else if(choice == "4"){
+             if (user.registerAccount(userList))
             {
                 cout << "Register successfully\n";
             }
@@ -118,20 +105,14 @@ int main()
             {
                 cout << "Fail\n";
             }
-            break;
-        }
-        case 5:
-        {
+        }else if(choice == "5"){
             exitProgram = true;
             cout << "Bye! See you later!! \n";
-            break;
-        }
-        default:
-        {
+            
+        }else{
             cout << "Invalid input! Please try again. \n";
-            cin >> choice;
         }
-        }
+        
     }
 
     fileSave.saveBorrowToFile(borrowList);
