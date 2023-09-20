@@ -72,7 +72,7 @@ public:
 
     // request methods
     void requestToRent(vector<Motorbike> &bike, vector<Request> &requests);
-    void acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo,vector<Request> &Totalrequest,Motorbike *bike);
+    void acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo);
     void rejectRequest(Request &request, vector<Motorbike> &bikes,vector<Request> &totalrequest);
 
     // return and review methods

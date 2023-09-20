@@ -1,11 +1,11 @@
 john_doe,password123,John Doe,1234567890,Passport,ID12345,License67890,2023-12-31,100.000000,Saigon
 alice_smith,securePass123,Alice Smith,9876543210,Driver's License,DL6789,License98765,2023-11-30,150.000000,Saigon
 phatnamki123,phat123,huynh tan hpat,1238,Citizen ID,askldjf123,als;kd123,12/2202,20.000000,Hanoi
-phat1,1,Huynh tan phat,0703564489,Citizen ID,192831123,12831238,09/31,28.000000,Hanoi
+phat1,1,Huynh tan phat,0703564489,Citizen ID,192831123,12831238,09/31,6.000000,Hanoi
 phat,1234,jaja,182391283,Passport,190283890132,1928381239,08/23,21.000000,Saigon
 lucia,yoyo,Seokyung Kim,12903821,Passport,123,23,23,234567765630.000000,Saigon
 bruh,bruh,bruh,213,Passport,2323,23,232,12345.000000,Hanoi
-hanoimem,yo,kimkim,2134567,Citizen ID,232,123,23-11-11,2345700.000000,Hanoi
+hanoimem,yo,kimkim,2134567,Citizen ID,232,123,23-11-11,2345722.000000,Hanoi
 haha123,123,Jaj,129312390,Passport,192381239,1928319283,02/12,20.000000,Saigon
 bu,bu,bubu,2345432,Citizen ID,123456,12345,234567,2345678765432.000000,Saigon
 SaigonSeller,yo,idk,234,Citizen ID,234,234,12345,234565432.000000,Saigon

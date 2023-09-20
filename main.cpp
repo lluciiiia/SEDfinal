@@ -350,7 +350,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
         cout << "2. Rent a bike. \n";
         cout << "3. View a review of a bike. \n";
         cout << "4. Exit\n";
-        cout << "Enter your choice(1-3): ";
+        cout << "Enter your choice(1-4): ";
         cin >> choice;
         cin.ignore();
         switch (choice)

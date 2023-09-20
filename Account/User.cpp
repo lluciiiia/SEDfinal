@@ -872,7 +872,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                                 Request reque = Request(this->getUsername(), bike.getMotorbikeId(), time, status);
                                 bike.getRequests().push_back(reque);
                                 requests.push_back(reque);
-                                cout << "Rent successful!\n";
+                                cout << "Successfully sent the request!\n";
                                 quit = true;
                             }
                         }
@@ -1056,7 +1056,7 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                             switch (choice)
                             {
                             case 1:
-                                this->acceptRequest(requester, bikeRequests, bikeRequest, userList, bo, requests, bi);
+                                this->acceptRequest(requester, bikeRequests, bikeRequest, userList, bo);
                                 break;
                             case 2:
                                 this->rejectRequest(bikeRequest, bikes, requests);
@@ -1318,117 +1318,53 @@ bool login(User &cus, vector<User> &userList, vector<Motorbike> &bikes)
     return false;
 }
 
-void User::acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo, vector<Request> &totalRequest, Motorbike *bike)
+void User::acceptRequest(User *requester, vector<Request> &requests, Request &request, vector<User> &users, vector<Borrow> &bo)
 {
     double price = OwnedMotorbikes[0].getConsumingPoints();
-    double bikeID = OwnedMotorbikes[0].getMotorbikeId();
+
     double rentalAmount = 0;
-    time_t now = time(0);
-
-    tm *ltm = localtime(&now);
-
-    string day = to_string(ltm->tm_mday);
-    string month = to_string(1 + ltm->tm_mon);
-    if (day.length() == 1)
-    {
-        day = "0" + day;
-    }
-    if (month.length() == 1)
-    {
-        month = "0" + month;
-    }
-    string dayAndMon = day + "/" + month;
-    Borrow *b1o;
-    Borrow temp;
-    bool oldcus = false;
-    for (auto &u : bo)
-    {
-        if (u.getMotorbikeID() == bikeID && u.getUsername() == requester->getUsername() && u.getBorrowSta() == "RENTED")
-        {
-            oldcus = true;
-            b1o = &u;
+    for(auto& re: requests){
+        if(re.getRequester() == requester->getUserName()){
+            rentalAmount = price * (double) stoi(re.getTimeSlot().getEndTime());
             break;
         }
     }
 
-    for (auto &re : requests)
-    {
-        if (re.getRequester() == requester->getUserName())
-        {
-            rentalAmount = price * (double)stoi(re.getTimeSlot().getEndTime());
-            break;
-        }
-    }
-
-    if (rentalAmount > requester->getCreditPoint())
-    {
+    if(rentalAmount > requester->getCreditPoint()){
         cout << "Payment was not successful. Request cannot be accepted." << endl;
         return;
     }
+
     requester->setCreditPoint(requester->getCreditPoint() - rentalAmount);
-    for (auto &u : users)
-    {
-        if (u.getUsername() == this->getUsername())
-        {
-            u.setCreditPoint(u.getCreditPoint() + rentalAmount);
-        }
-    }
-    this->creditPoint = this->creditPoint + rentalAmount;
+
     RequestStatus reSta;
     string startdate;
     string endDate;
-
-    for (auto &v : totalRequest)
-    {
-        if (v.getRequester() == requester->getUserName() && v.getMotorbikeID() == bikeID && v.getStatus() == RequestStatus::PENDING && oldcus == false)
-        {
+    requester->setCreditPoint(requester->getCreditPoint() + rentalAmount);
+    for(auto &v : requests){
+        if(v.getRequester() == requester->getUserName()){
             reSta = RequestStatus::ACCEPTED;
             v.setStatus(reSta);
-            startdate = dayAndMon;
+            startdate = v.getTimeSlot().getStartTime();
             endDate = v.getTimeSlot().getEndTime();
-            bike->setAvailability(false);
-            requester->RentingBikes.push_back(*bike);
-            TimeSlot time(startdate, endDate);
-            int bikeid = requester->getOwned()[0].getMotorbikeId();
-            temp = Borrow(time, requester->getUserName(), bikeID, rentalAmount, "RENTING");
-            bo.push_back(temp);
-        }
-        else if (v.getRequester() == requester->getUserName() && v.getMotorbikeID() == bikeID && v.getStatus() == RequestStatus::PENDING && oldcus == true)
-        {
-            reSta = RequestStatus::ACCEPTED;
-            v.setStatus(reSta);
-            startdate = dayAndMon;
-            endDate = v.getTimeSlot().getEndTime();
-            requester->RentingBikes.push_back(*bike);
-            TimeSlot time(startdate, endDate);
-            b1o->setTimeSlot(time);
-            b1o->setBorrowStatus("RENTING");
-            b1o->setPrice(rentalAmount);
-        }
-
-        if (v.getRequester() != requester->getUserName() && v.getMotorbikeID() == bikeID && v.getStatus() == RequestStatus::PENDING)
-        {
-            cout << "Rejecting request with ID: " << v.getMotorbikeID() << endl; // Debugging statement
+        } else {
             reSta = RequestStatus::REJECTED;
             v.setStatus(reSta);
-            bike->setAvailability(false);
-            startdate = dayAndMon;
-            endDate = v.getTimeSlot().getEndTime();
         }
     }
-    {
-    }
 
-    for (int i = 0; i < requester->getSentRequests().size(); i++)
-    {
-        if (requester->getUserName() == requester->getSentRequests()[i].getRequester())
-        {
+    for(int i = 0; i < requester->getSentRequests().size(); i++){
+        if(requester->getUserName() == requester->getSentRequests()[i].getRequester()){
             requester->getSentRequests()[i].setStatus(reSta);
             break;
         }
     }
 
-    cout << "Successfully accepted the request!" << endl;
+    TimeSlot time(startdate, endDate);
+    int bikeid = requester->getOwned()[0].getMotorbikeId();
+
+    Borrow b1o= Borrow(time, requester->getUserName(), bikeid, rentalAmount, "RENTING");
+    bo.push_back(b1o);
 }
 
 void User::rejectRequest(Request &request, vector<Motorbike> &bikes, vector<Request> &totalrequest)
