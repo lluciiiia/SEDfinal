@@ -1000,7 +1000,7 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                     for (int i = 0; i < bikeRequests.size(); i++)
                     {
                         if(bikeRequests[i].getStatus()== RequestStatus::ACCEPTED){
-                            cout<< "Your bike is being reting "<< bikeRequests[i].getRequester()<<"\n";
+                            cout<< "Your bike is being rented by "<< bikeRequests[i].getRequester()<<"\n";
                             cout<< "Enter to exit\n";
                             foundRequest=true;
                         }else if(bikeRequests[i].getStatus()== RequestStatus::PENDING){
