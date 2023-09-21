@@ -397,17 +397,18 @@ void displayUserInfo(User &user, vector<User> &userList)
         if(newPass.empty()){
             cout<<"It cannot be empty! \n";
         }else{
-        user.setPassword(newPass);
-        cout << "Password changed successfully.\n";
-        }   
-        
-
-        for (auto &u : userList) {
+            user.setPassword(newPass);
+            cout << "Password changed successfully.\n";
+            for (auto &u : userList) {
             if (user.getUsername() == u.getUsername()) {
                 u.setPassword(newPass);
                 break;
             }
         }
+        }   
+        
+
+        
     } else {
         cout << "Incorrect old password. Password not changed.\n";
     }
