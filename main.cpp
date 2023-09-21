@@ -208,7 +208,7 @@ void user_dashboard(User &user, vector<Motorbike> &bikes, vector<User> &userList
         if (choice == "1") {
             displayUserInfo(user, userList);
         } else if (choice == "2") {
-            user.removeBike(bikes, borrow, userRatings);
+            user.viewOwnedBike(bikes, borrow, userRatings);
         } else if (choice == "3") {
             user.viewMyReviews(userRatings);
         } else if (choice == "4") {
@@ -514,6 +514,7 @@ void searchEngine(User &user, vector<Motorbike> &bikes,vector<Request> &request)
 
     cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(15) << "Start Day" << setw(15) << "End Day" << setw(20) << "Description" << setw(8) << "Rating" << endl;
     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+    bool found =false;
     for (Motorbike &bike : bikes)
     {
         if (bike.getCity() == city && bike.getAvailableTimeSlot().isDateInRange(date))
@@ -531,11 +532,14 @@ void searchEngine(User &user, vector<Motorbike> &bikes,vector<Request> &request)
              << setw(20) << bike.getDes()
              << setw(8) << bike.getRating()
             << endl;
+            found =true;
             }
         }
     }
-
-    cout << "\n1. Rent a bike\n2. View bikes on normal mode\n";
+    if(!found){
+        cout<< "There is no bike that fits your search. Sorry! \n\n";
+    }
+    cout << "\n1. Rent a bike\n2. Return to previous page. \n";
     cout<< "Enter choice: ";
     getline(cin,choice);
     if (choice == "1") {

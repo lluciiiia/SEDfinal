@@ -79,10 +79,10 @@ public:
     void returnBikes(User &user, vector<User> &userList, vector<Request> &re, vector<Borrow> &bo, vector<Motorbike> &bikes, vector<MotorbikeRating> &ratings);
     void rateBike(Motorbike *ratedMotorbike, vector<MotorbikeRating> &ratings);
     void rateRenter(User &ratedUser);
-
+    void listBike(Motorbike *bike, Motorbike *bike2, bool &taken);
     // owned motorbike methods
     bool addBike(vector<Motorbike> &bikes);    // = list
-    void removeBike(vector<Motorbike> &bikes, vector <Borrow> &borrow,vector<UserRating> &ratings); // = unlist
+    void viewOwnedBike(vector<Motorbike> &bikes, vector <Borrow> &borrow,vector<UserRating> &ratings); // = unlist
 
     friend class Admin;
 };

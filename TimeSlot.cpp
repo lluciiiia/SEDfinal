@@ -3,6 +3,7 @@
 #include <iostream>
 #include <regex>
 #include <stdexcept>
+#include <sstream>
 
 using namespace std;
 
@@ -69,43 +70,60 @@ bool TimeSlot::operator==(const TimeSlot& other) const
 
 string TimeSlot::addDayToDate()
 {
-    istringstream ss(startTime);
-        int day, month;
-        char slash;
-        ss>>day>> slash >>month;
+    try {
+        stringstream ss(startTime);
+        string token1, token2;
+        std::string token;
+        std::vector<std::string> tokens;
+        int dayToAdd = stoi(endTime);
         
-        int dayToAdd= stoi(endTime);
-
-        day+= dayToAdd;
-
-
+        while (std::getline(ss, token, '/')) {
+            tokens.push_back(token);
+        }
+        
+        if (tokens.size() != 2) {
+            throw std::invalid_argument("Invalid date format");
+        }
+        
+        int day = stoi(tokens[0]);
+        int month = stoi(tokens[1]);
+        
         int maxdayinMonth;
-        if(month ==2){
-            maxdayinMonth == 28;
-        }else if(month == 4 || month == 6 || month == 9 || month == 11){
-            maxdayinMonth == 30;
-        }else {
+        if (month == 2) {
+            maxdayinMonth = 28;
+        } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+            maxdayinMonth = 30;
+        } else {
             maxdayinMonth = 31;
         }
-
-        if(day > maxdayinMonth){
-            day= day-maxdayinMonth;
-            month ++;
-            if(month > 12){
-                month== 1;
+        
+        day += dayToAdd;
+        
+        if (day > maxdayinMonth) {
+            day = day - maxdayinMonth;
+            month++;
+            
+            if (month > 12) {
+                month = 1;
             }
         }
-
-        string daystring= to_string(day);
-        string monthString= to_string(month);
-        if(daystring.length() == 1){
-            daystring = "0"+daystring;
+        
+        string daystring = to_string(day);
+        string monthString = to_string(month);
+        
+        if (daystring.length() == 1) {
+            daystring = "0" + daystring;
         }
         
-        if(monthString.length() == 1){
-            monthString = "0"+monthString;
+        if (monthString.length() == 1) {
+            monthString = "0" + monthString;
         }
-    return daystring+"/"+ monthString;
+        
+        return daystring + "/" + monthString;
+    } catch (const std::exception& e) {
+        cerr << "Error in addDayToDate: " << e.what() << endl;
+        throw; 
+    }
 }
 
 bool TimeSlot::isDateInRange(const string &date)

@@ -16,3 +16,4 @@ lucia;7.000000;he used my bike so carefully.
 2;2.500000;Below average bike needs improvement.
 1;5.000000;Its average
 1;5.000000;it was so nice
+1;9.000000;Its was good!
