@@ -1120,28 +1120,36 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                     }
                     else
                     {
-                        int choice;
+                        string choice;
                         cout << "Enter 1 to accept, 2 to reject, 3 to view the renter's reviews, 4 to quit: ";
                         cin >> choice;
                         cin.ignore(); // Consume newline character
 
-                        switch (choice)
+                        if (choice == "1")
                         {
-                        case 1:
                             this->acceptRequest(requester, bike.getRequests(), bikeRequest, userList, bo, requests, bi);
                             foundRequest = true;
                             break;
-                        case 2:
+                        }
+                        else if (choice == "2")
+                        {
                             this->rejectRequest(bikeRequest, bikes, requests);
                             foundRequest = true;
                             break;
-                        case 3:
+                        }
+
+                        else if (choice == "3")
+                        {
                             viewRequesterReviews(requesterStr, userRatings);
                             break;
-                        case 4:
+                        }
+                        else if (choice == "4")
+                        {
                             foundRequest = true;
                             break;
-                        default:
+                        }
+                        else
+                        {
                             cout << "Invalid choice. Please try again." << endl;
                             break;
                         }
