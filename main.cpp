@@ -287,7 +287,7 @@ void viewGuestBikeDash(vector<Motorbike> &bikes, string cityStr)
     bool dashboardRun = false;
     City city = stringToCity(cityStr);
 
-    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(15) << "Start Day" << setw(15) << "End Day" << setw(20) << "Description" << setw(8) << "Rating" << endl;
+    cout << left << setw(12) << "MotorbikeID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(15) << "Start Day" << setw(15) << "End Day" << setw(20) << "Description" << setw(8) << "Rating" << endl;
     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
     for (Motorbike &bike : bikes)
     {
@@ -318,7 +318,7 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
 
     while (!dashboardRun)
     {
-    cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(15) << "Start Day" << setw(15) << "End Day" << setw(20) << "Description" << setw(8) << "Rating" << endl;
+    cout << left << setw(12) << "MotorbikeID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(15) << "Start Day" << setw(15) << "End Day" << setw(20) << "Description" << setw(8) << "Rating" << endl;
 
     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
     for (Motorbike &bike : bikes)

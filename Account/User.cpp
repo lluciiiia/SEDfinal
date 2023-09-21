@@ -516,10 +516,11 @@ void User::viewOwnedBike(vector<Motorbike> &bikes, vector <Borrow> &borrow, vect
                  << setw(8) << cityStr
                  << endl;
         }
+        cout << "You can only add only one bike. \n\n";
     while (true)
     {
         
-        cout << "You can only add only one bike. \n";
+        cout<<"Welcome to your bike's information\n";
         cout << "1.Add a bike: \n";
         cout << "2.Delete your bike \n";
         cout << "3.List your bike or change available date. \n";

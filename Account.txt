@@ -11,3 +11,4 @@ bu,bu,bubu,2345432,Citizen ID,123456,12345,234567,2345678765432.000000,Saigon
 SaigonSeller,yo,idk,234,Citizen ID,234,234,12345,234565432.000000,Saigon
 norequirerating,no,ha,20,Passport,222,33,333,20.000000,Saigon
 mink,1234,minsung,0794829155,Passport,1342,123,23,20.000000,Saigon
+khoa,1234,Khoa Nguyen,0703456213,Citizen ID,12938128903,190238102938,23/01,20.000000,Saigon
