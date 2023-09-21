@@ -388,15 +388,19 @@ void displayUserInfo(User &user, vector<User> &userList)
         if (choice == "1") {
         string oldPass;
         cout << "Enter your old password: ";
-    getline(cin, oldPass);
+        getline(cin, oldPass);
 
     if (oldPass == user.getPassword()) {
         string newPass;
         cout << "Enter your new password: ";
         getline(cin, newPass);
-
+        if(newPass.empty()){
+            cout<<"It cannot be empty! \n";
+        }else{
         user.setPassword(newPass);
         cout << "Password changed successfully.\n";
+        }   
+        
 
         for (auto &u : userList) {
             if (user.getUsername() == u.getUsername()) {
