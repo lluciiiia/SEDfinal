@@ -314,7 +314,9 @@ void viewBikeDash(User &user, vector<Motorbike> &bikes, vector<Request> &request
     string choice;
     bool dashboardRun = false;
 
-    
+    cout<<"--------------------\n";
+    cout<<"----Motorbikes---\n";
+    cout<< "Here are the motorbikes on the system. \n";
 
     while (!dashboardRun)
     {

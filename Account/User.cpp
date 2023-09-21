@@ -206,14 +206,16 @@ void User::listBike(Motorbike *bike, Motorbike *bike2,bool &taken)
     char choice;
     cout<< "The bike's available start date: " << bike->getAvailableTimeSlot().getStartTime()<<"\n";
     cout<< "The bikes's available end date: " << bike->getAvailableTimeSlot().getEndTime()<< "\n";
-    if(bike->getAvailability()){
+    if(bike2->getAvailability()){
         cout<<"Your bike is on the market. \n";
     }else{
         cout<< "Your bike is not on the market. \n";
     }
+    //cout<<"Availability changed to: " << (bike2->getAvailability() ? "On the market" : "Not on the market") << endl;
     bool dashborad=false;
     while(!dashborad){
-         if(bike->getAvailability()){
+    
+         if(bike2->getAvailability()){
              cout<<"1. Unlist your bike on the market.\n";
         }else{
             cout<< "1. List your motorbike on the market. \n";
@@ -231,7 +233,9 @@ void User::listBike(Motorbike *bike, Motorbike *bike2,bool &taken)
 
                 }else{
                     bike->setAvailability(!bike->getAvailability());
-                    bike2->setAvailability(!bike->getAvailability());
+                    bike2->setAvailability(!bike2->getAvailability());
+                    // cout<<"Availability changed to: " << (bike2->getAvailability() ? "On the market" : "Not on the market") << endl;
+                    // cout << "Availability changed to: " << (bike->getAvailability() ? "On the market" : "Not on the market") << endl;
                 }
             break;
             case '2':{
@@ -390,7 +394,7 @@ bool User::addBike(vector<Motorbike> &bikes)
         std::cout << "Invalid city. Please enter Saigon or Hanoi.\n";
     }
 
-    int motorbikeID = bikes.size() + 1;
+    
     int consumingPoints;
     // Bike price TODO: Test
     while (true)
@@ -456,7 +460,26 @@ while (true)
     availableTimeSlot = TimeSlot(startTime,endTime);
     break;
 }
+// checking for the id
+    int motorbikeID = bikes.size() + 1;
+bool uniqueIDFound = false;
 
+while (!uniqueIDFound) {
+    // Check if motorbikeID already exists in the bikes vector
+    bool found = false;
+    for ( auto& moto : bikes) {
+        if (motorbikeID == moto.getMotorbikeId()) {
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        uniqueIDFound = true;
+    } else {
+        motorbikeID++; 
+    }
+}
     Motorbike motor(model, motorbikeID,
                     color, enginSize,
                     selectedCity,
@@ -533,6 +556,7 @@ void User::viewOwnedBike(vector<Motorbike> &bikes, vector <Borrow> &borrow, vect
         {
             system("cls");
             this->addBike(bikes);
+            cin.ignore();
         }
         else if (idToRemove == "2")
         {
@@ -928,9 +952,13 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
     cout<<"----Renting bikes---\n";
     cout<< "Here are some available bikes that fit you. \n";
     time_t now = time(0);
-
+    int thisid;
     tm *ltm = localtime(&now);
-
+    if(!OwnedMotorbikes.empty()){
+        thisid= OwnedMotorbikes[0].getMotorbikeId();
+    }else{
+        thisid= 0;
+    }
     string day = to_string(ltm->tm_mday);
     string month = to_string(1 + ltm->tm_mon);
     if (day.length() == 1)
@@ -946,7 +974,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
     for (Motorbike &bike : bikes)
     {
         // TODO: city filter!!
-        if (bike.getAvailability() == true && this->creditPoint >= bike.getConsumingPoints() && this->city == bike.getCity())
+        if (bike.getAvailability() == true && this->creditPoint >= bike.getConsumingPoints() && this->city == bike.getCity() && bike.getMotorbikeId() !=thisid)
         {
             cout << left << setw(12) << bike.getMotorbikeId()
                  << setw(20) << bike.getModel()
