@@ -469,14 +469,15 @@ void searchEngine(User &user, vector<Motorbike> &bikes,vector<Request> &request)
     double userPoints = user.getCreditPoint();
     double userRating = user.getRating();
     
+    // search by city
     while (true)
     {
-        
         std::cout << "Enter the city to search in (Saigon or Hanoi): ";
         std::cin >> desiredCity;
         
         if (desiredCity == "Saigon" || desiredCity == "Hanoi")
         {
+            cin.ignore();
             break;
         }
 
@@ -485,6 +486,7 @@ void searchEngine(User &user, vector<Motorbike> &bikes,vector<Request> &request)
     string date;
     regex dateRegex("^(0[1-9]|[1-2][0-9]|3[0-1])/(0[1-9]|1[0-2])$");
 
+    // search by renting date
     while (true) {
         cout << "Enter the date to search (dd/mm): ";
         getline(std::cin, date);
@@ -493,9 +495,10 @@ void searchEngine(User &user, vector<Motorbike> &bikes,vector<Request> &request)
         
             break; 
         } else {
-            cout << "Invalid date format. Please use (dd/mm) format." << std::endl;
+            cout << "\nInvalid date format. Please use (dd/mm) format." << std::endl;
         }
     }
+
     if (desiredCity == "Saigon")
     {
         city = City::Saigon;
@@ -503,8 +506,9 @@ void searchEngine(User &user, vector<Motorbike> &bikes,vector<Request> &request)
     else
     {
         city = City::Hanoi;
-    }
+    }   
 
+    // automatically take userPoints and userRating into account
     cout << "My credit point: " << userPoints << "\n";
     cout << "My rating score: " << userRating << "\n";
 
