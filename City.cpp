@@ -2,6 +2,7 @@
 #include <string>
 #include "City.h"
 
+// Method to convert city information to string
 string cityToString(City city) {
     static map<City, string> cityMap = {
         {City::Saigon, "Saigon"},
@@ -16,6 +17,7 @@ string cityToString(City city) {
     }
 }
 
+// Method to convert string to city
 City stringToCity(const std::string &cityStr)
 {
     if (cityStr == "Saigon")

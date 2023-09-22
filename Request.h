@@ -11,12 +11,11 @@ class Motorbike;
 class Request
 {
 private:
-    string requester;  
+    string requester;
     RequestStatus status;
     TimeSlot timeSlot;
     int motorbikeID;
-    
-    
+
 public:
     Request();
     Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status);
@@ -26,17 +25,12 @@ public:
     TimeSlot getTimeSlot() const;
     int getMotorbikeID() const;
     void setRequester(string requester);
-    //void setMotorbike(string motorbike);
+    // void setMotorbike(string motorbike);
     void setStatus(RequestStatus status);
     void setTimeSlot(TimeSlot timeSlot);
     string requestToString();
     void showInfo();
-    bool operator==(const Request& other) const;
+    bool operator==(const Request &other) const;
 };
 
-
-
-
 #endif
-
-

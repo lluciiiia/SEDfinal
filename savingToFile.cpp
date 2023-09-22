@@ -6,6 +6,7 @@
 #include "Motorbike.h"
 using namespace std;
 
+// Method to save accounts to file
 void saveToFile::SaveAccountToFile(vector<User> &users)
 {
     ofstream myFile(accountFile);
@@ -23,7 +24,8 @@ void saveToFile::SaveAccountToFile(vector<User> &users)
     }
 }
 
-vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector<Request> &requests, vector<UserRating> &ratings, vector <Borrow> &borrowList)
+// Method to load accounts from file
+vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector<Request> &requests, vector<UserRating> &ratings, vector<Borrow> &borrowList)
 {
     vector<User> users;
     fstream myFile(accountFile, ios::in);
@@ -64,11 +66,13 @@ vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector<Request> &r
             {
                 user.getOwned().push_back(mot);
             }
-            for(auto &v : borrowList){
-            if(v.getUsername() == user.getUsername() && v.getMotorbikeID() == mot.getMotorbikeId()){
-                user.getRentingBikes().push_back(mot);
+            for (auto &v : borrowList)
+            {
+                if (v.getUsername() == user.getUsername() && v.getMotorbikeID() == mot.getMotorbikeId())
+                {
+                    user.getRentingBikes().push_back(mot);
+                }
             }
-        }
         }
         for (auto &v : ratings)
         {
@@ -88,14 +92,13 @@ vector<User> saveToFile::loadAccount(vector<Motorbike> &moto, vector<Request> &r
                 user.getSentRequests().push_back(re);
             }
         }
-        
     }
-   
 
     myFile.close();
     return users;
 }
 
+// Method to save bikes to file
 void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
 {
     ofstream myFile(motobikeFile);
@@ -113,6 +116,7 @@ void saveToFile::SaveMotobikeToFile(vector<Motorbike> &moto)
     }
 }
 
+// Method to load bikes from file
 vector<Motorbike> saveToFile::loadMotor(vector<Request> &requests, vector<MotorbikeRating> &ratings)
 {
     vector<Motorbike> motors;
@@ -164,7 +168,7 @@ vector<Motorbike> saveToFile::loadMotor(vector<Request> &requests, vector<Motorb
     {
         for (auto &re : requests)
         {
-            if (mo.getMotorbikeId() == re.getMotorbikeID() && (re.getStatus()== RequestStatus::PENDING ||re.getStatus()== RequestStatus::ACCEPTED ))
+            if (mo.getMotorbikeId() == re.getMotorbikeID() && (re.getStatus() == RequestStatus::PENDING || re.getStatus() == RequestStatus::ACCEPTED))
             {
                 mo.getRequests().push_back(re);
             }
@@ -182,6 +186,7 @@ vector<Motorbike> saveToFile::loadMotor(vector<Request> &requests, vector<Motorb
     return motors;
 }
 
+// Method to save requests to file
 void saveToFile::SaveRequestToFIle(vector<Request> &request)
 {
     ofstream myFile(requestFile);
@@ -199,6 +204,7 @@ void saveToFile::SaveRequestToFIle(vector<Request> &request)
     }
 }
 
+// Method to load requests from file
 vector<Request> saveToFile::loadRequest()
 {
     vector<Request> requests;
@@ -241,9 +247,31 @@ vector<Request> saveToFile::loadRequest()
     return requests;
 }
 
+// Method to save ratings to file
+void saveToFile::saveRatingToFile(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings)
+{
+    ofstream myFile(ratingFile);
+    if (myFile.is_open())
+    {
+        for (auto &v : uraitngs)
+        {
+            myFile << v.uRatingtoString() << "\n";
+        }
+        for (auto &v : mRatings)
+        {
+            myFile << v.mRatingtoString() << "\n";
+        }
+        myFile.close();
+    }
+    else
+    {
+        cout << "Error opening rating file";
+    }
+}
+
+// Method to load ratings from file
 void saveToFile::loadRating(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings)
 {
-    // cout<<"asidjasodjasojaskasjlkasjsadlk";
     regex regexp("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
     fstream myFile(ratingFile, ios::in);
     string line;
@@ -258,7 +286,6 @@ void saveToFile::loadRating(vector<UserRating> &uraitngs, vector<MotorbikeRating
         }
         if (tokens.size() == 3)
         {
-            // cout<<"asidjasodjasojaskasjlkasjsadlk";
             if (regex_match(tokens[0], regexp))
             {
                 int bikeId = stoi(tokens[0]);
@@ -278,6 +305,7 @@ void saveToFile::loadRating(vector<UserRating> &uraitngs, vector<MotorbikeRating
     myFile.close();
 }
 
+// Method to save borrows to file
 void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
 {
     ofstream myFile(borrowFile);
@@ -295,6 +323,7 @@ void saveToFile::saveBorrowToFile(vector<Borrow> &borrow)
     }
 }
 
+// Method to load borrows from file
 vector<Borrow> saveToFile::loadBorrow()
 {
     vector<Borrow> borrows;
@@ -318,7 +347,7 @@ vector<Borrow> saveToFile::loadBorrow()
             string start = tokens[3];
             string end = tokens[4];
             TimeSlot time(start, end);
-            Borrow bo = Borrow(time, username, motobikeID, price,tokens[5]);
+            Borrow bo = Borrow(time, username, motobikeID, price, tokens[5]);
             borrows.push_back(bo);
         }
     }
@@ -326,25 +355,4 @@ vector<Borrow> saveToFile::loadBorrow()
     myFile.close();
 
     return borrows;
-}
-
-void saveToFile::saveRatingToFile(vector<UserRating> &uraitngs, vector<MotorbikeRating> &mRatings)
-{
-    ofstream myFile(ratingFile);
-    if (myFile.is_open())
-    {
-        for (auto &v : uraitngs)
-        {
-            myFile << v.uRatingtoString() << "\n";
-        }
-        for (auto &v : mRatings)
-        {
-            myFile << v.mRatingtoString() << "\n";
-        }
-        myFile.close();
-    }
-    else
-    {
-        cout << "Error opening rating file";
-    }
 }

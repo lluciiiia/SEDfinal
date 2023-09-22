@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// Rating class
 class Rating
 {
 private:
@@ -25,6 +26,7 @@ public:
     void setComment(string comment);
 };
 
+// User Rating class
 class UserRating : public Rating
 {
 private:
@@ -43,6 +45,7 @@ public:
     }
 };
 
+// Motorbike Rating class
 class MotorbikeRating : public Rating
 {
 private:

@@ -9,6 +9,7 @@ Borrow::Borrow()
 {
 }
 
+// Getters
 TimeSlot Borrow::getTimeSlot() const
 {
     return timeSlot;
@@ -39,6 +40,7 @@ string Borrow::getBorrowSta()
     return borrowSta;
 }
 
+// Setters
 void Borrow::setTimeSlot(TimeSlot timeSlot)
 {
     timeSlot = timeSlot;
@@ -64,6 +66,7 @@ void Borrow::setBorrowStatus(string status)
     this->borrowSta = status;
 }
 
+// Method to convert borrow information to string
 string Borrow::borrowtoString()
 {
     return username + "," +

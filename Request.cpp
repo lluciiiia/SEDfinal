@@ -1,9 +1,6 @@
 #include "Request.h"
 
-Request::Request()
-{
-}
-
+Request::Request(){}
 Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestStatus status)
 {
     this->requester = requester;
@@ -12,7 +9,7 @@ Request::Request(string requester, int motorbikeID, TimeSlot timeSlot, RequestSt
     this->status = status;
 }
 
-
+// Getters
 string Request::getRequester() const
 {
     return requester;
@@ -33,11 +30,11 @@ TimeSlot Request::getTimeSlot() const
     return timeSlot;
 }
 
+// Setters
 void Request::setRequester(string requester)
 {
     this->requester = requester;
 }
-
 
 void Request::setMotorbikeID(int motorbikeID)
 {
@@ -54,6 +51,7 @@ void Request::setTimeSlot(TimeSlot timeslot)
     this->timeSlot = timeSlot;
 }
 
+// Method to convert the request information to string
 string Request::requestToString()
 {
     string requestSta;
@@ -80,20 +78,19 @@ string Request::requestToString()
            timeSlot.getEndTime();
 }
 
+// Method to display the information of the request
 void Request::showInfo()
 {
     cout << "Requester: " << requester << "\n";
     cout << "Motorbike: " << motorbikeID << "\n";
     cout << "Request Status: " << __STRINGIFY(status) << "\n";
-    // timeSlot.showInfo();
 };
 
-bool Request::operator==(const Request& other) const
+// == Operator Method
+bool Request::operator==(const Request &other) const
 {
     return this->requester == other.requester &&
            this->status == other.status &&
-           this->timeSlot == other.timeSlot && 
+           this->timeSlot == other.timeSlot &&
            this->motorbikeID == other.motorbikeID;
 }
-
-

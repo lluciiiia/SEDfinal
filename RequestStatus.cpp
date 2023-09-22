@@ -2,7 +2,9 @@
 #include <string>
 #include "Request.h"
 
-string statusToString(RequestStatus status) {
+// Method to convert the request status to string
+string statusToString(RequestStatus status)
+{
     static map<RequestStatus, string> statusMap = {
         {RequestStatus::PENDING, "Pending"},
         {RequestStatus::ACCEPTED, "Accepted"},
@@ -10,9 +12,12 @@ string statusToString(RequestStatus status) {
     };
 
     auto it = statusMap.find(status);
-    if (it != statusMap.end()) {
+    if (it != statusMap.end())
+    {
         return it->second;
-    } else {
+    }
+    else
+    {
         return "Unknown"; // Handle unknown enum values
     }
 }

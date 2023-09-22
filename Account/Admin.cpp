@@ -6,10 +6,7 @@
 using namespace std;
 
 Admin::Admin()
-    : Account("", "", "", "")
-// TODO: default
-{
-}
+    : Account("", "", "", "") {}
 
 Admin::Admin(string username,
              string password,
@@ -21,21 +18,19 @@ Admin::Admin(string username,
     this->adminID = adminID;
 }
 
-// Might change parameter -> vector
-void Admin::viewMemberInfo(User user)
+// Getter
+string Admin::getAdminID() const
 {
-    // Print userID, IDtype, licenseNumber, licenseExpiryDate, creditPoits, city
-    //(Might add motorbike, motorbikeRatings and userRatings if necessary)
-    cout << "\nMember information:\n";
-    cout << "User name: " << user.getUserName() << endl;
-    cout << "ID Type: " << user.IDtype << endl;
-    cout << "License Number: " << user.licenseNumber << endl;
-    cout << "License Expiry Date: " << user.licenseExpiryDate << endl;
-    cout << "Credit points: " << user.creditPoint << endl;
-    cout << "City: " << __STRINGIFY(user.city) << endl;
-    cout << "\n";
+    return adminID;
 }
 
+// Setter
+void Admin::setAdminID(string adminID)
+{
+    this->adminID = adminID;
+}
+
+// Dash board for admins to view all the bikes' information
 void Admin::viewMotorbikeInfo(vector<Motorbike> &bikes)
 {
     cout << left << setw(12) << "Motorbike ID" << setw(20) << "Model" << setw(10) << "Color" << setw(10) << "Engine" << setw(15) << "Owner" << setw(12) << "Year" << setw(20) << "Description" << setw(8) << "Rating" << setw(8) << "City" << endl;
@@ -56,6 +51,7 @@ void Admin::viewMotorbikeInfo(vector<Motorbike> &bikes)
     }
 }
 
+// Dash board for admins to view all the members' information
 void Admin::viewAccounts(vector<User> &users)
 {
     cout << left << setw(30) << "User name"
@@ -102,16 +98,7 @@ void Admin::viewAccounts(vector<User> &users)
     }
 }
 
-string Admin::getAdminID() const
-{
-    return adminID;
-}
-
-void Admin::setAdminID(string adminID)
-{
-    this->adminID = adminID;
-}
-
+// Method for admins to log in
 bool Admin::adminLogin()
 {
     // Temporary admin user and pass

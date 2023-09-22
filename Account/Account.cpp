@@ -5,6 +5,7 @@ using namespace std;
 
 Account::Account(std::string username, std::string password, std::string fullName, std::string phoneNumber) : username(username), password(password), fullName(fullName), phoneNumber(phoneNumber) {}
 
+// Getters
 string Account::getUsername()
 {
     return username;
@@ -25,6 +26,7 @@ string Account::getPhoneNumber()
     return phoneNumber;
 }
 
+// Setters
 void Account::setUsername(string userName)
 {
     this->username = userName;
