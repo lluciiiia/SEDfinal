@@ -1160,17 +1160,26 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
         cout << "Enter a motorbike ID to view (Q to quit): ";
         cin >> IDtoView;
         cin.ignore(); // Consume newline character
-
+        regex regexcheck("^[0-9Qq]$");
+        
         if (IDtoView == "Q" || IDtoView == "q")
         {
             foundMotorbike = true;
+            cout<<"Enter to continue....";
             break;
+        }else if(!regex_match(IDtoView,regexcheck)){
+            cout<< "Invalid input! Please try again!  \n";
+        }else {
+            int thisBikeid;
+        if(!this->OwnedMotorbikes.empty()){
+            thisBikeid= OwnedMotorbikes[0].getMotorbikeId();
+        }else{
+            cout<<"You dont have a bike to see the request !\n";
         }
-
         for (auto &bike : bikes)
         {
             int bikeID = bike.getMotorbikeId();
-            if (stoi(IDtoView) == bikeID)
+            if (stoi(IDtoView) == bikeID && stoi(IDtoView) == thisBikeid)
             {
                 if (bike.getRequests().empty())
                 {
@@ -1197,89 +1206,83 @@ void User::viewBikeRequests(vector<User> &userList, vector<Borrow> &bo, vector<M
                         }
                     }
                 }
+                
+            int requestIndex;
+            bool foundRequest = false;
 
-                int requestIndex;
-                bool foundRequest = false;
+    while (!foundRequest) {
+        std::string input;
 
-                while (!foundRequest)
-                {
-                    cout << "Enter a Request ID to view (0 to quit): ";
-                    cin >> requestIndex;
-                    cin.ignore(); // Consume newline character
+        std::cout << "Enter a Request ID to view (0 to quit): ";
+        std::cin >> input;
+        std::cin.ignore(); // Consume newline character
 
-                    if (requestIndex == 0)
-                    {
-                        foundRequest = true;
-                        break;
-                    }
+        if (input == "0") {
+            foundRequest = true;
+            break;
+        }
 
-                    if (requestIndex < 1 || requestIndex > bike.getRequests().size())
-                    {
-                        cout << "Invalid Request ID. Please try again." << endl;
-                        continue; // Go back to the request ID input
-                    }
+        if (!regex_match(input, std::regex("^[0-9]+$"))) {
+            std::cout << "Invalid input. Please enter a numeric Request ID." << std::endl;
+            continue; // Go back to the request ID input
+        }
 
-                    Request &bikeRequest = bike.getRequests()[requestIndex - 1]; // Subtract 1 to convert to 0-based index
-                    string requesterStr = bikeRequest.getRequester();
-                    User *requester = nullptr;
-                    Motorbike *bi = nullptr;
+        requestIndex = std::stoi(input);
 
-                    // Search for the requester and motorbike
-                    for (auto &user : userList)
-                    {
-                        if (user.getUserName() == requesterStr)
-                        {
-                            requester = &user;
-                            break;
-                        }
-                    }
+        if (requestIndex < 1 || requestIndex > bike.getRequests().size()) {
+            std::cout << "Invalid Request ID. Please try again." << std::endl;
+            continue; // Go back to the request ID input
+        }
 
-                    for (auto &bi1 : bikes)
-                    {
-                        if (bikeRequest.getMotorbikeID() == bi1.getMotorbikeId())
-                        {
-                            bi = &bi1;
-                            break;
-                        }
-                    }
+        Request &bikeRequest = bike.getRequests()[requestIndex - 1]; // Subtract 1 to convert to 0-based index
+        std::string requesterStr = bikeRequest.getRequester();
+        User *requester = nullptr;
+        Motorbike *bi = nullptr;
 
-                    if (requester == nullptr)
-                    {
-                        cout << "Requester not found." << endl;
-                    }
-                    else
-                    {
-                        char choice;
-                        cout << "Enter 1 to accept, 2 to reject, 3 to view the renter's reviews, 4 to quit: ";
-                        cin>> choice;
-                        cin.ignore();
+        // Search for the requester and motorbike
+        for (auto &user : userList) {
+            if (user.getUserName() == requesterStr) {
+                requester = &user;
+                break;
+            }
+        }
 
-                        switch (choice)
-                        {
-                            case '1':
-                                this->acceptRequest(requester, bike.getRequests(), bikeRequest, userList, bo, requests, bi);
-                                foundRequest = true;
-                                break;
-                            case '2':
-                                this->rejectRequest(bikeRequest, bikes, requests);
-                                foundRequest = true;
-                                break;
-                            case '3':
-                                viewRequesterReviews(requesterStr, userRatings);
-                                break;
-                            case '4':
-                                foundRequest = true;
-                                break;
-                            default:
-                                cout << "Invalid choice. Please try again." << endl;
-                                break;
-                        }
-                    }
-                }
+        for (auto &bi1 : bikes) {
+            if (bikeRequest.getMotorbikeID() == bi1.getMotorbikeId()) {
+                bi = &bi1;
+                break;
+            }
+        }
+
+        if (requester == nullptr) {
+            std::cout << "Requester not found." << std::endl;
+        } else {
+            std::string choice;
+            std::cout << "Enter 1 to accept, 2 to reject, 3 to view the renter's reviews, 4 to quit: ";
+            std::cin >> choice;
+            std::cin.ignore();
+
+            if (choice == "1") {
+                this->acceptRequest(requester, bike.getRequests(), bikeRequest, userList, bo, requests, bi);
+                foundRequest = true;
+            } else if (choice == "2") {
+                this->rejectRequest(bikeRequest, bikes, requests);
+                foundRequest = true;
+            } else if (choice == "3") {
+                viewRequesterReviews(requesterStr, userRatings);
+            } else if (choice == "4") {
+                foundRequest = true;
+            } else {
+                std::cout << "Invalid choice. Please try again." << std::endl;
+            }
+        }
+    }
                 foundMotorbike = true;
                 break;
             }
         }
+        }
+        
 
         if (!foundMotorbike)
         {
