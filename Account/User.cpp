@@ -246,7 +246,7 @@ void User::listBike(Motorbike *bike, Motorbike *bike2, bool &taken)
         {
             cout << "1. List your motorbike on the market. \n";
         }
-        cout << "2.Enter new time slot for the bike. \n";
+        cout << "2. Enter new time slot for the bike. \n";
         cout << "3. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
@@ -590,7 +590,7 @@ void User::viewOwnedBike(vector<Motorbike> &bikes, vector<Borrow> &borrow, vecto
     {
 
         cout << "Welcome to your bike's information\n";
-        cout << "1.Add a bike: \n";
+        cout << "1.Add a bike \n";
         cout << "2.Delete your bike \n";
         cout << "3.List your bike or change available date. \n";
         cout << "4.Rate the renter of your bike. \n";
@@ -647,7 +647,7 @@ void User::viewOwnedBike(vector<Motorbike> &bikes, vector<Borrow> &borrow, vecto
                 if (borrow[i].getMotorbikeID() == id && borrow[i].getBorrowSta() == "RENTED")
                 {
                     cout << "Renter: " << borrow[i].getUsername() << "\n";
-                    cout << "Total amount: " << borrow[i].getPrice();
+                    cout << "Total amount: " << borrow[i].getPrice() << '\n';
                     string username;
 
                     while (true)
@@ -1054,7 +1054,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
         bool twice = false;
         bool already = false;
         string input;
-        cout << "Enter the bike id you want to rent (or Q to quit): ";
+        cout << "Enter the bike id you want to rent (Q to quit): ";
         getline(cin, input);
 
         if (input == "q" || input == "Q")
@@ -1090,7 +1090,7 @@ void User::requestToRent(vector<Motorbike> &bikes, vector<Request> &requests)
                         {
                             bikeExists = true;
                             string days;
-                            cout << "How many days you want to rent the bike? (or Q to quit): ";
+                            cout << "How many days you want to rent the bike? (Q to quit): ";
                             getline(cin, days);
 
                             if (days == "q" || days == "Q")
